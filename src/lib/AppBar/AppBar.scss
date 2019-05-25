@@ -1,0 +1,28 @@
+@import "../styles";
+
+$height: 56px;
+
+.vui-AppBar {
+  height: $height;
+  box-shadow: $vui-Elevation-z4;
+  background-color: #6200eeff;
+  color: #ffffff;
+  fill: #ffffff;
+  :before {
+    background-color: #ffffff !important;
+  }
+  display: flex;
+  align-items: center;
+  padding: 0 8px;
+
+  &.sticky {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+  }
+}
+
+.vui-AppBar-placeholder {
+  height: $height;
+}

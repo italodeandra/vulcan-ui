@@ -1,0 +1,21 @@
+@import "./lib/styles";
+
+.demo-App {
+  color: #000000de;
+
+  .App-container {
+    padding: 16px;
+  }
+
+  pre {
+    color: #757575;
+  }
+
+  .component {
+    padding-bottom: 16px;
+  }
+
+  .subcomponent {
+    padding-bottom: 8px;
+  }
+}
