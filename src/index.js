@@ -5,8 +5,9 @@ import AppBarDemo from './demo/AppBarDemo'
 import ButtonDemo from './demo/ButtonDemo'
 import HomeDemo from './demo/HomeDemo'
 import NavigationDrawerDemo from './demo/NavigationDrawerDemo'
+import TextFielDemo from './demo/TextFieldDemo'
 import useTitle from './demo/useTitle'
-import './index.scss'
+import './demo.scss'
 import { AppBar, Button, Icon, NavigationDrawer, useMobile } from './lib'
 
 const App = () => {
@@ -19,7 +20,7 @@ const App = () => {
     return (
         <div className='demo-App'>
             <Router>
-                <AppBar sticky getRef={AppBarRef}>
+                <AppBar sticky setRef={AppBarRef}>
                     <Button icon onClick={() => setIsNavigationDrawerOpen(t => !t)} autoFocus>
                         <Icon name='menu' />
                     </Button>
@@ -70,12 +71,18 @@ const App = () => {
                                            onClick={() => isMobile && setIsNavigationDrawerOpen(false)}>
                         Navigation Drawer
                     </NavigationDrawer.Item>
+                    <NavigationDrawer.Item to='/text-field'
+                                           title={!isNavigationDrawerOpen && 'Text field'}
+                                           onClick={() => isMobile && setIsNavigationDrawerOpen(false)}>
+                        Text field
+                    </NavigationDrawer.Item>
                 </NavigationDrawer>
                 <div className='App-container' ref={AppContainerRef}>
                     <Route path='/' exact component={HomeDemo} />
                     <Route path='/app-bar' component={AppBarDemo} />
                     <Route path='/button' component={ButtonDemo} />
                     <Route path='/navigation-drawer' component={NavigationDrawerDemo} />
+                    <Route path='/text-field' component={TextFielDemo} />
                 </div>
             </Router>
         </div>

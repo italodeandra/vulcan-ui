@@ -15,7 +15,7 @@ const AppBarDemo = () => {
             <div className='subdemo'>
                 <h2>App bar</h2>
                 <p>Example above on the page</p>
-                <pre>{`<AppBar sticky getRef='{AppBarRef}'>
+                <pre>{`<AppBar sticky setRef='{AppBarRef}'>
     <Button icon onClick={() => setIsNavigationDrawerOpen(t => !t)} autoFocus>
         <Icon name='menu' />
     </Button>
