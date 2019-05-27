@@ -1,8 +1,10 @@
-import React from 'react'
+import React, { useEffect, useRef } from 'react'
 import { classNames } from '../index'
 import './Button.scss'
 
-const Button = ({ children, className, outlined, text, icon, onClick }) => {
+const Button = ({ children, className, outlined, text, icon, onClick, autoFocus }) => {
+    const ref = useRef(null)
+
     className = classNames(
         className,
         'vui-Button',
@@ -12,8 +14,16 @@ const Button = ({ children, className, outlined, text, icon, onClick }) => {
         (icon) && 'icon'
     )
 
-    return (<button className={className}
-                    onClick={onClick}>
+    useEffect(() => {
+        if (autoFocus) {
+            ref.current.focus()
+        }
+    }, [autoFocus])
+
+    return (<button ref={ref}
+                    className={className}
+                    onClick={onClick}
+                    auto-focus={autoFocus ? 'true' : undefined}>
         {children}
     </button>)
 }

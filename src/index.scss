@@ -3,19 +3,38 @@
 .demo-App {
   color: #000000de;
 
+  .title {
+    margin-left: 8px;
+    font-weight: 500;
+  }
+
   .App-container {
     padding: 16px;
+    overflow-x: auto;
   }
 
   pre {
     color: #757575;
   }
 
-  .component {
+  .demo {
     padding-bottom: 16px;
   }
 
-  .subcomponent {
+  .subdemo {
     padding-bottom: 8px;
+  }
+
+  .navigation-drawer .app-bar {
+    background-color: #ffffff;
+    color: #000000de;
+    fill: #000000de;
+
+    border-bottom: 1px solid rgba(#000000, 0.1);
+    box-sizing: border-box;
+
+    .menu-button:before {
+      background-color: #000000de !important;
+    }
   }
 }

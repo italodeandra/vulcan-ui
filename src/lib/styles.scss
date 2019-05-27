@@ -1,3 +1,4 @@
+@import "./Utils/variables";
 @import "./Elevation/Elevation";
 
 body {
@@ -12,6 +13,7 @@ body {
 }
 
 /* roboto-regular - latin */
+//noinspection ALL
 @font-face {
   font-family: 'Roboto';
   font-style: normal;
@@ -26,6 +28,7 @@ body {
 }
 
 /* roboto-500 - latin */
+//noinspection ALL
 @font-face {
   font-family: 'Roboto';
   font-style: normal;
