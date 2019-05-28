@@ -1,13 +1,9 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import { Button, Icon } from '../lib'
 import useTitle from './useTitle'
 
 const ButtonDemo = () => {
-    const [, setTitle] = useTitle()
-
-    useEffect(() => {
-        setTitle('Button')
-    }, [setTitle])
+    useTitle('Button')
 
     return (
         <div className='component'>

@@ -1,14 +1,10 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import { TextField } from '../lib/index'
 import useTitle from './useTitle'
 
 const TextFielDemo = () => {
-    const [, setTitle] = useTitle()
+    useTitle('Text field')
     const [test, setTest] = useState(null)
-
-    useEffect(() => {
-        setTitle('Text field')
-    }, [setTitle])
 
     return (
         <div className='demo'>

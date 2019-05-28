@@ -1,14 +1,10 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 
 import { AppBar, Button, Icon } from '../lib/index'
 import useTitle from './useTitle'
 
 const AppBarDemo = () => {
-    const [, setTitle] = useTitle()
-
-    useEffect(() => {
-        setTitle('App bar')
-    }, [setTitle])
+    useTitle('App bar')
 
     return (
         <div className='demo'>
@@ -26,13 +22,13 @@ const AppBarDemo = () => {
             </div>
             <div className='subdemo'>
                 <h2>App bar not sticky</h2>
-                <p>
+                <div>
                     <AppBar>
                         <Button icon onClick={() => alert('Button clicked')}>
                             <Icon name='menu' />
                         </Button>
                     </AppBar>
-                </p>
+                </div>
                 <pre>{`<AppBar>
     <Button icon onClick={() => alert('Button clicked')}>
         <Icon name='menu' />
