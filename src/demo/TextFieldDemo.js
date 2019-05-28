@@ -18,6 +18,8 @@ const TextFielDemo = () => {
                     label='Teste'
                     name='test'
                     onChange={setTest}
+                    helperText='This is a helper text'
+                    required
                 />
                 <div>
                     {test}

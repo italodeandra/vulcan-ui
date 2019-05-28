@@ -1,0 +1,132 @@
+@import "../styles";
+
+.vui-TextField {
+  .input-container {
+    position: relative;
+    border-radius: 4px 4px 0 0;
+    overflow: hidden;
+
+    &:before {
+      content: '';
+      position: absolute;
+      z-index: 1;
+      top: 0;
+      height: 100%;
+      left: 0;
+      width: 100%;
+      background-color: #000000;
+      pointer-events: none;
+      opacity: 0;
+    }
+  }
+
+  .input {
+    min-height: 56px;
+    padding: 21px 16px 5px 16px;
+    box-sizing: border-box;
+    width: 100%;
+    border: none;
+    background-color: #eeeeee;
+    border-bottom: 1px solid rgba(#000000, 0.42);
+    outline: none;
+    font-size: 16px;
+    letter-spacing: .009375em;
+    line-height: 1.75rem;
+    color: rgba(#000000, 0.87);
+  }
+
+  label {
+    position: absolute;
+    top: 18px;
+    left: 16px;
+    color: rgba(#000000, 0.6);
+    pointer-events: none;
+    font-size: 16px;
+    transform-origin: left top;
+    transition-property: transform, color;
+    transition-duration: 180ms;
+    transition-timing-function: $vui-Motion-Speed-Standard-Easing;
+    letter-spacing: .009375em;
+    line-height: 1.15rem;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .input:required ~ label:after {
+    content: ' *';
+  }
+
+  .border {
+    position: absolute;
+    background-color: #6200eeff;
+    height: 2px;
+    left: 0;
+    width: 100%;
+    bottom: 0;
+    transform: scaleX(0);
+    opacity: 0;
+    transition-property: transform, opacity;
+    transition-duration: 180ms;
+    transition-timing-function: $vui-Motion-Speed-Standard-Easing;
+  }
+
+  .assistive-text {
+    padding: 0 16px;
+    color: rgba(#000000, 0.6);
+    font-size: .75rem;
+    line-height: 1.25rem;
+    letter-spacing: .0333333333em;
+  }
+
+  &:hover {
+    .input-container:before {
+      opacity: 0.04;
+    }
+  }
+
+  &.is-focused {
+    .border {
+      transform: scaleX(1);
+      opacity: 1;
+    }
+
+    .input-container:before {
+      opacity: 0.08;
+    }
+
+    label {
+      color: #6200eeff;
+    }
+
+    .input:required ~ label:after {
+      color: #B00020;
+    }
+  }
+
+  &.is-focused,
+  &.is-filled {
+    label {
+      transform: translateY(-50%) scale(0.75);
+    }
+  }
+
+  &.has-error:not(
+    .is-pristine
+  ):not(
+    .is-focused
+  ) {
+    .input {
+      border-color: #B00020;
+    }
+
+    label {
+      color: #B00020;
+    }
+
+    .border {
+      background-color: #B00020;
+    }
+  }
+}
+
+// #B00020
