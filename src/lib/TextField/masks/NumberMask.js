@@ -8,7 +8,7 @@ const NumberMask = (config) => {
             return rawValue
         }
 
-        let maskedValue = rawValue
+        let maskedValue = rawValue.toString()
 
         const activeElement = document.activeElement
 
@@ -36,7 +36,7 @@ const NumberMask = (config) => {
     }
 
     function parseValue(maskedValue) {
-        let parsedValue = maskedValue
+        let parsedValue = maskedValue.toString()
 
         parsedValue = parsedValue.replace(/[^\d]/g, '')
 
