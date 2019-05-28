@@ -8,6 +8,7 @@ import NavigationDrawer from './NavigationDrawer/NavigationDrawer'
 import TextField from './TextField/TextField'
 import classNames from './Utils/classNames'
 import createSharedStateHook from './Utils/createSharedStateHook'
+import caretPosition from './Utils/caretPosition'
 
 export {
     AppBar,
@@ -21,5 +22,6 @@ export {
     useScroll,
 
     classNames,
-    createSharedStateHook
+    createSharedStateHook,
+    caretPosition
 }
