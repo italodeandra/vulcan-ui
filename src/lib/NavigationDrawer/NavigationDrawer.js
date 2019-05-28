@@ -79,10 +79,6 @@ const NavigationDrawer = ({ className, children, open, containerRef, collapsable
 
     return (
         <>
-            <div className={className}
-                 ref={navigationDrawerRef}>
-                {children}
-            </div>
             {isMobile &&
             <div ref={scrimRef}
                  className={
@@ -94,6 +90,10 @@ const NavigationDrawer = ({ className, children, open, containerRef, collapsable
                  }
                  onClick={onScrimClick} />
             }
+            <div className={className}
+                 ref={navigationDrawerRef}>
+                {children}
+            </div>
         </>
     )
 }

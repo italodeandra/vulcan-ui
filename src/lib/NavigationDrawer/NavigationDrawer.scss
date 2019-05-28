@@ -8,6 +8,7 @@
   height: 100%;
   background-color: #ffffff;
   top: 56px;
+  z-index: 1;
 
   padding: 8px 0;
 
@@ -132,6 +133,7 @@
   animation-name: scrim-hide;
   animation-fill-mode: forwards;
   animation-timing-function: $vui-Motion-Speed-Accelerate-Easing;
+  z-index: 1;
 
   &.animation-ready {
     animation-duration: 210ms;

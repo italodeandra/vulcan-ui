@@ -116,8 +116,6 @@
 
   &.has-error:not(
     .is-pristine
-  ):not(
-    .is-focused
   ) {
     .input {
       border-color: #B00020;

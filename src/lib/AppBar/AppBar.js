@@ -11,7 +11,7 @@ const AppBar = ({ className, children, sticky, setRef }) => {
         className,
         'vui-AppBar',
         sticky && 'sticky',
-        !!isWindowScrolled && 'scrolled'
+        (sticky && !!isWindowScrolled) && 'scrolled'
     )
 
     useEffect(() => {
