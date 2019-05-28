@@ -17,9 +17,13 @@ const TextFielDemo = () => {
                 <TextField
                     label='Teste'
                     name='test'
+                    value={test}
                     onChange={setTest}
                     helperText='This is a helper text'
-                    required
+                    validation={{
+                        required: 'Please fill this field',
+                        maxLength: 3
+                    }}
                 />
                 <div>
                     {test}

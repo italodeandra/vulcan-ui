@@ -13,6 +13,16 @@ function useValidation(value, validation) {
                     return
                 }
             }
+
+            if (validation.maxLength) {
+                const maxLength = {}
+                maxLength.length = validation.maxLength.length || validation.maxLength
+                maxLength.message = validation.maxLength.message || (`${value.length}/${maxLength.length}`)
+                if (value && value.length > maxLength.length) {
+                    setErrorText(maxLength.message)
+                    return
+                }
+            }
         }
     }, [validation, value])
 

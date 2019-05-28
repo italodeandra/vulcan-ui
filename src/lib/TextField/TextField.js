@@ -4,6 +4,10 @@ import { classNames, useDeepCompareEffect } from '../index'
 import './TextField.scss'
 import useValidation from './useValidation'
 
+function checkIfIsCounter(value) {
+    return new RegExp('^[0-9]+\\/[0-9]+$').test(value)
+}
+
 const TextField = ({ className, id, name, label, onChange, type, value: defaultValue, helperText, validation, required }) => {
     type = type || 'text'
     id = id || name
@@ -12,10 +16,13 @@ const TextField = ({ className, id, name, label, onChange, type, value: defaultV
             required
         }
     }
+    if (!required && validation) {
+        required = validation.required
+    }
     const [value, setValue] = useState(defaultValue)
     const [isFocused, setIsFocused] = useState(false)
-    const [isFilled, setIsFilled] = useState(false)
-    const [isPristine, setIsPristine] = useState(true)
+    const [isFilled, setIsFilled] = useState(!!value)
+    const [isPristine, setIsPristine] = useState(!value)
     const [hasError, errorText] = useValidation(value, validation)
 
     className = classNames(
@@ -29,6 +36,9 @@ const TextField = ({ className, id, name, label, onChange, type, value: defaultV
 
     const handleChange = ({ target }) => {
         setValue(target.value)
+        setIsPristine(false)
+        setIsFilled(!!target.value)
+        onChange && onChange(target.value)
     }
 
     useDeepCompareEffect(() => {
@@ -37,14 +47,6 @@ const TextField = ({ className, id, name, label, onChange, type, value: defaultV
             setValue(defaultValue)
         }
     }, [defaultValue])
-
-    useDeepCompareEffect(() => {
-        if (!_isEqual(value, defaultValue)) {
-            setIsPristine(false)
-        }
-        onChange && onChange(value)
-        setIsFilled(!!value)
-    }, [value])
 
     return (
         <div className={className}>
@@ -68,7 +70,10 @@ const TextField = ({ className, id, name, label, onChange, type, value: defaultV
                 <div className='border' />
             </div>
             {(errorText || helperText) &&
-            <div className='assistive-text'>
+            <div className={classNames(
+                'assistive-text',
+                (hasError && checkIfIsCounter(errorText)) && 'counter')
+            }>
                 {errorText || helperText}
             </div>
             }
