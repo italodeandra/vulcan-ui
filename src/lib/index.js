@@ -6,6 +6,7 @@ import usePortal from './Hooks/usePortal'
 import useScroll from './Hooks/useScroll'
 import Icon from './Icon/Icon'
 import NavigationDrawer from './NavigationDrawer/NavigationDrawer'
+import Spinner from './Spinner/Spinner'
 import TextField from './TextField/TextField'
 import caretPosition from './Utils/caretPosition'
 import classNames from './Utils/classNames'
@@ -16,6 +17,7 @@ export {
     Button,
     Icon,
     NavigationDrawer,
+    Spinner,
     TextField,
 
     useDeepCompareEffect,

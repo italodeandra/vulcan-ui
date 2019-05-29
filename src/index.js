@@ -7,6 +7,7 @@ import AutocompleteDemo from './demo/AutocompleteDemo'
 import ButtonDemo from './demo/ButtonDemo'
 import HomeDemo from './demo/HomeDemo'
 import NavigationDrawerDemo from './demo/NavigationDrawerDemo'
+import SpinnerDemo from './demo/SpinnerDemo'
 import TextFielDemo from './demo/TextFieldDemo'
 import useTitle from './demo/useTitle'
 import { AppBar, Button, Icon, NavigationDrawer, useMobile } from './lib'
@@ -75,7 +76,12 @@ const App = () => {
                     <NavigationDrawer.Item to='/navigation-drawer'
                                            title={!isNavigationDrawerOpen && 'Navigation drawer'}
                                            onClick={() => isMobile && setIsNavigationDrawerOpen(false)}>
-                        Navigation Drawer
+                        Navigation drawer
+                    </NavigationDrawer.Item>
+                    <NavigationDrawer.Item to='/spinner'
+                                           title={!isNavigationDrawerOpen && 'Spinner'}
+                                           onClick={() => isMobile && setIsNavigationDrawerOpen(false)}>
+                        Spinner
                     </NavigationDrawer.Item>
                     <NavigationDrawer.Item to='/text-field'
                                            title={!isNavigationDrawerOpen && 'Text field'}
@@ -89,6 +95,7 @@ const App = () => {
                     <Route path='/autocomplete' component={AutocompleteDemo} />
                     <Route path='/button' component={ButtonDemo} />
                     <Route path='/navigation-drawer' component={NavigationDrawerDemo} />
+                    <Route path='/spinner' component={SpinnerDemo} />
                     <Route path='/text-field' component={TextFielDemo} />
                 </div>
             </Router>

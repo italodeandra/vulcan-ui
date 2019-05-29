@@ -7,8 +7,8 @@ const ButtonDemo = () => {
 
     return (
         <div className='component'>
+            <h2>Button</h2>
             <div className='subcomponent'>
-                <h2>Button</h2>
                 <p><strong>Contained</strong></p>
                 <p>
                     <Button onClick={() => alert('Contained button clicked')}>
