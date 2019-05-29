@@ -19,7 +19,7 @@ const AutocompleteResult = ({ children, target, setRef }) => {
 
             nextStyle.left = targetDOMRect.x
             nextStyle.width = targetDOMRect.width
-            nextStyle.top = targetDOMRect.y
+            nextStyle.top = targetDOMRect.y + targetDOMRect.height
 
             if (refDOMRect.bottom > window.innerHeight) {
                 nextStyle.bottom = 0
@@ -49,9 +49,9 @@ const AutocompleteResult = ({ children, target, setRef }) => {
 
 AutocompleteResult.Item = ({ children, className, ...props }) => {
     return (
-        <div className={classNames('item', 'vui-TextField-Autocomplete-Target')} {...props} tabIndex='0'>
+        <button className={classNames('item', 'vui-TextField-Autocomplete-Target')} {...props} tabIndex='0'>
             {children}
-        </div>
+        </button>
     )
 }
 

@@ -1,26 +1,65 @@
-import React, { useRef } from 'react'
-import { TextField, usePortal } from '../../index'
+import _isEqual from 'lodash.isequal'
+import React, { useRef, useState } from 'react'
+import { Button, Spinner, TextField, usePortal } from '../../index'
 import './Autocomplete.scss'
 import AutocompleteResult from './AutocompleteResult'
 
-const Autocomplete = ({ ...props }) => {
-    const inputRef = useRef(null)
+const Autocomplete = ({ autocompleteConfig, onChange, value: defaultValue, onItemSelect, ...props }) => {
     const resultRef = useRef(null)
     const [resultTargetRef, showResult, setShowResult] = usePortal.hook()
+    const [isLoading, setIsLoading] = useState(false)
+    const [value, setValue] = useState(defaultValue)
+    const [selected, setSelected] = useState(defaultValue)
+    const [result, setResult] = useState(null)
 
-    const handleBlur = ({ relatedTarget }) => {
+    const handleFocus = (e) => {
+        props.onFocus && props.onFocus(e)
+        setShowResult(true)
+        setIsLoading(true)
+        setTimeout(() => {
+            setIsLoading(false)
+            setResult([
+                {
+                    'id': 16,
+                    'name': 'Ítalo 16'
+                },
+                {
+                    'id': 17,
+                    'name': 'Ítalo 17'
+                },
+                {
+                    'id': 18,
+                    'name': 'Ítalo 18'
+                }
+            ])
+        }, 500)
+    }
+
+    const handleBlur = (e) => {
+        props.onBlur && props.onBlur(e)
+
+        const { relatedTarget } = e
+
         if (!relatedTarget || !relatedTarget.classList.contains('vui-TextField-Autocomplete-Target')) {
             setShowResult(false)
         }
+
+        if (!_isEqual(value, selected)) {
+            setValue(null)
+        }
     }
 
-    const handleKeyDown = ({ key, target }) => {
+    const handleKeyDown = (e) => {
+        props.onKeyDown && props.onKeyDown(e)
+
+        const { key, target } = e
+
         switch (key) {
             case 'ArrowUp':
                 if (target.previousElementSibling && target.previousElementSibling.classList && target.previousElementSibling.classList.contains('item')) {
                     target.previousElementSibling.focus()
                 } else {
-                    inputRef.current.focus()
+                    resultTargetRef.current.focus()
                 }
                 break
             case 'ArrowDown':
@@ -35,25 +74,50 @@ const Autocomplete = ({ ...props }) => {
         }
     }
 
+    const handleChange = (newValue) => {
+        setValue(newValue)
+        onChange && onChange(null)
+    }
+
+    const handleItemClick = (item) => {
+        resultTargetRef.current.focus()
+        const newSelected = autocompleteConfig.valueTranspile(item)
+        setValue(newSelected)
+        setSelected(newSelected)
+        onChange && onChange(autocompleteConfig.valueTranspile(item))
+        setShowResult(false)
+        setResult(null)
+        onItemSelect && onItemSelect(item)
+    }
+
     return (
         <TextField
-            setRef={inputRef}
             {...props}
+            value={value}
+            setRef={resultTargetRef}
             autoComplete={false}
-            onFocus={() => setShowResult(true)}
+            onFocus={handleFocus}
             onBlur={handleBlur}
             inputClassName='vui-TextField-Autocomplete-Target'
             onKeyDown={handleKeyDown}
+            suffix={isLoading &&
+            <Button icon>
+                <Spinner />
+            </Button>
+            }
+            onChange={handleChange}
         >
-            <div className='auto-complete' ref={resultTargetRef}>
-                {showResult &&
+            <div className='auto-complete'>
+                {(showResult && result) &&
                 <AutocompleteResult target={resultTargetRef} setRef={resultRef}>
-                    <AutocompleteResult.Item onBlur={handleBlur} onKeyDown={handleKeyDown}>
-                        Hello world 1
-                    </AutocompleteResult.Item>
-                    <AutocompleteResult.Item onBlur={handleBlur} onKeyDown={handleKeyDown}>
-                        Hello world 2
-                    </AutocompleteResult.Item>
+                    {result.map(item =>
+                        <AutocompleteResult.Item key={autocompleteConfig.valueTranspile(item)}
+                                                 onBlur={handleBlur}
+                                                 onKeyDown={handleKeyDown}
+                                                 onClick={() => handleItemClick(item)}>
+                            {autocompleteConfig.itemTranspile(item)}
+                        </AutocompleteResult.Item>
+                    )}
                 </AutocompleteResult>
                 }
             </div>

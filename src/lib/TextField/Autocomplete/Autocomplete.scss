@@ -21,6 +21,10 @@
     box-sizing: border-box;
     position: relative;
     outline: none;
+    background-color: transparent;
+    border: none;
+    font-size: inherit;
+    width: 100%;
 
     &:before {
       content: '';

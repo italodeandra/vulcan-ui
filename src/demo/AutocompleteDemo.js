@@ -6,6 +6,10 @@ const AutocompleteDemo = () => {
     useTitle('Autocomplete')
     const [test, setTest] = useState(null)
 
+    const handleItemSelect = (item) => {
+        alert(`You selected ${JSON.stringify(item)}`)
+    }
+
     return (
         <div className='demo'>
             <h2>Autocomplete</h2>
@@ -16,8 +20,14 @@ const AutocompleteDemo = () => {
                     value={test}
                     onChange={setTest}
                     validation={{
-                        required: 'Please fill this field'
+                        required: 'Please select an user'
                     }}
+                    autocompleteConfig={{
+                        endpoint: ({ page }) => `http://localhost:8080?page=${page}`,
+                        itemTranspile: (i) => `${i.name} - ${i.id}`,
+                        valueTranspile: (v) => v.name
+                    }}
+                    onItemSelect={handleItemSelect}
                 />
                 <pre>state: {test}</pre>
             </div>

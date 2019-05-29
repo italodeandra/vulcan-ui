@@ -6,8 +6,10 @@ import NumberFormatter from './NumberFormatter'
 const Number = ({ maskConfig, ...props }) => {
     const onFocus = (e) => {
         props.onFocus && props.onFocus(e)
+
+        const {target} = e
+
         if (maskConfig && (maskConfig.decimal || maskConfig.money)) {
-            const target = e.target
             if (target.value === '') {
                 props.onChange && props.onChange('0.00')
             }
