@@ -1,4 +1,5 @@
 //TODO: Remove the manual animation from the scrim and use the *future* Animation component
+//TODO: Fix mobile version on collapsable
 
 import React, { useEffect, useRef, useState } from 'react'
 import { NavLink } from 'react-router-dom'

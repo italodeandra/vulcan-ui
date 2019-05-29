@@ -1,11 +1,11 @@
 function doGetCaretPosition(ctrl) {
-    var CaretPos = 0
+    let CaretPos = 0
 
-    if (ctrl.selectionStart || ctrl.selectionStart == 0) {// Standard.
+    if (ctrl.selectionStart || ctrl.selectionStart === 0) {// Standard.
         CaretPos = ctrl.selectionStart
     } else if (document.selection) {// Legacy IE
         ctrl.focus()
-        var Sel = document.selection.createRange()
+        const Sel = document.selection.createRange()
         Sel.moveStart('character', -ctrl.value.length)
         CaretPos = Sel.text.length
     }
@@ -19,7 +19,7 @@ function setCaretPosition(ctrl, pos) {
         ctrl.focus()
         ctrl.setSelectionRange(pos, pos)
     } else if (ctrl.createTextRange) {
-        var range = ctrl.createTextRange()
+        const range = ctrl.createTextRange()
         range.collapse(true)
         range.moveEnd('character', pos)
         range.moveStart('character', pos)

@@ -2,8 +2,9 @@
 
 import _isEqual from 'lodash.isequal'
 import React, { useState } from 'react'
-import { caretPosition, classNames, useDeepCompareEffect } from '../index'
-import NumberMask from './masks/NumberMask'
+import { classNames, useDeepCompareEffect } from '../index'
+import Autocomplete from './Autocomplete/Autocomplete'
+import Number from './Number/Number'
 import './TextField.scss'
 import useValidation from './useValidation'
 
@@ -13,6 +14,7 @@ function checkIfIsCounter(value) {
 
 const TextField = ({
                        className,
+                       inputClassName,
                        id,
                        name,
                        label,
@@ -24,7 +26,11 @@ const TextField = ({
                        required,
                        format,
                        onFocus,
-                       onBlur
+                       onBlur,
+                       children,
+                       autoComplete,
+                       setRef,
+                       ...props
                    }) => {
     type = type || 'text'
     format = format || { parse: f => f, mask: f => f }
@@ -75,7 +81,8 @@ const TextField = ({
         <div className={className}>
             <div className='input-container'>
                 <input
-                    className='input'
+                    ref={setRef}
+                    className={classNames('input', inputClassName)}
                     id={id}
                     name={name}
                     type={type}
@@ -90,6 +97,8 @@ const TextField = ({
                         if (onBlur) onBlur(e)
                     }}
                     required={required}
+                    autoComplete={autoComplete === false ? 'off' : undefined}
+                    {...props}
                 />
                 {!!label &&
                 <label htmlFor={id}>
@@ -106,28 +115,13 @@ const TextField = ({
                 {(!isPristine && hasError) ? errorText : helperText}
             </div>
             }
+            {children}
         </div>
     )
 }
 
-TextField.Number = ({ ...props }) => {
-    const onFocus = (e) => {
-        props.onFocus && props.onFocus(e)
-        if (props.maskConfig && (props.maskConfig.decimal || props.maskConfig.money)) {
-            const target = e.target
-            if (target.value === '') {
-                props.onChange && props.onChange('0.00')
-            }
-            caretPosition.set(target, target.value.length)
-        }
-    }
-    return (
-        <TextField
-            {...props}
-            onFocus={onFocus}
-            format={NumberMask(props.maskConfig)}
-        />
-    )
-}
+TextField.Number = Number
+
+TextField.Autocomplete = Autocomplete
 
 export default TextField

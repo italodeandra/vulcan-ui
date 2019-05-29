@@ -1,6 +1,6 @@
 import { caretPosition } from '../../index'
 
-const NumberMask = (config) => {
+const NumberFormatter = (config) => {
     config = config || {}
 
     function maskValue(rawValue) {
@@ -82,4 +82,4 @@ function addThousandDots(value) {
     }
 }
 
-export default NumberMask
+export default NumberFormatter

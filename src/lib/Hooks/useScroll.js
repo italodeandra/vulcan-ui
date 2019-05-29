@@ -6,7 +6,7 @@ const useScroll = (element) => {
     useEffect(() => {
         const elementRef = element.current
 
-        const handleScroll = () => {
+        const handleScroll = (e) => {
             setScrollY(element.current.scrollY)
         }
 

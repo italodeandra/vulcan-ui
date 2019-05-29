@@ -1,13 +1,14 @@
 import React, { useRef, useState } from 'react'
 import { render } from 'react-dom'
 import { BrowserRouter as Router, Route } from 'react-router-dom'
+import './demo.scss'
 import AppBarDemo from './demo/AppBarDemo'
+import AutocompleteDemo from './demo/AutocompleteDemo'
 import ButtonDemo from './demo/ButtonDemo'
 import HomeDemo from './demo/HomeDemo'
 import NavigationDrawerDemo from './demo/NavigationDrawerDemo'
 import TextFielDemo from './demo/TextFieldDemo'
 import useTitle from './demo/useTitle'
-import './demo.scss'
 import { AppBar, Button, Icon, NavigationDrawer, useMobile } from './lib'
 
 const App = () => {
@@ -61,6 +62,11 @@ const App = () => {
                                            onClick={() => isMobile && setIsNavigationDrawerOpen(false)}>
                         App bar
                     </NavigationDrawer.Item>
+                    <NavigationDrawer.Item to='/autocomplete'
+                                           title={!isNavigationDrawerOpen && 'Autocomplete'}
+                                           onClick={() => isMobile && setIsNavigationDrawerOpen(false)}>
+                        Autocomplete
+                    </NavigationDrawer.Item>
                     <NavigationDrawer.Item to='/button'
                                            title={!isNavigationDrawerOpen && 'Button'}
                                            onClick={() => isMobile && setIsNavigationDrawerOpen(false)}>
@@ -80,6 +86,7 @@ const App = () => {
                 <div className='App-container' ref={AppContainerRef}>
                     <Route path='/' exact component={HomeDemo} />
                     <Route path='/app-bar' component={AppBarDemo} />
+                    <Route path='/autocomplete' component={AutocompleteDemo} />
                     <Route path='/button' component={ButtonDemo} />
                     <Route path='/navigation-drawer' component={NavigationDrawerDemo} />
                     <Route path='/text-field' component={TextFielDemo} />
