@@ -34,6 +34,9 @@
     line-height: 1.75rem;
     color: rgba(#000000, 0.87);
   }
+  &.has-suffix .input {
+    padding-right: 56px;
+  }
 
   label {
     position: absolute;
@@ -68,6 +71,13 @@
     transition-property: transform, opacity;
     transition-duration: 180ms;
     transition-timing-function: $vui-Motion-Speed-Standard-Easing;
+  }
+
+  .suffix {
+    position: absolute;
+    right: 0;
+    top: 0;
+    padding: 10px;
   }
 
   .assistive-text {

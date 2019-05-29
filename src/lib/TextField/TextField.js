@@ -30,6 +30,7 @@ const TextField = ({
                        children,
                        autoComplete,
                        setRef,
+                       suffix,
                        ...props
                    }) => {
     type = type || 'text'
@@ -55,7 +56,8 @@ const TextField = ({
         isFocused && 'is-focused',
         isFilled && 'is-filled',
         isPristine && 'is-pristine',
-        hasError && 'has-error'
+        hasError && 'has-error',
+        suffix && 'has-suffix'
     )
 
     const handleChange = ({ target }) => {
@@ -100,6 +102,9 @@ const TextField = ({
                     autoComplete={autoComplete === false ? 'off' : undefined}
                     {...props}
                 />
+                {suffix &&
+                <div className='suffix'>{suffix}</div>
+                }
                 {!!label &&
                 <label htmlFor={id}>
                     {label}

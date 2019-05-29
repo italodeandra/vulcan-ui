@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { TextField } from '../lib/index'
+import { Button, Icon, TextField } from '../lib/index'
 import useTitle from './useTitle'
 
 const TextFielDemo = () => {
@@ -29,6 +29,11 @@ const TextFielDemo = () => {
                             },
                             maxLength: 6
                         }}
+                        suffix={
+                            <Button icon onClick={() => alert('Button clicked')}>
+                                <Icon name='home' />
+                            </Button>
+                        }
                     />
                     <pre>
                         state: {test1}
