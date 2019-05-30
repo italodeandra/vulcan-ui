@@ -31,7 +31,21 @@ const AutocompleteDemo = () => {
                 />
                 <pre>state: {test}</pre>
             </div>
-            <pre>{``}</pre>
+            <pre>{`<TextField.Autocomplete
+    label='Test'
+    name='test'
+    value={test}
+    onChange={setTest}
+    validation={{
+        required: 'Please select an item'
+    }}
+    autocompleteConfig={{
+        endpoint: ({ query, page }) => \`http://localhost:8080?query=${query}&page=${page}\`,
+        itemTranspile: (i) => \`${i.name} - ${i.id}\`,
+        valueTranspile: (v) => v.name
+    }}
+    onItemSelect={handleItemSelect}
+/>`}</pre>
         </div>
     )
 }
