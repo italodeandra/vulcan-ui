@@ -6,7 +6,7 @@
 
 .vui-TextField-AutocompleteResult {
   overflow-y: auto;
-  background-color: white;
+  background-color: #ffffff;
   box-shadow: $vui-Elevation-z8;
   border-radius: 4px;
   position: fixed;
@@ -49,5 +49,16 @@
     &:active:before {
       opacity: 0.16;
     }
+  }
+
+  .empty {
+    min-height: 48px;
+    padding: 13px 16px;
+    display: flex;
+    align-items: center;
+    box-sizing: border-box;
+    font-size: inherit;
+    width: 100%;
+    opacity: 0.38;
   }
 }

@@ -7,7 +7,7 @@ const AutocompleteDemo = () => {
     const [test, setTest] = useState(null)
 
     const handleItemSelect = (item) => {
-        alert(`You selected ${JSON.stringify(item)}`)
+        // alert(`You selected ${JSON.stringify(item)}`)
     }
 
     return (
@@ -20,10 +20,10 @@ const AutocompleteDemo = () => {
                     value={test}
                     onChange={setTest}
                     validation={{
-                        required: 'Please select an user'
+                        required: 'Please select an item'
                     }}
                     autocompleteConfig={{
-                        endpoint: ({ page }) => `http://localhost:8080?page=${page}`,
+                        endpoint: ({ query, page }) => `http://localhost:8080?query=${query}&page=${page}`,
                         itemTranspile: (i) => `${i.name} - ${i.id}`,
                         valueTranspile: (v) => v.name
                     }}

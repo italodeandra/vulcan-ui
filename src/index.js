@@ -7,6 +7,7 @@ import AutocompleteDemo from './demo/AutocompleteDemo'
 import ButtonDemo from './demo/ButtonDemo'
 import HomeDemo from './demo/HomeDemo'
 import NavigationDrawerDemo from './demo/NavigationDrawerDemo'
+import ProgressBarDemo from './demo/ProgressBarDemo'
 import SpinnerDemo from './demo/SpinnerDemo'
 import TextFielDemo from './demo/TextFieldDemo'
 import useTitle from './demo/useTitle'
@@ -78,6 +79,11 @@ const App = () => {
                                            onClick={() => isMobile && setIsNavigationDrawerOpen(false)}>
                         Navigation drawer
                     </NavigationDrawer.Item>
+                    <NavigationDrawer.Item to='/progress-bar'
+                                           title={!isNavigationDrawerOpen && 'Progress bar'}
+                                           onClick={() => isMobile && setIsNavigationDrawerOpen(false)}>
+                        Progress bar
+                    </NavigationDrawer.Item>
                     <NavigationDrawer.Item to='/spinner'
                                            title={!isNavigationDrawerOpen && 'Spinner'}
                                            onClick={() => isMobile && setIsNavigationDrawerOpen(false)}>
@@ -95,6 +101,7 @@ const App = () => {
                     <Route path='/autocomplete' component={AutocompleteDemo} />
                     <Route path='/button' component={ButtonDemo} />
                     <Route path='/navigation-drawer' component={NavigationDrawerDemo} />
+                    <Route path='/progress-bar' component={ProgressBarDemo} />
                     <Route path='/spinner' component={SpinnerDemo} />
                     <Route path='/text-field' component={TextFielDemo} />
                 </div>

@@ -1,13 +1,20 @@
 import { useEffect, useState } from 'react'
 
-const useScroll = (element) => {
+const useScroll = (element, endOffset = 0) => {
     const [scrollY, setScrollY] = useState(null)
+    const [isScrollEnd, setIsEndReached] = useState(false)
 
     useEffect(() => {
         const elementRef = element.current
 
-        const handleScroll = (e) => {
-            setScrollY(element.current.scrollY)
+        const handleScroll = () => {
+            const newScrollY = element.current.scrollY || element.current.scrollTop
+            const innerHeight = element.current.innerHeight || element.current.clientHeight
+            const scrollHeight = element.current.scrollHeight
+            if (scrollHeight > innerHeight) {
+                setScrollY(newScrollY)
+                setIsEndReached(newScrollY >= scrollHeight - innerHeight - endOffset)
+            }
         }
 
         if (element.current) {
@@ -20,10 +27,11 @@ const useScroll = (element) => {
             elementRef.removeEventListener('scroll', handleScroll)
             elementRef.removeEventListener('resize', handleScroll)
         }
-    }, [element])
+    }, [element, endOffset])
 
     return [
-        scrollY
+        scrollY,
+        isScrollEnd
     ]
 }
 
