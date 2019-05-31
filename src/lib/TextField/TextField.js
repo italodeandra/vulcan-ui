@@ -31,6 +31,8 @@ const TextField = ({
                        autoComplete,
                        setRef,
                        suffix,
+                       readOnly,
+                       disabled,
                        ...props
                    }) => {
     type = type || 'text'
@@ -57,7 +59,9 @@ const TextField = ({
         isFilled && 'is-filled',
         isPristine && 'is-pristine',
         hasError && 'has-error',
-        suffix && 'has-suffix'
+        suffix && 'has-suffix',
+        readOnly && 'is-readonly',
+        disabled && 'is-disabled'
     )
 
     const handleChange = ({ target }) => {
@@ -100,6 +104,8 @@ const TextField = ({
                     }}
                     required={required}
                     autoComplete={autoComplete === false ? 'off' : undefined}
+                    readOnly={readOnly}
+                    disabled={disabled}
                     {...props}
                 />
                 {suffix &&

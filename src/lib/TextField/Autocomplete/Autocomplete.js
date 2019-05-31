@@ -1,12 +1,16 @@
 import _isEqual from 'lodash.isequal'
 import React, { useEffect, useRef, useState } from 'react'
-import { Button, ProgressBar, Spinner, TextField, usePortal } from '../../index'
+import { Button, ProgressBar, Spinner, TextField, useDeepCompareEffect, usePortal } from '../../index'
 import './Autocomplete.scss'
 import AutocompleteDataSource from './AutocompleteDataSource'
 import AutocompleteResult from './AutocompleteResult'
 
-const Autocomplete = ({ autocompleteConfig, onChange, value: defaultValue, onItemSelect, ...props }) => {
+let autocompleteIndex = 0
+
+const Autocomplete = ({ autocompleteConfig, onChange, value: defaultValue, onItemSelect, readOnly, keepValue, ...props }) => {
     autocompleteConfig.emptyLabel = autocompleteConfig.emptyLabel || 'No items found'
+    autocompleteConfig.responseTranspile = autocompleteConfig.responseTranspile || ((r) => r)
+    autocompleteConfig.valueTranspile = autocompleteConfig.valueTranspile || ((r) => r)
     const resultRef = useRef(null)
     const [resultTargetRef, showResult, setShowResult] = usePortal.hook()
     const [isLoading, setIsLoading] = useState(false)
@@ -17,6 +21,20 @@ const Autocomplete = ({ autocompleteConfig, onChange, value: defaultValue, onIte
     const getResultTimeout = useRef(null)
     const [page, setPage] = useState(0)
     const [isScrollEnd, setIsScrollEnd] = useState(false)
+    const index = useRef(++autocompleteIndex)
+
+    useDeepCompareEffect(() => {
+        if (!_isEqual(value, defaultValue)) {
+            if (keepValue) {
+                setValue(defaultValue)
+                setSelected(defaultValue)
+            } else {
+                setValue(null)
+                setSelected(null)
+                onChange && onChange(null)
+            }
+        }
+    }, [defaultValue])
 
     const getResult = (value, page) => {
         if (page === 0) {
@@ -26,78 +44,109 @@ const Autocomplete = ({ autocompleteConfig, onChange, value: defaultValue, onIte
         setIsLoading(true)
         setIsScrollEnd(false)
         const getResultIndexCurrent = ++getResultIndex.current
-        AutocompleteDataSource(autocompleteConfig.endpoint, value, page)
+        AutocompleteDataSource(autocompleteConfig.request, value, page)
             .get()
             .then(res => {
                 if (getResultIndex.current === getResultIndexCurrent) {
+                    const responseTranspiled = autocompleteConfig.responseTranspile(res.data)
+                    if (Array.isArray(responseTranspiled)) {
+                        setResult(page === 0 ? responseTranspiled : (r) => [...r, ...responseTranspiled])
+                    } else {
+                        setSelected(value)
+                        onChange && onChange(value)
+                        setShowResult(false)
+                        setResult(null)
+                        onItemSelect && onItemSelect(responseTranspiled)
+                    }
                     setIsLoading(false)
-                    setResult(page === 0 ? res.data : (r) => [...r, ...res.data])
                 }
+            })
+            .catch((err) => {
+                console.error(err)
+                //TODO: Use snackbar when implemented
+                setIsLoading(false)
+                setResult(null)
             })
     }
 
     const handleFocus = (e) => {
         const { relatedTarget } = e
         props.onFocus && props.onFocus(e)
-        if (!relatedTarget || !relatedTarget.classList.contains('vui-TextField-Autocomplete-Target')) {
-            getResult(value, page)
+
+        if (!readOnly) {
+            if (!relatedTarget || !relatedTarget.classList.contains(`vui-TextField-Autocomplete-Target${index.current}`)) {
+                getResult(value, page)
+            }
         }
+    }
+
+    const handleItemFocus = (e) => {
+        // const target = e.target
+        // setTimeout(() => {
+        //     target.scrollIntoView(true)
+        // })
     }
 
     const handleBlur = (e) => {
         props.onBlur && props.onBlur(e)
 
-        const { relatedTarget } = e
+        if (!readOnly) {
+            const { relatedTarget } = e
 
-        if (!relatedTarget || !relatedTarget.classList.contains('vui-TextField-Autocomplete-Target')) {
-            setShowResult(false)
-            setPage(0)
-            setResult(null)
+            if (!relatedTarget || !relatedTarget.classList.contains(`vui-TextField-Autocomplete-Target${index.current}`)) {
+                setShowResult(false)
+                setPage(0)
+                setResult(null)
+            }
+
+            if (!keepValue && !_isEqual(value, selected)) {
+                setValue(null)
+                onChange && onChange(null)
+            }
+
+            ++getResultIndex.current
+            setIsLoading(false)
+            clearTimeout(getResultTimeout.current)
         }
-
-        if (!_isEqual(value, selected)) {
-            setValue(null)
-        }
-
-        getResultIndex.current++
-        setIsLoading(false)
     }
 
-    const handleKeyDown = (e) => {
-        props.onKeyDown && props.onKeyDown(e)
+    const handleKeyUp = (e) => {
+        props.onKeyUp && props.onKeyUp(e)
 
-        const { key, target } = e
+        if (!readOnly) {
+            const { key, target } = e
 
-        switch (key) {
-            case 'ArrowUp':
-                if (target.previousElementSibling && target.previousElementSibling.classList && target.previousElementSibling.classList.contains('item')) {
-                    target.previousElementSibling.focus()
-                } else {
+            switch (key) {
+                case 'ArrowUp':
+                    if (target.previousElementSibling && target.previousElementSibling.classList && target.previousElementSibling.classList.contains('item')) {
+                        target.previousElementSibling.focus()
+                    } else {
+                        resultTargetRef.current.focus()
+                    }
+                    break
+                case 'ArrowDown':
+                    if (target.nextElementSibling && target.nextElementSibling.classList && target.nextElementSibling.classList.contains('item')) {
+                        target.nextElementSibling.focus()
+                    } else {
+                        const firstItem = resultRef.current.querySelector('.item')
+                        firstItem && firstItem.focus()
+                    }
+                    break
+                case 'Escape':
                     resultTargetRef.current.focus()
-                }
-                break
-            case 'ArrowDown':
-                if (target.nextElementSibling && target.nextElementSibling.classList && target.nextElementSibling.classList.contains('item')) {
-                    target.nextElementSibling.focus()
-                } else {
-                    const firstItem = resultRef.current.querySelector('.item')
-                    firstItem && firstItem.focus()
-                }
-                break
-            case 'Escape':
-                resultTargetRef.current.focus()
-                setShowResult(false)
-                setResult(null)
-                break
-            default:
+                    setShowResult(false)
+                    setResult(null)
+                    break
+                default:
+            }
         }
     }
 
     const handleChange = (newValue) => {
         clearTimeout(getResultTimeout.current)
+        setValue(newValue)
         getResultTimeout.current = setTimeout(() => {
-            setValue(newValue)
-            onChange && onChange(null)
+            onChange && onChange(newValue)
             const newPage = 0
             setPage(newPage)
             getResult(newValue, newPage)
@@ -109,14 +158,13 @@ const Autocomplete = ({ autocompleteConfig, onChange, value: defaultValue, onIte
         const newSelected = autocompleteConfig.valueTranspile(item)
         setValue(newSelected)
         setSelected(newSelected)
-        onChange && onChange(autocompleteConfig.valueTranspile(item))
+        onChange && onChange(newSelected)
         setShowResult(false)
         setResult(null)
         onItemSelect && onItemSelect(item)
     }
 
     const handleScroll = (newIsScrollEnd) => {
-        console.log(newIsScrollEnd)
         setIsScrollEnd(newIsScrollEnd)
     }
 
@@ -138,8 +186,8 @@ const Autocomplete = ({ autocompleteConfig, onChange, value: defaultValue, onIte
             autoComplete={false}
             onFocus={handleFocus}
             onBlur={handleBlur}
-            inputClassName='vui-TextField-Autocomplete-Target'
-            onKeyDown={handleKeyDown}
+            inputClassName={`vui-TextField-Autocomplete-Target${index.current}`}
+            onKeyUp={handleKeyUp}
             suffix={
                 isLoading &&
                 <Button icon>
@@ -147,16 +195,25 @@ const Autocomplete = ({ autocompleteConfig, onChange, value: defaultValue, onIte
                 </Button>
             }
             onChange={handleChange}
+            readOnly={readOnly}
         >
             <div className='auto-complete'>
                 {(showResult) &&
-                <AutocompleteResult target={resultTargetRef} setRef={resultRef} onScroll={handleScroll}>
+                <AutocompleteResult
+                    target={resultTargetRef}
+                    setRef={resultRef}
+                    onScroll={autocompleteConfig.pagination ? handleScroll : undefined}
+                >
                     {result && <>
-                        {result.map(item =>
-                            <AutocompleteResult.Item key={autocompleteConfig.valueTranspile(item)}
-                                                     onBlur={handleBlur}
-                                                     onKeyDown={handleKeyDown}
-                                                     onClick={() => handleItemClick(item)}>
+                        {result.map((item, i) =>
+                            <AutocompleteResult.Item
+                                key={autocompleteConfig.valueTranspile(item).toString() + i}
+                                onBlur={handleBlur}
+                                onKeyUp={handleKeyUp}
+                                onClick={() => handleItemClick(item)}
+                                onFocus={handleItemFocus}
+                                targetClassName={`vui-TextField-Autocomplete-Target${index.current}`}
+                            >
                                 {autocompleteConfig.itemTranspile(item)}
                             </AutocompleteResult.Item>
                         )}

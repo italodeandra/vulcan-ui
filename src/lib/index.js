@@ -12,6 +12,8 @@ import TextField from './TextField/TextField'
 import caretPosition from './Utils/caretPosition'
 import classNames from './Utils/classNames'
 import createSharedStateHook from './Utils/createSharedStateHook'
+import jsonToParams from './Utils/jsonToParams'
+import jsonToQueryString from './Utils/jsonToQueryString'
 
 export {
     AppBar,
@@ -27,7 +29,9 @@ export {
     usePortal,
     useScroll,
 
+    caretPosition,
     classNames,
     createSharedStateHook,
-    caretPosition
+    jsonToParams,
+    jsonToQueryString
 }

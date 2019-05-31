@@ -12,4 +12,6 @@ import TextField from './TextField/TextField';
 import caretPosition from './Utils/caretPosition';
 import classNames from './Utils/classNames';
 import createSharedStateHook from './Utils/createSharedStateHook';
-export { AppBar, Button, Icon, NavigationDrawer, ProgressBar, Spinner, TextField, useDeepCompareEffect, useMobile, usePortal, useScroll, classNames, createSharedStateHook, caretPosition };
+import jsonToParams from './Utils/jsonToParams';
+import jsonToQueryString from './Utils/jsonToQueryString';
+export { AppBar, Button, Icon, NavigationDrawer, ProgressBar, Spinner, TextField, useDeepCompareEffect, useMobile, usePortal, useScroll, caretPosition, classNames, createSharedStateHook, jsonToParams, jsonToQueryString };

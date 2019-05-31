@@ -140,4 +140,19 @@
       background-color: #B00020;
     }
   }
+
+  &.is-readonly .input {
+    border-bottom-style: dashed;
+  }
+
+  &.is-disabled {
+    .input {
+      cursor: not-allowed;
+    }
+    opacity: 0.38;
+  }
+}
+
+.vui-TextField + .vui-TextField {
+  margin-top: 16px;
 }

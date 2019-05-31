@@ -1,6 +1,6 @@
 import _objectWithoutProperties from "@babel/runtime/helpers/esm/objectWithoutProperties";
 import _slicedToArray from "@babel/runtime/helpers/esm/slicedToArray";
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState, useLayoutEffect } from 'react';
 import { createPortal } from 'react-dom';
 import { classNames, usePortal, useScroll } from '../../index';
 
@@ -10,7 +10,7 @@ var AutocompleteResult = function AutocompleteResult(_ref) {
       setRef = _ref.setRef,
       onScroll = _ref.onScroll;
   var ref = useRef(null);
-  var portalContainer = usePortal('AutocompleteResult');
+  var portalContainer = usePortal('vuiAutocompleteResult');
 
   var _useState = useState(null),
       _useState2 = _slicedToArray(_useState, 2),
@@ -25,7 +25,7 @@ var AutocompleteResult = function AutocompleteResult(_ref) {
   useEffect(function () {
     if (setRef) setRef.current = ref.current;
   }, [setRef]);
-  useEffect(function () {
+  useLayoutEffect(function () {
     var handlePosition = function handlePosition() {
       var nextStyle = {};
       var targetDOMRect = target.current.getBoundingClientRect();
@@ -43,15 +43,29 @@ var AutocompleteResult = function AutocompleteResult(_ref) {
     };
 
     handlePosition();
-    window.addEventListener('scroll', handlePosition);
+
+    function getScrollParent(node) {
+      if (node == null) {
+        return null;
+      }
+
+      if (node.scrollHeight > node.clientHeight) {
+        return node;
+      } else {
+        return getScrollParent(node.parentNode);
+      }
+    }
+
+    var scrollable = getScrollParent(target.current) || window;
+    scrollable.addEventListener('scroll', handlePosition);
     window.addEventListener('resize', handlePosition);
     return function () {
-      window.removeEventListener('scroll', handlePosition);
+      scrollable.removeEventListener('scroll', handlePosition);
       window.removeEventListener('resize', handlePosition);
     };
   }, [target]);
   useEffect(function () {
-    onScroll(isScrollEnd); // eslint-disable-next-line react-hooks/exhaustive-deps
+    onScroll && onScroll(isScrollEnd); // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [scrollY]);
   return createPortal(React.createElement("div", {
     className: "vui-TextField-AutocompleteResult",
@@ -63,10 +77,11 @@ var AutocompleteResult = function AutocompleteResult(_ref) {
 AutocompleteResult.Item = function (_ref2) {
   var children = _ref2.children,
       className = _ref2.className,
-      props = _objectWithoutProperties(_ref2, ["children", "className"]);
+      targetClassName = _ref2.targetClassName,
+      props = _objectWithoutProperties(_ref2, ["children", "className", "targetClassName"]);
 
   return React.createElement("button", Object.assign({
-    className: classNames('item', 'vui-TextField-Autocomplete-Target')
+    className: classNames('item', targetClassName)
   }, props, {
     tabIndex: "0"
   }), children);

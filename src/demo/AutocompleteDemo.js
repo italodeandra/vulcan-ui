@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { TextField } from '../lib/index'
 import useTitle from './useTitle'
 
@@ -7,8 +7,14 @@ const AutocompleteDemo = () => {
     const [test, setTest] = useState(null)
 
     const handleItemSelect = (item) => {
-        // alert(`You selected ${JSON.stringify(item)}`)
+        console.info(`You selected ${JSON.stringify(item)}`)
     }
+
+    useEffect(() => {
+        setTimeout(() => {
+            setTest('Leanne Graham')
+        }, 2000)
+    }, [])
 
     return (
         <div className='demo'>
@@ -23,11 +29,22 @@ const AutocompleteDemo = () => {
                         required: 'Please select an item'
                     }}
                     autocompleteConfig={{
-                        endpoint: ({ query, page }) => `http://localhost:8080?query=${query}&page=${page}`,
+                        // request: ({ query, page }) => `http://localhost:8080?query=${query}&page=${page}`,
+                        // request: 'http://localhost:8080?query=&page=0',
+                        request: {
+                            url: 'https://jsonplaceholder.typicode.com/users',
+                            // method: 'post',
+                            // data: { query: '', page: 0 },
+                            data: ({ query }) => ({ query: query ? query : undefined }),
+                            // headers: {
+                            //     Authorization: 'Bearer 1'
+                            // }
+                        },
                         itemTranspile: (i) => `${i.name} - ${i.id}`,
                         valueTranspile: (v) => v.name
                     }}
                     onItemSelect={handleItemSelect}
+                    // keepValue
                 />
                 <pre>state: {test}</pre>
             </div>
@@ -40,8 +57,14 @@ const AutocompleteDemo = () => {
         required: 'Please select an item'
     }}
     autocompleteConfig={{
-        endpoint: ({ query, page }) => \`http://localhost:8080?query=${query}&page=${page}\`,
-        itemTranspile: (i) => \`${i.name} - ${i.id}\`,
+        // request: ({ query, page }) => \`http://localhost:8080?query=\${query}&page=\${page}\`,
+        // request: 'http://localhost:8080?query=&page=0',
+        request: {
+            endpoint: 'http://localhost:8080',
+            // data: { query: '', page: 0 },
+            data: ({ query, page }) => ({ query, page })
+        },
+        itemTranspile: (i) => \`\${i.name} - \${i.id}\`,
         valueTranspile: (v) => v.name
     }}
     onItemSelect={handleItemSelect}

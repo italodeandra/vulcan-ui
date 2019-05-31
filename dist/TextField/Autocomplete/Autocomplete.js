@@ -3,19 +3,31 @@ import _slicedToArray from "@babel/runtime/helpers/esm/slicedToArray";
 import _objectWithoutProperties from "@babel/runtime/helpers/esm/objectWithoutProperties";
 import _isEqual from 'lodash.isequal';
 import React, { useEffect, useRef, useState } from 'react';
-import { Button, ProgressBar, Spinner, TextField, usePortal } from '../../index';
+import { Button, ProgressBar, Spinner, TextField, useDeepCompareEffect, usePortal } from '../../index';
 import './Autocomplete.scss';
 import AutocompleteDataSource from './AutocompleteDataSource';
 import AutocompleteResult from './AutocompleteResult';
+var autocompleteIndex = 0;
 
 var Autocomplete = function Autocomplete(_ref) {
   var autocompleteConfig = _ref.autocompleteConfig,
       onChange = _ref.onChange,
       defaultValue = _ref.value,
       onItemSelect = _ref.onItemSelect,
-      props = _objectWithoutProperties(_ref, ["autocompleteConfig", "onChange", "value", "onItemSelect"]);
+      readOnly = _ref.readOnly,
+      keepValue = _ref.keepValue,
+      props = _objectWithoutProperties(_ref, ["autocompleteConfig", "onChange", "value", "onItemSelect", "readOnly", "keepValue"]);
 
   autocompleteConfig.emptyLabel = autocompleteConfig.emptyLabel || 'No items found';
+
+  autocompleteConfig.responseTranspile = autocompleteConfig.responseTranspile || function (r) {
+    return r;
+  };
+
+  autocompleteConfig.valueTranspile = autocompleteConfig.valueTranspile || function (r) {
+    return r;
+  };
+
   var resultRef = useRef(null);
 
   var _usePortal$hook = usePortal.hook(),
@@ -57,6 +69,20 @@ var Autocomplete = function Autocomplete(_ref) {
       isScrollEnd = _useState12[0],
       setIsScrollEnd = _useState12[1];
 
+  var index = useRef(++autocompleteIndex);
+  useDeepCompareEffect(function () {
+    if (!_isEqual(value, defaultValue)) {
+      if (keepValue) {
+        setValue(defaultValue);
+        setSelected(defaultValue);
+      } else {
+        setValue(null);
+        setSelected(null);
+        onChange && onChange(null);
+      }
+    }
+  }, [defaultValue]);
+
   var getResult = function getResult(value, page) {
     if (page === 0) {
       setResult(null);
@@ -66,13 +92,29 @@ var Autocomplete = function Autocomplete(_ref) {
     setIsLoading(true);
     setIsScrollEnd(false);
     var getResultIndexCurrent = ++getResultIndex.current;
-    AutocompleteDataSource(autocompleteConfig.endpoint, value, page).get().then(function (res) {
+    AutocompleteDataSource(autocompleteConfig.request, value, page).get().then(function (res) {
       if (getResultIndex.current === getResultIndexCurrent) {
+        var responseTranspiled = autocompleteConfig.responseTranspile(res.data);
+
+        if (Array.isArray(responseTranspiled)) {
+          setResult(page === 0 ? responseTranspiled : function (r) {
+            return [].concat(_toConsumableArray(r), _toConsumableArray(responseTranspiled));
+          });
+        } else {
+          setSelected(value);
+          onChange && onChange(value);
+          setShowResult(false);
+          setResult(null);
+          onItemSelect && onItemSelect(responseTranspiled);
+        }
+
         setIsLoading(false);
-        setResult(page === 0 ? res.data : function (r) {
-          return [].concat(_toConsumableArray(r), _toConsumableArray(res.data));
-        });
       }
+    }).catch(function (err) {
+      console.error(err); //TODO: Use snackbar when implemented
+
+      setIsLoading(false);
+      setResult(null);
     });
   };
 
@@ -80,69 +122,85 @@ var Autocomplete = function Autocomplete(_ref) {
     var relatedTarget = e.relatedTarget;
     props.onFocus && props.onFocus(e);
 
-    if (!relatedTarget || !relatedTarget.classList.contains('vui-TextField-Autocomplete-Target')) {
-      getResult(value, page);
+    if (!readOnly) {
+      if (!relatedTarget || !relatedTarget.classList.contains("vui-TextField-Autocomplete-Target".concat(index.current))) {
+        getResult(value, page);
+      }
     }
+  };
+
+  var handleItemFocus = function handleItemFocus(e) {// const target = e.target
+    // setTimeout(() => {
+    //     target.scrollIntoView(true)
+    // })
   };
 
   var handleBlur = function handleBlur(e) {
     props.onBlur && props.onBlur(e);
-    var relatedTarget = e.relatedTarget;
 
-    if (!relatedTarget || !relatedTarget.classList.contains('vui-TextField-Autocomplete-Target')) {
-      setShowResult(false);
-      setPage(0);
-      setResult(null);
+    if (!readOnly) {
+      var relatedTarget = e.relatedTarget;
+
+      if (!relatedTarget || !relatedTarget.classList.contains("vui-TextField-Autocomplete-Target".concat(index.current))) {
+        setShowResult(false);
+        setPage(0);
+        setResult(null);
+      }
+
+      if (!keepValue && !_isEqual(value, selected)) {
+        setValue(null);
+        onChange && onChange(null);
+      }
+
+      ++getResultIndex.current;
+      setIsLoading(false);
+      clearTimeout(getResultTimeout.current);
     }
-
-    if (!_isEqual(value, selected)) {
-      setValue(null);
-    }
-
-    getResultIndex.current++;
-    setIsLoading(false);
   };
 
-  var handleKeyDown = function handleKeyDown(e) {
-    props.onKeyDown && props.onKeyDown(e);
-    var key = e.key,
-        target = e.target;
+  var handleKeyUp = function handleKeyUp(e) {
+    props.onKeyUp && props.onKeyUp(e);
 
-    switch (key) {
-      case 'ArrowUp':
-        if (target.previousElementSibling && target.previousElementSibling.classList && target.previousElementSibling.classList.contains('item')) {
-          target.previousElementSibling.focus();
-        } else {
+    if (!readOnly) {
+      var key = e.key,
+          target = e.target;
+
+      switch (key) {
+        case 'ArrowUp':
+          if (target.previousElementSibling && target.previousElementSibling.classList && target.previousElementSibling.classList.contains('item')) {
+            target.previousElementSibling.focus();
+          } else {
+            resultTargetRef.current.focus();
+          }
+
+          break;
+
+        case 'ArrowDown':
+          if (target.nextElementSibling && target.nextElementSibling.classList && target.nextElementSibling.classList.contains('item')) {
+            target.nextElementSibling.focus();
+          } else {
+            var firstItem = resultRef.current.querySelector('.item');
+            firstItem && firstItem.focus();
+          }
+
+          break;
+
+        case 'Escape':
           resultTargetRef.current.focus();
-        }
+          setShowResult(false);
+          setResult(null);
+          break;
 
-        break;
-
-      case 'ArrowDown':
-        if (target.nextElementSibling && target.nextElementSibling.classList && target.nextElementSibling.classList.contains('item')) {
-          target.nextElementSibling.focus();
-        } else {
-          var firstItem = resultRef.current.querySelector('.item');
-          firstItem && firstItem.focus();
-        }
-
-        break;
-
-      case 'Escape':
-        resultTargetRef.current.focus();
-        setShowResult(false);
-        setResult(null);
-        break;
-
-      default:
+        default:
+      }
     }
   };
 
   var handleChange = function handleChange(newValue) {
     clearTimeout(getResultTimeout.current);
+    setValue(newValue);
     getResultTimeout.current = setTimeout(function () {
-      setValue(newValue);
-      onChange && onChange(null);
+      onChange && onChange(newValue);
       var newPage = 0;
       setPage(newPage);
       getResult(newValue, newPage);
@@ -154,14 +212,13 @@ var Autocomplete = function Autocomplete(_ref) {
     var newSelected = autocompleteConfig.valueTranspile(item);
     setValue(newSelected);
     setSelected(newSelected);
-    onChange && onChange(autocompleteConfig.valueTranspile(item));
+    onChange && onChange(newSelected);
     setShowResult(false);
     setResult(null);
     onItemSelect && onItemSelect(item);
   };
 
   var handleScroll = function handleScroll(newIsScrollEnd) {
-    console.log(newIsScrollEnd);
     setIsScrollEnd(newIsScrollEnd);
   };
 
@@ -180,26 +237,29 @@ var Autocomplete = function Autocomplete(_ref) {
     autoComplete: false,
     onFocus: handleFocus,
     onBlur: handleBlur,
-    inputClassName: "vui-TextField-Autocomplete-Target",
-    onKeyDown: handleKeyDown,
+    inputClassName: "vui-TextField-Autocomplete-Target".concat(index.current),
+    onKeyUp: handleKeyUp,
     suffix: isLoading && React.createElement(Button, {
       icon: true
     }, React.createElement(Spinner, null)),
-    onChange: handleChange
+    onChange: handleChange,
+    readOnly: readOnly
   }), React.createElement("div", {
     className: "auto-complete"
   }, showResult && React.createElement(AutocompleteResult, {
     target: resultTargetRef,
     setRef: resultRef,
-    onScroll: handleScroll
-  }, result && React.createElement(React.Fragment, null, result.map(function (item) {
+    onScroll: autocompleteConfig.pagination ? handleScroll : undefined
+  }, result && React.createElement(React.Fragment, null, result.map(function (item, i) {
     return React.createElement(AutocompleteResult.Item, {
-      key: autocompleteConfig.valueTranspile(item),
+      key: autocompleteConfig.valueTranspile(item).toString() + i,
       onBlur: handleBlur,
-      onKeyDown: handleKeyDown,
+      onKeyUp: handleKeyUp,
       onClick: function onClick() {
         return handleItemClick(item);
-      }
+      },
+      onFocus: handleItemFocus,
+      targetClassName: "vui-TextField-Autocomplete-Target".concat(index.current)
     }, autocompleteConfig.itemTranspile(item));
   }), !result.length && React.createElement("div", {
     className: "empty"

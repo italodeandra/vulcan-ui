@@ -1,10 +1,10 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useEffect, useRef, useState, useLayoutEffect } from 'react'
 import { createPortal } from 'react-dom'
 import { classNames, usePortal, useScroll } from '../../index'
 
 const AutocompleteResult = ({ children, target, setRef, onScroll }) => {
     const ref = useRef(null)
-    const portalContainer = usePortal('AutocompleteResult')
+    const portalContainer = usePortal('vuiAutocompleteResult')
     const [style, setStyle] = useState(null)
     const [scrollY, isScrollEnd] = useScroll(ref, 48)
 
@@ -12,7 +12,7 @@ const AutocompleteResult = ({ children, target, setRef, onScroll }) => {
         if (setRef) setRef.current = ref.current
     }, [setRef])
 
-    useEffect(() => {
+    useLayoutEffect(() => {
         const handlePosition = () => {
             const nextStyle = {}
             const targetDOMRect = target.current.getBoundingClientRect()
@@ -32,16 +32,30 @@ const AutocompleteResult = ({ children, target, setRef, onScroll }) => {
 
         handlePosition()
 
-        window.addEventListener('scroll', handlePosition)
+        function getScrollParent(node) {
+            if (node == null) {
+                return null;
+            }
+
+            if (node.scrollHeight > node.clientHeight) {
+                return node;
+            } else {
+                return getScrollParent(node.parentNode);
+            }
+        }
+
+        const scrollable = getScrollParent(target.current) || window
+
+        scrollable.addEventListener('scroll', handlePosition)
         window.addEventListener('resize', handlePosition)
         return () => {
-            window.removeEventListener('scroll', handlePosition)
+            scrollable.removeEventListener('scroll', handlePosition)
             window.removeEventListener('resize', handlePosition)
         }
     }, [target])
 
     useEffect(() => {
-        onScroll(isScrollEnd)
+        onScroll && onScroll(isScrollEnd)
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [scrollY])
 
@@ -53,9 +67,9 @@ const AutocompleteResult = ({ children, target, setRef, onScroll }) => {
     )
 }
 
-AutocompleteResult.Item = ({ children, className, ...props }) => {
+AutocompleteResult.Item = ({ children, className, targetClassName, ...props }) => {
     return (
-        <button className={classNames('item', 'vui-TextField-Autocomplete-Target')} {...props} tabIndex='0'>
+        <button className={classNames('item', targetClassName)} {...props} tabIndex='0'>
             {children}
         </button>
     )
