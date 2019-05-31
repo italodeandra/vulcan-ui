@@ -123,3 +123,11 @@ NavigationDrawer.Header = ({ children }) => {
         </div>
     ) : null
 }
+
+NavigationDrawer.Divider = () => (
+    <div className='divider' />
+)
+
+NavigationDrawer.Subtitle = ({ children }) => (
+    <div className='subtitle'>{children}</div>
+)

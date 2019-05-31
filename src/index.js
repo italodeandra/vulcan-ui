@@ -37,6 +37,7 @@ const App = () => {
                     containerRef={AppContainerRef}
                     onScrimClick={() => setIsNavigationDrawerOpen(false)}
                     appBarRef={AppBarRef}
+                    collapsable
                 >
                     <NavigationDrawer.Header>
                         <AppBar className='app-bar'>
@@ -59,6 +60,8 @@ const App = () => {
                         <Icon name='home' />
                         Home
                     </NavigationDrawer.Item>
+                    <NavigationDrawer.Divider />
+                    <NavigationDrawer.Subtitle>Demos</NavigationDrawer.Subtitle>
                     <NavigationDrawer.Item to='/app-bar'
                                            title={!isNavigationDrawerOpen && 'App bar'}
                                            onClick={() => isMobile && setIsNavigationDrawerOpen(false)}>

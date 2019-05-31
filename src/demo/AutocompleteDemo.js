@@ -10,12 +10,6 @@ const AutocompleteDemo = () => {
         console.info(`You selected ${JSON.stringify(item)}`)
     }
 
-    useEffect(() => {
-        setTimeout(() => {
-            setTest('Leanne Graham')
-        }, 2000)
-    }, [])
-
     return (
         <div className='demo'>
             <h2>Autocomplete</h2>
@@ -60,14 +54,19 @@ const AutocompleteDemo = () => {
         // request: ({ query, page }) => \`http://localhost:8080?query=\${query}&page=\${page}\`,
         // request: 'http://localhost:8080?query=&page=0',
         request: {
-            endpoint: 'http://localhost:8080',
+            url: 'https://jsonplaceholder.typicode.com/users',
+            // method: 'post',
             // data: { query: '', page: 0 },
-            data: ({ query, page }) => ({ query, page })
+            data: ({ query }) => ({ query: query ? query : undefined }),
+            // headers: {
+            //     Authorization: 'Bearer 1'
+            // }
         },
         itemTranspile: (i) => \`\${i.name} - \${i.id}\`,
         valueTranspile: (v) => v.name
     }}
     onItemSelect={handleItemSelect}
+    // keepValue
 />`}</pre>
         </div>
     )
