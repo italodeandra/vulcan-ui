@@ -1,8 +1,9 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import useTitle from './useTitle'
 
 const HomeDemo = () => {
-    useTitle('Vulcan UI Demo')
+    const [, setTitle] = useTitle()
+    useEffect(() => setTitle('Vulcan UI Demo'))
 
     return (
         <h1>

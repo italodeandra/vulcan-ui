@@ -123,3 +123,16 @@ NavigationDrawer.Header = function (_ref3) {
     className: "header"
   }, children) : null;
 };
+
+NavigationDrawer.Divider = function () {
+  return React.createElement("div", {
+    className: "divider"
+  });
+};
+
+NavigationDrawer.Subtitle = function (_ref4) {
+  var children = _ref4.children;
+  return React.createElement("div", {
+    className: "subtitle"
+  }, children);
+};

@@ -37,7 +37,6 @@ const App = () => {
                     containerRef={AppContainerRef}
                     onScrimClick={() => setIsNavigationDrawerOpen(false)}
                     appBarRef={AppBarRef}
-                    collapsable
                 >
                     <NavigationDrawer.Header>
                         <AppBar className='app-bar'>

@@ -1,17 +1,11 @@
-import { useEffect } from 'react'
-
 import { createSharedStateHook } from '../lib/index'
 
 const initialState = ''
 
 const userSharedStateHook = createSharedStateHook(initialState)
 
-function useUser(nextTitle) {
+function useTitle() {
     const [title, setTitle] = userSharedStateHook()
-
-    useEffect(() => {
-        if (nextTitle) setTitle(nextTitle)
-    })
 
     return [
         title,
@@ -19,4 +13,4 @@ function useUser(nextTitle) {
     ]
 }
 
-export default useUser
+export default useTitle

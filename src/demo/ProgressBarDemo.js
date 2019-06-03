@@ -1,9 +1,10 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { ProgressBar } from '../lib'
 import useTitle from './useTitle'
 
 const ProgressBarDemo = () => {
-    useTitle('Progress bar')
+    const [, setTitle] = useTitle()
+    useEffect(() => setTitle('Progress bar'))
 
     return (
         <div className='component'>
@@ -13,14 +14,14 @@ const ProgressBarDemo = () => {
                 <div>
                     <ProgressBar progression={20} />
                 </div>
-                <pre>{`<ProgressBar progression={20} />`}</pre>
+                <pre>{`<ProgressBar progression='{20}' />`}</pre>
             </div>
             <div className='subdemo'>
                 <p><strong>Indeterminate</strong></p>
                 <div>
                     <ProgressBar indeterminate height={2} />
                 </div>
-                <pre>{`<ProgressBar indeterminate height={2} />`}</pre>
+                <pre>{`<ProgressBar indeterminate height='{2}' />`}</pre>
             </div>
         </div>
     )

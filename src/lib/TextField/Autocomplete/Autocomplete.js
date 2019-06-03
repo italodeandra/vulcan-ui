@@ -110,14 +110,15 @@ const Autocomplete = ({ autocompleteConfig, onChange, value: defaultValue, onIte
         }
     }
 
-    const handleKeyUp = (e) => {
-        props.onKeyUp && props.onKeyUp(e)
+    const handleKeyDown = (e) => {
+        props.onKeyDown && props.onKeyDown(e)
 
         if (!readOnly) {
             const { key, target } = e
 
             switch (key) {
                 case 'ArrowUp':
+                    e.preventDefault()
                     if (target.previousElementSibling && target.previousElementSibling.classList && target.previousElementSibling.classList.contains('item')) {
                         target.previousElementSibling.focus()
                     } else {
@@ -125,6 +126,7 @@ const Autocomplete = ({ autocompleteConfig, onChange, value: defaultValue, onIte
                     }
                     break
                 case 'ArrowDown':
+                    e.preventDefault()
                     if (target.nextElementSibling && target.nextElementSibling.classList && target.nextElementSibling.classList.contains('item')) {
                         target.nextElementSibling.focus()
                     } else {
@@ -187,7 +189,7 @@ const Autocomplete = ({ autocompleteConfig, onChange, value: defaultValue, onIte
             onFocus={handleFocus}
             onBlur={handleBlur}
             inputClassName={`vui-TextField-Autocomplete-Target${index.current}`}
-            onKeyUp={handleKeyUp}
+            onKeyDown={handleKeyDown}
             suffix={
                 isLoading &&
                 <Button icon>
@@ -209,7 +211,7 @@ const Autocomplete = ({ autocompleteConfig, onChange, value: defaultValue, onIte
                             <AutocompleteResult.Item
                                 key={autocompleteConfig.valueTranspile(item).toString() + i}
                                 onBlur={handleBlur}
-                                onKeyUp={handleKeyUp}
+                                onKeyDown={handleKeyDown}
                                 onClick={() => handleItemClick(item)}
                                 onFocus={handleItemFocus}
                                 targetClassName={`vui-TextField-Autocomplete-Target${index.current}`}

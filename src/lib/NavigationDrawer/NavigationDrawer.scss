@@ -50,6 +50,10 @@
       opacity: 0;
       background-color: #000000;
       border-radius: 4px;
+
+      transition-property: border-radius;
+      transition-duration: 210ms;
+      transition-timing-function: $vui-Motion-Speed-Standard-Easing;
     }
 
     &:hover:before,
@@ -81,7 +85,7 @@
     transition-timing-function: $vui-Motion-Speed-Decelerate-Easing;
   }
 
-  &.collapsable {
+  &.collapsable:not(.mobile) {
     width: 56px;
     transform: translateX(0);
 

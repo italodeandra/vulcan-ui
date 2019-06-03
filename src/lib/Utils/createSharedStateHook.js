@@ -1,4 +1,6 @@
+import _isEqual from 'lodash.isequal'
 import { useEffect, useState } from 'react'
+import { useDeepCompareEffect } from '../index'
 
 function createSharedStateHook(initialState) {
     let state = initialState
@@ -6,6 +8,7 @@ function createSharedStateHook(initialState) {
 
     function useSharedState() {
         const [sharedState, setSharedState] = useState(state)
+        const [innerState, setInnerState] = useState(state)
 
         useEffect(() => {
             listeners.push(setSharedState)
@@ -15,15 +18,17 @@ function createSharedStateHook(initialState) {
             }
         }, [])
 
+        useDeepCompareEffect(() => {
+            if (!_isEqual(innerState, sharedState)) {
+                state = innerState
+                listeners.forEach(setState => setState(state))
+            }
+        }, [innerState])
+
         return [
             sharedState,
-            setUserAll
+            setInnerState
         ]
-    }
-
-    function setUserAll(nextState) {
-        state = nextState
-        listeners.forEach(setState => setState(nextState))
     }
 
     return useSharedState

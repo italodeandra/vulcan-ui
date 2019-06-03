@@ -1,16 +1,17 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Spinner } from '../lib'
 import useTitle from './useTitle'
 
 const SpinnerDemo = () => {
-    useTitle('Spinner')
+    const [, setTitle] = useTitle()
+    useEffect(() => setTitle('Spinner'))
 
     return (
         <div className='component'>
             <h2>Spinner</h2>
-            <p>
+            <div>
                 <Spinner />
-            </p>
+            </div>
             <pre>{`<Spinner />`}</pre>
         </div>
     )

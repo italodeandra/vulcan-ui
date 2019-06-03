@@ -1,8 +1,9 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import useTitle from './useTitle'
 
 const NavigationDrawerDemo = () => {
-    useTitle('Navigation drawer')
+    const [, setTitle] = useTitle()
+    useEffect(() => setTitle('Navigation drawer'))
 
     return (
         <div className='demo'>

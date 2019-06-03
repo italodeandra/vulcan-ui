@@ -1,9 +1,11 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Button, Icon, TextField } from '../lib/index'
 import useTitle from './useTitle'
 
 const TextFielDemo = () => {
-    useTitle('Text field')
+    const [, setTitle] = useTitle()
+    useEffect(() => setTitle('Text field'))
+
     const [test1, setTest1] = useState(null)
     const [test2, setTest2] = useState(null)
     const [test3, setTest3] = useState(null)
@@ -42,10 +44,10 @@ const TextFielDemo = () => {
                 <pre>{`<TextField
     label='Test 1'
     name='test1'
-    value={test1}
+    value='{test1}'
     onChange={setTest1}
     helperText='This is a helper text'
-    validation={{
+    validation='{{'
         required: 'Please fill this field',
         minLength: {
             length: 3,
@@ -79,10 +81,10 @@ const TextFielDemo = () => {
                 <pre>{`<TextField.Number
     label='Integer'
     name='test2'
-    value={test2}
+    value='{test2}'
     onChange={setTest2}
     helperText='This is a helper text'
-    validation={{
+    validation='{{'
         required: 'Please fill this field',
         minAmount: {
             amount: 50000,
@@ -113,10 +115,10 @@ const TextFielDemo = () => {
                 <pre>{`<TextField.Number
     label='Decimal'
     name='test3'
-    value={test3}
+    value='{test3}'
     onChange={setTest3}
     helperText='This is a helper text'
-    validation={{
+    validation='{{'
         required: 'Please fill this field',
         maxAmount: 9859962.50
     }}
@@ -145,10 +147,10 @@ const TextFielDemo = () => {
                 <pre>{`<TextField.Number
     label='Money'
     name='test4'
-    value={test4}
+    value='{test4}'
     onChange={setTest4}
     helperText='This is a helper text'
-    validation={{
+    validation='{{'
         required: 'Please fill this field',
         maxAmount: 9859962.50
     }}

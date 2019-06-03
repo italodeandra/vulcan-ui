@@ -3,7 +3,9 @@ import { TextField } from '../lib/index'
 import useTitle from './useTitle'
 
 const AutocompleteDemo = () => {
-    useTitle('Autocomplete')
+    const [, setTitle] = useTitle()
+    useEffect(() => setTitle('Autocomplete'))
+
     const [test, setTest] = useState(null)
 
     const handleItemSelect = (item) => {
@@ -29,7 +31,7 @@ const AutocompleteDemo = () => {
                             url: 'https://jsonplaceholder.typicode.com/users',
                             // method: 'post',
                             // data: { query: '', page: 0 },
-                            data: ({ query }) => ({ query: query ? query : undefined }),
+                            data: ({ query }) => ({ query: query ? query : undefined })
                             // headers: {
                             //     Authorization: 'Bearer 1'
                             // }
@@ -45,7 +47,7 @@ const AutocompleteDemo = () => {
             <pre>{`<TextField.Autocomplete
     label='Test'
     name='test'
-    value={test}
+    value='{test}'
     onChange={setTest}
     validation={{
         required: 'Please select an item'

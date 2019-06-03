@@ -158,8 +158,8 @@ var Autocomplete = function Autocomplete(_ref) {
     }
   };
 
-  var handleKeyUp = function handleKeyUp(e) {
-    props.onKeyUp && props.onKeyUp(e);
+  var handleKeyDown = function handleKeyDown(e) {
+    props.onKeyDown && props.onKeyDown(e);
 
     if (!readOnly) {
       var key = e.key,
@@ -167,6 +167,8 @@ var Autocomplete = function Autocomplete(_ref) {
 
       switch (key) {
         case 'ArrowUp':
+          e.preventDefault();
+
           if (target.previousElementSibling && target.previousElementSibling.classList && target.previousElementSibling.classList.contains('item')) {
             target.previousElementSibling.focus();
           } else {
@@ -176,6 +178,8 @@ var Autocomplete = function Autocomplete(_ref) {
           break;
 
         case 'ArrowDown':
+          e.preventDefault();
+
           if (target.nextElementSibling && target.nextElementSibling.classList && target.nextElementSibling.classList.contains('item')) {
             target.nextElementSibling.focus();
           } else {
@@ -238,7 +242,7 @@ var Autocomplete = function Autocomplete(_ref) {
     onFocus: handleFocus,
     onBlur: handleBlur,
     inputClassName: "vui-TextField-Autocomplete-Target".concat(index.current),
-    onKeyUp: handleKeyUp,
+    onKeyDown: handleKeyDown,
     suffix: isLoading && React.createElement(Button, {
       icon: true
     }, React.createElement(Spinner, null)),
@@ -254,7 +258,7 @@ var Autocomplete = function Autocomplete(_ref) {
     return React.createElement(AutocompleteResult.Item, {
       key: autocompleteConfig.valueTranspile(item).toString() + i,
       onBlur: handleBlur,
-      onKeyUp: handleKeyUp,
+      onKeyDown: handleKeyDown,
       onClick: function onClick() {
         return handleItemClick(item);
       },

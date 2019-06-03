@@ -1,10 +1,11 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 
 import { AppBar, Button, Icon } from '../lib/index'
 import useTitle from './useTitle'
 
 const AppBarDemo = () => {
-    useTitle('App bar')
+    const [, setTitle] = useTitle()
+    useEffect(() => setTitle('App bar'))
 
     return (
         <div className='demo'>

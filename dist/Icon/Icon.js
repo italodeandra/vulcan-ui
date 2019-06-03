@@ -1,10 +1,30 @@
 import React from 'react';
-import home from './icons/home';
-import menu from './icons/menu';
 import './Icon.scss';
+import accountGroup from './icons/accountGroup';
+import checkCircleOutline from './icons/checkCircleOutline';
+import fileChart from './icons/fileChart';
+import formatListCheckbox from './icons/formatListCheckbox';
+import home from './icons/home';
+import link from './icons/link';
+import menu from './icons/menu';
+import openInNew from './icons/openInNew';
+import plus from './icons/plus';
+import progressCheck from './icons/progressCheck';
+import sitemap from './icons/sitemap';
+import speedometer from './icons/speedometer';
 var icons = {
+  accountGroup: accountGroup,
+  checkCircleOutline: checkCircleOutline,
+  fileChart: fileChart,
+  formatListCheckbox: formatListCheckbox,
   home: home,
-  menu: menu
+  link: link,
+  menu: menu,
+  openInNew: openInNew,
+  plus: plus,
+  progressCheck: progressCheck,
+  sitemap: sitemap,
+  speedometer: speedometer
 };
 
 var Icon = function Icon(_ref) {

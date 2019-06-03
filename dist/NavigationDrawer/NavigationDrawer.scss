@@ -29,6 +29,7 @@
     position: relative;
     font-size: 16px;
     color: #000000de;
+    fill: rgba(#000000de, 0.6);
     font-weight: 500;
     text-decoration: none;
     overflow: hidden;
@@ -49,6 +50,10 @@
       opacity: 0;
       background-color: #000000;
       border-radius: 4px;
+
+      transition-property: border-radius;
+      transition-duration: 210ms;
+      transition-timing-function: $vui-Motion-Speed-Standard-Easing;
     }
 
     &:hover:before,
@@ -80,7 +85,7 @@
     transition-timing-function: $vui-Motion-Speed-Decelerate-Easing;
   }
 
-  &.collapsable {
+  &.collapsable:not(.mobile) {
     width: 56px;
     transform: translateX(0);
 
@@ -104,6 +109,24 @@
     top: 0;
     width: auto;
     right: 56px;
+  }
+
+  .divider {
+    height: 1px;
+    background-color: rgba(#0000001e, 0.12);
+    margin: 4px 0;
+  }
+
+  .subtitle {
+    font-size: 13px;
+    color: #0000008a;
+    font-weight: 500;
+    padding: 13px 16px 8px 16px;
+    display: none;
+  }
+
+  &.open .subtitle {
+    display: block;
   }
 }
 
