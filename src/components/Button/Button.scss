@@ -1,0 +1,73 @@
+@import "../../styles";
+
+.componentButton {
+  border: none;
+  height: 36px;
+  border-radius: 4px;
+  text-transform: uppercase;
+  outline: none;
+  user-select: none;
+  cursor: pointer;
+  padding: 0 16px;
+  display: flex;
+  align-items: center;
+  position: relative;
+
+  font: 500 14px "Roboto", -apple-system, BlinkMacSystemFont, "Segoe UI", "Oxygen",
+  "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+  sans-serif;
+
+  @mixin transition($property) {
+    transition-property: $property;
+    transition-duration: 180ms;
+    transition-timing-function: cubic-bezier(0.4, 0.0, 0.2, 1);
+  }
+
+  @include transition((color, background-color));
+
+  &:after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
+    border-radius: inherit;
+
+    @include transition(background-color);
+  }
+
+  &.contained {
+    background-color: $color-gray-300;
+    color: $text-color-primary-black;
+
+    &:hover:after {
+      background-color: rgba($text-color-primary-black, 0.05);
+    }
+
+    &:focus:after {
+      background-color: rgba($text-color-primary-black, 0.07);
+    }
+
+    &:active:after {
+      background-color: rgba($text-color-primary-black, 0.1);
+    }
+  }
+
+  &.text {
+    background-color: transparent;
+    color: $color-gray-300;
+
+    &:hover:after {
+      background-color: rgba($color-gray-300, 0.05);
+    }
+
+    &:focus:after {
+      background-color: rgba($color-gray-300, 0.07);
+    }
+
+    &:active:after {
+      background-color: rgba($color-gray-300, 0.1);
+    }
+  }
+}

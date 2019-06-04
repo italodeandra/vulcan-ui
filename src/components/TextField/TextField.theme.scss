@@ -1,0 +1,5 @@
+@mixin TextFieldTheme($primary-color) {
+  .TextField_componentTextField.TextField_focused input {
+    border: 2px solid $primary-color !important;
+  }
+}

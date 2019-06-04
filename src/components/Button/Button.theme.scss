@@ -1,0 +1,35 @@
+@mixin ButtonTheme($primary-color, $primary-color-text) {
+  .Button_componentButton.Button_contained {
+    background-color: $primary-color !important;
+    color: $primary-color-text !important;
+
+    &:hover:after {
+      background-color: rgba($primary-color-text, 0.05) !important;
+    }
+
+    &:focus:after {
+      background-color: rgba($primary-color-text, 0.07) !important;
+    }
+
+    &:active:after {
+      background-color: rgba($primary-color-text, 0.1) !important;
+    }
+  }
+
+  .Button_componentButton.Button_text {
+    background-color: transparent !important;
+    color: $primary-color !important;
+
+    &:hover:after {
+      background-color: rgba($primary-color, 0.05) !important;
+    }
+
+    &:focus:after {
+      background-color: rgba($primary-color, 0.07) !important;
+    }
+
+    &:active:after {
+      background-color: rgba($primary-color, 0.1) !important;
+    }
+  }
+}

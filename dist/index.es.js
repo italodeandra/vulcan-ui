@@ -1,13 +1,6 @@
-'use strict';
-
-Object.defineProperty(exports, '__esModule', { value: true });
-
-function _interopDefault (ex) { return (ex && (typeof ex === 'object') && 'default' in ex) ? ex['default'] : ex; }
-
-var React = require('react');
-var React__default = _interopDefault(React);
-var PropTypes = _interopDefault(require('prop-types'));
-var reactDom = require('react-dom');
+import React, { useEffect, useRef, useState } from 'react';
+import PropTypes from 'prop-types';
+import { createPortal } from 'react-dom';
 
 function styleInject(css, ref) {
   if ( ref === void 0 ) ref = {};
@@ -67,7 +60,7 @@ function Button(_ref) {
       className = _ref.className,
       children = _ref.children;
 
-  return React__default.createElement(
+  return React.createElement(
     'button',
     {
       type: submit ? 'submit' : 'button',
@@ -187,22 +180,22 @@ function TextField(_ref) {
   type = type || 'text';
   style = style || 'filled';
 
-  var _useState = React.useState(defaultValue),
+  var _useState = useState(defaultValue),
       _useState2 = slicedToArray(_useState, 2),
       value = _useState2[0],
       setValue = _useState2[1];
 
-  var _useState3 = React.useState(false),
+  var _useState3 = useState(false),
       _useState4 = slicedToArray(_useState3, 2),
       isFocused = _useState4[0],
       setFocused = _useState4[1];
 
-  var _useState5 = React.useState(false),
+  var _useState5 = useState(false),
       _useState6 = slicedToArray(_useState5, 2),
       isFilled = _useState6[0],
       setFilled = _useState6[1];
 
-  var _useState7 = React.useState(true),
+  var _useState7 = useState(true),
       _useState8 = slicedToArray(_useState7, 2),
       isPristine = _useState8[0],
       setPristine = _useState8[1];
@@ -212,7 +205,7 @@ function TextField(_ref) {
     validation.required = 'Please fill out this field';
   }
 
-  var _useState9 = React.useState({}),
+  var _useState9 = useState({}),
       _useState10 = slicedToArray(_useState9, 2),
       _useState10$ = _useState10[0],
       errorMessage = _useState10$.errorMessage,
@@ -220,15 +213,15 @@ function TextField(_ref) {
       setErrorMessage = _useState10[1];
 
   var isRequired = validation && validation.required;
-  var ref = setRef || React.useRef(null);
+  var ref = setRef || useRef(null);
 
   /** Check error */
-  React.useEffect(function () {
+  useEffect(function () {
     setErrorMessage(validate(value, type, validation));
   }, [value, type, JSON.stringify(validation)]);
 
   /** Check default value change */
-  React.useEffect(function () {
+  useEffect(function () {
     if (value !== defaultValue) {
       setPristine(false);
 
@@ -237,7 +230,7 @@ function TextField(_ref) {
   }, [JSON.stringify(defaultValue)]);
 
   /** Check is filled */
-  React.useEffect(function () {
+  useEffect(function () {
     if (checkIsFilled(value)) {
       setFilled(true);
     } else {
@@ -246,7 +239,7 @@ function TextField(_ref) {
   }, [JSON.stringify(value)]);
 
   /** Init custom error */
-  React.useEffect(function () {
+  useEffect(function () {
     if (onCustomError) {
       onCustomError.current = {
         set: function set$$1(error) {
@@ -283,12 +276,12 @@ function TextField(_ref) {
     }
   }
 
-  return React__default.createElement(
+  return React.createElement(
     'div',
     {
       className: classNames(styles$1.componentTextField, isFocused && styles$1.focused, isFilled && styles$1.filled, isPristine && styles$1.pristine, isRequired && styles$1.required, errorMessage && styles$1.error, styles$1[style])
     },
-    React__default.createElement('input', {
+    React.createElement('input', {
       ref: ref,
       tabIndex: '0',
       className: errorMessage ? 'error-focus' : '',
@@ -312,16 +305,16 @@ function TextField(_ref) {
       name: name,
       onTransitionEnd: checkAutofill
     }),
-    !!label && React__default.createElement(
+    !!label && React.createElement(
       'label',
       { htmlFor: id },
       label
     ),
-    (tip || !isPristine && !!errorMessage) && React__default.createElement(
+    (tip || !isPristine && !!errorMessage) && React.createElement(
       'div',
       { className: styles$1.tip },
       !isPristine && errorMessage ? errorMessage : tip,
-      !!floatRightMessage && React__default.createElement(
+      !!floatRightMessage && React.createElement(
         'span',
         { className: styles$1.floatRight },
         floatRightMessage
@@ -341,13 +334,13 @@ Spinner.propTypes = {
 function Spinner(_ref) {
   var className = _ref.className;
 
-  return React__default.createElement(
+  return React.createElement(
     'div',
     { className: styles$2.componentSpinner + ' ' + className },
-    React__default.createElement(
+    React.createElement(
       'svg',
       { viewBox: '0 0 44 44' },
-      React__default.createElement('circle', { cx: '22', cy: '22', r: '20', fill: 'none', strokeWidth: '4' })
+      React.createElement('circle', { cx: '22', cy: '22', r: '20', fill: 'none', strokeWidth: '4' })
     )
   );
 }
@@ -369,7 +362,7 @@ function FloatingActionButton(_ref) {
       extended = _ref.extended,
       className = _ref.className;
 
-  return React__default.createElement(
+  return React.createElement(
     'button',
     {
       type: 'button',
@@ -410,9 +403,9 @@ function addRootElement(rootElem) {
  * @returns {HTMLElement} The DOM node to use as the Portal target.
  */
 function usePortal(id) {
-  var rootElemRef = React.useRef(null);
+  var rootElemRef = useRef(null);
 
-  React.useEffect(function setupElement() {
+  useEffect(function setupElement() {
     // Look for existing target dom element to append to
     var existingParent = document.querySelector('#' + id);
     // Parent is either a new root or the existing dom element
@@ -471,20 +464,20 @@ function Menu(_ref) {
       onClickOutside = _ref.onClickOutside,
       children = _ref.children;
 
-  var _useState = React.useState(null),
+  var _useState = useState(null),
       _useState2 = slicedToArray(_useState, 2),
       targetPositionX = _useState2[0],
       setTargetPositionX = _useState2[1];
 
-  var _useState3 = React.useState(null),
+  var _useState3 = useState(null),
       _useState4 = slicedToArray(_useState3, 2),
       targetPositionY = _useState4[0],
       setTargetPositionY = _useState4[1];
 
-  var ref = React.useRef(null);
+  var ref = useRef(null);
   var portalContainer = usePortal(styles$4.componentMenuContainer);
 
-  React.useEffect(function () {
+  useEffect(function () {
     var targetPosition = {
       x: null,
       y: null
@@ -504,7 +497,7 @@ function Menu(_ref) {
     }
   }, []);
 
-  React.useEffect(function () {
+  useEffect(function () {
     if (onClickOutside) {
       window.addEventListener('click', handleClickOutside);
     }
@@ -522,7 +515,7 @@ function Menu(_ref) {
     }
   }
 
-  return reactDom.createPortal(React__default.createElement(
+  return createPortal(React.createElement(
     'div',
     {
       ref: ref,
@@ -555,13 +548,13 @@ function Dialog(_ref) {
     onClickOutside && onClickOutside();
   }
 
-  return reactDom.createPortal(React__default.createElement(
+  return createPortal(React.createElement(
     'div',
     {
       className: styles$5.componentDialog,
       onClick: handleClickOutside
     },
-    React__default.createElement(
+    React.createElement(
       'div',
       {
         className: styles$5.dialog,
@@ -589,7 +582,7 @@ function Form(_ref) {
       children = _ref.children,
       setRef = _ref.setRef;
 
-  var formRef = setRef || React.useRef(null);
+  var formRef = setRef || useRef(null);
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -611,7 +604,7 @@ function Form(_ref) {
     onSubmit && onSubmit();
   }
 
-  return React__default.createElement(
+  return React.createElement(
     'form',
     {
       className: styles$6.componentForm,
@@ -624,9 +617,9 @@ function Form(_ref) {
 }
 
 function useMenu() {
-  var ref = React.useRef(null);
+  var ref = useRef(null);
 
-  var _useState = React.useState(false),
+  var _useState = useState(false),
       _useState2 = slicedToArray(_useState, 2),
       show = _useState2[0],
       setShow = _useState2[1];
@@ -635,9 +628,9 @@ function useMenu() {
 }
 
 function useDialog() {
-  var ref = React.useRef(null);
+  var ref = useRef(null);
 
-  var _useState = React.useState(false),
+  var _useState = useState(false),
       _useState2 = slicedToArray(_useState, 2),
       show = _useState2[0],
       setShow = _useState2[1];
@@ -645,15 +638,5 @@ function useDialog() {
   return [ref, show, setShow];
 }
 
-exports.Button = Button;
-exports.TextField = TextField;
-exports.Spinner = Spinner;
-exports.FloatingActionButton = FloatingActionButton;
-exports.Menu = Menu;
-exports.Dialog = Dialog;
-exports.Form = Form;
-exports.usePortal = usePortal;
-exports.useMenu = useMenu;
-exports.useDialog = useDialog;
-exports.classNames = classNames;
-//# sourceMappingURL=index.js.map
+export { Button, TextField, Spinner, FloatingActionButton, Menu, Dialog, Form, usePortal, useMenu, useDialog, classNames };
+//# sourceMappingURL=index.es.js.map

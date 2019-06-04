@@ -1,0 +1,69 @@
+.componentSpinner {
+  width: 24px;
+  display: inline-block;
+
+  svg {
+    animation: rotate 2s linear infinite;
+    z-index: 2;
+
+    circle {
+      stroke-dasharray: 1, 150;
+      stroke-dashoffset: 0;
+      animation: dash 1.5s ease-in-out infinite, multicolor2 1.5s ease-in-out infinite;
+    }
+  }
+
+  @keyframes rotate {
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+
+  @keyframes dash {
+    0% {
+      stroke-dasharray: 1, 150;
+      stroke-dashoffset: 0;
+    }
+    50% {
+      stroke-dasharray: 90, 150;
+      stroke-dashoffset: -35;
+    }
+    100% {
+      stroke-dasharray: 90, 150;
+      stroke-dashoffset: -124;
+    }
+  }
+
+  @keyframes multicolor2 {
+    0% {
+      stroke: #3FCB2A;
+    }
+    11% {
+      stroke: #32D9A1;
+    }
+    22% {
+      stroke: #33C3DD;
+    }
+    33% {
+      stroke: #2B7CD7;
+    }
+    44% {
+      stroke: #5D33D5;
+    }
+    55% {
+      stroke: #BF2FDC;
+    }
+    66% {
+      stroke: #DE349E;
+    }
+    77% {
+      stroke: #E25335;
+    }
+    88% {
+      stroke: #FB9600;
+    }
+    100% {
+      stroke: #FFCE00;
+    }
+  }
+}

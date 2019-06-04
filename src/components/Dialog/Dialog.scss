@@ -1,0 +1,66 @@
+@import "../../styles";
+
+.componentDialog {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-color: rgba(black, 0.32);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 16px;
+
+  .dialog {
+    $d: &;
+
+    position: relative;
+    background-color: white;
+    box-shadow: $elevation-z24;
+    border-radius: 4px;
+    width: 100%;
+    max-width: 560px;
+    max-height: 100%;
+    display: flex;
+    flex-direction: column;
+    //overflow: hidden;
+
+    :global {
+      .dialog-header {
+        min-height: 64px;
+        padding: 21px 24px;
+        font-size: 20px;
+        font-weight: 500;
+        box-sizing: border-box;
+        color: #000000de;
+        //box-shadow: $elevation-z3;
+      }
+
+      .dialog-content {
+        padding: 21px 24px;
+        font-size: 14px;
+        box-sizing: border-box;
+        color: #00000099;
+        overflow-y: auto;
+
+        @at-root {
+          #{$d} :global .dialog-header ~ .dialog-content {
+            padding-top: 0;
+          }
+        }
+      }
+
+      .dialog-buttons {
+        display: flex;
+        justify-content: flex-end;
+        padding: 8px;
+        //box-shadow: $elevation-z3;
+
+        > button:not(:first-child) {
+          margin-left: 8px;
+        }
+      }
+    }
+  }
+}

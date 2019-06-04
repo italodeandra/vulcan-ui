@@ -1,0 +1,21 @@
+@import "../../styles";
+
+#componentMenuContainer {
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+
+.componentMenu {
+  background-color: white;
+  box-shadow: $elevation-z8;
+  border-radius: 4px;
+  position: absolute;
+  width: 112px;
+
+  :global .menu-item {
+    padding: 15px 16px;
+    font-size: 14px;
+    font-weight: 500;
+  }
+}

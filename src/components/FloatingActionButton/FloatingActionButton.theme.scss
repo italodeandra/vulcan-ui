@@ -1,0 +1,18 @@
+@mixin FloatingActionButtonTheme($primary-color, $primary-color-text) {
+  .FloatingActionButton_componentFloatingActionButton {
+    background-color: $primary-color !important;
+    color: $primary-color-text !important;
+
+    &:hover:after {
+      background-color: rgba($primary-color-text, 0.05) !important;
+    }
+
+    &:focus:after {
+      background-color: rgba($primary-color-text, 0.07) !important;
+    }
+
+    &:active:after {
+      background-color: rgba($primary-color-text, 0.1) !important;
+    }
+  }
+}
