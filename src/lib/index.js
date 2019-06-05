@@ -1,5 +1,6 @@
 import AppBar from './AppBar/AppBar'
 import Button from './Button/Button'
+import Card from './Card/Card'
 import useDeepCompareEffect from './Hooks/useDeepCompareEffect'
 import useMobile from './Hooks/useMobile'
 import usePortal from './Hooks/usePortal'
@@ -18,6 +19,7 @@ import jsonToQueryString from './Utils/jsonToQueryString'
 export {
     AppBar,
     Button,
+    Card,
     Icon,
     NavigationDrawer,
     ProgressBar,

@@ -1,5 +1,6 @@
 import React from 'react';
 import './Icon.scss';
+import account from './icons/account';
 import accountGroup from './icons/accountGroup';
 import checkCircleOutline from './icons/checkCircleOutline';
 import fileChart from './icons/fileChart';
@@ -13,6 +14,7 @@ import progressCheck from './icons/progressCheck';
 import sitemap from './icons/sitemap';
 import speedometer from './icons/speedometer';
 var icons = {
+  account: account,
   accountGroup: accountGroup,
   checkCircleOutline: checkCircleOutline,
   fileChart: fileChart,

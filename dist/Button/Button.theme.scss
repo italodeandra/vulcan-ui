@@ -1,0 +1,28 @@
+@mixin VuiButtonTheme($class, $primary, $color-on-primary) {
+  #{$class} .vui-Button {
+    &.contained {
+      background-color: $primary;
+      color: $color-on-primary;
+
+      &:before {
+        background-color: $color-on-primary;
+      }
+    }
+
+    &.outlined {
+      color: $primary;
+
+      &:before {
+        background-color: $primary;
+      }
+    }
+
+    &.text {
+      color: $primary;
+
+      &:before {
+        background-color: $primary;
+      }
+    }
+  }
+}

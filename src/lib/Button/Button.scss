@@ -19,7 +19,9 @@
   letter-spacing: 1px;
   font-family: "Roboto", -apple-system, BlinkMacSystemFont, "Segoe UI", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
   position: relative;
-  transition: $vui-Elevation-transition;
+  transition-property: box-shadow;
+  transition-duration: 280ms;
+  transition-timing-function: $vui-Elevation-transition;
 
   & + .vui-Button {
     margin-left: 8px;

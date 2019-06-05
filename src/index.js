@@ -5,6 +5,7 @@ import './demo.scss'
 import AppBarDemo from './demo/AppBarDemo'
 import AutocompleteDemo from './demo/AutocompleteDemo'
 import ButtonDemo from './demo/ButtonDemo'
+import CardDemo from './demo/CardDemo'
 import HomeDemo from './demo/HomeDemo'
 import NavigationDrawerDemo from './demo/NavigationDrawerDemo'
 import ProgressBarDemo from './demo/ProgressBarDemo'
@@ -76,6 +77,11 @@ const App = () => {
                                            onClick={() => isMobile && setIsNavigationDrawerOpen(false)}>
                         Button
                     </NavigationDrawer.Item>
+                    <NavigationDrawer.Item to='/card'
+                                           title={!isNavigationDrawerOpen && 'Card'}
+                                           onClick={() => isMobile && setIsNavigationDrawerOpen(false)}>
+                        Card
+                    </NavigationDrawer.Item>
                     <NavigationDrawer.Item to='/navigation-drawer'
                                            title={!isNavigationDrawerOpen && 'Navigation drawer'}
                                            onClick={() => isMobile && setIsNavigationDrawerOpen(false)}>
@@ -102,6 +108,7 @@ const App = () => {
                     <Route path='/app-bar' component={AppBarDemo} />
                     <Route path='/autocomplete' component={AutocompleteDemo} />
                     <Route path='/button' component={ButtonDemo} />
+                    <Route path='/card' component={CardDemo} />
                     <Route path='/navigation-drawer' component={NavigationDrawerDemo} />
                     <Route path='/progress-bar' component={ProgressBarDemo} />
                     <Route path='/spinner' component={SpinnerDemo} />

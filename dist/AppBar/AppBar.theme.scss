@@ -1,0 +1,11 @@
+@mixin VuiAppBarTheme($class, $primary, $color-on-primary) {
+  #{$class} .vui-AppBar {
+    background-color: $primary;
+    color: $color-on-primary;
+    fill: $color-on-primary;
+
+    :before {
+      background-color: $color-on-primary !important;
+    }
+  }
+}

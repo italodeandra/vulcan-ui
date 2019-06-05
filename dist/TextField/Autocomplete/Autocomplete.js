@@ -101,11 +101,13 @@ var Autocomplete = function Autocomplete(_ref) {
             return [].concat(_toConsumableArray(r), _toConsumableArray(responseTranspiled));
           });
         } else {
-          setSelected(value);
-          onChange && onChange(value);
-          setShowResult(false);
-          setResult(null);
-          onItemSelect && onItemSelect(responseTranspiled);
+          if (responseTranspiled) {
+            setSelected(value);
+            onChange && onChange(value);
+            setShowResult(false);
+            setResult(null);
+            onItemSelect && onItemSelect(responseTranspiled);
+          }
         }
 
         setIsLoading(false);

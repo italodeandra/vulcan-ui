@@ -1,5 +1,6 @@
 import React from 'react'
 import './Icon.scss'
+import account from './icons/account'
 import accountGroup from './icons/accountGroup'
 import checkCircleOutline from './icons/checkCircleOutline'
 import fileChart from './icons/fileChart'
@@ -14,6 +15,7 @@ import sitemap from './icons/sitemap'
 import speedometer from './icons/speedometer'
 
 const icons = {
+    account,
     accountGroup,
     checkCircleOutline,
     fileChart,

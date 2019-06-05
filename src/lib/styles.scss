@@ -1,5 +1,8 @@
 @import "./Utils/variables";
 @import "./Elevation/Elevation";
+@import "./AppBar/AppBar.theme.scss";
+@import "./Button/Button.theme.scss";
+@import "./NavigationDrawer/NavigationDrawer.theme.scss";
 
 body {
   margin: 0;

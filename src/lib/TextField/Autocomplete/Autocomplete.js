@@ -52,11 +52,13 @@ const Autocomplete = ({ autocompleteConfig, onChange, value: defaultValue, onIte
                     if (Array.isArray(responseTranspiled)) {
                         setResult(page === 0 ? responseTranspiled : (r) => [...r, ...responseTranspiled])
                     } else {
-                        setSelected(value)
-                        onChange && onChange(value)
-                        setShowResult(false)
-                        setResult(null)
-                        onItemSelect && onItemSelect(responseTranspiled)
+                        if (responseTranspiled) {
+                            setSelected(value)
+                            onChange && onChange(value)
+                            setShowResult(false)
+                            setResult(null)
+                            onItemSelect && onItemSelect(responseTranspiled)
+                        }
                     }
                     setIsLoading(false)
                 }
