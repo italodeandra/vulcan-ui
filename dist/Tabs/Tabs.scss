@@ -60,21 +60,3 @@
   }
 }
 
-.vui-Tabs-Pages {
-  justify-content: stretch;
-  overflow: hidden;
-  white-space: nowrap;
-
-  .pages-container {
-    transition-property: transform, height;
-    transition-duration: 280ms;
-    transition-timing-function: $vui-Motion-Speed-Standard-Easing;
-  }
-
-  .vui-Tabs-Page {
-    width: 100%;
-    display: inline-block;
-    white-space: normal;
-    vertical-align: top;
-  }
-}

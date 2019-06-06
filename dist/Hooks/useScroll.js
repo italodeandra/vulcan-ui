@@ -20,7 +20,7 @@ var useScroll = function useScroll(element) {
     var handleScroll = function handleScroll() {
       var newScrollY = element.current.scrollY || element.current.scrollTop;
       var innerHeight = element.current.innerHeight || element.current.clientHeight;
-      var scrollHeight = element.current.scrollHeight;
+      var scrollHeight = element.current.scrollHeight || document.body.scrollHeight;
 
       if (scrollHeight > innerHeight) {
         setScrollY(newScrollY);

@@ -8,8 +8,10 @@ $height: 56px;
   background-color: #6200eeff;
   color: #ffffff;
   fill: #ffffff;
-  transition: $vui-Elevation-transition;
-  z-index: 1;
+  transition-property: box-shadow;
+  transition-duration: 280ms;
+  transition-timing-function: $vui-Elevation-transition;
+  z-index: 2;
   box-sizing: border-box;
 
   :before {
