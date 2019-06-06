@@ -10,6 +10,7 @@ import HomeDemo from './demo/HomeDemo'
 import NavigationDrawerDemo from './demo/NavigationDrawerDemo'
 import ProgressBarDemo from './demo/ProgressBarDemo'
 import SpinnerDemo from './demo/SpinnerDemo'
+import TabsDemo from './demo/TabsDemo'
 import TextFielDemo from './demo/TextFieldDemo'
 import useTitle from './demo/useTitle'
 import { AppBar, Button, Icon, NavigationDrawer, useMobile } from './lib'
@@ -97,6 +98,11 @@ const App = () => {
                                            onClick={() => isMobile && setIsNavigationDrawerOpen(false)}>
                         Spinner
                     </NavigationDrawer.Item>
+                    <NavigationDrawer.Item to='/tabs'
+                                           title={!isNavigationDrawerOpen && 'Tabs'}
+                                           onClick={() => isMobile && setIsNavigationDrawerOpen(false)}>
+                        Tabs
+                    </NavigationDrawer.Item>
                     <NavigationDrawer.Item to='/text-field'
                                            title={!isNavigationDrawerOpen && 'Text field'}
                                            onClick={() => isMobile && setIsNavigationDrawerOpen(false)}>
@@ -112,6 +118,7 @@ const App = () => {
                     <Route path='/navigation-drawer' component={NavigationDrawerDemo} />
                     <Route path='/progress-bar' component={ProgressBarDemo} />
                     <Route path='/spinner' component={SpinnerDemo} />
+                    <Route path='/tabs' component={TabsDemo} />
                     <Route path='/text-field' component={TextFielDemo} />
                 </div>
             </Router>

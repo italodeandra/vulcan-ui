@@ -1,0 +1,80 @@
+@import "../styles";
+
+.vui-Tabs {
+  display: flex;
+  flex-direction: row;
+  position: relative;
+
+  .vui-Tabs-Tab {
+    height: 48px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 14px;
+    color: #19191999;
+    text-transform: uppercase;
+    padding: 0 16px;
+    min-width: 90px;
+    box-sizing: border-box;
+    font-weight: 500;
+    letter-spacing: 1px;
+    font-family: "Roboto", -apple-system, BlinkMacSystemFont, "Segoe UI", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+    -webkit-appearance: none;
+    border: none;
+    outline: none;
+    background-color: transparent;
+    position: relative;
+
+    &:before {
+      content: '';
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      border-radius: inherit;
+      opacity: 0;
+      transition: opacity 280ms cubic-bezier(0.4, 0, 0.2, 1);
+      background-color: black;
+    }
+
+    &:hover:before {
+      opacity: 0.08;
+    }
+
+    &:focus:before {
+      opacity: 0.24;
+    }
+
+    &:active:before {
+      opacity: 0.32;
+    }
+  }
+
+  .active-indicator {
+    position: absolute;
+    height: 2px;
+    background-color: #6200ee;
+    transition-property: left, top;
+    transition-duration: 280ms;
+    transition-timing-function: $vui-Motion-Speed-Standard-Easing;
+    margin-top: -2px;
+  }
+}
+
+.vui-Tabs-Pages {
+  justify-content: stretch;
+  overflow: hidden;
+  white-space: nowrap;
+
+  .pages-container {
+    transition-property: transform, height;
+    transition-duration: 280ms;
+    transition-timing-function: $vui-Motion-Speed-Standard-Easing;
+  }
+
+  .vui-Tabs-Page {
+    width: 100%;
+    display: inline-block;
+    white-space: normal;
+    vertical-align: top;
+  }
+}

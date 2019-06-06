@@ -1,3 +1,50 @@
+@import "../styles";
+
 .vui-Card {
   background-color: white;
+  box-sizing: border-box;
+  border-radius: 4px;
+  box-shadow: $vui-Elevation-z4;
+
+  & + .vui-Card {
+    margin-top: 8px;
+  }
+
+  &.rounder {
+    border-radius: 8px;
+  }
+
+  .vui-Card-title {
+    color: #000000de;
+    font-size: 20px;
+    padding-top: 16px;
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+
+  .vui-Card-content {
+    color: #00000099;
+    font-size: 16px;
+    padding: 16px;
+  }
+
+  .vui-Card-title + .vui-Card-content {
+    margin-top: -8px;
+  }
+
+  .vui-Card-actions {
+    display: flex;
+    padding-left: 8px;
+    padding-right: 8px;
+    padding-bottom: 8px;
+
+    &.align-right {
+      flex-direction: row-reverse;
+    }
+
+    .vui-Button + .vui-Button {
+      margin-left: 0;
+      margin-right: 8px;
+    }
+  }
 }

@@ -34,7 +34,8 @@ var TextField = function TextField(_ref) {
       suffix = _ref.suffix,
       readOnly = _ref.readOnly,
       disabled = _ref.disabled,
-      props = _objectWithoutProperties(_ref, ["className", "inputClassName", "id", "name", "label", "onChange", "type", "value", "helperText", "validation", "required", "format", "onFocus", "onBlur", "children", "autoComplete", "setRef", "suffix", "readOnly", "disabled"]);
+      hiddenAutocomplete = _ref.hiddenAutocomplete,
+      props = _objectWithoutProperties(_ref, ["className", "inputClassName", "id", "name", "label", "onChange", "type", "value", "helperText", "validation", "required", "format", "onFocus", "onBlur", "children", "autoComplete", "setRef", "suffix", "readOnly", "disabled", "hiddenAutocomplete"]);
 
   type = type || 'text';
   format = format || {
@@ -82,7 +83,7 @@ var TextField = function TextField(_ref) {
       hasError = _useValidation2[0],
       errorText = _useValidation2[1];
 
-  className = classNames(className, 'vui-TextField', isFocused && 'is-focused', isFilled && 'is-filled', isPristine && 'is-pristine', hasError && 'has-error', suffix && 'has-suffix', readOnly && 'is-readonly', disabled && 'is-disabled');
+  className = classNames(className, 'vui-TextField', isFocused && 'is-focused', isFilled && 'is-filled', isPristine && 'is-pristine', hasError && 'has-error', suffix && 'has-suffix', readOnly && 'is-readonly', disabled && 'is-disabled', hiddenAutocomplete && 'is-hidden-autocomplete');
 
   var handleChange = function handleChange(_ref2) {
     var target = _ref2.target;

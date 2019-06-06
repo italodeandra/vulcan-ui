@@ -1,6 +1,10 @@
 @import "../styles";
 
 .vui-TextField {
+  &:not(.is-hidden-autocomplete) + .vui-TextField:not(.is-hidden-autocomplete) {
+    margin-top: 16px;
+  }
+
   .input-container {
     position: relative;
     border-radius: 4px 4px 0 0;
@@ -33,6 +37,8 @@
     letter-spacing: .009375em;
     line-height: 1.75rem;
     color: rgba(#000000, 0.87);
+    -webkit-appearance: none;
+    border-radius: 0;
   }
   &.has-suffix .input {
     padding-right: 56px;
@@ -151,8 +157,10 @@
     }
     opacity: 0.38;
   }
-}
 
-.vui-TextField + .vui-TextField {
-  margin-top: 16px;
+  &.is-hidden-autocomplete {
+    height: 0;
+    transform: scale(0);
+  }
+
 }

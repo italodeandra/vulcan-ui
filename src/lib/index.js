@@ -9,6 +9,7 @@ import Icon from './Icon/Icon'
 import NavigationDrawer from './NavigationDrawer/NavigationDrawer'
 import ProgressBar from './ProgressBar/ProgressBar'
 import Spinner from './Spinner/Spinner'
+import Tabs from './Tabs/Tabs'
 import TextField from './TextField/TextField'
 import caretPosition from './Utils/caretPosition'
 import classNames from './Utils/classNames'
@@ -24,6 +25,7 @@ export {
     NavigationDrawer,
     ProgressBar,
     Spinner,
+    Tabs,
     TextField,
 
     useDeepCompareEffect,

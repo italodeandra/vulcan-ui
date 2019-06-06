@@ -18,6 +18,7 @@ const TextFielDemo = () => {
                 <p><strong>Normal text</strong></p>
                 <div>
                     <TextField
+                        hiddenAutocomplete
                         label='Test 1'
                         name='test1'
                         value={test1}

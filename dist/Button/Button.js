@@ -9,7 +9,9 @@ var Button = function Button(_ref) {
       text = _ref.text,
       icon = _ref.icon,
       onClick = _ref.onClick,
-      autoFocus = _ref.autoFocus;
+      autoFocus = _ref.autoFocus,
+      type = _ref.type;
+  type = type || 'button';
   var ref = useRef(null);
   className = classNames(className, 'vui-Button', !outlined && !text && !icon && 'contained', outlined && 'outlined', text && 'text', icon && 'icon');
   useEffect(function () {
@@ -21,7 +23,8 @@ var Button = function Button(_ref) {
     ref: ref,
     className: className,
     onClick: onClick,
-    "auto-focus": autoFocus ? 'true' : undefined
+    "auto-focus": autoFocus ? 'true' : undefined,
+    type: type
   }, children);
 };
 
