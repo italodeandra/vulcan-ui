@@ -1,7 +1,7 @@
 //TODO: Fix the assistive text changing fast between error and helper when it has an required error
 
 import _isEqual from 'lodash.isequal'
-import React, { useState } from 'react'
+import React, { useRef, useState } from 'react'
 import { classNames, useDeepCompareEffect } from '../index'
 import Autocomplete from './Autocomplete/Autocomplete'
 import Number from './Number/Number'
@@ -36,9 +36,11 @@ const TextField = ({
                        hidden,
                        ...props
                    }) => {
+    const ref = useRef(null)
     type = type || 'text'
     format = format || { parse: f => f, mask: f => f }
     id = id || name
+    setRef = setRef || ref
     if (!validation && required) {
         validation = validation || {
             required
@@ -85,6 +87,18 @@ const TextField = ({
         }
     }, [defaultValue])
 
+    const handleAnimationStart = (e) => {
+        switch (e.animationName) {
+            case 'onAutoFillStart':
+                setIsFilled(true)
+                break
+            case 'onAutoFillCancel':
+                setIsFilled(!!value)
+                break
+            default:
+        }
+    }
+
     return (
         <div className={className}>
             <div className='input-container'>
@@ -109,6 +123,7 @@ const TextField = ({
                     readOnly={readOnly}
                     disabled={disabled}
                     {...props}
+                    onAnimationStart={handleAnimationStart}
                 />
                 {suffix &&
                 <div className='suffix'>{suffix}</div>

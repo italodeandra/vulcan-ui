@@ -4,6 +4,7 @@ import account from './icons/account';
 import accountGroup from './icons/accountGroup';
 import checkCircleOutline from './icons/checkCircleOutline';
 import fileChart from './icons/fileChart';
+import filterVariant from './icons/filterVariant';
 import formatListCheckbox from './icons/formatListCheckbox';
 import home from './icons/home';
 import link from './icons/link';
@@ -18,6 +19,7 @@ var icons = {
   accountGroup: accountGroup,
   checkCircleOutline: checkCircleOutline,
   fileChart: fileChart,
+  filterVariant: filterVariant,
   formatListCheckbox: formatListCheckbox,
   home: home,
   link: link,

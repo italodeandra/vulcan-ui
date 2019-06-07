@@ -102,7 +102,7 @@ NavigationDrawer.Item = function (_ref2) {
       title = _ref2.title,
       onClick = _ref2.onClick;
   return React.createElement(NavLink, {
-    className: "item",
+    className: "vui-NavigationDrawer-item",
     activeClassName: "active",
     exact: exact,
     to: to,
@@ -120,19 +120,19 @@ NavigationDrawer.Header = function (_ref3) {
       isMobile = _useMobile4[0];
 
   return isMobile ? React.createElement("div", {
-    className: "header"
+    className: "vui-NavigationDrawer-header"
   }, children) : null;
 };
 
 NavigationDrawer.Divider = function () {
   return React.createElement("div", {
-    className: "divider"
+    className: "vui-NavigationDrawer-divider"
   });
 };
 
 NavigationDrawer.Subtitle = function (_ref4) {
   var children = _ref4.children;
   return React.createElement("div", {
-    className: "subtitle"
+    className: "vui-NavigationDrawer-subtitle"
   }, children);
 };

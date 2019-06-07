@@ -20,9 +20,31 @@ const TextFielDemo = () => {
                     <TextField
                         // hidden // used for autofill
                         label='Test 1'
-                        name='test1'
+                        name='identifier'
                         value={test1}
                         onChange={setTest1}
+                        helperText='This is a helper text'
+                        validation={{
+                            required: 'Please fill this field',
+                            minLength: {
+                                length: 3,
+                                message: 'Fill with at least 3 characters'
+                            },
+                            maxLength: 6
+                        }}
+                        // suffix={
+                        //     <Button icon onClick={() => alert('Button clicked')}>
+                        //         <Icon name='home' />
+                        //     </Button>
+                        // }
+                    />
+                    <TextField
+                        // hidden // used for autofill
+                        label='Password'
+                        name='password'
+                        type='password'
+                        value={test2}
+                        onChange={setTest2}
                         helperText='This is a helper text'
                         validation={{
                             required: 'Please fill this field',

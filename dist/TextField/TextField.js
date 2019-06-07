@@ -2,7 +2,7 @@ import _slicedToArray from "@babel/runtime/helpers/esm/slicedToArray";
 import _objectWithoutProperties from "@babel/runtime/helpers/esm/objectWithoutProperties";
 //TODO: Fix the assistive text changing fast between error and helper when it has an required error
 import _isEqual from 'lodash.isequal';
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import { classNames, useDeepCompareEffect } from '../index';
 import Autocomplete from './Autocomplete/Autocomplete';
 import Number from './Number/Number';
@@ -34,9 +34,10 @@ var TextField = function TextField(_ref) {
       suffix = _ref.suffix,
       readOnly = _ref.readOnly,
       disabled = _ref.disabled,
-      hiddenAutocomplete = _ref.hiddenAutocomplete,
-      props = _objectWithoutProperties(_ref, ["className", "inputClassName", "id", "name", "label", "onChange", "type", "value", "helperText", "validation", "required", "format", "onFocus", "onBlur", "children", "autoComplete", "setRef", "suffix", "readOnly", "disabled", "hiddenAutocomplete"]);
+      hidden = _ref.hidden,
+      props = _objectWithoutProperties(_ref, ["className", "inputClassName", "id", "name", "label", "onChange", "type", "value", "helperText", "validation", "required", "format", "onFocus", "onBlur", "children", "autoComplete", "setRef", "suffix", "readOnly", "disabled", "hidden"]);
 
+  var ref = useRef(null);
   type = type || 'text';
   format = format || {
     parse: function parse(f) {
@@ -47,6 +48,7 @@ var TextField = function TextField(_ref) {
     }
   };
   id = id || name;
+  setRef = setRef || ref;
 
   if (!validation && required) {
     validation = validation || {
@@ -83,7 +85,7 @@ var TextField = function TextField(_ref) {
       hasError = _useValidation2[0],
       errorText = _useValidation2[1];
 
-  className = classNames(className, 'vui-TextField', isFocused && 'is-focused', isFilled && 'is-filled', isPristine && 'is-pristine', hasError && 'has-error', suffix && 'has-suffix', readOnly && 'is-readonly', disabled && 'is-disabled', hiddenAutocomplete && 'is-hidden-autocomplete');
+  className = classNames(className, 'vui-TextField', isFocused && 'is-focused', isFilled && 'is-filled', isPristine && 'is-pristine', hasError && 'has-error', suffix && 'has-suffix', readOnly && 'is-readonly', disabled && 'is-disabled', hidden && 'is-hidden');
 
   var handleChange = function handleChange(_ref2) {
     var target = _ref2.target;
@@ -102,6 +104,21 @@ var TextField = function TextField(_ref) {
       setIsFilled(!!newValue);
     }
   }, [defaultValue]);
+
+  var handleAnimationStart = function handleAnimationStart(e) {
+    switch (e.animationName) {
+      case 'onAutoFillStart':
+        setIsFilled(true);
+        break;
+
+      case 'onAutoFillCancel':
+        setIsFilled(!!value);
+        break;
+
+      default:
+    }
+  };
+
   return React.createElement("div", {
     className: className
   }, React.createElement("div", {
@@ -126,7 +143,9 @@ var TextField = function TextField(_ref) {
     autoComplete: autoComplete === false ? 'off' : undefined,
     readOnly: readOnly,
     disabled: disabled
-  }, props)), suffix && React.createElement("div", {
+  }, props, {
+    onAnimationStart: handleAnimationStart
+  })), suffix && React.createElement("div", {
     className: "suffix"
   }, suffix), !!label && React.createElement("label", {
     htmlFor: id

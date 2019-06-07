@@ -1,7 +1,7 @@
 @import "../styles";
 
 .vui-TextField {
-  &:not(.is-hidden-autocomplete) + .vui-TextField:not(.is-hidden-autocomplete) {
+  &:not(.is-hidden) + .vui-TextField:not(.is-hidden) {
     margin-top: 16px;
   }
 
@@ -39,7 +39,27 @@
     color: rgba(#000000, 0.87);
     -webkit-appearance: none;
     border-radius: 0;
+
+    &:-webkit-autofill {
+      animation-name: onAutoFillStart;
+      transition: background-color 50000s ease-in-out 0s;
+    }
+
+    &:not(:-webkit-autofill) {
+      animation-name: onAutoFillCancel;
+    }
+
+    @keyframes onAutoFillStart {
+      from {/**/}
+      to {/**/}
+    }
+
+    @keyframes onAutoFillCancel {
+      from {/**/}
+      to {/**/}
+    }
   }
+
   &.has-suffix .input {
     padding-right: 56px;
   }
@@ -155,6 +175,7 @@
     .input {
       cursor: not-allowed;
     }
+
     opacity: 0.38;
   }
 

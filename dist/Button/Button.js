@@ -5,6 +5,7 @@ import './Button.scss';
 var Button = function Button(_ref) {
   var children = _ref.children,
       className = _ref.className,
+      style = _ref.style,
       outlined = _ref.outlined,
       text = _ref.text,
       icon = _ref.icon,
@@ -22,6 +23,7 @@ var Button = function Button(_ref) {
   return React.createElement("button", {
     ref: ref,
     className: className,
+    style: style,
     onClick: onClick,
     "auto-focus": autoFocus ? 'true' : undefined,
     type: type
