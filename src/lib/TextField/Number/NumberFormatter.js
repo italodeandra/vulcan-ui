@@ -2,6 +2,7 @@ import { caretPosition } from '../../index'
 
 const NumberFormatter = (config) => {
     config = config || {}
+    config.prefix = config.prefix || ''
 
     function maskValue(rawValue) {
         if (!rawValue) {
@@ -32,7 +33,7 @@ const NumberFormatter = (config) => {
             maskedValue = maskedValue.replace('.', ',')
         }
 
-        return maskedValue
+        return config.prefix + maskedValue
     }
 
     function parseValue(maskedValue) {

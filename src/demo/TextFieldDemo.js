@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Button, Icon, TextField } from '../lib/index'
+import { TextField } from '../lib/index'
 import useTitle from './useTitle'
 
 const TextFielDemo = () => {
@@ -12,13 +12,13 @@ const TextFielDemo = () => {
     const [test4, setTest4] = useState(null)
 
     return (
-        <div className='demo'>
-            <h2>Text field</h2>
-            <div className='subdemo'>
-                <p><strong>Normal text</strong></p>
+        <>
+            <h1>Text field</h1>
+            <>
+                <h2>Normal text</h2>
                 <div>
                     <TextField
-                        hiddenAutocomplete
+                        // hidden // used for autofill
                         label='Test 1'
                         name='test1'
                         value={test1}
@@ -32,23 +32,24 @@ const TextFielDemo = () => {
                             },
                             maxLength: 6
                         }}
-                        suffix={
-                            <Button icon onClick={() => alert('Button clicked')}>
-                                <Icon name='home' />
-                            </Button>
-                        }
+                        // suffix={
+                        //     <Button icon onClick={() => alert('Button clicked')}>
+                        //         <Icon name='home' />
+                        //     </Button>
+                        // }
                     />
                     <pre>
                         state: {test1}
                     </pre>
                 </div>
                 <pre>{`<TextField
+    // hidden // used for autofill
     label='Test 1'
     name='test1'
-    value='{test1}'
+    value={test1}
     onChange={setTest1}
     helperText='This is a helper text'
-    validation='{{'
+    validation={{
         required: 'Please fill this field',
         minLength: {
             length: 3,
@@ -56,10 +57,15 @@ const TextFielDemo = () => {
         },
         maxLength: 6
     }}
+    // suffix={
+    //     <Button icon onClick={() => alert('Button clicked')}>
+    //         <Icon name='home' />
+    //     </Button>
+    // }
 />`}</pre>
-            </div>
-            <div className='subdemo'>
-                <p><strong>Integer</strong></p>
+            </>
+            <>
+                <h2>Integer</h2>
                 <div>
                     <TextField.Number
                         label='Integer'
@@ -93,9 +99,9 @@ const TextFielDemo = () => {
         }
     }}
 />`}</pre>
-            </div>
-            <div className='subdemo'>
-                <p><strong>Decimal</strong></p>
+            </>
+            <>
+                <h2>Decimal</h2>
                 <div>
                     <TextField.Number
                         label='Decimal'
@@ -125,9 +131,9 @@ const TextFielDemo = () => {
     }}
     maskConfig={{ decimal: true }}
 />`}</pre>
-            </div>
-            <div className='subdemo'>
-                <p><strong>Money</strong></p>
+            </>
+            <>
+                <h2>Money</h2>
                 <div>
                     <TextField.Number
                         label='Money'
@@ -139,7 +145,7 @@ const TextFielDemo = () => {
                             required: 'Please fill this field',
                             maxAmount: 9859962.50
                         }}
-                        maskConfig={{ money: true }}
+                        maskConfig={{ money: true, prefix: 'R$' }}
                     />
                     <pre>
                         state: {test4}
@@ -148,17 +154,17 @@ const TextFielDemo = () => {
                 <pre>{`<TextField.Number
     label='Money'
     name='test4'
-    value='{test4}'
+    value={test4}
     onChange={setTest4}
     helperText='This is a helper text'
-    validation='{{'
+    validation={{
         required: 'Please fill this field',
         maxAmount: 9859962.50
     }}
-    maskConfig={{ money: true }}
+    maskConfig={{ money: true, prefix: 'R$' }}
 />`}</pre>
-            </div>
-        </div>
+            </>
+        </>
     )
 }
 

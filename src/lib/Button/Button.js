@@ -2,7 +2,7 @@ import React, { useEffect, useRef } from 'react'
 import { classNames } from '../index'
 import './Button.scss'
 
-const Button = ({ children, className, outlined, text, icon, onClick, autoFocus, type }) => {
+const Button = ({ children, className, style, outlined, text, icon, onClick, autoFocus, type }) => {
     type = type || 'button'
     const ref = useRef(null)
 
@@ -25,6 +25,7 @@ const Button = ({ children, className, outlined, text, icon, onClick, autoFocus,
         <button
             ref={ref}
             className={className}
+            style={style}
             onClick={onClick}
             auto-focus={autoFocus ? 'true' : undefined}
             type={type}

@@ -8,11 +8,12 @@ const AppBarDemo = () => {
     useEffect(() => setTitle('App bar'))
 
     return (
-        <div className='demo'>
-            <div className='subdemo'>
-                <h2>App bar</h2>
-                <p>Example above on the page</p>
-                <pre>{`<AppBar sticky setRef='{AppBarRef}'>
+        <>
+            <h1>App bar</h1>
+            <>
+                <h2>Sticky</h2>
+                <p>Example above on the page. Sticky means it will stay at the top and elevate on scroll.</p>
+                <pre>{`<AppBar sticky setRef={AppBarRef}>
     <Button icon onClick={() => setIsNavigationDrawerOpen(t => !t)} autoFocus>
         <Icon name='menu' />
     </Button>
@@ -20,9 +21,9 @@ const AppBarDemo = () => {
         {title}
     </span>
 </AppBar>`}</pre>
-            </div>
-            <div className='subdemo'>
-                <h2>App bar not sticky</h2>
+            </>
+            <>
+                <h2>Not sticky</h2>
                 <div>
                     <AppBar>
                         <Button icon onClick={() => alert('Button clicked')}>
@@ -35,8 +36,8 @@ const AppBarDemo = () => {
         <Icon name='menu' />
     </Button>
 </AppBar>`}</pre>
-            </div>
-        </div>
+            </>
+        </>
     )
 }
 

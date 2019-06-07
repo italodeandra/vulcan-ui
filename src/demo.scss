@@ -1,5 +1,7 @@
 @import "./lib/styles";
 
+@include styles();
+
 body {
   background-color: #fafafa;
 }
@@ -7,12 +9,12 @@ body {
 .demo-App {
   color: #000000de;
 
-  .title {
+  .app-bar-title {
     margin-left: 8px;
     font-weight: 500;
   }
 
-  .App-container {
+  .app-container {
     padding: 16px;
     overflow-x: auto;
   }
@@ -20,14 +22,7 @@ body {
   pre {
     color: #757575;
     overflow-x: auto;
-  }
-
-  .demo {
-    padding-bottom: 16px;
-  }
-
-  .subdemo {
-    padding-bottom: 8px;
+    margin-bottom: 5*8px;
   }
 
   .navigation-drawer .app-bar {

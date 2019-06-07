@@ -7,53 +7,53 @@ const ButtonDemo = () => {
     useEffect(() => setTitle('Button'))
 
     return (
-        <div className='component'>
-            <h2>Button</h2>
-            <div className='subcomponent'>
-                <p><strong>Contained</strong></p>
-                <p>
+        <>
+            <h1>Button</h1>
+            <>
+                <h2>Contained</h2>
+                <div>
                     <Button onClick={() => alert('Contained button clicked')}>
                         Contained button
                     </Button>
-                </p>
+                </div>
                 <pre>{`<Button onClick={() => alert('Contained button clicked')}>
     Contained button
 </Button>`}</pre>
-            </div>
-            <div className='subcomponent'>
-                <p><strong>Outlined</strong></p>
-                <p>
+            </>
+            <>
+                <h2>Outline</h2>
+                <div>
                     <Button outlined onClick={() => alert('Outlined button clicked')}>
                         Outlined button
                     </Button>
-                </p>
+                </div>
                 <pre>{`<Button outlined onClick={() => alert('Outlined button clicked')}>
     Outlined button
 </Button>`}</pre>
-            </div>
-            <div className='subcomponent'>
-                <p><strong>Text</strong></p>
-                <p>
+            </>
+            <>
+                <h2>Text</h2>
+                <div>
                     <Button text onClick={() => alert('Text button clicked')}>
                         Text button
                     </Button>
-                </p>
+                </div>
                 <pre>{`<Button text onClick={() => alert('Text button clicked')}>
     Text button
 </Button>`}</pre>
-            </div>
-            <div className='subcomponent'>
-                <p><strong>Icon</strong></p>
-                <p>
+            </>
+            <>
+                <h2>Icon</h2>
+                <div>
                     <Button icon onClick={() => alert('Icon button clicked')}>
                         <Icon name='menu' />
                     </Button>
-                </p>
+                </div>
                 <pre>{`<Button icon onClick={() => alert('Icon button clicked')}>
     <Icon name='menu' />
 </Button>`}</pre>
-            </div>
-        </div>
+            </>
+        </>
     )
 }
 

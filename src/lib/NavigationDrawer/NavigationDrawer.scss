@@ -16,11 +16,11 @@
   transition-duration: 210ms;
   transition-timing-function: $vui-Motion-Speed-Accelerate-Easing;
 
-  .header {
+  .vui-NavigationDrawer-header {
     margin: -8px 0 8px 0;
   }
 
-  .item {
+  .vui-NavigationDrawer-item {
     height: 48px;
     display: flex;
     align-items: center;
@@ -89,14 +89,14 @@
     width: 56px;
     transform: translateX(0);
 
-    .item:before {
+    .vui-NavigationDrawer-item:before {
       border-radius: 20px;
     }
 
     &.open {
       width: 256px;
 
-      .item:before {
+      .vui-NavigationDrawer-item:before {
         border-radius: 4px;
       }
     }
@@ -111,13 +111,13 @@
     right: 56px;
   }
 
-  .divider {
+  .vui-NavigationDrawer-divider {
     height: 1px;
     background-color: rgba(#0000001e, 0.12);
     margin: 4px 0;
   }
 
-  .subtitle {
+  .vui-NavigationDrawer-subtitle {
     font-size: 13px;
     color: #0000008a;
     font-weight: 500;
@@ -125,7 +125,7 @@
     display: none;
   }
 
-  &.open .subtitle {
+  &.open .vui-NavigationDrawer-subtitle {
     display: block;
   }
 }

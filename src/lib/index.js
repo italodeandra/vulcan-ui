@@ -1,6 +1,7 @@
 import AppBar from './AppBar/AppBar'
 import Button from './Button/Button'
 import Card from './Card/Card'
+import DataTable from './DataTable/DataTable'
 import useDeepCompareEffect from './Hooks/useDeepCompareEffect'
 import useMobile from './Hooks/useMobile'
 import usePortal from './Hooks/usePortal'
@@ -21,6 +22,7 @@ export {
     AppBar,
     Button,
     Card,
+    DataTable,
     Icon,
     NavigationDrawer,
     ProgressBar,

@@ -6,6 +6,7 @@ import AppBarDemo from './demo/AppBarDemo'
 import AutocompleteDemo from './demo/AutocompleteDemo'
 import ButtonDemo from './demo/ButtonDemo'
 import CardDemo from './demo/CardDemo'
+import DataTableDemo from './demo/DataTableDemo'
 import HomeDemo from './demo/HomeDemo'
 import NavigationDrawerDemo from './demo/NavigationDrawerDemo'
 import ProgressBarDemo from './demo/ProgressBarDemo'
@@ -29,7 +30,7 @@ const App = () => {
                     <Button icon onClick={() => setIsNavigationDrawerOpen(t => !t)} autoFocus>
                         <Icon name='menu' />
                     </Button>
-                    <span className='title'>
+                    <span className='app-bar-title'>
                         {title}
                     </span>
                 </AppBar>
@@ -49,7 +50,7 @@ const App = () => {
                                 autoFocus={isNavigationDrawerOpen}>
                                 <Icon name='menu' />
                             </Button>
-                            <span className='title'>
+                            <span className='app-bar-title'>
                                 Vulcan UI
                             </span>
                         </AppBar>
@@ -83,6 +84,11 @@ const App = () => {
                                            onClick={() => isMobile && setIsNavigationDrawerOpen(false)}>
                         Card
                     </NavigationDrawer.Item>
+                    <NavigationDrawer.Item to='/data-table'
+                                           title={!isNavigationDrawerOpen && 'Data table'}
+                                           onClick={() => isMobile && setIsNavigationDrawerOpen(false)}>
+                        Data table
+                    </NavigationDrawer.Item>
                     <NavigationDrawer.Item to='/navigation-drawer'
                                            title={!isNavigationDrawerOpen && 'Navigation drawer'}
                                            onClick={() => isMobile && setIsNavigationDrawerOpen(false)}>
@@ -109,12 +115,13 @@ const App = () => {
                         Text field
                     </NavigationDrawer.Item>
                 </NavigationDrawer>
-                <div className='App-container' ref={AppContainerRef}>
+                <div className='app-container' ref={AppContainerRef}>
                     <Route path='/' exact component={HomeDemo} />
                     <Route path='/app-bar' component={AppBarDemo} />
                     <Route path='/autocomplete' component={AutocompleteDemo} />
                     <Route path='/button' component={ButtonDemo} />
                     <Route path='/card' component={CardDemo} />
+                    <Route path='/data-table' component={DataTableDemo} />
                     <Route path='/navigation-drawer' component={NavigationDrawerDemo} />
                     <Route path='/progress-bar' component={ProgressBarDemo} />
                     <Route path='/spinner' component={SpinnerDemo} />

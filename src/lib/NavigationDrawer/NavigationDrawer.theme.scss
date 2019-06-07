@@ -1,6 +1,6 @@
 @mixin VuiNavigationDrawerTheme($class, $primary) {
   #{$class} .vui-NavigationDrawer {
-    .item {
+    .vui-NavigationDrawer-item {
       &.active {
         color: $primary;
         fill: $primary;

@@ -7,13 +7,13 @@ const SpinnerDemo = () => {
     useEffect(() => setTitle('Spinner'))
 
     return (
-        <div className='component'>
-            <h2>Spinner</h2>
+        <>
+            <h1>Spinner</h1>
             <div>
                 <Spinner />
             </div>
             <pre>{`<Spinner />`}</pre>
-        </div>
+        </>
     )
 }
 

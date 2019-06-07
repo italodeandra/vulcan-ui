@@ -6,16 +6,16 @@ const NavigationDrawerDemo = () => {
     useEffect(() => setTitle('Navigation drawer'))
 
     return (
-        <div className='demo'>
-            <h2>Navigation drawer</h2>
-            <div className='subcomponent'>
-                <p><strong>Standard</strong></p>
-                <p>Example on left side of the page</p>
+        <>
+            <h1>Navigation drawer</h1>
+            <>
+                <h2>Standard</h2>
+                <div>Example on left side of the page</div>
                 <pre>{`<NavigationDrawer
     className='navigation-drawer'
-    open='{isNavigationDrawerOpen}'
-    containerRef='{AppContainerRef}'
-    onScrimClick='{()' => setIsNavigationDrawerOpen(false)}
+    open={isNavigationDrawerOpen}
+    containerRef={AppContainerRef}
+    onScrimClick={()' => setIsNavigationDrawerOpen(false)}
     appBarRef={AppBarRef}
 >
     <NavigationDrawer.Header>
@@ -27,59 +27,46 @@ const NavigationDrawerDemo = () => {
                 autoFocus={isNavigationDrawerOpen}>
                 <Icon name='menu' />
             </Button>
-            <span className='title'>
+            <span className='app-bar-title'>
                 Vulcan UI
             </span>
         </AppBar>
     </NavigationDrawer.Header>
     <NavigationDrawer.Item to='/'
                            exact
-                           title='{!isNavigationDrawerOpen' && 'Home'}
+                           title={!isNavigationDrawerOpen' && 'Home'}
                            onClick={() => isMobile && setIsNavigationDrawerOpen(false)}>
         <Icon name='home' />
         Home
     </NavigationDrawer.Item>
+    <NavigationDrawer.Divider />
+    <NavigationDrawer.Subtitle>Demos</NavigationDrawer.Subtitle>
+    <NavigationDrawer.Item to='/app-bar'
+                           title={!isNavigationDrawerOpen' && 'App bar'}
+                           onClick={() => isMobile && setIsNavigationDrawerOpen(false)}>
+        App bar
+    </NavigationDrawer.Item>
 </NavigationDrawer>`}</pre>
-            </div>
-            <div className='subcomponent'>
-                <p><strong>Collapsable</strong></p>
-                <p>Icons stays on screen for fast navigation</p>
+            </>
+            <>
+                <h2>Collapsable</h2>
+                <div>Icons stays on screen for fast navigation</div>
                 <pre>{`<NavigationDrawer
     className='navigation-drawer'
-    open='{isNavigationDrawerOpen}'
-    containerRef='{AppContainerRef}'
-    onScrimClick='{()' => setIsNavigationDrawerOpen(false)}
+    open={isNavigationDrawerOpen}
+    containerRef={AppContainerRef}
+    onScrimClick={()' => setIsNavigationDrawerOpen(false)}
     appBarRef={AppBarRef}
     collapsable
 >
-    <NavigationDrawer.Header>
-        <AppBar className='app-bar'>
-            <Button
-                className='menu-button'
-                icon
-                onClick={() => setIsNavigationDrawerOpen(t => !t)}
-                autoFocus={isNavigationDrawerOpen}>
-                <Icon name='menu' />
-            </Button>
-            <span className='title'>
-                Vulcan UI
-            </span>
-        </AppBar>
-    </NavigationDrawer.Header>
-    <NavigationDrawer.Item to='/'
-                           exact
-                           title='{!isNavigationDrawerOpen' && 'Home'}
-                           onClick={() => isMobile && setIsNavigationDrawerOpen(false)}>
-        <Icon name='home' />
-        Home
-    </NavigationDrawer.Item>
 </NavigationDrawer>`}</pre>
-            </div>
-            <div className='subcomponent'>
-                <p><strong>NavigationDrawer.Header</strong></p>
-                <p>Only shows when the device is mobile</p>
-            </div>
-        </div>
+            </>
+            <>
+                <h2>Behavior</h2>
+                <h3>NavigationDrawer.Header</h3>
+                <div>Only shows when the device is mobile</div>
+            </>
+        </>
     )
 }
 

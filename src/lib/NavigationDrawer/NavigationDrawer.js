@@ -102,7 +102,7 @@ const NavigationDrawer = ({ className, children, open, containerRef, collapsable
 export default NavigationDrawer
 
 NavigationDrawer.Item = ({ children, to, exact, title, onClick }) => (
-    <NavLink className='item'
+    <NavLink className='vui-NavigationDrawer-item'
              activeClassName='active'
              exact={exact}
              to={to}
@@ -118,16 +118,16 @@ NavigationDrawer.Header = ({ children }) => {
     const [isMobile] = useMobile()
 
     return isMobile ? (
-        <div className='header'>
+        <div className='vui-NavigationDrawer-header'>
             {children}
         </div>
     ) : null
 }
 
 NavigationDrawer.Divider = () => (
-    <div className='divider' />
+    <div className='vui-NavigationDrawer-divider' />
 )
 
 NavigationDrawer.Subtitle = ({ children }) => (
-    <div className='subtitle'>{children}</div>
+    <div className='vui-NavigationDrawer-subtitle'>{children}</div>
 )

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { TextField } from '../lib/index'
 import useTitle from './useTitle'
 
@@ -13,9 +13,10 @@ const AutocompleteDemo = () => {
     }
 
     return (
-        <div className='demo'>
-            <h2>Autocomplete</h2>
-            <div>
+        <>
+            <h1>Text field</h1>
+            <>
+                <h2>Autocomplete</h2>
                 <TextField.Autocomplete
                     label='Test'
                     name='test'
@@ -29,9 +30,9 @@ const AutocompleteDemo = () => {
                         // request: 'http://localhost:8080?query=&page=0',
                         request: {
                             url: 'https://jsonplaceholder.typicode.com/users',
-                            // method: 'post',
-                            // data: { query: '', page: 0 },
-                            data: ({ query }) => ({ query: query ? query : undefined })
+                            // method: 'post', // default "get"
+                            // data: { query: '', page: 0 }
+                            data: ({ query }) => ({ name: query ? query : undefined })
                             // headers: {
                             //     Authorization: 'Bearer 1'
                             // }
@@ -40,14 +41,14 @@ const AutocompleteDemo = () => {
                         valueTranspile: (v) => v.name
                     }}
                     onItemSelect={handleItemSelect}
-                    // keepValue
+                    // keepValue // value doesn't clear on blur
                 />
                 <pre>state: {test}</pre>
-            </div>
+            </>
             <pre>{`<TextField.Autocomplete
     label='Test'
     name='test'
-    value='{test}'
+    value={test}
     onChange={setTest}
     validation={{
         required: 'Please select an item'
@@ -57,9 +58,9 @@ const AutocompleteDemo = () => {
         // request: 'http://localhost:8080?query=&page=0',
         request: {
             url: 'https://jsonplaceholder.typicode.com/users',
-            // method: 'post',
-            // data: { query: '', page: 0 },
-            data: ({ query }) => ({ query: query ? query : undefined }),
+            // method: 'post', // default "get"
+            // data: { query: '', page: 0 }
+            data: ({ query }) => ({ name: query ? query : undefined })
             // headers: {
             //     Authorization: 'Bearer 1'
             // }
@@ -68,9 +69,9 @@ const AutocompleteDemo = () => {
         valueTranspile: (v) => v.name
     }}
     onItemSelect={handleItemSelect}
-    // keepValue
+    // keepValue // value doesn't clear on blur
 />`}</pre>
-        </div>
+        </>
     )
 }
 

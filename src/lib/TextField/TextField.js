@@ -33,7 +33,7 @@ const TextField = ({
                        suffix,
                        readOnly,
                        disabled,
-                       hiddenAutocomplete,
+                       hidden,
                        ...props
                    }) => {
     type = type || 'text'
@@ -63,7 +63,7 @@ const TextField = ({
         suffix && 'has-suffix',
         readOnly && 'is-readonly',
         disabled && 'is-disabled',
-        hiddenAutocomplete && 'is-hidden-autocomplete'
+        hidden && 'is-hidden'
     )
 
     const handleChange = ({ target }) => {

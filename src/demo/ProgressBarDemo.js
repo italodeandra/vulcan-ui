@@ -7,23 +7,23 @@ const ProgressBarDemo = () => {
     useEffect(() => setTitle('Progress bar'))
 
     return (
-        <div className='component'>
-            <h2>Progress bar</h2>
-            <div className='subdemo'>
-                <p><strong>Determinate</strong></p>
+        <>
+            <h1>Progress bar</h1>
+            <>
+                <h2>Determinate</h2>
                 <div>
                     <ProgressBar progression={20} />
                 </div>
-                <pre>{`<ProgressBar progression='{20}' />`}</pre>
-            </div>
-            <div className='subdemo'>
-                <p><strong>Indeterminate</strong></p>
+                <pre>{`<ProgressBar progression={20} />`}</pre>
+            </>
+            <>
+                <h2>Indeterminate</h2>
                 <div>
                     <ProgressBar indeterminate height={2} />
                 </div>
-                <pre>{`<ProgressBar indeterminate height='{2}' />`}</pre>
-            </div>
-        </div>
+                <pre>{`<ProgressBar indeterminate height={2} />`}</pre>
+            </>
+        </>
     )
 }
 
