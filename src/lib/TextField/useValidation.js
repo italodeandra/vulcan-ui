@@ -2,17 +2,22 @@ import { useEffect, useState } from 'react'
 
 function useValidation(value, validation) {
     const [hasError, setHasError] = useState(false)
-    const [errorText, setErrorText] = useState(null)
+    const [errorText, setErrorMessage] = useState(null)
+
+    const setCustomErrorMessage = (errorMessage) => {
+        setHasError(true)
+        setErrorMessage(errorMessage)
+    }
 
     useEffect(() => {
         setHasError(false)
-        setErrorText(null)
+        setErrorMessage(null)
 
         if (validation) {
             if (validation.required) {
                 if (!value) {
                     setHasError(true)
-                    setErrorText(validation.required.message || validation.required)
+                    setErrorMessage(validation.required.message || validation.required)
                     return
                 }
             }
@@ -21,9 +26,9 @@ function useValidation(value, validation) {
                 const maxLength = {}
                 maxLength.length = validation.maxLength.length || validation.maxLength
                 maxLength.message = validation.maxLength.message || (`${value.length}/${maxLength.length}`)
-                if (value && value.length > maxLength.length) {
+                if (typeof value === 'undefined' || value === null || value.length > maxLength.length) {
                     setHasError(true)
-                    setErrorText(maxLength.message)
+                    setErrorMessage(maxLength.message)
                     return
                 }
             }
@@ -32,9 +37,9 @@ function useValidation(value, validation) {
                 const minLength = {}
                 minLength.length = validation.minLength.length || validation.minLength
                 minLength.message = validation.minLength.message
-                if (value && value.length < minLength.length) {
+                if (typeof value === 'undefined' || value === null || value.length < minLength.length) {
                     setHasError(true)
-                    setErrorText(minLength.message)
+                    setErrorMessage(minLength.message)
                     return
                 }
             }
@@ -43,9 +48,9 @@ function useValidation(value, validation) {
                 const minAmount = {}
                 minAmount.amount = validation.minAmount.amount || validation.minAmount
                 minAmount.message = validation.minAmount.message
-                if (value && parseFloat(value) < minAmount.amount) {
+                if (typeof value === 'undefined' || value === null || parseFloat(value) < minAmount.amount) {
                     setHasError(true)
-                    setErrorText(minAmount.message)
+                    setErrorMessage(minAmount.message)
                     return
                 }
             }
@@ -54,9 +59,9 @@ function useValidation(value, validation) {
                 const maxAmount = {}
                 maxAmount.amount = validation.maxAmount.amount || validation.maxAmount
                 maxAmount.message = validation.maxAmount.message
-                if (value && parseFloat(value) > maxAmount.amount) {
+                if (typeof value === 'undefined' || value === null || parseFloat(value) > maxAmount.amount) {
                     setHasError(true)
-                    setErrorText(maxAmount.message)
+                    setErrorMessage(maxAmount.message)
                     return
                 }
             }
@@ -65,7 +70,8 @@ function useValidation(value, validation) {
 
     return [
         hasError,
-        errorText
+        errorText,
+        setCustomErrorMessage
     ]
 }
 

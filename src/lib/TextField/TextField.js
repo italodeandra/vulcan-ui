@@ -1,7 +1,7 @@
 //TODO: Fix the assistive text changing fast between error and helper when it has an required error
 
 import _isEqual from 'lodash.isequal'
-import React, { useRef, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { classNames, useDeepCompareEffect } from '../index'
 import Autocomplete from './Autocomplete/Autocomplete'
 import Number from './Number/Number'
@@ -53,11 +53,12 @@ const TextField = ({
     const [isFocused, setIsFocused] = useState(false)
     const [isFilled, setIsFilled] = useState(!!defaultValue)
     const [isPristine, setIsPristine] = useState(!defaultValue)
-    const [hasError, errorText] = useValidation(value, validation)
+    const [hasError, errorMessage, setCustomErrorMessage] = useValidation(value, validation)
 
     className = classNames(
         className,
         'vui-TextField',
+        'vui-Field',
         isFocused && 'is-focused',
         isFilled && 'is-filled',
         isPristine && 'is-pristine',
@@ -69,6 +70,7 @@ const TextField = ({
     )
 
     const handleChange = ({ target }) => {
+        console.log(target)
         const newValue = format.parse(target.value)
 
         setValue(newValue)
@@ -99,11 +101,31 @@ const TextField = ({
         }
     }
 
+    const handleCustomErrorMessage = (errorMessage) => {
+        setIsPristine(false)
+        setCustomErrorMessage(errorMessage)
+    }
+
+    useEffect(() => {
+        const refContent = {
+            element: ref.current,
+            setCustomErrorMessage: handleCustomErrorMessage
+        }
+
+        if (setRef) {
+            if (typeof setRef !== 'function') {
+                setRef.current = refContent
+            } else {
+                setRef({ current: refContent })
+            }
+        }
+    }, [setCustomErrorMessage])
+
     return (
         <div className={className}>
             <div className='input-container'>
                 <input
-                    ref={setRef}
+                    ref={ref}
                     className={classNames('input', inputClassName)}
                     id={id}
                     name={name}
@@ -138,9 +160,9 @@ const TextField = ({
             {(hasError || helperText) &&
             <div className={classNames(
                 'assistive-text',
-                (hasError && checkIfIsCounter(errorText)) && 'counter')
+                (hasError && checkIfIsCounter(errorMessage)) && 'counter')
             }>
-                {(!isPristine && hasError) ? errorText : helperText}
+                {(!isPristine && hasError) ? errorMessage : helperText}
             </div>
             }
             {children}

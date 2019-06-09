@@ -6,6 +6,7 @@ import useDeepCompareEffect from './Hooks/useDeepCompareEffect'
 import useMobile from './Hooks/useMobile'
 import usePortal from './Hooks/usePortal'
 import useScroll from './Hooks/useScroll'
+import Form from './Form/Form'
 import Icon from './Icon/Icon'
 import NavigationDrawer from './NavigationDrawer/NavigationDrawer'
 import ProgressBar from './ProgressBar/ProgressBar'
@@ -23,6 +24,7 @@ export {
     Button,
     Card,
     DataTable,
+    Form,
     Icon,
     NavigationDrawer,
     ProgressBar,

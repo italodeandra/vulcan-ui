@@ -1,0 +1,13 @@
+@mixin VuiTextFieldTheme($class, $primary) {
+  #{$class} .vui-TextField {
+    .border {
+      background-color: $primary;
+    }
+
+    &.is-focused {
+      label {
+        color: $primary;
+      }
+    }
+  }
+}

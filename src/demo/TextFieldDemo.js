@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react'
-import { TextField } from '../lib/index'
+import React, { useEffect, useRef, useState } from 'react'
+import { Button, TextField, Form } from '../lib/index'
 import useTitle from './useTitle'
 
 const TextFielDemo = () => {
@@ -10,6 +10,23 @@ const TextFielDemo = () => {
     const [test2, setTest2] = useState(null)
     const [test3, setTest3] = useState(null)
     const [test4, setTest4] = useState(null)
+    const [test5, setTest5] = useState(null)
+    const [test6, setTest6] = useState(null)
+
+    const customErrorFieldRef = useRef(null)
+
+    const handleCustomErrorClick = () => {
+        customErrorFieldRef.current.setCustomErrorMessage('Test custom error message')
+    }
+
+    const handleFormSubmit = (f) => {
+        const isInvalid = f.isInvalid()
+        if (isInvalid) {
+            isInvalid.focusFirstInvalid()
+        } else {
+            console.info('Form is valid')
+        }
+    }
 
     return (
         <>
@@ -18,33 +35,10 @@ const TextFielDemo = () => {
                 <h2>Normal text</h2>
                 <div>
                     <TextField
-                        // hidden // used for autofill
                         label='Test 1'
-                        name='identifier'
+                        name='test1'
                         value={test1}
                         onChange={setTest1}
-                        helperText='This is a helper text'
-                        validation={{
-                            required: 'Please fill this field',
-                            minLength: {
-                                length: 3,
-                                message: 'Fill with at least 3 characters'
-                            },
-                            maxLength: 6
-                        }}
-                        // suffix={
-                        //     <Button icon onClick={() => alert('Button clicked')}>
-                        //         <Icon name='home' />
-                        //     </Button>
-                        // }
-                    />
-                    <TextField
-                        // hidden // used for autofill
-                        label='Password'
-                        name='password'
-                        type='password'
-                        value={test2}
-                        onChange={setTest2}
                         helperText='This is a helper text'
                         validation={{
                             required: 'Please fill this field',
@@ -176,15 +170,90 @@ const TextFielDemo = () => {
                 <pre>{`<TextField.Number
     label='Money'
     name='test4'
-    value={test4}
+    value='{test4}'
     onChange={setTest4}
     helperText='This is a helper text'
-    validation={{
+    validation='{{'
         required: 'Please fill this field',
         maxAmount: 9859962.50
     }}
     maskConfig={{ money: true, prefix: 'R$' }}
 />`}</pre>
+            </>
+            <>
+                <h2>Custom error</h2>
+                <div>
+                    <TextField
+                        setRef={customErrorFieldRef}
+                        label='Custom error'
+                        name='test5'
+                        value={test5}
+                        onChange={setTest5}
+                    />
+                    <br />
+                    <Button onClick={handleCustomErrorClick}>Set custom error</Button>
+                </div>
+                <pre>{`const customErrorFieldRef = useRef(null)
+
+const handleCustomErrorClick = () => {
+    customErrorFieldRef.current.setCustomErrorMessage('Test custom error message')
+}
+
+<TextField
+    setRef='{customErrorFieldRef}'
+    label='Custom error'
+    name='test5'
+    value='{test5}'
+    onChange={setTest5}
+/>
+<br />
+<Button onClick={handleCustomErrorClick}>Set custom error</Button>`}</pre>
+            </>
+            <>
+                <h2>Form</h2>
+                <div>
+                    <Form onSubmit={handleFormSubmit}>
+                        <TextField
+                            label='Test 6'
+                            name='test6'
+                            value={test6}
+                            onChange={setTest6}
+                            validation={{
+                                minLength: {
+                                    length: 3,
+                                    message: 'Fill with at least 3 characters'
+                                }
+                            }}
+                        />
+                        <br />
+                        <Button type='submit'>Submit</Button>
+                    </Form>
+                </div>
+                <pre>{`const handleFormSubmit = (f) => {
+    const isInvalid = f.isInvalid()
+    if (isInvalid) {
+        isInvalid.focusFirstInvalid()
+    } else {
+        console.info('Form is valid')
+    }
+}
+
+<Form onSubmit={handleFormSubmit}>
+    <TextField
+        label='Test 6'
+        name='test6'
+        value={test6}
+        onChange={setTest6}
+        validation={{
+            minLength: {
+                length: 3,
+                message: 'Fill with at least 3 characters'
+            }
+        }}
+    />
+    <br />
+    <Button type='submit'>Submit</Button>
+</Form>`}</pre>
             </>
         </>
     )
