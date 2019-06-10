@@ -12,6 +12,7 @@ const TextFielDemo = () => {
     const [test4, setTest4] = useState(null)
     const [test5, setTest5] = useState(null)
     const [test6, setTest6] = useState(null)
+    const [test7, setTest7] = useState(null)
 
     const customErrorFieldRef = useRef(null)
 
@@ -254,6 +255,21 @@ const handleCustomErrorClick = () => {
     <br />
     <Button type='submit'>Submit</Button>
 </Form>`}</pre>
+            </>
+            <>
+                <h2>Autosizing text</h2>
+                <div>
+                    <TextField.Autosize
+                        label='Test 7'
+                        name='test7'
+                        value={test7}
+                        onChange={setTest7}
+                    />
+                    <pre>
+                        state: {test7}
+                    </pre>
+                </div>
+                <pre>{``}</pre>
             </>
         </>
     )

@@ -1,3 +1,5 @@
+//TODO: Fix: Page doesnt resize when the content size change.. Maybe can fix removing the height after the animation ends
+
 import React, { useContext, useEffect, useRef, useState } from 'react'
 import './Pages.scss'
 

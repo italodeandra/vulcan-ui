@@ -4,6 +4,7 @@ import _isEqual from 'lodash.isequal'
 import React, { useEffect, useRef, useState } from 'react'
 import { classNames, useDeepCompareEffect } from '../index'
 import Autocomplete from './Autocomplete/Autocomplete'
+import Autosize from './Autosize/Autosize'
 import Number from './Number/Number'
 import './TextField.scss'
 import useValidation from './useValidation'
@@ -34,6 +35,8 @@ const TextField = ({
                        readOnly,
                        disabled,
                        hidden,
+                       autosize,
+                       inputElement,
                        ...props
                    }) => {
     const ref = useRef(null)
@@ -121,32 +124,38 @@ const TextField = ({
         }
     }, [setCustomErrorMessage])
 
+    const inputElementProps = {
+        ref: ref,
+        className: classNames('input', inputClassName),
+        id: id,
+        name: name,
+        type: type,
+        onChange: handleChange,
+        value: format.mask(value) || '',
+        onFocus: e => {
+            setIsFocused(true)
+            if (onFocus) onFocus(e)
+        },
+        onBlur: e => {
+            setIsFocused(false)
+            if (onBlur) onBlur(e)
+        },
+        required: required,
+        autoComplete: autoComplete === false ? 'off' : undefined,
+        readOnly: readOnly,
+        disabled: disabled,
+        onAnimationStart: handleAnimationStart,
+        ...props
+    }
+
     return (
         <div className={className}>
             <div className='input-container'>
-                <input
-                    ref={ref}
-                    className={classNames('input', inputClassName)}
-                    id={id}
-                    name={name}
-                    type={type}
-                    onChange={handleChange}
-                    value={format.mask(value) || ''}
-                    onFocus={e => {
-                        setIsFocused(true)
-                        if (onFocus) onFocus(e)
-                    }}
-                    onBlur={e => {
-                        setIsFocused(false)
-                        if (onBlur) onBlur(e)
-                    }}
-                    required={required}
-                    autoComplete={autoComplete === false ? 'off' : undefined}
-                    readOnly={readOnly}
-                    disabled={disabled}
-                    {...props}
-                    onAnimationStart={handleAnimationStart}
-                />
+                {
+                    inputElement
+                        ? inputElement(inputElementProps)
+                        : <input {...inputElementProps} />
+                }
                 {suffix &&
                 <div className='suffix'>{suffix}</div>
                 }
@@ -173,5 +182,7 @@ const TextField = ({
 TextField.Number = Number
 
 TextField.Autocomplete = Autocomplete
+
+TextField.Autosize = Autosize
 
 export default TextField
