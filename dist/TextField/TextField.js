@@ -94,7 +94,6 @@ var TextField = function TextField(_ref) {
 
   var handleChange = function handleChange(_ref2) {
     var target = _ref2.target;
-    console.log(target);
     var newValue = format.parse(target.value);
     setValue(newValue);
     setIsPristine(false);

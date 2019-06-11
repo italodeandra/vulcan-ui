@@ -73,7 +73,6 @@ const TextField = ({
     )
 
     const handleChange = ({ target }) => {
-        console.log(target)
         const newValue = format.parse(target.value)
 
         setValue(newValue)
