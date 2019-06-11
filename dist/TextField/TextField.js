@@ -8,8 +8,8 @@ import { classNames, useDeepCompareEffect } from '../index';
 import Autocomplete from './Autocomplete/Autocomplete';
 import Autosize from './Autosize/Autosize';
 import Number from './Number/Number';
-import './TextField.scss';
 import Select from './Select/Select';
+import './TextField.scss';
 import useValidation from './useValidation';
 
 function checkIfIsCounter(value) {
@@ -93,9 +93,9 @@ var TextField = function TextField(_ref) {
 
   className = classNames(className, 'vui-TextField', 'vui-Field', isFocused && 'is-focused', isFilled && 'is-filled', isPristine && 'is-pristine', hasError && 'has-error', suffix && 'has-suffix', readOnly && 'is-readonly', disabled && 'is-disabled', hidden && 'is-hidden');
 
-  var handleChange = function handleChange(_ref2) {
-    var target = _ref2.target;
-    var newValue = format.parse(target.value);
+  var handleChange = function handleChange(e) {
+    var target = e.target;
+    var newValue = format.parse(target ? target.value : e);
     setValue(newValue);
     setIsPristine(false);
     setIsFilled(!!newValue);

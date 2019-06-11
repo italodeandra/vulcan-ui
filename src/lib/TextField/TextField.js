@@ -6,8 +6,8 @@ import { classNames, useDeepCompareEffect } from '../index'
 import Autocomplete from './Autocomplete/Autocomplete'
 import Autosize from './Autosize/Autosize'
 import Number from './Number/Number'
-import './TextField.scss'
 import Select from './Select/Select'
+import './TextField.scss'
 import useValidation from './useValidation'
 
 function checkIfIsCounter(value) {
@@ -73,8 +73,9 @@ const TextField = ({
         hidden && 'is-hidden'
     )
 
-    const handleChange = ({ target }) => {
-        const newValue = format.parse(target.value)
+    const handleChange = (e) => {
+        const target = e.target
+        const newValue = format.parse(target ? target.value : e)
 
         setValue(newValue)
         setIsPristine(false)

@@ -1,9 +1,13 @@
 import React, { useEffect, useRef } from 'react';
+import { classNames } from '../index';
 
 var Form = function Form(_ref) {
-  var children = _ref.children,
+  var id = _ref.id,
+      className = _ref.className,
+      children = _ref.children,
       onSubmit = _ref.onSubmit,
       setRef = _ref.setRef;
+  className = classNames(className, 'vui-Form');
   var ref = useRef(null);
   useEffect(function () {
     if (setRef) {
@@ -37,6 +41,8 @@ var Form = function Form(_ref) {
   };
 
   return React.createElement("form", {
+    id: id,
+    className: className,
     onSubmit: handleSubmit,
     ref: ref
   }, children);

@@ -1,6 +1,8 @@
 import React, { useEffect, useRef } from 'react'
+import { classNames } from '../index'
 
-const Form = ({ children, onSubmit, setRef }) => {
+const Form = ({ id, className, children, onSubmit, setRef }) => {
+    className = classNames(className, 'vui-Form')
     const ref = useRef(null)
 
     useEffect(() => {
@@ -34,7 +36,12 @@ const Form = ({ children, onSubmit, setRef }) => {
     }
 
     return (
-        <form onSubmit={handleSubmit} ref={ref}>
+        <form
+            id={id}
+            className={className}
+            onSubmit={handleSubmit}
+            ref={ref}
+        >
             {children}
         </form>
     )
