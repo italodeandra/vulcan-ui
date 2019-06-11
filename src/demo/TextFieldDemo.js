@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react'
-import { Button, TextField, Form } from '../lib/index'
+import { Button, Form, TextField } from '../lib/index'
 import useTitle from './useTitle'
 
 const TextFielDemo = () => {
@@ -13,6 +13,7 @@ const TextFielDemo = () => {
     const [test5, setTest5] = useState(null)
     const [test6, setTest6] = useState(null)
     const [test7, setTest7] = useState(null)
+    const [test8, setTest8] = useState(null)
 
     const customErrorFieldRef = useRef(null)
 
@@ -105,7 +106,7 @@ const TextFielDemo = () => {
                 <pre>{`<TextField.Number
     label='Integer'
     name='test2'
-    value='{test2}'
+    value={test2}
     onChange={setTest2}
     helperText='This is a helper text'
     validation='{{'
@@ -139,7 +140,7 @@ const TextFielDemo = () => {
                 <pre>{`<TextField.Number
     label='Decimal'
     name='test3'
-    value='{test3}'
+    value={test3}
     onChange={setTest3}
     helperText='This is a helper text'
     validation='{{'
@@ -171,7 +172,7 @@ const TextFielDemo = () => {
                 <pre>{`<TextField.Number
     label='Money'
     name='test4'
-    value='{test4}'
+    value={test4}
     onChange={setTest4}
     helperText='This is a helper text'
     validation='{{'
@@ -201,10 +202,10 @@ const handleCustomErrorClick = () => {
 }
 
 <TextField
-    setRef='{customErrorFieldRef}'
+    setRef={customErrorFieldRef}
     label='Custom error'
     name='test5'
-    value='{test5}'
+    value={test5}
     onChange={setTest5}
 />
 <br />
@@ -257,7 +258,7 @@ const handleCustomErrorClick = () => {
 </Form>`}</pre>
             </>
             <>
-                <h2>Autosizing text</h2>
+                <h2>Autosize</h2>
                 <div>
                     <TextField.Autosize
                         label='Test 7'
@@ -269,7 +270,42 @@ const handleCustomErrorClick = () => {
                         state: {test7}
                     </pre>
                 </div>
-                <pre>{``}</pre>
+                <pre>{`<TextField.Autosize
+    label='Test 7'
+    name='test7'
+    value={test7}
+    onChange={setTest7}
+/>`}</pre>
+            </>
+            <>
+                <h2>Select</h2>
+                <div>
+                    <TextField.Select
+                        label='Test 8'
+                        name='test8'
+                        value={test8}
+                        onChange={setTest8}
+                        options={[
+                            { label: 'Test A', value: 'A' },
+                            { label: 'Test B', value: 'B' }
+                        ]}
+                        required
+                    />
+                    <pre>
+                        state: {JSON.stringify(test8)}
+                    </pre>
+                </div>
+                <pre>{`<TextField.Select
+    label='Test 8'
+    name='test8'
+    value={test8}
+    onChange={setTest8}
+    options={[
+        { label: 'Test A', value: 'A' },
+        { label: 'Test B', value: 'B' }
+    ]}
+    required
+/>`}</pre>
             </>
         </>
     )

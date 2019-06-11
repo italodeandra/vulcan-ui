@@ -131,12 +131,6 @@ var Autocomplete = function Autocomplete(_ref) {
     }
   };
 
-  var handleItemFocus = function handleItemFocus(e) {// const target = e.target
-    // setTimeout(() => {
-    //     target.scrollIntoView(true)
-    // })
-  };
-
   var handleBlur = function handleBlur(e) {
     props.onBlur && props.onBlur(e);
 
@@ -174,7 +168,7 @@ var Autocomplete = function Autocomplete(_ref) {
           if (target.previousElementSibling && target.previousElementSibling.classList && target.previousElementSibling.classList.contains('item')) {
             target.previousElementSibling.focus();
           } else {
-            resultTargetRef.current.focus();
+            resultTargetRef.current.element.focus();
           }
 
           break;
@@ -192,7 +186,7 @@ var Autocomplete = function Autocomplete(_ref) {
           break;
 
         case 'Escape':
-          resultTargetRef.current.focus();
+          resultTargetRef.current.element.focus();
           setShowResult(false);
           setResult(null);
           break;
@@ -214,7 +208,7 @@ var Autocomplete = function Autocomplete(_ref) {
   };
 
   var handleItemClick = function handleItemClick(item) {
-    resultTargetRef.current.focus();
+    resultTargetRef.current.element.focus();
     var newSelected = autocompleteConfig.valueTranspile(item);
     setValue(newSelected);
     setSelected(newSelected);
@@ -264,7 +258,6 @@ var Autocomplete = function Autocomplete(_ref) {
       onClick: function onClick() {
         return handleItemClick(item);
       },
-      onFocus: handleItemFocus,
       targetClassName: "vui-TextField-Autocomplete-Target".concat(index.current)
     }, autocompleteConfig.itemTranspile(item));
   }), !result.length && React.createElement("div", {

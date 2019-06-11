@@ -7,6 +7,7 @@ import Autocomplete from './Autocomplete/Autocomplete'
 import Autosize from './Autosize/Autosize'
 import Number from './Number/Number'
 import './TextField.scss'
+import Select from './Select/Select'
 import useValidation from './useValidation'
 
 function checkIfIsCounter(value) {
@@ -122,7 +123,7 @@ const TextField = ({
             }
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [setCustomErrorMessage])
+    }, [])
 
     const inputElementProps = {
         ref: ref,
@@ -184,5 +185,7 @@ TextField.Number = Number
 TextField.Autocomplete = Autocomplete
 
 TextField.Autosize = Autosize
+
+TextField.Select = Select
 
 export default TextField

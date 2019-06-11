@@ -15,7 +15,7 @@ const AutocompleteResult = ({ children, target, setRef, onScroll }) => {
     useLayoutEffect(() => {
         const handlePosition = () => {
             const nextStyle = {}
-            const targetDOMRect = target.current.getBoundingClientRect()
+            const targetDOMRect = target.current.element.getBoundingClientRect()
             const refDOMRect = ref.current.getBoundingClientRect()
 
             nextStyle.left = targetDOMRect.x
@@ -44,7 +44,7 @@ const AutocompleteResult = ({ children, target, setRef, onScroll }) => {
             }
         }
 
-        const scrollable = getScrollParent(target.current) || window
+        const scrollable = getScrollParent(target.current.element) || window
 
         scrollable.addEventListener('scroll', handlePosition)
         window.addEventListener('resize', handlePosition)

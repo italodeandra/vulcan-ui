@@ -82,13 +82,6 @@ const Autocomplete = ({ autocompleteConfig, onChange, value: defaultValue, onIte
         }
     }
 
-    const handleItemFocus = (e) => {
-        // const target = e.target
-        // setTimeout(() => {
-        //     target.scrollIntoView(true)
-        // })
-    }
-
     const handleBlur = (e) => {
         props.onBlur && props.onBlur(e)
 
@@ -124,7 +117,7 @@ const Autocomplete = ({ autocompleteConfig, onChange, value: defaultValue, onIte
                     if (target.previousElementSibling && target.previousElementSibling.classList && target.previousElementSibling.classList.contains('item')) {
                         target.previousElementSibling.focus()
                     } else {
-                        resultTargetRef.current.focus()
+                        resultTargetRef.current.element.focus()
                     }
                     break
                 case 'ArrowDown':
@@ -137,7 +130,7 @@ const Autocomplete = ({ autocompleteConfig, onChange, value: defaultValue, onIte
                     }
                     break
                 case 'Escape':
-                    resultTargetRef.current.focus()
+                    resultTargetRef.current.element.focus()
                     setShowResult(false)
                     setResult(null)
                     break
@@ -158,7 +151,7 @@ const Autocomplete = ({ autocompleteConfig, onChange, value: defaultValue, onIte
     }
 
     const handleItemClick = (item) => {
-        resultTargetRef.current.focus()
+        resultTargetRef.current.element.focus()
         const newSelected = autocompleteConfig.valueTranspile(item)
         setValue(newSelected)
         setSelected(newSelected)
@@ -215,7 +208,6 @@ const Autocomplete = ({ autocompleteConfig, onChange, value: defaultValue, onIte
                                 onBlur={handleBlur}
                                 onKeyDown={handleKeyDown}
                                 onClick={() => handleItemClick(item)}
-                                onFocus={handleItemFocus}
                                 targetClassName={`vui-TextField-Autocomplete-Target${index.current}`}
                             >
                                 {autocompleteConfig.itemTranspile(item)}

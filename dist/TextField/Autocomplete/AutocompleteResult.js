@@ -28,7 +28,7 @@ var AutocompleteResult = function AutocompleteResult(_ref) {
   useLayoutEffect(function () {
     var handlePosition = function handlePosition() {
       var nextStyle = {};
-      var targetDOMRect = target.current.getBoundingClientRect();
+      var targetDOMRect = target.current.element.getBoundingClientRect();
       var refDOMRect = ref.current.getBoundingClientRect();
       nextStyle.left = targetDOMRect.x;
       nextStyle.width = targetDOMRect.width;
@@ -56,7 +56,7 @@ var AutocompleteResult = function AutocompleteResult(_ref) {
       }
     }
 
-    var scrollable = getScrollParent(target.current) || window;
+    var scrollable = getScrollParent(target.current.element) || window;
     scrollable.addEventListener('scroll', handlePosition);
     window.addEventListener('resize', handlePosition);
     return function () {
