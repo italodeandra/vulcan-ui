@@ -33,12 +33,17 @@
     background-color: #eeeeee;
     border-bottom: 1px solid rgba(#000000, 0.42);
     outline: none;
-    font-size: 16px;
     letter-spacing: .009375em;
     line-height: 1.75rem;
     color: rgba(#000000, 0.87);
     -webkit-appearance: none;
     border-radius: 0;
+    font: 400 16px "Roboto", -apple-system, BlinkMacSystemFont, "Segoe UI", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue";
+    display: block;
+    overflow: hidden;
+    box-shadow: none;
+    resize: none;
 
     &:-webkit-autofill {
       animation-name: onAutoFillStart;
@@ -58,6 +63,12 @@
       from {/**/}
       to {/**/}
     }
+  }
+
+  textarea.input {
+    min-height: 78px;
+    padding-top: 26px;
+    padding-bottom: 10px;
   }
 
   &.has-suffix .input {
@@ -159,7 +170,7 @@
 
     label,
     .assistive-text {
-      color: #B00020;
+      color: #B00020 !important;
     }
 
     .border {

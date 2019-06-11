@@ -10,17 +10,22 @@ function useValidation(value, validation) {
   var _useState3 = useState(null),
       _useState4 = _slicedToArray(_useState3, 2),
       errorText = _useState4[0],
-      setErrorText = _useState4[1];
+      setErrorMessage = _useState4[1];
+
+  var setCustomErrorMessage = function setCustomErrorMessage(errorMessage) {
+    setHasError(true);
+    setErrorMessage(errorMessage);
+  };
 
   useEffect(function () {
     setHasError(false);
-    setErrorText(null);
+    setErrorMessage(null);
 
     if (validation) {
       if (validation.required) {
         if (!value) {
           setHasError(true);
-          setErrorText(validation.required.message || validation.required);
+          setErrorMessage(validation.required.message || validation.required);
           return;
         }
       }
@@ -30,9 +35,9 @@ function useValidation(value, validation) {
         maxLength.length = validation.maxLength.length || validation.maxLength;
         maxLength.message = validation.maxLength.message || "".concat(value.length, "/").concat(maxLength.length);
 
-        if (value && value.length > maxLength.length) {
+        if (typeof value === 'undefined' || value === null || value.length > maxLength.length) {
           setHasError(true);
-          setErrorText(maxLength.message);
+          setErrorMessage(maxLength.message);
           return;
         }
       }
@@ -42,9 +47,9 @@ function useValidation(value, validation) {
         minLength.length = validation.minLength.length || validation.minLength;
         minLength.message = validation.minLength.message;
 
-        if (value && value.length < minLength.length) {
+        if (typeof value === 'undefined' || value === null || value.length < minLength.length) {
           setHasError(true);
-          setErrorText(minLength.message);
+          setErrorMessage(minLength.message);
           return;
         }
       }
@@ -54,9 +59,9 @@ function useValidation(value, validation) {
         minAmount.amount = validation.minAmount.amount || validation.minAmount;
         minAmount.message = validation.minAmount.message;
 
-        if (value && parseFloat(value) < minAmount.amount) {
+        if (typeof value === 'undefined' || value === null || parseFloat(value) < minAmount.amount) {
           setHasError(true);
-          setErrorText(minAmount.message);
+          setErrorMessage(minAmount.message);
           return;
         }
       }
@@ -66,15 +71,15 @@ function useValidation(value, validation) {
         maxAmount.amount = validation.maxAmount.amount || validation.maxAmount;
         maxAmount.message = validation.maxAmount.message;
 
-        if (value && parseFloat(value) > maxAmount.amount) {
+        if (typeof value === 'undefined' || value === null || parseFloat(value) > maxAmount.amount) {
           setHasError(true);
-          setErrorText(maxAmount.message);
+          setErrorMessage(maxAmount.message);
           return;
         }
       }
     }
   }, [validation, value]);
-  return [hasError, errorText];
+  return [hasError, errorText, setCustomErrorMessage];
 }
 
 export default useValidation;

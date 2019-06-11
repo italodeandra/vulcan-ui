@@ -14,14 +14,20 @@ export var Pages = function Pages(_ref) {
       setPagesHeight = _useState2[1];
 
   var currentPageRef = useRef(context.currentPage);
+  var removeHeightTimer = useRef(null);
 
   var setPagesSize = function setPagesSize() {
     setTimeout(function () {
       setPagesHeight(pagesRef.current.querySelectorAll('.vui-Tabs-Page')[currentPageRef.current].getBoundingClientRect().height);
     });
+    clearTimeout(removeHeightTimer.current);
+    removeHeightTimer.current = setTimeout(function () {
+      setPagesHeight(undefined);
+    }, 280);
   };
 
   useEffect(function () {
+    setPagesHeight(pagesRef.current.querySelectorAll('.vui-Tabs-Page')[currentPageRef.current].getBoundingClientRect().height);
     currentPageRef.current = context.currentPage;
     setPagesSize();
   }, [context.currentPage]);

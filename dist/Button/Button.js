@@ -1,4 +1,7 @@
+import _objectSpread from "@babel/runtime/helpers/esm/objectSpread";
+import _objectWithoutProperties from "@babel/runtime/helpers/esm/objectWithoutProperties";
 import React, { useEffect, useRef } from 'react';
+import { Link } from 'react-router-dom';
 import { classNames } from '../index';
 import './Button.scss';
 
@@ -11,7 +14,10 @@ var Button = function Button(_ref) {
       icon = _ref.icon,
       onClick = _ref.onClick,
       autoFocus = _ref.autoFocus,
-      type = _ref.type;
+      type = _ref.type,
+      to = _ref.to,
+      props = _objectWithoutProperties(_ref, ["children", "className", "style", "outlined", "text", "icon", "onClick", "autoFocus", "type", "to"]);
+
   type = type || 'button';
   var ref = useRef(null);
   className = classNames(className, 'vui-Button', !outlined && !text && !icon && 'contained', outlined && 'outlined', text && 'text', icon && 'icon');
@@ -20,14 +26,22 @@ var Button = function Button(_ref) {
       ref.current.focus();
     }
   }, [autoFocus]);
-  return React.createElement("button", {
+  props = _objectSpread({}, props, {
     ref: ref,
     className: className,
     style: style,
     onClick: onClick,
-    "auto-focus": autoFocus ? 'true' : undefined,
+    'auto-focus': autoFocus ? 'true' : undefined,
     type: type
-  }, children);
+  });
+
+  if (to) {
+    return React.createElement(Link, Object.assign({
+      to: to
+    }, props), children);
+  } else {
+    return React.createElement("button", props, children);
+  }
 };
 
 export default Button;

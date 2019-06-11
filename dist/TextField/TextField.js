@@ -1,10 +1,12 @@
+import _objectSpread from "@babel/runtime/helpers/esm/objectSpread";
 import _slicedToArray from "@babel/runtime/helpers/esm/slicedToArray";
 import _objectWithoutProperties from "@babel/runtime/helpers/esm/objectWithoutProperties";
 //TODO: Fix the assistive text changing fast between error and helper when it has an required error
 import _isEqual from 'lodash.isequal';
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { classNames, useDeepCompareEffect } from '../index';
 import Autocomplete from './Autocomplete/Autocomplete';
+import Autosize from './Autosize/Autosize';
 import Number from './Number/Number';
 import './TextField.scss';
 import useValidation from './useValidation';
@@ -35,7 +37,9 @@ var TextField = function TextField(_ref) {
       readOnly = _ref.readOnly,
       disabled = _ref.disabled,
       hidden = _ref.hidden,
-      props = _objectWithoutProperties(_ref, ["className", "inputClassName", "id", "name", "label", "onChange", "type", "value", "helperText", "validation", "required", "format", "onFocus", "onBlur", "children", "autoComplete", "setRef", "suffix", "readOnly", "disabled", "hidden"]);
+      autosize = _ref.autosize,
+      inputElement = _ref.inputElement,
+      props = _objectWithoutProperties(_ref, ["className", "inputClassName", "id", "name", "label", "onChange", "type", "value", "helperText", "validation", "required", "format", "onFocus", "onBlur", "children", "autoComplete", "setRef", "suffix", "readOnly", "disabled", "hidden", "autosize", "inputElement"]);
 
   var ref = useRef(null);
   type = type || 'text';
@@ -81,14 +85,16 @@ var TextField = function TextField(_ref) {
       setIsPristine = _useState8[1];
 
   var _useValidation = useValidation(value, validation),
-      _useValidation2 = _slicedToArray(_useValidation, 2),
+      _useValidation2 = _slicedToArray(_useValidation, 3),
       hasError = _useValidation2[0],
-      errorText = _useValidation2[1];
+      errorMessage = _useValidation2[1],
+      setCustomErrorMessage = _useValidation2[2];
 
-  className = classNames(className, 'vui-TextField', isFocused && 'is-focused', isFilled && 'is-filled', isPristine && 'is-pristine', hasError && 'has-error', suffix && 'has-suffix', readOnly && 'is-readonly', disabled && 'is-disabled', hidden && 'is-hidden');
+  className = classNames(className, 'vui-TextField', 'vui-Field', isFocused && 'is-focused', isFilled && 'is-filled', isPristine && 'is-pristine', hasError && 'has-error', suffix && 'has-suffix', readOnly && 'is-readonly', disabled && 'is-disabled', hidden && 'is-hidden');
 
   var handleChange = function handleChange(_ref2) {
     var target = _ref2.target;
+    console.log(target);
     var newValue = format.parse(target.value);
     setValue(newValue);
     setIsPristine(false);
@@ -119,12 +125,31 @@ var TextField = function TextField(_ref) {
     }
   };
 
-  return React.createElement("div", {
-    className: className
-  }, React.createElement("div", {
-    className: "input-container"
-  }, React.createElement("input", Object.assign({
-    ref: setRef,
+  var handleCustomErrorMessage = function handleCustomErrorMessage(errorMessage) {
+    setIsPristine(false);
+    setCustomErrorMessage(errorMessage);
+  };
+
+  useEffect(function () {
+    var refContent = {
+      element: ref.current,
+      setCustomErrorMessage: handleCustomErrorMessage
+    };
+
+    if (setRef) {
+      if (typeof setRef !== 'function') {
+        setRef.current = refContent;
+      } else {
+        setRef({
+          current: refContent
+        });
+      }
+    } // eslint-disable-next-line react-hooks/exhaustive-deps
+
+  }, [setCustomErrorMessage]);
+
+  var inputElementProps = _objectSpread({
+    ref: ref,
     className: classNames('input', inputClassName),
     id: id,
     name: name,
@@ -142,20 +167,26 @@ var TextField = function TextField(_ref) {
     required: required,
     autoComplete: autoComplete === false ? 'off' : undefined,
     readOnly: readOnly,
-    disabled: disabled
-  }, props, {
+    disabled: disabled,
     onAnimationStart: handleAnimationStart
-  })), suffix && React.createElement("div", {
+  }, props);
+
+  return React.createElement("div", {
+    className: className
+  }, React.createElement("div", {
+    className: "input-container"
+  }, inputElement ? inputElement(inputElementProps) : React.createElement("input", inputElementProps), suffix && React.createElement("div", {
     className: "suffix"
   }, suffix), !!label && React.createElement("label", {
     htmlFor: id
   }, label), React.createElement("div", {
     className: "border"
   })), (hasError || helperText) && React.createElement("div", {
-    className: classNames('assistive-text', hasError && checkIfIsCounter(errorText) && 'counter')
-  }, !isPristine && hasError ? errorText : helperText), children);
+    className: classNames('assistive-text', hasError && checkIfIsCounter(errorMessage) && 'counter')
+  }, !isPristine && hasError ? errorMessage : helperText), children);
 };
 
 TextField.Number = Number;
 TextField.Autocomplete = Autocomplete;
+TextField.Autosize = Autosize;
 export default TextField;

@@ -3,6 +3,7 @@ import './Icon.scss';
 import account from './icons/account';
 import accountGroup from './icons/accountGroup';
 import checkCircleOutline from './icons/checkCircleOutline';
+import close from './icons/close';
 import fileChart from './icons/fileChart';
 import filterVariant from './icons/filterVariant';
 import formatListCheckbox from './icons/formatListCheckbox';
@@ -18,6 +19,7 @@ var icons = {
   account: account,
   accountGroup: accountGroup,
   checkCircleOutline: checkCircleOutline,
+  close: close,
   fileChart: fileChart,
   filterVariant: filterVariant,
   formatListCheckbox: formatListCheckbox,
