@@ -1,5 +1,3 @@
-//TODO: Fix: Page doesnt resize when the content size change.. Maybe can fix removing the height after the animation ends
-
 import React, { useContext, useEffect, useRef, useState } from 'react'
 import './Pages.scss'
 
@@ -8,14 +6,20 @@ export const Pages = ({ children, tabs }) => {
     const pagesRef = useRef(null)
     const [pagesHeight, setPagesHeight] = useState(0)
     const currentPageRef = useRef(context.currentPage)
+    const removeHeightTimer = useRef(null)
 
     const setPagesSize = () => {
         setTimeout(() => {
             setPagesHeight(pagesRef.current.querySelectorAll('.vui-Tabs-Page')[currentPageRef.current].getBoundingClientRect().height)
         })
+        clearTimeout(removeHeightTimer.current)
+        removeHeightTimer.current = setTimeout(() => {
+            setPagesHeight(undefined)
+        }, 280)
     }
 
     useEffect(() => {
+        setPagesHeight(pagesRef.current.querySelectorAll('.vui-Tabs-Page')[currentPageRef.current].getBoundingClientRect().height)
         currentPageRef.current = context.currentPage
         setPagesSize()
     }, [context.currentPage])

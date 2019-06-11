@@ -39,15 +39,15 @@
   }
 
   &:hover:before {
-    opacity: 0.04;
+    opacity: 0.08;
   }
 
   &:focus:before {
-    opacity: 0.12;
+    opacity: 0.16;
   }
 
   &:active:before {
-    opacity: 0.16;
+    opacity: 0.20;
   }
 
   &.contained {

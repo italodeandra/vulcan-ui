@@ -1,8 +1,9 @@
 import React, { useEffect, useRef } from 'react'
+import { Link } from 'react-router-dom'
 import { classNames } from '../index'
 import './Button.scss'
 
-const Button = ({ children, className, style, outlined, text, icon, onClick, autoFocus, type }) => {
+const Button = ({ children, className, style, outlined, text, icon, onClick, autoFocus, type, to, ...props }) => {
     type = type || 'button'
     const ref = useRef(null)
 
@@ -21,18 +22,29 @@ const Button = ({ children, className, style, outlined, text, icon, onClick, aut
         }
     }, [autoFocus])
 
-    return (
-        <button
-            ref={ref}
-            className={className}
-            style={style}
-            onClick={onClick}
-            auto-focus={autoFocus ? 'true' : undefined}
-            type={type}
-        >
-            {children}
-        </button>
-    )
+    props = {
+        ...props,
+        ref: ref,
+        className: className,
+        style: style,
+        onClick: onClick,
+        'auto-focus': autoFocus ? 'true' : undefined,
+        type: type
+    }
+
+    if (to) {
+        return (
+            <Link to={to} {...props}>
+                {children}
+            </Link>
+        )
+    } else {
+        return (
+            <button {...props}>
+                {children}
+            </button>
+        )
+    }
 }
 
 export default Button

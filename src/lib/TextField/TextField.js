@@ -122,6 +122,7 @@ const TextField = ({
                 setRef({ current: refContent })
             }
         }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [setCustomErrorMessage])
 
     const inputElementProps = {

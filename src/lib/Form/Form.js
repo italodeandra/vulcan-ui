@@ -10,7 +10,7 @@ const Form = ({ children, onSubmit, setRef }) => {
                 isInvalid: checkIfIsInvalid
             }
         }
-    }, [])
+    }, [setRef])
 
     const handleSubmit = (e) => {
         e.preventDefault()
