@@ -15,9 +15,10 @@ var Autocomplete = function Autocomplete(_ref) {
       defaultValue = _ref.value,
       onItemSelect = _ref.onItemSelect,
       readOnly = _ref.readOnly,
-      keepValue = _ref.keepValue,
-      props = _objectWithoutProperties(_ref, ["autocompleteConfig", "onChange", "value", "onItemSelect", "readOnly", "keepValue"]);
+      setRef = _ref.setRef,
+      props = _objectWithoutProperties(_ref, ["autocompleteConfig", "onChange", "value", "onItemSelect", "readOnly", "setRef"]);
 
+  autocompleteConfig = autocompleteConfig || {};
   autocompleteConfig.emptyLabel = autocompleteConfig.emptyLabel || 'No items found';
 
   autocompleteConfig.responseTranspile = autocompleteConfig.responseTranspile || function (r) {
@@ -70,9 +71,15 @@ var Autocomplete = function Autocomplete(_ref) {
       setIsScrollEnd = _useState12[1];
 
   var index = useRef(++autocompleteIndex);
+  useEffect(function () {
+    if (setRef) {
+      setRef.current = resultTargetRef.current;
+    } // eslint-disable-next-line react-hooks/exhaustive-deps
+
+  }, [setRef]);
   useDeepCompareEffect(function () {
     if (!_isEqual(value, defaultValue)) {
-      if (keepValue) {
+      if (autocompleteConfig.keepValue) {
         setValue(defaultValue);
         setSelected(defaultValue);
       } else {
@@ -141,11 +148,11 @@ var Autocomplete = function Autocomplete(_ref) {
         setShowResult(false);
         setPage(0);
         setResult(null);
-      }
 
-      if (!keepValue && !_isEqual(value, selected)) {
-        setValue(null);
-        onChange && onChange(null);
+        if (!autocompleteConfig.keepValue && !_isEqual(value, selected)) {
+          setValue(null);
+          onChange && onChange(null);
+        }
       }
 
       ++getResultIndex.current;
@@ -210,12 +217,15 @@ var Autocomplete = function Autocomplete(_ref) {
   var handleItemClick = function handleItemClick(item) {
     resultTargetRef.current.element.focus();
     var newSelected = autocompleteConfig.valueTranspile(item);
-    setValue(newSelected);
-    setSelected(newSelected);
-    onChange && onChange(newSelected);
-    setShowResult(false);
-    setResult(null);
     onItemSelect && onItemSelect(item);
+
+    if (!autocompleteConfig.keepResultOpen) {
+      onChange && onChange(newSelected);
+      setSelected(newSelected);
+      setValue(newSelected);
+      setShowResult(false);
+      setResult(null);
+    } else {}
   };
 
   var handleScroll = function handleScroll(newIsScrollEnd) {

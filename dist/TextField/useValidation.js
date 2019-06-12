@@ -13,11 +13,11 @@ function useValidation(value, validation) {
       setErrorMessage = _useState4[1];
 
   var setCustomErrorMessage = function setCustomErrorMessage(errorMessage) {
-    setHasError(true);
+    setHasError(!!errorMessage);
     setErrorMessage(errorMessage);
   };
 
-  useEffect(function () {
+  var validate = function validate() {
     setHasError(false);
     setErrorMessage(null);
 
@@ -78,8 +78,12 @@ function useValidation(value, validation) {
         }
       }
     }
+  };
+
+  useEffect(function () {
+    validate();
   }, [validation, value]);
-  return [hasError, errorText, setCustomErrorMessage];
+  return [hasError, errorText, setCustomErrorMessage, validate];
 }
 
 export default useValidation;

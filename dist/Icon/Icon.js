@@ -1,4 +1,5 @@
 import React from 'react';
+import { classNames } from '../index';
 import './Icon.scss';
 import account from './icons/account';
 import accountGroup from './icons/accountGroup';
@@ -34,9 +35,12 @@ var icons = {
 };
 
 var Icon = function Icon(_ref) {
-  var name = _ref.name;
+  var className = _ref.className,
+      name = _ref.name,
+      onClick = _ref.onClick;
   return React.createElement("div", {
-    className: "vui-Icon"
+    className: classNames(className, 'vui-Icon'),
+    onClick: onClick
   }, icons[name]());
 };
 

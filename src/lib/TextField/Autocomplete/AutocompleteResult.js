@@ -18,9 +18,9 @@ const AutocompleteResult = ({ children, target, setRef, onScroll }) => {
             const targetDOMRect = target.current.element.getBoundingClientRect()
             const refDOMRect = ref.current.getBoundingClientRect()
 
-            nextStyle.left = targetDOMRect.x
+            nextStyle.left = targetDOMRect.left
             nextStyle.width = targetDOMRect.width
-            nextStyle.top = targetDOMRect.y + targetDOMRect.height
+            nextStyle.top = targetDOMRect.top + targetDOMRect.height
 
             if (refDOMRect.bottom > window.innerHeight) {
                 nextStyle.bottom = 0

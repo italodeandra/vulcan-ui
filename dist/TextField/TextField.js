@@ -7,6 +7,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import { classNames, useDeepCompareEffect } from '../index';
 import Autocomplete from './Autocomplete/Autocomplete';
 import Autosize from './Autosize/Autosize';
+import Chips from './Chips/Chips';
 import Number from './Number/Number';
 import Select from './Select/Select';
 import './TextField.scss';
@@ -86,12 +87,13 @@ var TextField = function TextField(_ref) {
       setIsPristine = _useState8[1];
 
   var _useValidation = useValidation(value, validation),
-      _useValidation2 = _slicedToArray(_useValidation, 3),
+      _useValidation2 = _slicedToArray(_useValidation, 4),
       hasError = _useValidation2[0],
       errorMessage = _useValidation2[1],
-      setCustomErrorMessage = _useValidation2[2];
+      setCustomErrorMessage = _useValidation2[2],
+      validate = _useValidation2[3];
 
-  className = classNames(className, 'vui-TextField', 'vui-Field', isFocused && 'is-focused', isFilled && 'is-filled', isPristine && 'is-pristine', hasError && 'has-error', suffix && 'has-suffix', readOnly && 'is-readonly', disabled && 'is-disabled', hidden && 'is-hidden');
+  className = classNames(className, 'vui-TextField', 'vui-Field', isFocused && 'is-focused', isFilled && 'is-filled', isPristine && 'is-pristine', hasError && 'has-error', suffix && 'has-suffix', readOnly && 'is-readonly', disabled && 'is-disabled', hidden && 'is-hidden', required && 'is-required');
 
   var handleChange = function handleChange(e) {
     var target = e.target;
@@ -133,7 +135,10 @@ var TextField = function TextField(_ref) {
   useEffect(function () {
     var refContent = {
       element: ref.current,
-      setCustomErrorMessage: handleCustomErrorMessage
+      setCustomErrorMessage: handleCustomErrorMessage,
+      setIsPristine: setIsPristine,
+      setIsFilled: setIsFilled,
+      validate: validate
     };
 
     if (setRef) {
@@ -190,4 +195,5 @@ TextField.Number = Number;
 TextField.Autocomplete = Autocomplete;
 TextField.Autosize = Autosize;
 TextField.Select = Select;
+TextField.Chips = Chips;
 export default TextField;
