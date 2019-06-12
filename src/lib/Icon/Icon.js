@@ -1,4 +1,5 @@
 import React from 'react'
+import { classNames } from '../index'
 import './Icon.scss'
 import account from './icons/account'
 import accountGroup from './icons/accountGroup'
@@ -34,8 +35,8 @@ const icons = {
     speedometer
 }
 
-const Icon = ({ name }) => (
-    <div className='vui-Icon'>
+const Icon = ({ className, name, onClick }) => (
+    <div className={classNames(className, 'vui-Icon')} onClick={onClick}>
         {icons[name]()}
     </div>
 )

@@ -1,0 +1,62 @@
+.vui-TextField-Chips.vui-TextField-Chips.vui-TextField-Chips {
+  .chips {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    margin-top: -4px;
+
+    .chip {
+      display: inline-flex;
+      min-height: 32px;
+      padding: 0 12px;
+      background-color: #0000001f;
+      border-radius: 16px;
+      justify-content: center;
+      align-items: center;
+      font-size: 14px;
+      color: #000000de;
+      margin-right: 8px;
+      margin-top: 8px;
+      cursor: default;
+
+      .close {
+        background-color: #0000001f;
+        height: 18px;
+        width: 18px;
+        border-radius: 9px;
+        margin-left: 8px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        svg {
+          width: 14px;
+          height: 14px;
+        }
+      }
+    }
+  }
+
+  input {
+    width: 150px;
+    flex: 1 0 150px;
+    border: none;
+    background-color: #eeeeee;
+
+    box-sizing: border-box;
+    outline: none;
+    letter-spacing: .009375em;
+    line-height: 1.75rem;
+    color: rgba(#000000, 0.87);
+    -webkit-appearance: none;
+    font: 400 16px "Roboto", -apple-system, BlinkMacSystemFont, "Segoe UI", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue";
+    overflow: hidden;
+    box-shadow: none;
+    resize: none;
+    padding: 8px 0 0 0;
+
+    min-height: auto;
+  }
+}

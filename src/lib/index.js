@@ -9,6 +9,7 @@ import useScroll from './Hooks/useScroll'
 import Form from './Form/Form'
 import Icon from './Icon/Icon'
 import NavigationDrawer from './NavigationDrawer/NavigationDrawer'
+import PrettyJson from './PrettyJson/PrettyJson'
 import ProgressBar from './ProgressBar/ProgressBar'
 import Spinner from './Spinner/Spinner'
 import Tabs from './Tabs/Tabs'
@@ -27,6 +28,7 @@ export {
     Form,
     Icon,
     NavigationDrawer,
+    PrettyJson,
     ProgressBar,
     Spinner,
     Tabs,

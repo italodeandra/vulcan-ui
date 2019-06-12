@@ -5,11 +5,11 @@ function useValidation(value, validation) {
     const [errorText, setErrorMessage] = useState(null)
 
     const setCustomErrorMessage = (errorMessage) => {
-        setHasError(true)
+        setHasError(!!errorMessage)
         setErrorMessage(errorMessage)
     }
 
-    useEffect(() => {
+    const validate = () => {
         setHasError(false)
         setErrorMessage(null)
 
@@ -66,12 +66,17 @@ function useValidation(value, validation) {
                 }
             }
         }
+    }
+
+    useEffect(() => {
+        validate()
     }, [validation, value])
 
     return [
         hasError,
         errorText,
-        setCustomErrorMessage
+        setCustomErrorMessage,
+        validate
     ]
 }
 

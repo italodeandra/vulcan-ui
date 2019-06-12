@@ -5,6 +5,7 @@ import React, { useEffect, useRef, useState } from 'react'
 import { classNames, useDeepCompareEffect } from '../index'
 import Autocomplete from './Autocomplete/Autocomplete'
 import Autosize from './Autosize/Autosize'
+import Chips from './Chips/Chips'
 import Number from './Number/Number'
 import Select from './Select/Select'
 import './TextField.scss'
@@ -57,7 +58,7 @@ const TextField = ({
     const [isFocused, setIsFocused] = useState(false)
     const [isFilled, setIsFilled] = useState(!!defaultValue)
     const [isPristine, setIsPristine] = useState(!defaultValue)
-    const [hasError, errorMessage, setCustomErrorMessage] = useValidation(value, validation)
+    const [hasError, errorMessage, setCustomErrorMessage, validate] = useValidation(value, validation)
 
     className = classNames(
         className,
@@ -70,7 +71,8 @@ const TextField = ({
         suffix && 'has-suffix',
         readOnly && 'is-readonly',
         disabled && 'is-disabled',
-        hidden && 'is-hidden'
+        hidden && 'is-hidden',
+        required && 'is-required'
     )
 
     const handleChange = (e) => {
@@ -113,7 +115,10 @@ const TextField = ({
     useEffect(() => {
         const refContent = {
             element: ref.current,
-            setCustomErrorMessage: handleCustomErrorMessage
+            setCustomErrorMessage: handleCustomErrorMessage,
+            setIsPristine,
+            setIsFilled,
+            validate
         }
 
         if (setRef) {
@@ -188,5 +193,7 @@ TextField.Autocomplete = Autocomplete
 TextField.Autosize = Autosize
 
 TextField.Select = Select
+
+TextField.Chips = Chips
 
 export default TextField

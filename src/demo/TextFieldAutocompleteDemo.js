@@ -2,9 +2,9 @@ import React, { useEffect, useState } from 'react'
 import { TextField } from '../lib/index'
 import useTitle from './useTitle'
 
-const AutocompleteDemo = () => {
+const TextFieldAutocompleteDemo = () => {
     const [, setTitle] = useTitle()
-    useEffect(() => setTitle('Autocomplete'))
+    useEffect(() => setTitle('Text field Autocomplete'))
 
     const [test, setTest] = useState(null)
 
@@ -38,10 +38,10 @@ const AutocompleteDemo = () => {
                             // }
                         },
                         itemTranspile: (i) => `${i.name} - ${i.id}`,
-                        valueTranspile: (v) => v.name
+                        valueTranspile: (v) => v.name,
+                        // keepValue // value doesn't clear on blur
                     }}
                     onItemSelect={handleItemSelect}
-                    // keepValue // value doesn't clear on blur
                 />
                 <pre>state: {test}</pre>
             </>
@@ -75,4 +75,4 @@ const AutocompleteDemo = () => {
     )
 }
 
-export default AutocompleteDemo
+export default TextFieldAutocompleteDemo

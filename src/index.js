@@ -3,7 +3,6 @@ import { render } from 'react-dom'
 import { BrowserRouter as Router, Route } from 'react-router-dom'
 import './demo.scss'
 import AppBarDemo from './demo/AppBarDemo'
-import AutocompleteDemo from './demo/AutocompleteDemo'
 import ButtonDemo from './demo/ButtonDemo'
 import CardDemo from './demo/CardDemo'
 import DataTableDemo from './demo/DataTableDemo'
@@ -12,6 +11,8 @@ import NavigationDrawerDemo from './demo/NavigationDrawerDemo'
 import ProgressBarDemo from './demo/ProgressBarDemo'
 import SpinnerDemo from './demo/SpinnerDemo'
 import TabsDemo from './demo/TabsDemo'
+import TextFieldAutocompleteDemo from './demo/TextFieldAutocompleteDemo'
+import TextFieldChipsDemo from './demo/TextFieldChipsDemo'
 import TextFielDemo from './demo/TextFieldDemo'
 import useTitle from './demo/useTitle'
 import { AppBar, Button, Icon, NavigationDrawer, useMobile } from './lib'
@@ -69,11 +70,6 @@ const App = () => {
                                            onClick={() => isMobile && setIsNavigationDrawerOpen(false)}>
                         App bar
                     </NavigationDrawer.Item>
-                    <NavigationDrawer.Item to='/autocomplete'
-                                           title={!isNavigationDrawerOpen && 'Autocomplete'}
-                                           onClick={() => isMobile && setIsNavigationDrawerOpen(false)}>
-                        Autocomplete
-                    </NavigationDrawer.Item>
                     <NavigationDrawer.Item to='/button'
                                            title={!isNavigationDrawerOpen && 'Button'}
                                            onClick={() => isMobile && setIsNavigationDrawerOpen(false)}>
@@ -114,11 +110,20 @@ const App = () => {
                                            onClick={() => isMobile && setIsNavigationDrawerOpen(false)}>
                         Text field
                     </NavigationDrawer.Item>
+                    <NavigationDrawer.Item to='/text-field-autocomplete'
+                                           title={!isNavigationDrawerOpen && 'Text field Autocomplete'}
+                                           onClick={() => isMobile && setIsNavigationDrawerOpen(false)}>
+                        Text field Autocomplete
+                    </NavigationDrawer.Item>
+                    <NavigationDrawer.Item to='/text-field-chips'
+                                           title={!isNavigationDrawerOpen && 'Text field Chips'}
+                                           onClick={() => isMobile && setIsNavigationDrawerOpen(false)}>
+                        Text field Chips
+                    </NavigationDrawer.Item>
                 </NavigationDrawer>
                 <div className='app-container' ref={AppContainerRef}>
                     <Route path='/' exact component={HomeDemo} />
                     <Route path='/app-bar' component={AppBarDemo} />
-                    <Route path='/autocomplete' component={AutocompleteDemo} />
                     <Route path='/button' component={ButtonDemo} />
                     <Route path='/card' component={CardDemo} />
                     <Route path='/data-table' component={DataTableDemo} />
@@ -127,6 +132,8 @@ const App = () => {
                     <Route path='/spinner' component={SpinnerDemo} />
                     <Route path='/tabs' component={TabsDemo} />
                     <Route path='/text-field' component={TextFielDemo} />
+                    <Route path='/text-field-autocomplete' component={TextFieldAutocompleteDemo} />
+                    <Route path='/text-field-chips' component={TextFieldChipsDemo} />
                 </div>
             </Router>
         </div>

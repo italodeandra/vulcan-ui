@@ -7,7 +7,8 @@ import AutocompleteResult from './AutocompleteResult'
 
 let autocompleteIndex = 0
 
-const Autocomplete = ({ autocompleteConfig, onChange, value: defaultValue, onItemSelect, readOnly, keepValue, ...props }) => {
+const Autocomplete = ({ autocompleteConfig, onChange, value: defaultValue, onItemSelect, readOnly, setRef, ...props }) => {
+    autocompleteConfig = autocompleteConfig || {}
     autocompleteConfig.emptyLabel = autocompleteConfig.emptyLabel || 'No items found'
     autocompleteConfig.responseTranspile = autocompleteConfig.responseTranspile || ((r) => r)
     autocompleteConfig.valueTranspile = autocompleteConfig.valueTranspile || ((r) => r)
@@ -23,9 +24,16 @@ const Autocomplete = ({ autocompleteConfig, onChange, value: defaultValue, onIte
     const [isScrollEnd, setIsScrollEnd] = useState(false)
     const index = useRef(++autocompleteIndex)
 
+    useEffect(() => {
+        if (setRef) {
+            setRef.current = resultTargetRef.current
+        }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [setRef])
+
     useDeepCompareEffect(() => {
         if (!_isEqual(value, defaultValue)) {
-            if (keepValue) {
+            if (autocompleteConfig.keepValue) {
                 setValue(defaultValue)
                 setSelected(defaultValue)
             } else {
@@ -92,11 +100,11 @@ const Autocomplete = ({ autocompleteConfig, onChange, value: defaultValue, onIte
                 setShowResult(false)
                 setPage(0)
                 setResult(null)
-            }
 
-            if (!keepValue && !_isEqual(value, selected)) {
-                setValue(null)
-                onChange && onChange(null)
+                if (!autocompleteConfig.keepValue && !_isEqual(value, selected)) {
+                    setValue(null)
+                    onChange && onChange(null)
+                }
             }
 
             ++getResultIndex.current
@@ -153,12 +161,16 @@ const Autocomplete = ({ autocompleteConfig, onChange, value: defaultValue, onIte
     const handleItemClick = (item) => {
         resultTargetRef.current.element.focus()
         const newSelected = autocompleteConfig.valueTranspile(item)
-        setValue(newSelected)
-        setSelected(newSelected)
-        onChange && onChange(newSelected)
-        setShowResult(false)
-        setResult(null)
         onItemSelect && onItemSelect(item)
+        if (!autocompleteConfig.keepResultOpen) {
+            onChange && onChange(newSelected)
+            setSelected(newSelected)
+            setValue(newSelected)
+            setShowResult(false)
+            setResult(null)
+        } else {
+
+        }
     }
 
     const handleScroll = (newIsScrollEnd) => {
