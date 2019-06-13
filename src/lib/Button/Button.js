@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import { classNames } from '../index'
 import './Button.scss'
 
-const Button = ({ children, className, style, outlined, text, icon, onClick, autoFocus, type, to, ...props }) => {
+const Button = ({ children, className, style, outlined, text, icon, onClick, autoFocus, type, to, setRef, ...props }) => {
     type = type || 'button'
     const ref = useRef(null)
 
@@ -21,6 +21,12 @@ const Button = ({ children, className, style, outlined, text, icon, onClick, aut
             ref.current.focus()
         }
     }, [autoFocus])
+
+    useEffect(() => {
+        if (setRef) {
+            setRef.current = ref.current
+        }
+    }, [])
 
     props = {
         ...props,

@@ -1,0 +1,92 @@
+@import "../../styles";
+
+.vui-NavigationDrawer-item {
+  height: 48px;
+  display: flex;
+  align-items: center;
+  padding: 0 16px;
+  box-sizing: border-box;
+  position: relative;
+  font-size: 16px;
+  color: #000000de;
+  fill: rgba(#000000de, 0.6);
+  font-weight: 500;
+  text-decoration: none;
+  overflow: hidden;
+  white-space: nowrap;
+  outline: none;
+
+  .label {
+    white-space: nowrap;
+    width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .vui-Icon {
+    margin-right: 16px;
+  }
+
+  &:before {
+    content: '';
+    position: absolute;
+    top: 4px;
+    right: 8px;
+    bottom: 4px;
+    left: 8px;
+    opacity: 0;
+    background-color: #000000;
+    border-radius: 4px;
+
+    transition-property: border-radius;
+    transition-duration: 210ms;
+    transition-timing-function: $vui-Motion-Speed-Accelerate-Easing;
+  }
+
+  &:hover:before,
+  &:focus:before {
+    opacity: 0.08;
+  }
+
+  &:active:before {
+    opacity: 0.12;
+  }
+
+  &.active {
+    color: #6200eeff;
+    fill: #6200eeff;
+
+    &:before {
+      opacity: 0.2;
+      background-color: #6200eeff;
+    }
+
+    &:focus:before {
+      opacity: 0.25;
+    }
+  }
+
+  .badge {
+    margin-left: auto;
+    background-color: #6200eeff;
+    width: 20px;
+    height: 20px;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+    font-size: 12px;
+    min-width: 20px;
+  }
+}
+
+.vui-NavigationDrawer.collapsable:not(.open) .vui-NavigationDrawer-item .badge {
+  position: absolute;
+  right: 2px;
+  top: 2px;
+}
+
+.vui-NavigationDrawer.open .vui-NavigationDrawer-item:before {
+  transition-timing-function: $vui-Motion-Speed-Decelerate-Easing;
+}

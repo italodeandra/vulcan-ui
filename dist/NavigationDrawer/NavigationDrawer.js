@@ -2,9 +2,13 @@ import _slicedToArray from "@babel/runtime/helpers/esm/slicedToArray";
 //TODO: Remove the manual animation from the scrim and use the *future* Animation component
 //TODO: Fix mobile version on collapsable
 import React, { useEffect, useRef, useState } from 'react';
-import { NavLink } from 'react-router-dom';
 import { classNames, useMobile } from '../index';
+import Divider from './Divider/Divider';
+import Header from './Header/Header';
+import Item from './Item/Item';
+import ItemGroup from './ItemGroup/ItemGroup';
 import './NavigationDrawer.scss';
+import Subtitle from './Subtitle/Subtitle';
 
 var NavigationDrawer = function NavigationDrawer(_ref) {
   var className = _ref.className,
@@ -25,6 +29,11 @@ var NavigationDrawer = function NavigationDrawer(_ref) {
       _useState2 = _slicedToArray(_useState, 2),
       isAnimationReady = _useState2[0],
       setIsAnimationReady = _useState2[1];
+
+  var _useState3 = useState(undefined),
+      _useState4 = _slicedToArray(_useState3, 2),
+      top = _useState4[0],
+      setTop = _useState4[1];
 
   className = classNames(className, 'vui-NavigationDrawer', open && 'open', collapsable && 'collapsable', isMobile && 'mobile');
   useEffect(function () {
@@ -83,56 +92,25 @@ var NavigationDrawer = function NavigationDrawer(_ref) {
       _autofocusEl && _autofocusEl.focus();
     }
   }, [containerRef, open, collapsable, isMobile, appBarRef]);
+  useEffect(function () {
+    setTop(appBarRef.current.getBoundingClientRect().height);
+  }, []);
   return React.createElement(React.Fragment, null, isMobile && React.createElement("div", {
     ref: scrimRef,
     className: classNames('vui-NavigationDrawer-scrim', open && 'open', isAnimationReady && 'animation-ready'),
     onClick: onScrimClick
   }), React.createElement("div", {
     className: className,
-    ref: navigationDrawerRef
+    ref: navigationDrawerRef,
+    style: {
+      top: top
+    }
   }, children));
 };
 
 export default NavigationDrawer;
-
-NavigationDrawer.Item = function (_ref2) {
-  var children = _ref2.children,
-      to = _ref2.to,
-      exact = _ref2.exact,
-      title = _ref2.title,
-      onClick = _ref2.onClick;
-  return React.createElement(NavLink, {
-    className: "vui-NavigationDrawer-item",
-    activeClassName: "active",
-    exact: exact,
-    to: to,
-    title: title ? title : undefined,
-    onClick: onClick
-  }, children);
-};
-
-NavigationDrawer.Header = function (_ref3) {
-  var children = _ref3.children;
-
-  // eslint-disable-next-line react-hooks/rules-of-hooks
-  var _useMobile3 = useMobile(),
-      _useMobile4 = _slicedToArray(_useMobile3, 1),
-      isMobile = _useMobile4[0];
-
-  return isMobile ? React.createElement("div", {
-    className: "vui-NavigationDrawer-header"
-  }, children) : null;
-};
-
-NavigationDrawer.Divider = function () {
-  return React.createElement("div", {
-    className: "vui-NavigationDrawer-divider"
-  });
-};
-
-NavigationDrawer.Subtitle = function (_ref4) {
-  var children = _ref4.children;
-  return React.createElement("div", {
-    className: "vui-NavigationDrawer-subtitle"
-  }, children);
-};
+NavigationDrawer.Item = Item;
+NavigationDrawer.Header = Header;
+NavigationDrawer.Divider = Divider;
+NavigationDrawer.Subtitle = Subtitle;
+NavigationDrawer.ItemGroup = ItemGroup;

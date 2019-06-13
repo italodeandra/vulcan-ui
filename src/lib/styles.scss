@@ -61,4 +61,19 @@
     url('/assets/fonts/roboto-v19-latin-700.ttf') format('truetype'), /* Safari, Android, iOS */
     url('/assets/fonts/roboto-v19-latin-700.svg#Roboto') format('svg'); /* Legacy iOS */
   }
+
+  /* montserrat-700 - latin */
+  //noinspection ALL
+  @font-face {
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 700;
+    src: url('/assets/fonts/montserrat-v13-latin-700.eot'); /* IE9 Compat Modes */
+    src: local('Montserrat Bold'), local('Montserrat-Bold'),
+    url('/assets/fonts/montserrat-v13-latin-700.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+    url('/assets/fonts/montserrat-v13-latin-700.woff2') format('woff2'), /* Super Modern Browsers */
+    url('/assets/fonts/montserrat-v13-latin-700.woff') format('woff'), /* Modern Browsers */
+    url('/assets/fonts/montserrat-v13-latin-700.ttf') format('truetype'), /* Safari, Android, iOS */
+    url('/assets/fonts/montserrat-v13-latin-700.svg#Montserrat') format('svg'); /* Legacy iOS */
+  }
 }

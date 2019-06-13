@@ -9,6 +9,10 @@ body {
 .demo-App {
   color: #000000de;
 
+  .app-bar {
+    padding: 0 8px;
+  }
+
   .app-bar-title {
     margin-left: 8px;
     font-weight: 500;

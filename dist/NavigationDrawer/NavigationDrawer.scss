@@ -5,79 +5,17 @@
   left: 0;
   width: 256px;
   transform: translateX(-110%);
-  height: 100%;
   top: 56px;
-  z-index: 1;
+  bottom: 0;
+  z-index: 3;
+  box-sizing: border-box;
+  overflow-y: auto;
 
-  padding: 8px 0;
+  padding: 4px 0;
 
   transition-property: width, transform;
   transition-duration: 210ms;
   transition-timing-function: $vui-Motion-Speed-Accelerate-Easing;
-
-  .vui-NavigationDrawer-header {
-    margin: -8px 0 8px 0;
-  }
-
-  .vui-NavigationDrawer-item {
-    height: 48px;
-    display: flex;
-    align-items: center;
-    padding: 0 16px;
-    box-sizing: border-box;
-    position: relative;
-    font-size: 16px;
-    color: #000000de;
-    fill: rgba(#000000de, 0.6);
-    font-weight: 500;
-    text-decoration: none;
-    overflow: hidden;
-    white-space: nowrap;
-    outline: none;
-
-    .vui-Icon {
-      margin-right: 16px;
-    }
-
-    &:before {
-      content: '';
-      position: absolute;
-      top: 4px;
-      right: 8px;
-      bottom: 4px;
-      left: 8px;
-      opacity: 0;
-      background-color: #000000;
-      border-radius: 4px;
-
-      transition-property: border-radius;
-      transition-duration: 210ms;
-      transition-timing-function: $vui-Motion-Speed-Standard-Easing;
-    }
-
-    &:hover:before,
-    &:focus:before {
-      opacity: 0.08;
-    }
-
-    &:active:before {
-      opacity: 0.12;
-    }
-
-    &.active {
-      color: #6200eeff;
-      fill: #6200eeff;
-
-      &:before {
-        opacity: 0.2;
-        background-color: #6200eeff;
-      }
-
-      &:focus:before {
-        opacity: 0.25;
-      }
-    }
-  }
 
   &.open {
     transform: translateX(0);
@@ -109,24 +47,6 @@
     width: auto;
     right: 56px;
   }
-
-  .vui-NavigationDrawer-divider {
-    height: 1px;
-    background-color: rgba(#0000001e, 0.12);
-    margin: 4px 0;
-  }
-
-  .vui-NavigationDrawer-subtitle {
-    font-size: 13px;
-    color: #0000008a;
-    font-weight: 500;
-    padding: 13px 16px 8px 16px;
-    display: none;
-  }
-
-  &.open .vui-NavigationDrawer-subtitle {
-    display: block;
-  }
 }
 
 .vui-NavigationDrawer-margin-left {
@@ -155,7 +75,7 @@
   animation-name: scrim-hide;
   animation-fill-mode: forwards;
   animation-timing-function: $vui-Motion-Speed-Accelerate-Easing;
-  z-index: 1;
+  z-index: 3;
 
   &.animation-ready {
     animation-duration: 210ms;

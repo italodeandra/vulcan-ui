@@ -2,11 +2,12 @@ import AppBar from './AppBar/AppBar'
 import Button from './Button/Button'
 import Card from './Card/Card'
 import DataTable from './DataTable/DataTable'
+import Form from './Form/Form'
 import useDeepCompareEffect from './Hooks/useDeepCompareEffect'
+import useLocalStorage from './Hooks/useLocalStorage'
 import useMobile from './Hooks/useMobile'
 import usePortal from './Hooks/usePortal'
 import useScroll from './Hooks/useScroll'
-import Form from './Form/Form'
 import Icon from './Icon/Icon'
 import NavigationDrawer from './NavigationDrawer/NavigationDrawer'
 import PrettyJson from './PrettyJson/PrettyJson'
@@ -35,6 +36,7 @@ export {
     TextField,
 
     useDeepCompareEffect,
+    useLocalStorage,
     useMobile,
     usePortal,
     useScroll,

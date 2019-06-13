@@ -70,6 +70,7 @@ function useValidation(value, validation) {
 
     useEffect(() => {
         validate()
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [validation, value])
 
     return [

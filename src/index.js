@@ -15,19 +15,20 @@ import TextFieldAutocompleteDemo from './demo/TextFieldAutocompleteDemo'
 import TextFieldChipsDemo from './demo/TextFieldChipsDemo'
 import TextFielDemo from './demo/TextFieldDemo'
 import useTitle from './demo/useTitle'
-import { AppBar, Button, Icon, NavigationDrawer, useMobile } from './lib'
+import { AppBar, Button, Icon, NavigationDrawer, useLocalStorage, useMobile } from './lib'
 
 const App = () => {
     const [title] = useTitle()
     const AppContainerRef = useRef(null)
     const AppBarRef = useRef(null)
     const [isMobile] = useMobile()
-    const [isNavigationDrawerOpen, setIsNavigationDrawerOpen] = useState(!isMobile)
+    const [isNavigationDrawerOpen, setIsNavigationDrawerOpen] = useLocalStorage('NavigationDrawerOpen', !isMobile)
+    const [navigationDrawerGroupCollapse, setNavigationDrawerGroupCollapse] = useState(false)
 
     return (
         <div className='demo-App'>
             <Router>
-                <AppBar sticky setRef={AppBarRef}>
+                <AppBar className='app-bar' sticky setRef={AppBarRef}>
                     <Button icon onClick={() => setIsNavigationDrawerOpen(t => !t)} autoFocus>
                         <Icon name='menu' />
                     </Button>
@@ -41,6 +42,7 @@ const App = () => {
                     containerRef={AppContainerRef}
                     onScrimClick={() => setIsNavigationDrawerOpen(false)}
                     appBarRef={AppBarRef}
+                    collapsable
                 >
                     <NavigationDrawer.Header>
                         <AppBar className='app-bar'>
@@ -56,70 +58,79 @@ const App = () => {
                             </span>
                         </AppBar>
                     </NavigationDrawer.Header>
-                    <NavigationDrawer.Item to='/'
-                                           exact
-                                           title={!isNavigationDrawerOpen && 'Home'}
-                                           onClick={() => isMobile && setIsNavigationDrawerOpen(false)}>
-                        <Icon name='home' />
+                    <NavigationDrawer.Item
+                        to='/'
+                        exact
+                        title={!isNavigationDrawerOpen && 'Home'}
+                        onClick={() => isMobile && setIsNavigationDrawerOpen(false)}
+                        badge={5}
+                        icon={<Icon name='home' />}
+                    >
                         Home
                     </NavigationDrawer.Item>
                     <NavigationDrawer.Divider />
-                    <NavigationDrawer.Subtitle>Demos</NavigationDrawer.Subtitle>
-                    <NavigationDrawer.Item to='/app-bar'
-                                           title={!isNavigationDrawerOpen && 'App bar'}
-                                           onClick={() => isMobile && setIsNavigationDrawerOpen(false)}>
-                        App bar
-                    </NavigationDrawer.Item>
-                    <NavigationDrawer.Item to='/button'
-                                           title={!isNavigationDrawerOpen && 'Button'}
-                                           onClick={() => isMobile && setIsNavigationDrawerOpen(false)}>
-                        Button
-                    </NavigationDrawer.Item>
-                    <NavigationDrawer.Item to='/card'
-                                           title={!isNavigationDrawerOpen && 'Card'}
-                                           onClick={() => isMobile && setIsNavigationDrawerOpen(false)}>
-                        Card
-                    </NavigationDrawer.Item>
-                    <NavigationDrawer.Item to='/data-table'
-                                           title={!isNavigationDrawerOpen && 'Data table'}
-                                           onClick={() => isMobile && setIsNavigationDrawerOpen(false)}>
-                        Data table
-                    </NavigationDrawer.Item>
-                    <NavigationDrawer.Item to='/navigation-drawer'
-                                           title={!isNavigationDrawerOpen && 'Navigation drawer'}
-                                           onClick={() => isMobile && setIsNavigationDrawerOpen(false)}>
-                        Navigation drawer
-                    </NavigationDrawer.Item>
-                    <NavigationDrawer.Item to='/progress-bar'
-                                           title={!isNavigationDrawerOpen && 'Progress bar'}
-                                           onClick={() => isMobile && setIsNavigationDrawerOpen(false)}>
-                        Progress bar
-                    </NavigationDrawer.Item>
-                    <NavigationDrawer.Item to='/spinner'
-                                           title={!isNavigationDrawerOpen && 'Spinner'}
-                                           onClick={() => isMobile && setIsNavigationDrawerOpen(false)}>
-                        Spinner
-                    </NavigationDrawer.Item>
-                    <NavigationDrawer.Item to='/tabs'
-                                           title={!isNavigationDrawerOpen && 'Tabs'}
-                                           onClick={() => isMobile && setIsNavigationDrawerOpen(false)}>
-                        Tabs
-                    </NavigationDrawer.Item>
-                    <NavigationDrawer.Item to='/text-field'
-                                           title={!isNavigationDrawerOpen && 'Text field'}
-                                           onClick={() => isMobile && setIsNavigationDrawerOpen(false)}>
-                        Text field
-                    </NavigationDrawer.Item>
-                    <NavigationDrawer.Item to='/text-field-autocomplete'
-                                           title={!isNavigationDrawerOpen && 'Text field Autocomplete'}
-                                           onClick={() => isMobile && setIsNavigationDrawerOpen(false)}>
-                        Text field Autocomplete
-                    </NavigationDrawer.Item>
-                    <NavigationDrawer.Item to='/text-field-chips'
-                                           title={!isNavigationDrawerOpen && 'Text field Chips'}
-                                           onClick={() => isMobile && setIsNavigationDrawerOpen(false)}>
-                        Text field Chips
-                    </NavigationDrawer.Item>
+                    <NavigationDrawer.Subtitle
+                        onCollapse={collapse => setNavigationDrawerGroupCollapse(collapse)}
+                    >
+                        Demos
+                    </NavigationDrawer.Subtitle>
+                    <NavigationDrawer.ItemGroup collapse={navigationDrawerGroupCollapse}>
+                        <NavigationDrawer.Item to='/app-bar'
+                                               title={!isNavigationDrawerOpen && 'App bar'}
+                                               onClick={() => isMobile && setIsNavigationDrawerOpen(false)}>
+                            App bar
+                        </NavigationDrawer.Item>
+                        <NavigationDrawer.Item to='/button'
+                                               title={!isNavigationDrawerOpen && 'Button'}
+                                               onClick={() => isMobile && setIsNavigationDrawerOpen(false)}>
+                            Button
+                        </NavigationDrawer.Item>
+                        <NavigationDrawer.Item to='/card'
+                                               title={!isNavigationDrawerOpen && 'Card'}
+                                               onClick={() => isMobile && setIsNavigationDrawerOpen(false)}>
+                            Card
+                        </NavigationDrawer.Item>
+                        <NavigationDrawer.Item to='/data-table'
+                                               title={!isNavigationDrawerOpen && 'Data table'}
+                                               onClick={() => isMobile && setIsNavigationDrawerOpen(false)}>
+                            Data table
+                        </NavigationDrawer.Item>
+                        <NavigationDrawer.Item to='/navigation-drawer'
+                                               title={!isNavigationDrawerOpen && 'Navigation drawer'}
+                                               onClick={() => isMobile && setIsNavigationDrawerOpen(false)}>
+                            Navigation drawer
+                        </NavigationDrawer.Item>
+                        <NavigationDrawer.Item to='/progress-bar'
+                                               title={!isNavigationDrawerOpen && 'Progress bar'}
+                                               onClick={() => isMobile && setIsNavigationDrawerOpen(false)}>
+                            Progress bar
+                        </NavigationDrawer.Item>
+                        <NavigationDrawer.Item to='/spinner'
+                                               title={!isNavigationDrawerOpen && 'Spinner'}
+                                               onClick={() => isMobile && setIsNavigationDrawerOpen(false)}>
+                            Spinner
+                        </NavigationDrawer.Item>
+                        <NavigationDrawer.Item to='/tabs'
+                                               title={!isNavigationDrawerOpen && 'Tabs'}
+                                               onClick={() => isMobile && setIsNavigationDrawerOpen(false)}>
+                            Tabs
+                        </NavigationDrawer.Item>
+                        <NavigationDrawer.Item to='/text-field'
+                                               title={!isNavigationDrawerOpen && 'Text field'}
+                                               onClick={() => isMobile && setIsNavigationDrawerOpen(false)}>
+                            Text field
+                        </NavigationDrawer.Item>
+                        <NavigationDrawer.Item to='/text-field-autocomplete'
+                                               title={!isNavigationDrawerOpen && 'Text field Autocomplete'}
+                                               onClick={() => isMobile && setIsNavigationDrawerOpen(false)}>
+                            Text field Autocomplete
+                        </NavigationDrawer.Item>
+                        <NavigationDrawer.Item to='/text-field-chips'
+                                               title={!isNavigationDrawerOpen && 'Text field Chips'}
+                                               onClick={() => isMobile && setIsNavigationDrawerOpen(false)}>
+                            Text field Chips
+                        </NavigationDrawer.Item>
+                    </NavigationDrawer.ItemGroup>
                 </NavigationDrawer>
                 <div className='app-container' ref={AppContainerRef}>
                     <Route path='/' exact component={HomeDemo} />

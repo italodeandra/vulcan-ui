@@ -16,7 +16,8 @@ var Button = function Button(_ref) {
       autoFocus = _ref.autoFocus,
       type = _ref.type,
       to = _ref.to,
-      props = _objectWithoutProperties(_ref, ["children", "className", "style", "outlined", "text", "icon", "onClick", "autoFocus", "type", "to"]);
+      setRef = _ref.setRef,
+      props = _objectWithoutProperties(_ref, ["children", "className", "style", "outlined", "text", "icon", "onClick", "autoFocus", "type", "to", "setRef"]);
 
   type = type || 'button';
   var ref = useRef(null);
@@ -26,6 +27,11 @@ var Button = function Button(_ref) {
       ref.current.focus();
     }
   }, [autoFocus]);
+  useEffect(function () {
+    if (setRef) {
+      setRef.current = ref.current;
+    }
+  }, []);
   props = _objectSpread({}, props, {
     ref: ref,
     className: className,

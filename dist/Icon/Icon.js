@@ -4,6 +4,7 @@ import './Icon.scss';
 import account from './icons/account';
 import accountGroup from './icons/accountGroup';
 import checkCircleOutline from './icons/checkCircleOutline';
+import chevronUp from './icons/chevronUp';
 import close from './icons/close';
 import fileChart from './icons/fileChart';
 import filterVariant from './icons/filterVariant';
@@ -20,6 +21,7 @@ var icons = {
   account: account,
   accountGroup: accountGroup,
   checkCircleOutline: checkCircleOutline,
+  chevronUp: chevronUp,
   close: close,
   fileChart: fileChart,
   filterVariant: filterVariant,

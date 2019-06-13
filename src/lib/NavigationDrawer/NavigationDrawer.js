@@ -2,15 +2,20 @@
 //TODO: Fix mobile version on collapsable
 
 import React, { useEffect, useRef, useState } from 'react'
-import { NavLink } from 'react-router-dom'
 import { classNames, useMobile } from '../index'
+import Divider from './Divider/Divider'
+import Header from './Header/Header'
+import Item from './Item/Item'
+import ItemGroup from './ItemGroup/ItemGroup'
 import './NavigationDrawer.scss'
+import Subtitle from './Subtitle/Subtitle'
 
 const NavigationDrawer = ({ className, children, open, containerRef, collapsable, onScrimClick, appBarRef }) => {
     const scrimRef = useRef(null)
     const navigationDrawerRef = useRef(null)
     const [isMobile] = useMobile()
     const [isAnimationReady, setIsAnimationReady] = useState(false)
+    const [top, setTop] = useState(undefined)
 
     className = classNames(
         className,
@@ -78,21 +83,30 @@ const NavigationDrawer = ({ className, children, open, containerRef, collapsable
         }
     }, [containerRef, open, collapsable, isMobile, appBarRef])
 
+    useEffect(() => {
+        setTop(appBarRef.current.getBoundingClientRect().height)
+    }, [])
+
     return (
         <>
             {isMobile &&
-            <div ref={scrimRef}
-                 className={
-                     classNames(
-                         'vui-NavigationDrawer-scrim',
-                         open && 'open',
-                         isAnimationReady && 'animation-ready'
-                     )
-                 }
-                 onClick={onScrimClick} />
+            <div
+                ref={scrimRef}
+                className={
+                    classNames(
+                        'vui-NavigationDrawer-scrim',
+                        open && 'open',
+                        isAnimationReady && 'animation-ready'
+                    )
+                }
+                onClick={onScrimClick}
+            />
             }
-            <div className={className}
-                 ref={navigationDrawerRef}>
+            <div
+                className={className}
+                ref={navigationDrawerRef}
+                style={{ top }}
+            >
                 {children}
             </div>
         </>
@@ -101,33 +115,12 @@ const NavigationDrawer = ({ className, children, open, containerRef, collapsable
 
 export default NavigationDrawer
 
-NavigationDrawer.Item = ({ children, to, exact, title, onClick }) => (
-    <NavLink className='vui-NavigationDrawer-item'
-             activeClassName='active'
-             exact={exact}
-             to={to}
-             title={title ? title : undefined}
-             onClick={onClick}>
-        {children}
-    </NavLink>
-)
+NavigationDrawer.Item = Item
 
+NavigationDrawer.Header = Header
 
-NavigationDrawer.Header = ({ children }) => {
-    // eslint-disable-next-line react-hooks/rules-of-hooks
-    const [isMobile] = useMobile()
+NavigationDrawer.Divider = Divider
 
-    return isMobile ? (
-        <div className='vui-NavigationDrawer-header'>
-            {children}
-        </div>
-    ) : null
-}
+NavigationDrawer.Subtitle = Subtitle
 
-NavigationDrawer.Divider = () => (
-    <div className='vui-NavigationDrawer-divider' />
-)
-
-NavigationDrawer.Subtitle = ({ children }) => (
-    <div className='vui-NavigationDrawer-subtitle'>{children}</div>
-)
+NavigationDrawer.ItemGroup = ItemGroup

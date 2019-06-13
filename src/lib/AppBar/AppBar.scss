@@ -4,7 +4,7 @@
 $height: 56px;
 
 .vui-AppBar {
-  height: $height;
+  min-height: $height;
   background-color: #6200eeff;
   color: #ffffff;
   fill: #ffffff;
@@ -14,13 +14,13 @@ $height: 56px;
   z-index: 2;
   box-sizing: border-box;
 
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+
   :before {
     background-color: #ffffff !important;
   }
-
-  display: flex;
-  align-items: center;
-  padding: 0 8px;
 
   &.sticky {
     position: fixed;
@@ -31,6 +31,15 @@ $height: 56px;
 
   &.scrolled {
     box-shadow: $vui-Elevation-z4;
+  }
+
+  .vui-AppBar-row {
+    height: $height;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    flex: 0 0 100%;
+    box-sizing: border-box;
   }
 }
 

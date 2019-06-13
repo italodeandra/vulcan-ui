@@ -81,7 +81,7 @@ function useValidation(value, validation) {
   };
 
   useEffect(function () {
-    validate();
+    validate(); // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [validation, value]);
   return [hasError, errorText, setCustomErrorMessage, validate];
 }
