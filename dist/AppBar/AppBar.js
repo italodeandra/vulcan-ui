@@ -1,3 +1,4 @@
+import _objectSpread from "@babel/runtime/helpers/esm/objectSpread";
 import _slicedToArray from "@babel/runtime/helpers/esm/slicedToArray";
 import React, { useEffect, useRef, useState } from 'react';
 import { classNames, useScroll } from '../index';
@@ -7,7 +8,8 @@ var AppBar = function AppBar(_ref) {
   var className = _ref.className,
       children = _ref.children,
       sticky = _ref.sticky,
-      setRef = _ref.setRef;
+      setRef = _ref.setRef,
+      style = _ref.style;
   var ref = useRef(null);
   var windowRef = useRef(window);
 
@@ -32,9 +34,9 @@ var AppBar = function AppBar(_ref) {
   return React.createElement(React.Fragment, null, React.createElement("div", {
     className: className,
     ref: ref,
-    style: {
+    style: _objectSpread({}, style, {
       height: height
-    }
+    })
   }, children), sticky && React.createElement("div", {
     className: "vui-AppBar-placeholder",
     style: {
