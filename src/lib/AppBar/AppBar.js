@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from 'react'
 import { classNames, useScroll } from '../index'
 import './AppBar.scss'
 
-const AppBar = ({ className, children, sticky, setRef }) => {
+const AppBar = ({ className, children, sticky, setRef, style }) => {
     const ref = useRef(null)
     const windowRef = useRef(window)
     const [isWindowScrolled] = useScroll(windowRef)
@@ -26,7 +26,7 @@ const AppBar = ({ className, children, sticky, setRef }) => {
     }, [])
 
     return (<>
-        <div className={className} ref={ref} style={{ height }}>
+        <div className={className} ref={ref} style={{ ...style, height }}>
             {children}
         </div>
         {sticky &&

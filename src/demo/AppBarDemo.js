@@ -25,13 +25,13 @@ const AppBarDemo = () => {
             <>
                 <h2>Not sticky</h2>
                 <div>
-                    <AppBar>
+                    <AppBar style={{padding: '0 8px'}}>
                         <Button icon onClick={() => alert('Button clicked')}>
                             <Icon name='menu' />
                         </Button>
                     </AppBar>
                 </div>
-                <pre>{`<AppBar>
+                <pre>{`<AppBar style={{padding: '0 8px'}}>
     <Button icon onClick={() => alert('Button clicked')}>
         <Icon name='menu' />
     </Button>
