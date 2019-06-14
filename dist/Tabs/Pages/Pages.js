@@ -1,6 +1,6 @@
 import _objectSpread from "@babel/runtime/helpers/esm/objectSpread";
 import _slicedToArray from "@babel/runtime/helpers/esm/slicedToArray";
-import React, { useContext, useEffect, useRef, useState } from 'react';
+import React, { useContext, useEffect, useRef, useState, useLayoutEffect } from 'react';
 import './Pages.scss';
 export var Pages = function Pages(_ref) {
   var children = _ref.children,
@@ -18,7 +18,8 @@ export var Pages = function Pages(_ref) {
 
   var setPagesSize = function setPagesSize() {
     setTimeout(function () {
-      setPagesHeight(pagesRef.current.querySelectorAll('.vui-Tabs-Page')[currentPageRef.current].getBoundingClientRect().height);
+      var page = pagesRef.current.querySelectorAll('.vui-Tabs-Page')[currentPageRef.current];
+      setPagesHeight(page.getBoundingClientRect().height);
     });
     clearTimeout(removeHeightTimer.current);
     removeHeightTimer.current = setTimeout(function () {
@@ -27,7 +28,8 @@ export var Pages = function Pages(_ref) {
   };
 
   useEffect(function () {
-    setPagesHeight(pagesRef.current.querySelectorAll('.vui-Tabs-Page')[currentPageRef.current].getBoundingClientRect().height);
+    var page = pagesRef.current.querySelectorAll('.vui-Tabs-Page')[currentPageRef.current];
+    setPagesHeight(page.getBoundingClientRect().height);
     currentPageRef.current = context.currentPage;
     setPagesSize();
   }, [context.currentPage]);
@@ -61,10 +63,11 @@ export var Page = function Page(_ref2) {
   var children = _ref2.children,
       tabs = _ref2.tabs,
       key = _ref2.key;
+  var ref = useRef(null);
   var context = useContext(tabs);
   var currentPageRef = useRef(context.currentPage);
 
-  var _useState3 = useState(true),
+  var _useState3 = useState(false),
       _useState4 = _slicedToArray(_useState3, 2),
       show = _useState4[0],
       setShow = _useState4[1];
@@ -78,7 +81,12 @@ export var Page = function Page(_ref2) {
       }
     }, 280);
   }, [context.currentPage, key]);
+  useLayoutEffect(function () {
+    ref.current.parentNode.parentNode.scrollTop = 0;
+    ref.current.parentNode.parentNode.scrollLeft = 0;
+  }, [show]);
   return React.createElement("div", {
-    className: "vui-Tabs-Page"
+    className: "vui-Tabs-Page",
+    ref: ref
   }, show ? children : null);
 };

@@ -21,6 +21,10 @@ body {
   .app-container {
     padding: 16px;
     overflow-x: auto;
+
+    &:not(.vui-NavigationDrawer-margin-left) {
+      display: none;
+    }
   }
 
   pre {

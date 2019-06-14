@@ -4,7 +4,7 @@ import './Subtitle.scss'
 
 let vuiNavigationDrawerItemGroupCollapseIndex = 0
 const Subtitle = ({ children, collapseId, onCollapse }) => {
-    const [collapse, setCollapse] = useLocalStorage('vuiNavigationDrawerItemGroupCollapse' + (useMemo(() => collapseId ? collapseId : ++vuiNavigationDrawerItemGroupCollapseIndex, [])))
+    const [collapse, setCollapse] = useLocalStorage('vuiNavigationDrawerItemGroupCollapse' + (useMemo(() => collapseId ? collapseId : ++vuiNavigationDrawerItemGroupCollapseIndex, [collapseId])))
 
     useEffect(() => {
         onCollapse && onCollapse(collapse)

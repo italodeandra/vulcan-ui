@@ -11,7 +11,7 @@ var Subtitle = function Subtitle(_ref) {
 
   var _useLocalStorage = useLocalStorage('vuiNavigationDrawerItemGroupCollapse' + useMemo(function () {
     return collapseId ? collapseId : ++vuiNavigationDrawerItemGroupCollapseIndex;
-  }, [])),
+  }, [collapseId])),
       _useLocalStorage2 = _slicedToArray(_useLocalStorage, 2),
       collapse = _useLocalStorage2[0],
       setCollapse = _useLocalStorage2[1];

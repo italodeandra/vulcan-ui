@@ -26,7 +26,7 @@ const Button = ({ children, className, style, outlined, text, icon, onClick, aut
         if (setRef) {
             setRef.current = ref.current
         }
-    }, [])
+    }, [setRef])
 
     props = {
         ...props,

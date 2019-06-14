@@ -7,6 +7,7 @@ import ButtonDemo from './demo/ButtonDemo'
 import CardDemo from './demo/CardDemo'
 import DataTableDemo from './demo/DataTableDemo'
 import HomeDemo from './demo/HomeDemo'
+import MenuDemo from './demo/MenuDemo'
 import NavigationDrawerDemo from './demo/NavigationDrawerDemo'
 import ProgressBarDemo from './demo/ProgressBarDemo'
 import SpinnerDemo from './demo/SpinnerDemo'
@@ -95,6 +96,11 @@ const App = () => {
                                                onClick={() => isMobile && setIsNavigationDrawerOpen(false)}>
                             Data table
                         </NavigationDrawer.Item>
+                        <NavigationDrawer.Item to='/menu'
+                                               title={!isNavigationDrawerOpen && 'Menu'}
+                                               onClick={() => isMobile && setIsNavigationDrawerOpen(false)}>
+                            Menu
+                        </NavigationDrawer.Item>
                         <NavigationDrawer.Item to='/navigation-drawer'
                                                title={!isNavigationDrawerOpen && 'Navigation drawer'}
                                                onClick={() => isMobile && setIsNavigationDrawerOpen(false)}>
@@ -138,6 +144,7 @@ const App = () => {
                     <Route path='/button' component={ButtonDemo} />
                     <Route path='/card' component={CardDemo} />
                     <Route path='/data-table' component={DataTableDemo} />
+                    <Route path='/menu' component={MenuDemo} />
                     <Route path='/navigation-drawer' component={NavigationDrawerDemo} />
                     <Route path='/progress-bar' component={ProgressBarDemo} />
                     <Route path='/spinner' component={SpinnerDemo} />

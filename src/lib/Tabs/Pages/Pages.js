@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useRef, useState } from 'react'
+import React, { useContext, useEffect, useRef, useState, useLayoutEffect } from 'react'
 import './Pages.scss'
 
 export const Pages = ({ children, tabs }) => {
@@ -10,7 +10,8 @@ export const Pages = ({ children, tabs }) => {
 
     const setPagesSize = () => {
         setTimeout(() => {
-            setPagesHeight(pagesRef.current.querySelectorAll('.vui-Tabs-Page')[currentPageRef.current].getBoundingClientRect().height)
+            const page = pagesRef.current.querySelectorAll('.vui-Tabs-Page')[currentPageRef.current]
+            setPagesHeight(page.getBoundingClientRect().height)
         })
         clearTimeout(removeHeightTimer.current)
         removeHeightTimer.current = setTimeout(() => {
@@ -19,7 +20,8 @@ export const Pages = ({ children, tabs }) => {
     }
 
     useEffect(() => {
-        setPagesHeight(pagesRef.current.querySelectorAll('.vui-Tabs-Page')[currentPageRef.current].getBoundingClientRect().height)
+        const page = pagesRef.current.querySelectorAll('.vui-Tabs-Page')[currentPageRef.current]
+        setPagesHeight(page.getBoundingClientRect().height)
         currentPageRef.current = context.currentPage
         setPagesSize()
     }, [context.currentPage])
@@ -49,9 +51,10 @@ export const Pages = ({ children, tabs }) => {
 }
 
 export const Page = ({ children, tabs, key }) => {
+    const ref = useRef(null)
     const context = useContext(tabs)
     const currentPageRef = useRef(context.currentPage)
-    const [show, setShow] = useState(true)
+    const [show, setShow] = useState(false)
 
     useEffect(() => {
         currentPageRef.current = context.currentPage
@@ -63,8 +66,13 @@ export const Page = ({ children, tabs, key }) => {
         }, 280)
     }, [context.currentPage, key])
 
+    useLayoutEffect(() => {
+        ref.current.parentNode.parentNode.scrollTop = 0
+        ref.current.parentNode.parentNode.scrollLeft = 0
+    }, [show])
+
     return (
-        <div className='vui-Tabs-Page'>
+        <div className='vui-Tabs-Page' ref={ref}>
             {show ? children : null}
         </div>
     )

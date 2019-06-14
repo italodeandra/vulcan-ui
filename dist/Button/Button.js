@@ -31,7 +31,7 @@ var Button = function Button(_ref) {
     if (setRef) {
       setRef.current = ref.current;
     }
-  }, []);
+  }, [setRef]);
   props = _objectSpread({}, props, {
     ref: ref,
     className: className,

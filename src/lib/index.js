@@ -9,6 +9,8 @@ import useMobile from './Hooks/useMobile'
 import usePortal from './Hooks/usePortal'
 import useScroll from './Hooks/useScroll'
 import Icon from './Icon/Icon'
+import Menu from './Menu/Menu'
+import useMenu from './Menu/useMenu'
 import NavigationDrawer from './NavigationDrawer/NavigationDrawer'
 import PrettyJson from './PrettyJson/PrettyJson'
 import ProgressBar from './ProgressBar/ProgressBar'
@@ -28,6 +30,8 @@ export {
     DataTable,
     Form,
     Icon,
+    Menu,
+    useMenu,
     NavigationDrawer,
     PrettyJson,
     ProgressBar,

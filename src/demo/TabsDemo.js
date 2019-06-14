@@ -24,7 +24,7 @@ const TabsDemo = () => {
                         </Tabs>
                     </Card>
                 </div>
-                <pre>{`<Tabs tabs={tabs}>
+                <pre>{`<Tabs tabs='{tabs}'>
     <Tabs.Tab>Page 1</Tabs.Tab>
     <Tabs.Tab>Page 2</Tabs.Tab>
 </Tabs>`}</pre>
@@ -39,14 +39,21 @@ const TabsDemo = () => {
                                     Page 1
                                 </Card.Title>
                                 <Card.Content>
-                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aspernatur assumenda
-                                    commodi
-                                    deserunt
-                                    dolorem ducimus error exercitationem fugiat id inventore ipsa iure laboriosam
-                                    maiores
-                                    nam
-                                    nesciunt
-                                    nostrum, odio officiis quaerat, vel.
+                                    <div>
+                                        <input id='a' type='text' autoFocus />
+                                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aspernatur assumenda
+                                        commodi
+                                        deserunt
+                                        dolorem ducimus error exercitationem fugiat id inventore ipsa iure laboriosam
+                                        maiores
+                                        nam
+                                        nesciunt
+                                        nostrum, odio officiis quaerat, vel.
+                                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Assumenda atque cumque error inventore quaerat recusandae unde. Adipisci aliquam architecto delectus, incidunt perspiciatis similique. Enim fugit quia quis quod sunt. Sapiente.
+                                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Assumenda atque cumque error inventore quaerat recusandae unde. Adipisci aliquam architecto delectus, incidunt perspiciatis similique. Enim fugit quia quis quod sunt. Sapiente.
+                                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Assumenda atque cumque error inventore quaerat recusandae unde. Adipisci aliquam architecto delectus, incidunt perspiciatis similique. Enim fugit quia quis quod sunt. Sapiente.
+                                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Assumenda atque cumque error inventore quaerat recusandae unde. Adipisci aliquam architecto delectus, incidunt perspiciatis similique. Enim fugit quia quis quod sunt. Sapiente.
+                                    </div>
                                 </Card.Content>
                             </Tabs.Page>
                             <Tabs.Page>
@@ -54,6 +61,7 @@ const TabsDemo = () => {
                                     Page 2
                                 </Card.Title>
                                 <Card.Content>
+                                    <input id='a' type='text' autoFocus />
                                     Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aspernatur assumenda
                                     commodi
                                     deserunt
@@ -72,7 +80,7 @@ const TabsDemo = () => {
                         </Tabs.Pages>
                     </Card>
                 </div>
-                <pre>{`<Tabs.Pages tabs={tabs}>
+                <pre>{`<Tabs.Pages tabs='{tabs}'>
     <Tabs.Page>
         <Card.Title>
             Page 1

@@ -56,6 +56,7 @@ var NavigationDrawer = function NavigationDrawer(_ref) {
       setTimeout(function () {
         if (containerRefEl) {
           containerRefEl.style.transition = '';
+          containerRefEl.style.animation = '';
         }
       }, 140);
       return function () {
@@ -94,7 +95,7 @@ var NavigationDrawer = function NavigationDrawer(_ref) {
   }, [containerRef, open, collapsable, isMobile, appBarRef]);
   useEffect(function () {
     setTop(appBarRef.current.getBoundingClientRect().height);
-  }, []);
+  }, [appBarRef]);
   return React.createElement(React.Fragment, null, isMobile && React.createElement("div", {
     ref: scrimRef,
     className: classNames('vui-NavigationDrawer-scrim', open && 'open', isAnimationReady && 'animation-ready'),

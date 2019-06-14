@@ -45,6 +45,7 @@ const NavigationDrawer = ({ className, children, open, containerRef, collapsable
             setTimeout(() => {
                 if (containerRefEl) {
                     containerRefEl.style.transition = ''
+                    containerRefEl.style.animation = ''
                 }
             }, 140)
 
@@ -85,7 +86,7 @@ const NavigationDrawer = ({ className, children, open, containerRef, collapsable
 
     useEffect(() => {
         setTop(appBarRef.current.getBoundingClientRect().height)
-    }, [])
+    }, [appBarRef])
 
     return (
         <>
