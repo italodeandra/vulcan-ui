@@ -22,6 +22,7 @@ import classNames from './Utils/classNames'
 import createSharedStateHook from './Utils/createSharedStateHook'
 import jsonToParams from './Utils/jsonToParams'
 import jsonToQueryString from './Utils/jsonToQueryString'
+import polyfill from './Utils/polyfill'
 
 export {
     AppBar,
@@ -49,5 +50,6 @@ export {
     classNames,
     createSharedStateHook,
     jsonToParams,
-    jsonToQueryString
+    jsonToQueryString,
+    polyfill
 }

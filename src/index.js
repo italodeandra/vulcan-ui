@@ -17,6 +17,9 @@ import TextFieldChipsDemo from './demo/TextFieldChipsDemo'
 import TextFielDemo from './demo/TextFieldDemo'
 import useTitle from './demo/useTitle'
 import { AppBar, Button, Icon, NavigationDrawer, useLocalStorage, useMobile } from './lib'
+import polyfill from './lib/Utils/polyfill'
+
+polyfill()
 
 const App = () => {
     const [title] = useTitle()
