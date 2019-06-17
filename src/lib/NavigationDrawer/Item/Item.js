@@ -16,14 +16,13 @@ const Item = ({ icon, children, to, exact, title, onClick, badge, url }) => {
     const elementProps = {
         className: 'vui-NavigationDrawer-item',
         exact: exact,
-        to: to,
         title: title ? title : undefined,
         onClick: onClick
     }
 
     return url
-        ? <a href={url} target='_blank' rel='noopener noreferrer' {...elementProps} >{children}</a>
-        : <NavLink {...elementProps} activeClassName='active'>{children}</NavLink>
+        ? <a {...elementProps} href={url} target='_blank' rel='noopener noreferrer'>{children}</a>
+        : <NavLink {...elementProps} to={to} activeClassName='active'>{children}</NavLink>
 }
 
 export default Item

@@ -12,6 +12,7 @@
   position: fixed;
   width: 100%;
   max-height: 48*4px;
+  z-index: 2;
 
   .item {
     min-height: 48px;

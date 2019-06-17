@@ -19,15 +19,15 @@ var Item = function Item(_ref) {
   var elementProps = {
     className: 'vui-NavigationDrawer-item',
     exact: exact,
-    to: to,
     title: title ? title : undefined,
     onClick: onClick
   };
-  return url ? React.createElement("a", Object.assign({
+  return url ? React.createElement("a", Object.assign({}, elementProps, {
     href: url,
     target: "_blank",
     rel: "noopener noreferrer"
-  }, elementProps), children) : React.createElement(NavLink, Object.assign({}, elementProps, {
+  }), children) : React.createElement(NavLink, Object.assign({}, elementProps, {
+    to: to,
     activeClassName: "active"
   }), children);
 };
