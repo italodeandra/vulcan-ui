@@ -1,6 +1,15 @@
 import _isEqual from 'lodash.isequal'
 import React, { useEffect, useRef, useState } from 'react'
-import { Button, ProgressBar, Spinner, TextField, useDeepCompareEffect, usePortal } from '../../index'
+import {
+    Button,
+    Icon,
+    ProgressBar,
+    Spinner,
+    TextField,
+    useDeepCompareEffect,
+    usePortal,
+    useSnackbar
+} from '../../index'
 import './Autocomplete.scss'
 import AutocompleteDataSource from './AutocompleteDataSource'
 import AutocompleteResult from './AutocompleteResult'
@@ -10,6 +19,7 @@ let autocompleteIndex = 0
 const Autocomplete = ({ autocompleteConfig, onChange, value: defaultValue, onItemSelect, readOnly, setRef, ...props }) => {
     autocompleteConfig = autocompleteConfig || {}
     autocompleteConfig.emptyLabel = autocompleteConfig.emptyLabel || 'No items found'
+    autocompleteConfig.errorMessage = autocompleteConfig.errorMessage || 'There was an error during the request of the autocomplete'
     autocompleteConfig.responseTranspile = autocompleteConfig.responseTranspile || ((r) => r)
     autocompleteConfig.valueTranspile = autocompleteConfig.valueTranspile || ((r) => r)
     const resultRef = useRef(null)
@@ -23,6 +33,7 @@ const Autocomplete = ({ autocompleteConfig, onChange, value: defaultValue, onIte
     const [page, setPage] = useState(0)
     const [isScrollEnd, setIsScrollEnd] = useState(false)
     const index = useRef(++autocompleteIndex)
+    const [showSnackbar] = useSnackbar()
 
     useEffect(() => {
         if (setRef) {
@@ -73,7 +84,11 @@ const Autocomplete = ({ autocompleteConfig, onChange, value: defaultValue, onIte
             })
             .catch((err) => {
                 console.error(err)
-                //TODO: Use snackbar when implemented
+                showSnackbar(autocompleteConfig.errorMessage, Infinity, (snackbar) =>
+                    <Button icon onClick={snackbar.close}>
+                        <Icon name='close' />
+                    </Button>
+                )
                 setIsLoading(false)
                 setResult(null)
             })

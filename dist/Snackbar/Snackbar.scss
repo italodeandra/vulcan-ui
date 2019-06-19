@@ -13,8 +13,7 @@
   .vui-Snackbar {
     pointer-events: auto;
     max-width: 344px;
-    min-height: 48px;
-    padding: 0 16px;
+    padding: 16px;
     box-shadow: $vui-Elevation-z6;
     border-radius: 4px;
     background-color: rgba(black, 0.87);
@@ -30,12 +29,14 @@
     animation-duration: 200ms;
 
     .action {
+      margin: -8px 0;
       margin-right: -8px;
       margin-left: 8px;
 
       .vui-Button {
         padding: 0 8px;
         color: lighten(#6200eeff, 30%);
+        fill: lighten(#6200eeff, 30%);
 
         &:before {
           background-color: lighten(#6200eeff, 30%);

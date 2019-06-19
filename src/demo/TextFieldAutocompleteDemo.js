@@ -29,7 +29,7 @@ const TextFieldAutocompleteDemo = () => {
                         // request: ({ query, page }) => `http://localhost:8080?query=${query}&page=${page}`,
                         // request: 'http://localhost:8080?query=&page=0',
                         request: {
-                            url: 'https://jsonplaceholder.typicode.com/users',
+                            url: 'https://jsonplaceholder.typi2code.com/users',
                             // method: 'post', // default "get"
                             // data: { query: '', page: 0 }
                             data: ({ query }) => ({ name: query ? query : undefined })

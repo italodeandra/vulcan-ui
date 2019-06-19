@@ -3,7 +3,7 @@ import _slicedToArray from "@babel/runtime/helpers/esm/slicedToArray";
 import _objectWithoutProperties from "@babel/runtime/helpers/esm/objectWithoutProperties";
 import _isEqual from 'lodash.isequal';
 import React, { useEffect, useRef, useState } from 'react';
-import { Button, ProgressBar, Spinner, TextField, useDeepCompareEffect, usePortal } from '../../index';
+import { Button, Icon, ProgressBar, Spinner, TextField, useDeepCompareEffect, usePortal, useSnackbar } from '../../index';
 import './Autocomplete.scss';
 import AutocompleteDataSource from './AutocompleteDataSource';
 import AutocompleteResult from './AutocompleteResult';
@@ -20,6 +20,7 @@ var Autocomplete = function Autocomplete(_ref) {
 
   autocompleteConfig = autocompleteConfig || {};
   autocompleteConfig.emptyLabel = autocompleteConfig.emptyLabel || 'No items found';
+  autocompleteConfig.errorMessage = autocompleteConfig.errorMessage || 'There was an error during the request of the autocomplete';
 
   autocompleteConfig.responseTranspile = autocompleteConfig.responseTranspile || function (r) {
     return r;
@@ -71,6 +72,11 @@ var Autocomplete = function Autocomplete(_ref) {
       setIsScrollEnd = _useState12[1];
 
   var index = useRef(++autocompleteIndex);
+
+  var _useSnackbar = useSnackbar(),
+      _useSnackbar2 = _slicedToArray(_useSnackbar, 1),
+      showSnackbar = _useSnackbar2[0];
+
   useEffect(function () {
     if (setRef) {
       setRef.current = resultTargetRef.current;
@@ -120,8 +126,15 @@ var Autocomplete = function Autocomplete(_ref) {
         setIsLoading(false);
       }
     }).catch(function (err) {
-      console.error(err); //TODO: Use snackbar when implemented
-
+      console.error(err);
+      showSnackbar(autocompleteConfig.errorMessage, Infinity, function (snackbar) {
+        return React.createElement(Button, {
+          icon: true,
+          onClick: snackbar.close
+        }, React.createElement(Icon, {
+          name: "close"
+        }));
+      });
       setIsLoading(false);
       setResult(null);
     });
