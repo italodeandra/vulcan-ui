@@ -3,12 +3,14 @@ import _slicedToArray from "@babel/runtime/helpers/esm/slicedToArray";
 //TODO: Fix mobile version on collapsable
 import React, { useEffect, useRef, useState } from 'react';
 import { classNames, useMobile } from '../index';
+import disableBodyScroll from '../Utils/disableBodyScroll';
 import Divider from './Divider/Divider';
 import Header from './Header/Header';
 import Item from './Item/Item';
 import ItemGroup from './ItemGroup/ItemGroup';
 import './NavigationDrawer.scss';
 import Subtitle from './Subtitle/Subtitle';
+import useTouchMove from './useTouchMove';
 
 var NavigationDrawer = function NavigationDrawer(_ref) {
   var className = _ref.className,
@@ -16,8 +18,8 @@ var NavigationDrawer = function NavigationDrawer(_ref) {
       open = _ref.open,
       containerRef = _ref.containerRef,
       collapsable = _ref.collapsable,
-      onScrimClick = _ref.onScrimClick,
-      appBarRef = _ref.appBarRef;
+      appBarRef = _ref.appBarRef,
+      onOpenChange = _ref.onOpenChange;
   var scrimRef = useRef(null);
   var navigationDrawerRef = useRef(null);
 
@@ -26,23 +28,21 @@ var NavigationDrawer = function NavigationDrawer(_ref) {
       isMobile = _useMobile2[0];
 
   var _useState = useState(false),
-      _useState2 = _slicedToArray(_useState, 2),
-      isAnimationReady = _useState2[0],
-      setIsAnimationReady = _useState2[1];
+      _useState2 = _slicedToArray(_useState, 1),
+      isAnimationReady = _useState2[0];
 
   var _useState3 = useState(undefined),
       _useState4 = _slicedToArray(_useState3, 2),
       top = _useState4[0],
       setTop = _useState4[1];
 
-  className = classNames(className, 'vui-NavigationDrawer', open && 'open', collapsable && 'collapsable', isMobile && 'mobile');
-  useEffect(function () {
-    if (isMobile) {
-      setTimeout(function () {
-        setIsAnimationReady(true);
-      }, 280);
-    }
-  }, [isMobile]);
+  var _useState5 = useState(open),
+      _useState6 = _slicedToArray(_useState5, 2),
+      innerOpen = _useState6[0],
+      setInnerOpen = _useState6[1];
+
+  useTouchMove(navigationDrawerRef, innerOpen, setInnerOpen);
+  className = classNames(className, 'vui-NavigationDrawer', 'can-scroll', innerOpen && 'open', collapsable && 'collapsable', isMobile && 'mobile');
   useEffect(function () {
     if (!isMobile) {
       var containerRefEl = containerRef && containerRef.current;
@@ -75,7 +75,7 @@ var NavigationDrawer = function NavigationDrawer(_ref) {
           containerRefEl.classList.add('vui-NavigationDrawer-collapsable');
         }
 
-        containerRefEl.classList[open ? 'add' : 'remove']('vui-NavigationDrawer-open');
+        containerRefEl.classList[innerOpen ? 'add' : 'remove']('vui-NavigationDrawer-open');
       }
 
       return function () {
@@ -84,7 +84,7 @@ var NavigationDrawer = function NavigationDrawer(_ref) {
       };
     }
 
-    if (open) {
+    if (innerOpen) {
       var autofocusEl = navigationDrawerRef.current.querySelector('[auto-focus]');
       autofocusEl && autofocusEl.focus();
     } else if (appBarRef) {
@@ -92,14 +92,31 @@ var NavigationDrawer = function NavigationDrawer(_ref) {
 
       _autofocusEl && _autofocusEl.focus();
     }
-  }, [containerRef, open, collapsable, isMobile, appBarRef]);
+  }, [containerRef, innerOpen, collapsable, isMobile, appBarRef]);
   useEffect(function () {
     setTop(appBarRef.current.getBoundingClientRect().height);
   }, [appBarRef]);
+  useEffect(function () {
+    onOpenChange && onOpenChange(innerOpen);
+
+    if (innerOpen) {
+      document.body.style.overflow = 'hidden';
+      disableBodyScroll(true, '.can-scroll');
+    } else {
+      document.body.style.overflow = '';
+      disableBodyScroll(false, '.can-scroll');
+    } // eslint-disable-next-line react-hooks/exhaustive-deps
+
+  }, [innerOpen]);
+  useEffect(function () {
+    setInnerOpen(open); // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [open]);
   return React.createElement(React.Fragment, null, isMobile && React.createElement("div", {
     ref: scrimRef,
-    className: classNames('vui-NavigationDrawer-scrim', open && 'open', isAnimationReady && 'animation-ready'),
-    onClick: onScrimClick
+    className: classNames('vui-NavigationDrawer-scrim', 'can-scroll', innerOpen && 'open', isAnimationReady && 'animation-ready'),
+    onClick: function onClick() {
+      return setInnerOpen(false);
+    }
   }), React.createElement("div", {
     className: className,
     ref: navigationDrawerRef,
@@ -109,9 +126,9 @@ var NavigationDrawer = function NavigationDrawer(_ref) {
   }, children));
 };
 
-export default NavigationDrawer;
 NavigationDrawer.Item = Item;
 NavigationDrawer.Header = Header;
 NavigationDrawer.Divider = Divider;
 NavigationDrawer.Subtitle = Subtitle;
 NavigationDrawer.ItemGroup = ItemGroup;
+export default NavigationDrawer;

@@ -1,9 +1,11 @@
 @import "./Utils/variables";
 @import "./Elevation/Elevation";
-@import "./AppBar/AppBar.theme.scss";
-@import "./Button/Button.theme.scss";
-@import "./NavigationDrawer/NavigationDrawer.theme.scss";
-@import "./TextField/TextField.theme.scss";
+@import "./AppBar/AppBar.theme";
+@import "./Button/Button.theme";
+@import "./NavigationDrawer/NavigationDrawer.theme";
+@import "./ProgressBar/ProgressBar.theme";
+@import "./Snackbar/Snackbar.theme";
+@import "./TextField/TextField.theme";
 
 @mixin styles {
   body {
@@ -15,6 +17,19 @@
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     text-rendering: optimizeLegibility;
+  }
+
+  html, body {
+    max-width: 100%;
+    overflow-x: hidden;
+    height: 100vh;
+    min-height: 100%;
+    min-height: calc(100% + constant(safe-area-inset-top));
+    min-height: calc(100% + env(safe-area-inset-top));
+  }
+
+  .can-scroll {
+    -webkit-overflow-scrolling: touch;
   }
 
   /* roboto-regular - latin */

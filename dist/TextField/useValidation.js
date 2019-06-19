@@ -1,5 +1,6 @@
 import _slicedToArray from "@babel/runtime/helpers/esm/slicedToArray";
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
+import { useDeepCompareEffect } from '../index';
 
 function useValidation(value, validation) {
   var _useState = useState(false),
@@ -80,7 +81,7 @@ function useValidation(value, validation) {
     }
   };
 
-  useEffect(function () {
+  useDeepCompareEffect(function () {
     validate(); // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [validation, value]);
   return [hasError, errorText, setCustomErrorMessage, validate];

@@ -1,5 +1,5 @@
 import { useEffect, useRef } from 'react'
-import disableBodyScroll from '../Utils/disableBodyScroll'
+import { disableBodyScroll } from '../index'
 
 const useTouchMove = (elementRef, open, setOpen) => {
     const touchStartX = useRef(null)
@@ -8,6 +8,7 @@ const useTouchMove = (elementRef, open, setOpen) => {
     const nextOpen = useRef(open)
 
     const handleTouchStart = (e) => {
+        e.preventDefault()
         if (elementRef.current) {
             touchStartX.current = e.touches[0].pageX
             currentElementX.current = getTranslateX(elementRef.current)

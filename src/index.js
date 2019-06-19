@@ -33,14 +33,17 @@ const App = () => {
         <div className='demo-App'>
             <Router>
                 <AppBar className='app-bar' sticky setRef={AppBarRef}>
-                    {isMobile &&
-                    <AppBar.Row style={{ height: 20 }} />
+                    {(isMobile
+                        && ('standalone' in window.navigator)
+                        && window.navigator.standalone)
+                    &&
+                    <AppBar.Row className='iphone-app-bar' />
                     }
                     <AppBar.Row>
                         <Button icon onClick={() => setIsNavigationDrawerOpen(t => !t)} autoFocus>
                             <Icon name='menu' />
                         </Button>
-                        <span className='app-bar-title'>
+                        <span className='app-bar-title' onClick={() => window.location.reload()}>
                         {title}
                     </span>
                     </AppBar.Row>
@@ -55,8 +58,11 @@ const App = () => {
                 >
                     <NavigationDrawer.Header>
                         <AppBar className='app-bar'>
-                            {isMobile &&
-                            <AppBar.Row style={{ height: 20 }} />
+                            {(isMobile
+                                && ('standalone' in window.navigator)
+                                && window.navigator.standalone )
+                            &&
+                            <AppBar.Row className='iphone-app-bar' />
                             }
                             <AppBar.Row>
                                 <Button
@@ -179,3 +185,4 @@ const App = () => {
 }
 
 render(<App />, document.getElementById('root'))
+

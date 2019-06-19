@@ -42,3 +42,10 @@ body {
     }
   }
 }
+
+.iphone-app-bar.iphone-app-bar.iphone-app-bar {
+  padding-top: 0;
+  padding-top: constant(safe-area-inset-top);
+  padding-top: env(safe-area-inset-top);
+  height: 0;
+}

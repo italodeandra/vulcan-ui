@@ -28,7 +28,7 @@ var useScroll = function useScroll(element) {
       }
     };
 
-    if (element.current) {
+    if (elementRef) {
       handleScroll();
       elementRef.addEventListener('scroll', handleScroll);
       elementRef.addEventListener('resize', handleScroll);
