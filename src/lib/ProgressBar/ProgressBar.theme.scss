@@ -1,0 +1,13 @@
+@mixin VuiProgressBarTheme($class, $primary, $primary-light) {
+  #{$class} .vui-ProgressBar {
+    background-color: $primary-light;
+
+    .determinate {
+      background-color: $primary;
+    }
+
+    .indeterminate {
+      background-color: $primary;
+    }
+  }
+}

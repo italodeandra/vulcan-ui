@@ -17,7 +17,7 @@ const useScroll = (element, endOffset = 0) => {
             }
         }
 
-        if (element.current) {
+        if (elementRef) {
             handleScroll()
             elementRef.addEventListener('scroll', handleScroll)
             elementRef.addEventListener('resize', handleScroll)

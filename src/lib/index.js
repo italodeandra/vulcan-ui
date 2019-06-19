@@ -14,12 +14,15 @@ import useMenu from './Menu/useMenu'
 import NavigationDrawer from './NavigationDrawer/NavigationDrawer'
 import PrettyJson from './PrettyJson/PrettyJson'
 import ProgressBar from './ProgressBar/ProgressBar'
+import Snackbar from './Snackbar/Snackbar'
+import useSnackbar from './Snackbar/useSnackbar'
 import Spinner from './Spinner/Spinner'
 import Tabs from './Tabs/Tabs'
 import TextField from './TextField/TextField'
 import caretPosition from './Utils/caretPosition'
 import classNames from './Utils/classNames'
 import createSharedStateHook from './Utils/createSharedStateHook'
+import disableBodyScroll from './Utils/disableBodyScroll'
 import jsonToParams from './Utils/jsonToParams'
 import jsonToQueryString from './Utils/jsonToQueryString'
 import polyfill from './Utils/polyfill'
@@ -36,6 +39,8 @@ export {
     NavigationDrawer,
     PrettyJson,
     ProgressBar,
+    Snackbar,
+    useSnackbar,
     Spinner,
     Tabs,
     TextField,
@@ -49,6 +54,7 @@ export {
     caretPosition,
     classNames,
     createSharedStateHook,
+    disableBodyScroll,
     jsonToParams,
     jsonToQueryString,
     polyfill

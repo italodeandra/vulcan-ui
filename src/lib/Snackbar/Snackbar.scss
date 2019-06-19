@@ -1,0 +1,62 @@
+@import "../styles";
+
+#vui-Snackbar-container {
+  pointer-events: none;
+  position: fixed;
+  display: flex;
+  justify-content: center;
+  bottom: 16px;
+  left: 16px;
+  right: 16px;
+  z-index: 4;
+
+  .vui-Snackbar {
+    pointer-events: auto;
+    max-width: 344px;
+    min-height: 48px;
+    padding: 0 16px;
+    box-shadow: $vui-Elevation-z6;
+    border-radius: 4px;
+    background-color: rgba(black, 0.87);
+    color: rgba(white, 0.87);
+    display: flex;
+    align-items: center;
+    font-size: 14px;
+    transform: translateY(50px);
+    opacity: 0;
+    animation-name: show-snackbar;
+    animation-timing-function: $vui-Motion-Speed-Decelerate-Easing;
+    animation-fill-mode: forwards;
+    animation-duration: 200ms;
+
+    .action {
+      margin-right: -8px;
+      margin-left: 8px;
+
+      .vui-Button {
+        padding: 0 8px;
+        color: lighten(#6200eeff, 30%);
+
+        &:before {
+          background-color: lighten(#6200eeff, 30%);
+        }
+      }
+    }
+  }
+
+  .vui-Snackbar + .vui-Snackbar {
+    margin-top: 8px;
+  }
+}
+
+@keyframes show-snackbar {
+  0% {
+    transform: translateY(50px);
+    opacity: 0;
+  }
+
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}

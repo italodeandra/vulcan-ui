@@ -10,14 +10,14 @@ import HomeDemo from './demo/HomeDemo'
 import MenuDemo from './demo/MenuDemo'
 import NavigationDrawerDemo from './demo/NavigationDrawerDemo'
 import ProgressBarDemo from './demo/ProgressBarDemo'
+import SnackbarDemo from './demo/SnackbarDemo'
 import SpinnerDemo from './demo/SpinnerDemo'
 import TabsDemo from './demo/TabsDemo'
 import TextFieldAutocompleteDemo from './demo/TextFieldAutocompleteDemo'
 import TextFieldChipsDemo from './demo/TextFieldChipsDemo'
 import TextFielDemo from './demo/TextFieldDemo'
 import useTitle from './demo/useTitle'
-import { AppBar, Button, Icon, NavigationDrawer, useLocalStorage, useMobile } from './lib'
-import polyfill from './lib/Utils/polyfill'
+import { AppBar, Button, Icon, NavigationDrawer, polyfill, Snackbar, useLocalStorage, useMobile } from './lib'
 
 polyfill()
 
@@ -33,33 +33,43 @@ const App = () => {
         <div className='demo-App'>
             <Router>
                 <AppBar className='app-bar' sticky setRef={AppBarRef}>
-                    <Button icon onClick={() => setIsNavigationDrawerOpen(t => !t)} autoFocus>
-                        <Icon name='menu' />
-                    </Button>
-                    <span className='app-bar-title'>
+                    {isMobile &&
+                    <AppBar.Row style={{ height: 20 }} />
+                    }
+                    <AppBar.Row>
+                        <Button icon onClick={() => setIsNavigationDrawerOpen(t => !t)} autoFocus>
+                            <Icon name='menu' />
+                        </Button>
+                        <span className='app-bar-title'>
                         {title}
                     </span>
+                    </AppBar.Row>
                 </AppBar>
                 <NavigationDrawer
                     className='navigation-drawer'
                     open={isNavigationDrawerOpen}
                     containerRef={AppContainerRef}
-                    onScrimClick={() => setIsNavigationDrawerOpen(false)}
                     appBarRef={AppBarRef}
                     collapsable
+                    onOpenChange={(isOpen) => setIsNavigationDrawerOpen(isOpen)}
                 >
                     <NavigationDrawer.Header>
                         <AppBar className='app-bar'>
-                            <Button
-                                className='menu-button'
-                                icon
-                                onClick={() => setIsNavigationDrawerOpen(t => !t)}
-                                autoFocus={isNavigationDrawerOpen}>
-                                <Icon name='menu' />
-                            </Button>
-                            <span className='app-bar-title'>
+                            {isMobile &&
+                            <AppBar.Row style={{ height: 20 }} />
+                            }
+                            <AppBar.Row>
+                                <Button
+                                    className='menu-button'
+                                    icon
+                                    onClick={() => setIsNavigationDrawerOpen(t => !t)}
+                                    autoFocus={isNavigationDrawerOpen}>
+                                    <Icon name='menu' />
+                                </Button>
+                                <span className='app-bar-title'>
                                 Vulcan UI
                             </span>
+                            </AppBar.Row>
                         </AppBar>
                     </NavigationDrawer.Header>
                     <NavigationDrawer.Item
@@ -114,6 +124,11 @@ const App = () => {
                                                onClick={() => isMobile && setIsNavigationDrawerOpen(false)}>
                             Progress bar
                         </NavigationDrawer.Item>
+                        <NavigationDrawer.Item to='/snackbar'
+                                               title={!isNavigationDrawerOpen && 'Snackbar'}
+                                               onClick={() => isMobile && setIsNavigationDrawerOpen(false)}>
+                            Snackbar
+                        </NavigationDrawer.Item>
                         <NavigationDrawer.Item to='/spinner'
                                                title={!isNavigationDrawerOpen && 'Spinner'}
                                                onClick={() => isMobile && setIsNavigationDrawerOpen(false)}>
@@ -150,12 +165,14 @@ const App = () => {
                     <Route path='/menu' component={MenuDemo} />
                     <Route path='/navigation-drawer' component={NavigationDrawerDemo} />
                     <Route path='/progress-bar' component={ProgressBarDemo} />
+                    <Route path='/snackbar' component={SnackbarDemo} />
                     <Route path='/spinner' component={SpinnerDemo} />
                     <Route path='/tabs' component={TabsDemo} />
                     <Route path='/text-field' component={TextFielDemo} />
                     <Route path='/text-field-autocomplete' component={TextFieldAutocompleteDemo} />
                     <Route path='/text-field-chips' component={TextFieldChipsDemo} />
                 </div>
+                <Snackbar />
             </Router>
         </div>
     )

@@ -3,35 +3,32 @@
 
 import React, { useEffect, useRef, useState } from 'react'
 import { classNames, useMobile } from '../index'
+import disableBodyScroll from '../Utils/disableBodyScroll'
 import Divider from './Divider/Divider'
 import Header from './Header/Header'
 import Item from './Item/Item'
 import ItemGroup from './ItemGroup/ItemGroup'
 import './NavigationDrawer.scss'
 import Subtitle from './Subtitle/Subtitle'
+import useTouchMove from './useTouchMove'
 
-const NavigationDrawer = ({ className, children, open, containerRef, collapsable, onScrimClick, appBarRef }) => {
+const NavigationDrawer = ({ className, children, open, containerRef, collapsable, appBarRef, onOpenChange }) => {
     const scrimRef = useRef(null)
     const navigationDrawerRef = useRef(null)
     const [isMobile] = useMobile()
-    const [isAnimationReady, setIsAnimationReady] = useState(false)
+    const [isAnimationReady] = useState(false)
     const [top, setTop] = useState(undefined)
+    const [innerOpen, setInnerOpen] = useState(open)
+    useTouchMove(navigationDrawerRef, innerOpen, setInnerOpen)
 
     className = classNames(
         className,
         'vui-NavigationDrawer',
-        open && 'open',
+        'can-scroll',
+        innerOpen && 'open',
         collapsable && 'collapsable',
         isMobile && 'mobile'
     )
-
-    useEffect(() => {
-        if (isMobile) {
-            setTimeout(() => {
-                setIsAnimationReady(true)
-            }, 280)
-        }
-    }, [isMobile])
 
     useEffect(() => {
         if (!isMobile) {
@@ -66,7 +63,7 @@ const NavigationDrawer = ({ className, children, open, containerRef, collapsable
                     containerRefEl.classList.add('vui-NavigationDrawer-collapsable')
                 }
 
-                containerRefEl.classList[open ? 'add' : 'remove']('vui-NavigationDrawer-open')
+                containerRefEl.classList[innerOpen ? 'add' : 'remove']('vui-NavigationDrawer-open')
             }
 
             return () => {
@@ -75,18 +72,35 @@ const NavigationDrawer = ({ className, children, open, containerRef, collapsable
             }
         }
 
-        if (open) {
+        if (innerOpen) {
             const autofocusEl = navigationDrawerRef.current.querySelector('[auto-focus]')
             autofocusEl && autofocusEl.focus()
         } else if (appBarRef) {
             const autofocusEl = appBarRef.current.querySelector('[auto-focus]')
             autofocusEl && autofocusEl.focus()
         }
-    }, [containerRef, open, collapsable, isMobile, appBarRef])
+    }, [containerRef, innerOpen, collapsable, isMobile, appBarRef])
 
     useEffect(() => {
         setTop(appBarRef.current.getBoundingClientRect().height)
     }, [appBarRef])
+
+    useEffect(() => {
+        onOpenChange && onOpenChange(innerOpen)
+        if (innerOpen) {
+            document.body.style.overflow = 'hidden'
+            disableBodyScroll(true, '.can-scroll')
+        } else {
+            document.body.style.overflow = ''
+            disableBodyScroll(false, '.can-scroll')
+        }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [innerOpen])
+
+    useEffect(() => {
+        setInnerOpen(open)
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [open])
 
     return (
         <>
@@ -96,11 +110,12 @@ const NavigationDrawer = ({ className, children, open, containerRef, collapsable
                 className={
                     classNames(
                         'vui-NavigationDrawer-scrim',
-                        open && 'open',
+                        'can-scroll',
+                        innerOpen && 'open',
                         isAnimationReady && 'animation-ready'
                     )
                 }
-                onClick={onScrimClick}
+                onClick={() => setInnerOpen(false)}
             />
             }
             <div
@@ -114,8 +129,6 @@ const NavigationDrawer = ({ className, children, open, containerRef, collapsable
     )
 }
 
-export default NavigationDrawer
-
 NavigationDrawer.Item = Item
 
 NavigationDrawer.Header = Header
@@ -125,3 +138,5 @@ NavigationDrawer.Divider = Divider
 NavigationDrawer.Subtitle = Subtitle
 
 NavigationDrawer.ItemGroup = ItemGroup
+
+export default NavigationDrawer

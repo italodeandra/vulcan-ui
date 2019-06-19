@@ -1,0 +1,12 @@
+@mixin VuiSnackbarTheme($class, $primary) {
+  #{$class} .vui-Snackbar {
+    .action {
+      .vui-Button {
+        color: lighten($primary, 10%);
+        &:before {
+          background-color: lighten($primary, 10%);
+        }
+      }
+    }
+  }
+}

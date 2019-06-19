@@ -1,4 +1,5 @@
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
+import { useDeepCompareEffect } from '../index'
 
 function useValidation(value, validation) {
     const [hasError, setHasError] = useState(false)
@@ -68,7 +69,7 @@ function useValidation(value, validation) {
         }
     }
 
-    useEffect(() => {
+    useDeepCompareEffect(() => {
         validate()
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [validation, value])
