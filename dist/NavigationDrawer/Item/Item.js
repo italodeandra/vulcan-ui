@@ -17,7 +17,7 @@ var Item = function Item(_ref) {
     className: "badge"
   }, badge));
   var elementProps = {
-    className: 'vui-NavigationDrawer-item',
+    className: 'vui-NavigationDrawer-item can-scroll',
     exact: exact,
     title: title ? title : undefined,
     onClick: onClick

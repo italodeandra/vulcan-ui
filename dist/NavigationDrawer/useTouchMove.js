@@ -8,8 +8,6 @@ var useTouchMove = function useTouchMove(elementRef, open, setOpen) {
   var nextOpen = useRef(open);
 
   var handleTouchStart = function handleTouchStart(e) {
-    e.preventDefault();
-
     if (elementRef.current) {
       touchStartX.current = e.touches[0].pageX;
       currentElementX.current = getTranslateX(elementRef.current);
@@ -28,14 +26,12 @@ var useTouchMove = function useTouchMove(elementRef, open, setOpen) {
           elementRef.current.style.transform = "translateX(".concat(newTranslateX, "px)");
         }
 
-        nextOpen.current = newTranslateX > -40;
-        document.body.style.overflow = 'hidden';
-        disableBodyScroll(true, '.vui-NavigationDrawer, .vui-NavigationDrawer-scrim');
+        nextOpen.current = newTranslateX > -(window.innerWidth / 2);
       }
     }
   };
 
-  var handleTouchEnd = function handleTouchEnd(e) {
+  var handleTouchEnd = function handleTouchEnd() {
     if (elementRef.current) {
       elementRef.current.style.transitionProperty = '';
       elementRef.current.style.transform = '';
@@ -59,13 +55,13 @@ var useTouchMove = function useTouchMove(elementRef, open, setOpen) {
     nextOpen.current = open;
   }, [open]);
   useEffect(function () {
-    document.body.addEventListener('touchstart', handleTouchStart);
-    document.body.addEventListener('touchmove', handleTouchMove);
-    document.body.addEventListener('touchend', handleTouchEnd);
+    document.addEventListener('touchstart', handleTouchStart);
+    document.addEventListener('touchmove', handleTouchMove);
+    document.addEventListener('touchend', handleTouchEnd);
     return function () {
-      document.body.removeEventListener('touchstart', handleTouchStart);
-      document.body.removeEventListener('touchmove', handleTouchMove);
-      document.body.removeEventListener('touchend', handleTouchEnd);
+      document.removeEventListener('touchstart', handleTouchStart);
+      document.removeEventListener('touchmove', handleTouchMove);
+      document.removeEventListener('touchend', handleTouchEnd);
     }; // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 };

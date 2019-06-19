@@ -25,7 +25,7 @@ const useTouchMove = (elementRef, open, setOpen) => {
                 if (newTranslateX < 0) {
                     elementRef.current.style.transform = `translateX(${newTranslateX}px)`
                 }
-                nextOpen.current = newTranslateX > -40
+                nextOpen.current = newTranslateX > -(window.innerWidth/2)
             }
         }
     }
