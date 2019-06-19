@@ -8,7 +8,6 @@ const useTouchMove = (elementRef, open, setOpen) => {
     const nextOpen = useRef(open)
 
     const handleTouchStart = (e) => {
-        e.preventDefault()
         if (elementRef.current) {
             touchStartX.current = e.touches[0].pageX
             currentElementX.current = getTranslateX(elementRef.current)
@@ -27,13 +26,11 @@ const useTouchMove = (elementRef, open, setOpen) => {
                     elementRef.current.style.transform = `translateX(${newTranslateX}px)`
                 }
                 nextOpen.current = newTranslateX > -40
-                document.body.style.overflow = 'hidden'
-                disableBodyScroll(true, '.vui-NavigationDrawer, .vui-NavigationDrawer-scrim')
             }
         }
     }
 
-    const handleTouchEnd = (e) => {
+    const handleTouchEnd = () => {
         if (elementRef.current) {
             elementRef.current.style.transitionProperty = ''
             elementRef.current.style.transform = ''
@@ -56,14 +53,14 @@ const useTouchMove = (elementRef, open, setOpen) => {
     }, [open])
 
     useEffect(() => {
-        document.body.addEventListener('touchstart', handleTouchStart)
-        document.body.addEventListener('touchmove', handleTouchMove)
-        document.body.addEventListener('touchend', handleTouchEnd)
+        document.addEventListener('touchstart', handleTouchStart)
+        document.addEventListener('touchmove', handleTouchMove)
+        document.addEventListener('touchend', handleTouchEnd)
 
         return () => {
-            document.body.removeEventListener('touchstart', handleTouchStart)
-            document.body.removeEventListener('touchmove', handleTouchMove)
-            document.body.removeEventListener('touchend', handleTouchEnd)
+            document.removeEventListener('touchstart', handleTouchStart)
+            document.removeEventListener('touchmove', handleTouchMove)
+            document.removeEventListener('touchend', handleTouchEnd)
         }
 
         // eslint-disable-next-line react-hooks/exhaustive-deps

@@ -6,15 +6,15 @@ const Item = ({ icon, children, to, exact, title, onClick, badge, url }) => {
     children = <>
         {icon}
         <span className='label'>
-                {children}
-            </span>
+            {children}
+        </span>
         {!!badge &&
         <div className='badge'>{badge}</div>
         }
     </>
 
     const elementProps = {
-        className: 'vui-NavigationDrawer-item',
+        className: 'vui-NavigationDrawer-item can-scroll',
         exact: exact,
         title: title ? title : undefined,
         onClick: onClick
