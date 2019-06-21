@@ -1,0 +1,52 @@
+@import "../styles";
+
+.vui-Dialog {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-color: rgba(black, 0.32);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 16px;
+  z-index: 3;
+  opacity: 0;
+  animation-name: open-scrim;
+  animation-timing-function: $vui-Motion-Speed-Accelerate-Easing;
+  animation-duration: 195ms;
+  animation-fill-mode: forwards;
+
+  .dialog {
+    width: 100%;
+    max-width: 560px;
+    max-height: 100%;
+    animation-name: open-dialog;
+    animation-timing-function: $vui-Motion-Speed-Accelerate-Easing;
+    animation-duration: 195ms;
+    animation-fill-mode: forwards;
+
+    @keyframes open-dialog {
+      0% {
+        opacity: 0;
+        transform: scale(0.8);
+      }
+
+      100% {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+  }
+
+  @keyframes open-scrim {
+    0% {
+      opacity: 0;
+    }
+
+    100% {
+      opacity: 1;
+    }
+  }
+}

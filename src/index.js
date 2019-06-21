@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react'
+import React, { useRef } from 'react'
 import { render } from 'react-dom'
 import { BrowserRouter as Router, Route } from 'react-router-dom'
 import './demo.scss'
@@ -6,6 +6,7 @@ import AppBarDemo from './demo/AppBarDemo'
 import ButtonDemo from './demo/ButtonDemo'
 import CardDemo from './demo/CardDemo'
 import DataTableDemo from './demo/DataTableDemo'
+import DialogDemo from './demo/DialogDemo'
 import HomeDemo from './demo/HomeDemo'
 import MenuDemo from './demo/MenuDemo'
 import NavigationDrawerDemo from './demo/NavigationDrawerDemo'
@@ -26,8 +27,8 @@ const App = () => {
     const AppContainerRef = useRef(null)
     const AppBarRef = useRef(null)
     const [isMobile] = useMobile()
-    const [isNavigationDrawerOpen, setIsNavigationDrawerOpen] = useLocalStorage('NavigationDrawerOpen', !isMobile)
-    const [navigationDrawerGroupCollapse, setNavigationDrawerGroupCollapse] = useState(false)
+    const [isNavigationDrawerOpen, setIsNavigationDrawerOpen] = useLocalStorage('IsNavigationDrawerOpen', !isMobile)
+    const [navigationDrawerGroupCollapse, setNavigationDrawerGroupCollapse] = useLocalStorage('NavigationDrawerGroupCollapse', false)
 
     return (
         <div className='demo-App'>
@@ -90,7 +91,8 @@ const App = () => {
                     </NavigationDrawer.Item>
                     <NavigationDrawer.Divider />
                     <NavigationDrawer.Subtitle
-                        onCollapse={collapse => setNavigationDrawerGroupCollapse(collapse)}
+                        collapse={navigationDrawerGroupCollapse}
+                        onCollapseChange={collapse => setNavigationDrawerGroupCollapse(collapse)}
                     >
                         Demos
                     </NavigationDrawer.Subtitle>
@@ -114,6 +116,11 @@ const App = () => {
                                                title={!isNavigationDrawerOpen && 'Data table'}
                                                onClick={() => isMobile && setIsNavigationDrawerOpen(false)}>
                             Data table
+                        </NavigationDrawer.Item>
+                        <NavigationDrawer.Item to='/dialog'
+                                               title={!isNavigationDrawerOpen && 'Dialog'}
+                                               onClick={() => isMobile && setIsNavigationDrawerOpen(false)}>
+                            Dialog
                         </NavigationDrawer.Item>
                         <NavigationDrawer.Item to='/menu'
                                                title={!isNavigationDrawerOpen && 'Menu'}
@@ -168,6 +175,7 @@ const App = () => {
                     <Route path='/button' component={ButtonDemo} />
                     <Route path='/card' component={CardDemo} />
                     <Route path='/data-table' component={DataTableDemo} />
+                    <Route path='/dialog' component={DialogDemo} />
                     <Route path='/menu' component={MenuDemo} />
                     <Route path='/navigation-drawer' component={NavigationDrawerDemo} />
                     <Route path='/progress-bar' component={ProgressBarDemo} />

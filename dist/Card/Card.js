@@ -5,10 +5,12 @@ import './Card.scss';
 var Card = function Card(_ref) {
   var children = _ref.children,
       className = _ref.className,
-      rounder = _ref.rounder;
+      rounder = _ref.rounder,
+      onClick = _ref.onClick;
   className = classNames(className, 'vui-Card', rounder ? 'rounder' : '');
   return React.createElement("div", {
-    className: className
+    className: className,
+    onClick: onClick
   }, children);
 };
 

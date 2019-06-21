@@ -1,20 +1,17 @@
-import React, { useEffect, useMemo } from 'react'
-import { classNames, Icon, useLocalStorage } from '../../index'
+import React from 'react'
+import { classNames, Icon } from '../../index'
 import './Subtitle.scss'
 
-let vuiNavigationDrawerItemGroupCollapseIndex = 0
-const Subtitle = ({ children, collapseId, onCollapse }) => {
-    const [collapse, setCollapse] = useLocalStorage('vuiNavigationDrawerItemGroupCollapse' + (useMemo(() => collapseId ? collapseId : ++vuiNavigationDrawerItemGroupCollapseIndex, [collapseId])))
-
-    useEffect(() => {
-        onCollapse && onCollapse(collapse)
-    }, [onCollapse, collapse])
+const Subtitle = ({ children, collapse, onCollapseChange }) => {
+    const handleCollapseClick = () => {
+        onCollapseChange && onCollapseChange(!collapse)
+    }
 
     return (
-        <div className={classNames('vui-NavigationDrawer-subtitle', onCollapse && 'pointer')}
-             onClick={setCollapse && (() => setCollapse(c => !c))}>
+        <div className={classNames('vui-NavigationDrawer-subtitle', onCollapseChange && 'pointer')}
+             onClick={handleCollapseClick}>
             {children}
-            {onCollapse &&
+            {onCollapseChange &&
             <Icon className={classNames('chevron', collapse && 'collapse')} name='chevronUp' />
             }
         </div>

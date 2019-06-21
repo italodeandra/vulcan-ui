@@ -2,6 +2,8 @@ import AppBar from './AppBar/AppBar'
 import Button from './Button/Button'
 import Card from './Card/Card'
 import DataTable from './DataTable/DataTable'
+import Dialog from './Dialog/Dialog'
+import useDialog from './Dialog/useDialog'
 import Form from './Form/Form'
 import useDeepCompareEffect from './Hooks/useDeepCompareEffect'
 import useLocalStorage from './Hooks/useLocalStorage'
@@ -32,6 +34,8 @@ export {
     Button,
     Card,
     DataTable,
+    Dialog,
+    useDialog,
     Form,
     Icon,
     Menu,

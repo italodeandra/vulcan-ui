@@ -2,7 +2,7 @@ import React from 'react'
 import { classNames } from '../index'
 import './Card.scss'
 
-const Card = ({ children, className, rounder }) => {
+const Card = ({ children, className, rounder, onClick }) => {
     className = classNames(
         className,
         'vui-Card',
@@ -10,7 +10,7 @@ const Card = ({ children, className, rounder }) => {
     )
 
     return (
-        <div className={className}>
+        <div className={className} onClick={onClick}>
             {children}
         </div>
     )
