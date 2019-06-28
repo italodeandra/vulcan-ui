@@ -3,6 +3,7 @@ import { classNames } from '../index';
 import './Icon.scss';
 import account from './icons/account';
 import accountGroup from './icons/accountGroup';
+import arrowDown from './icons/arrowDown';
 import autoFix from './icons/autoFix';
 import calendar from './icons/calendar';
 import checkCircleOutline from './icons/checkCircleOutline';
@@ -26,6 +27,7 @@ import speedometer from './icons/speedometer';
 var icons = {
   account: account,
   accountGroup: accountGroup,
+  arrowDown: arrowDown,
   autoFix: autoFix,
   calendar: calendar,
   checkCircleOutline: checkCircleOutline,
