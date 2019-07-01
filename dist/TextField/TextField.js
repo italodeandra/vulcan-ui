@@ -17,6 +17,10 @@ function checkIfIsCounter(value) {
   return new RegExp('^[0-9]+\\/[0-9]+$').test(value);
 }
 
+function checkValue(value) {
+  return typeof value !== 'undefined' && value !== null;
+}
+
 var TextField = function TextField(_ref) {
   var className = _ref.className,
       inputClassName = _ref.inputClassName,
@@ -76,12 +80,12 @@ var TextField = function TextField(_ref) {
       isFocused = _useState4[0],
       setIsFocused = _useState4[1];
 
-  var _useState5 = useState(!!defaultValue),
+  var _useState5 = useState(checkValue(defaultValue)),
       _useState6 = _slicedToArray(_useState5, 2),
       isFilled = _useState6[0],
       setIsFilled = _useState6[1];
 
-  var _useState7 = useState(!defaultValue),
+  var _useState7 = useState(!checkValue(defaultValue)),
       _useState8 = _slicedToArray(_useState7, 2),
       isPristine = _useState8[0],
       setIsPristine = _useState8[1];
@@ -100,7 +104,7 @@ var TextField = function TextField(_ref) {
     var newValue = format.parse(target ? target.value : e);
     setValue(newValue);
     setIsPristine(false);
-    setIsFilled(!!newValue);
+    setIsFilled(checkValue(newValue));
     onChange && onChange(newValue);
   };
 
@@ -109,7 +113,7 @@ var TextField = function TextField(_ref) {
       var newValue = defaultValue;
       setIsPristine(false);
       setValue(format.parse(newValue));
-      setIsFilled(!!newValue);
+      setIsFilled(checkValue(newValue));
     }
   }, [defaultValue]);
 
@@ -120,7 +124,7 @@ var TextField = function TextField(_ref) {
         break;
 
       case 'onAutoFillCancel':
-        setIsFilled(!!value);
+        setIsFilled(checkValue(value));
         break;
 
       default:

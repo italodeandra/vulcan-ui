@@ -15,6 +15,10 @@ function checkIfIsCounter(value) {
     return new RegExp('^[0-9]+\\/[0-9]+$').test(value)
 }
 
+function checkValue(value) {
+    return typeof value !== 'undefined' && value !== null
+}
+
 const TextField = ({
                        className,
                        inputClassName,
@@ -56,8 +60,8 @@ const TextField = ({
     }
     const [value, setValue] = useState(defaultValue)
     const [isFocused, setIsFocused] = useState(false)
-    const [isFilled, setIsFilled] = useState(!!defaultValue)
-    const [isPristine, setIsPristine] = useState(!defaultValue)
+    const [isFilled, setIsFilled] = useState(checkValue(defaultValue))
+    const [isPristine, setIsPristine] = useState(!checkValue(defaultValue))
     const [hasError, errorMessage, setCustomErrorMessage, validate] = useValidation(value, validation)
 
     className = classNames(
@@ -81,7 +85,7 @@ const TextField = ({
 
         setValue(newValue)
         setIsPristine(false)
-        setIsFilled(!!newValue)
+        setIsFilled(checkValue(newValue))
         onChange && onChange(newValue)
     }
 
@@ -91,7 +95,7 @@ const TextField = ({
 
             setIsPristine(false)
             setValue(format.parse(newValue))
-            setIsFilled(!!newValue)
+            setIsFilled(checkValue(newValue))
         }
     }, [defaultValue])
 
@@ -101,7 +105,7 @@ const TextField = ({
                 setIsFilled(true)
                 break
             case 'onAutoFillCancel':
-                setIsFilled(!!value)
+                setIsFilled(checkValue(value))
                 break
             default:
         }

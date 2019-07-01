@@ -1,6 +1,10 @@
 import { useState } from 'react'
 import { useDeepCompareEffect } from '../index'
 
+function checkValue(value) {
+    return typeof value !== 'undefined' && value !== null
+}
+
 function useValidation(value, validation) {
     const [hasError, setHasError] = useState(false)
     const [errorText, setErrorMessage] = useState(null)
@@ -16,7 +20,7 @@ function useValidation(value, validation) {
 
         if (validation) {
             if (validation.required) {
-                if (!value) {
+                if (!checkValue(value)) {
                     setHasError(true)
                     setErrorMessage(validation.required.message || validation.required)
                     return
@@ -27,7 +31,7 @@ function useValidation(value, validation) {
                 const maxLength = {}
                 maxLength.length = validation.maxLength.length || validation.maxLength
                 maxLength.message = validation.maxLength.message || (`${value.length}/${maxLength.length}`)
-                if (typeof value === 'undefined' || value === null || value.length > maxLength.length) {
+                if (!checkValue(value) || value.length > maxLength.length) {
                     setHasError(true)
                     setErrorMessage(maxLength.message)
                     return
@@ -38,7 +42,7 @@ function useValidation(value, validation) {
                 const minLength = {}
                 minLength.length = validation.minLength.length || validation.minLength
                 minLength.message = validation.minLength.message
-                if (typeof value === 'undefined' || value === null || value.length < minLength.length) {
+                if (!checkValue(value) || value.length < minLength.length) {
                     setHasError(true)
                     setErrorMessage(minLength.message)
                     return
@@ -49,7 +53,7 @@ function useValidation(value, validation) {
                 const minAmount = {}
                 minAmount.amount = validation.minAmount.amount || validation.minAmount
                 minAmount.message = validation.minAmount.message
-                if (typeof value === 'undefined' || value === null || parseFloat(value) < minAmount.amount) {
+                if (!checkValue(value) || parseFloat(value) < minAmount.amount) {
                     setHasError(true)
                     setErrorMessage(minAmount.message)
                     return
@@ -60,7 +64,7 @@ function useValidation(value, validation) {
                 const maxAmount = {}
                 maxAmount.amount = validation.maxAmount.amount || validation.maxAmount
                 maxAmount.message = validation.maxAmount.message
-                if (typeof value === 'undefined' || value === null || parseFloat(value) > maxAmount.amount) {
+                if (!checkValue(value) || parseFloat(value) > maxAmount.amount) {
                     setHasError(true)
                     setErrorMessage(maxAmount.message)
                     return
