@@ -17,8 +17,20 @@ function Tabs(_ref) {
       setCurrentTabPosition = _useState2[1];
 
   useEffect(function () {
-    var tabRect = tabsRef.current.querySelectorAll('.vui-Tabs-Tab')[context.currentPage].getBoundingClientRect();
+    var tabRect;
     var tabsRect = tabsRef.current.getBoundingClientRect();
+
+    if (context.currentPage > -1) {
+      tabRect = tabsRef.current.querySelectorAll('.vui-Tabs-Tab')[context.currentPage].getBoundingClientRect();
+    } else {
+      tabRect = {
+        width: 0,
+        height: 0,
+        top: tabsRect.top - tabsRect.height,
+        left: tabsRect.left
+      };
+    }
+
     setCurrentTabPosition({
       width: tabRect.width,
       top: tabsRect.top - tabRect.top + tabRect.height,

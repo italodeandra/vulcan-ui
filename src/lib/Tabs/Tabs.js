@@ -9,8 +9,13 @@ function Tabs({ children, tabs }) {
     const [currentTabPosition, setCurrentTabPosition] = useState({})
 
     useEffect(() => {
-        const tabRect = tabsRef.current.querySelectorAll('.vui-Tabs-Tab')[context.currentPage].getBoundingClientRect()
+        let tabRect
         const tabsRect = tabsRef.current.getBoundingClientRect()
+        if (context.currentPage > -1) {
+            tabRect = tabsRef.current.querySelectorAll('.vui-Tabs-Tab')[context.currentPage].getBoundingClientRect()
+        } else {
+            tabRect = { width: 0, height: 0, top: tabsRect.top - tabsRect.height, left: tabsRect.left }
+        }
         setCurrentTabPosition({
             width: tabRect.width,
             top: tabsRect.top - tabRect.top + tabRect.height,

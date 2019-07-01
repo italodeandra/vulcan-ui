@@ -23,6 +23,7 @@ import useSnackbar from './Snackbar/useSnackbar'
 import Spinner from './Spinner/Spinner'
 import Tabs from './Tabs/Tabs'
 import TextField from './TextField/TextField'
+import base64 from './Utils/base64'
 import caretPosition from './Utils/caretPosition'
 import classNames from './Utils/classNames'
 import createSharedStateHook from './Utils/createSharedStateHook'
@@ -57,6 +58,7 @@ export {
     usePortal,
     useScroll,
 
+    base64,
     caretPosition,
     classNames,
     createSharedStateHook,

@@ -5,7 +5,7 @@ import useTitle from './useTitle'
 const TabsDemo = () => {
     const [, setTitle] = useTitle()
     useEffect(() => setTitle('Tabs'))
-    const tabs = Tabs.Context(0)
+    const tabs = Tabs.Context(-1)
 
     return (
         <>

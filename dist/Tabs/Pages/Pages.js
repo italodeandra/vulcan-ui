@@ -18,8 +18,12 @@ export var Pages = function Pages(_ref) {
 
   var setPagesSize = function setPagesSize() {
     setTimeout(function () {
-      var page = pagesRef.current.querySelectorAll('.vui-Tabs-Page')[currentPageRef.current];
-      setPagesHeight(page.getBoundingClientRect().height);
+      if (currentPageRef.current > -1) {
+        var page = pagesRef.current.querySelectorAll('.vui-Tabs-Page')[currentPageRef.current];
+        setPagesHeight(page.getBoundingClientRect().height);
+      } else {
+        setPagesHeight(0);
+      }
     });
     clearTimeout(removeHeightTimer.current);
     removeHeightTimer.current = setTimeout(function () {
@@ -28,8 +32,13 @@ export var Pages = function Pages(_ref) {
   };
 
   useEffect(function () {
-    var page = pagesRef.current.querySelectorAll('.vui-Tabs-Page')[currentPageRef.current];
-    setPagesHeight(page.getBoundingClientRect().height);
+    if (currentPageRef.current > -1) {
+      var page = pagesRef.current.querySelectorAll('.vui-Tabs-Page')[currentPageRef.current];
+      setPagesHeight(page.getBoundingClientRect().height);
+    } else {
+      setPagesHeight(0);
+    }
+
     currentPageRef.current = context.currentPage;
     setPagesSize();
   }, [context.currentPage]);

@@ -10,8 +10,12 @@ export const Pages = ({ children, tabs }) => {
 
     const setPagesSize = () => {
         setTimeout(() => {
-            const page = pagesRef.current.querySelectorAll('.vui-Tabs-Page')[currentPageRef.current]
-            setPagesHeight(page.getBoundingClientRect().height)
+            if (currentPageRef.current > -1) {
+                const page = pagesRef.current.querySelectorAll('.vui-Tabs-Page')[currentPageRef.current]
+                setPagesHeight(page.getBoundingClientRect().height)
+            } else {
+                setPagesHeight(0)
+            }
         })
         clearTimeout(removeHeightTimer.current)
         removeHeightTimer.current = setTimeout(() => {
@@ -20,9 +24,14 @@ export const Pages = ({ children, tabs }) => {
     }
 
     useEffect(() => {
-        const page = pagesRef.current.querySelectorAll('.vui-Tabs-Page')[currentPageRef.current]
-        setPagesHeight(page.getBoundingClientRect().height)
+        if (currentPageRef.current > -1) {
+            const page = pagesRef.current.querySelectorAll('.vui-Tabs-Page')[currentPageRef.current]
+            setPagesHeight(page.getBoundingClientRect().height)
+        } else {
+            setPagesHeight(0)
+        }
         currentPageRef.current = context.currentPage
+
         setPagesSize()
     }, [context.currentPage])
 

@@ -53,7 +53,7 @@
     position: absolute;
     height: 2px;
     background-color: #6200ee;
-    transition-property: left, top;
+    transition-property: width, left, top;
     transition-duration: 280ms;
     transition-timing-function: $vui-Motion-Speed-Standard-Easing;
     margin-top: -2px;
