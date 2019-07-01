@@ -1,3 +1,5 @@
+import axios from 'axios'
+import * as queryString from 'query-string'
 import AppBar from './AppBar/AppBar'
 import Button from './Button/Button'
 import Card from './Card/Card'
@@ -16,7 +18,7 @@ import useMenu from './Menu/useMenu'
 import NavigationDrawer from './NavigationDrawer/NavigationDrawer'
 import PrettyJson from './PrettyJson/PrettyJson'
 import ProgressBar from './ProgressBar/ProgressBar'
-import Snackbar from './Snackbar/Snackbar'
+import Snackbars from './Snackbar/Snackbars'
 import useSnackbar from './Snackbar/useSnackbar'
 import Spinner from './Spinner/Spinner'
 import Tabs from './Tabs/Tabs'
@@ -43,7 +45,7 @@ export {
     NavigationDrawer,
     PrettyJson,
     ProgressBar,
-    Snackbar,
+    Snackbars,
     useSnackbar,
     Spinner,
     Tabs,
@@ -61,5 +63,8 @@ export {
     disableBodyScroll,
     jsonToParams,
     jsonToQueryString,
-    polyfill
+    polyfill,
+
+    queryString,
+    axios
 }

@@ -1,5 +1,4 @@
-import axios from 'axios';
-import { jsonToParams, jsonToQueryString } from '../../index';
+import { axios, jsonToParams, jsonToQueryString } from '../../index';
 
 var AutocompleteDataSource = function AutocompleteDataSource(request, query) {
   var page = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 0;

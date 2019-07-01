@@ -6,7 +6,7 @@ import usePortal from '../Hooks/usePortal'
 import { Button, useSnackbar } from '../index'
 import './Snackbar.scss'
 
-const Snackbar = () => {
+const Snackbars = () => {
     const [, snackbars] = useSnackbar()
     const portalContainer = usePortal('vui-Snackbar-container')
 
@@ -39,4 +39,4 @@ const Snackbar = () => {
     )
 }
 
-export default Snackbar
+export default Snackbars

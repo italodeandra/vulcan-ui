@@ -1,4 +1,8 @@
-@mixin VuiNavigationDrawerTheme($class, $primary) {
+@mixin VuiNavigationDrawerTheme($class, $primary, $gradient) {
+  @if $gradient {
+    $gradient: linear-gradient(45deg, $primary, lighten($primary, 20));
+  }
+
   #{$class} .vui-NavigationDrawer {
     .vui-NavigationDrawer-item {
       &.active {
@@ -6,12 +10,18 @@
         fill: $primary;
 
         &:before {
-          background-color: $primary;
+          background: $primary;
+          @if $gradient {
+            background: if($gradient, $gradient, $primary);
+          }
         }
       }
 
       .badge {
-        background-color: $primary;
+        background: $primary;
+        @if $gradient {
+          background: if($gradient, $gradient, $primary);
+        }
       }
     }
   }

@@ -18,7 +18,7 @@ import TextFieldAutocompleteDemo from './demo/TextFieldAutocompleteDemo'
 import TextFieldChipsDemo from './demo/TextFieldChipsDemo'
 import TextFielDemo from './demo/TextFieldDemo'
 import useTitle from './demo/useTitle'
-import { AppBar, Button, Icon, NavigationDrawer, polyfill, Snackbar, useLocalStorage, useMobile } from './lib'
+import { AppBar, Button, Icon, NavigationDrawer, polyfill, Snackbars, useLocalStorage, useMobile } from './lib'
 
 polyfill()
 
@@ -186,7 +186,7 @@ const App = () => {
                     <Route path='/text-field-autocomplete' component={TextFieldAutocompleteDemo} />
                     <Route path='/text-field-chips' component={TextFieldChipsDemo} />
                 </div>
-                <Snackbar />
+                <Snackbars />
             </Router>
         </div>
     )

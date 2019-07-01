@@ -1,11 +1,18 @@
-@mixin VuiAppBarTheme($class, $primary, $color-on-primary) {
+@mixin VuiAppBarTheme($class, $primary, $color-on-primary, $gradient) {
+  @if $gradient {
+    $gradient: linear-gradient(45deg, $primary, lighten($primary, 20));
+  }
+
   #{$class} .vui-AppBar {
-    background-color: $primary;
+    background: $primary;
+    @if $gradient {
+      background: if($gradient, $gradient, $primary);
+    }
     color: $color-on-primary;
     fill: $color-on-primary;
 
     :before {
-      background-color: $color-on-primary !important;
+      background: $color-on-primary !important;
     }
   }
 }

@@ -24,6 +24,8 @@ import progressCheck from './icons/progressCheck';
 import rss from './icons/rss';
 import sitemap from './icons/sitemap';
 import speedometer from './icons/speedometer';
+import eye from './icons/eye';
+import eyeOff from './icons/eyeOff';
 var icons = {
   account: account,
   accountGroup: accountGroup,
@@ -34,6 +36,8 @@ var icons = {
   chevronUp: chevronUp,
   close: close,
   compass: compass,
+  eye: eye,
+  eyeOff: eyeOff,
   fileChart: fileChart,
   filterVariant: filterVariant,
   fire: fire,

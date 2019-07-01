@@ -6,7 +6,7 @@ import usePortal from '../Hooks/usePortal';
 import { Button, useSnackbar } from '../index';
 import './Snackbar.scss';
 
-var Snackbar = function Snackbar() {
+var Snackbars = function Snackbars() {
   var _useSnackbar = useSnackbar(),
       _useSnackbar2 = _slicedToArray(_useSnackbar, 2),
       snackbars = _useSnackbar2[1];
@@ -39,4 +39,4 @@ var Snackbar = function Snackbar() {
   })), portalContainer);
 };
 
-export default Snackbar;
+export default Snackbars;

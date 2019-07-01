@@ -1,5 +1,4 @@
-import axios from 'axios'
-import { jsonToParams, jsonToQueryString } from '../../index'
+import { axios, jsonToParams, jsonToQueryString } from '../../index'
 
 const AutocompleteDataSource = (request, query, page = 0) => {
     query = query || ''

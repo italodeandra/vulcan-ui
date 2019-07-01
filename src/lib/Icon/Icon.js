@@ -24,6 +24,8 @@ import progressCheck from './icons/progressCheck'
 import rss from './icons/rss'
 import sitemap from './icons/sitemap'
 import speedometer from './icons/speedometer'
+import eye from './icons/eye'
+import eyeOff from './icons/eyeOff'
 
 const icons = {
     account,
@@ -35,6 +37,8 @@ const icons = {
     chevronUp,
     close,
     compass,
+    eye,
+    eyeOff,
     fileChart,
     filterVariant,
     fire,
