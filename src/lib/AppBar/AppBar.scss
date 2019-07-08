@@ -18,8 +18,13 @@ $height: 56px;
   align-items: center;
   flex-wrap: wrap;
 
-  :before {
-    background-color: #ffffff !important;
+  .vui-Button.vui-Button {
+    color: #ffffff;
+    fill: #ffffff;
+
+    &:before {
+      background-color: #ffffff;
+    }
   }
 
   &.sticky {

@@ -3,12 +3,14 @@ import { useEffect, useState } from 'react'
 function createSharedStateHook(initialState) {
     let state = initialState
     const listeners = []
+    const stateRef = {}
 
     function useSharedState() {
         const [sharedState, setSharedState] = useState(state)
 
         const setAllStates = (newState) => {
             state = newState
+            stateRef.value = state
             listeners.forEach(setState => setState(state))
         }
 
@@ -22,7 +24,8 @@ function createSharedStateHook(initialState) {
 
         return [
             sharedState,
-            setAllStates
+            setAllStates,
+            stateRef
         ]
     }
 

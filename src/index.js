@@ -25,6 +25,7 @@ polyfill()
 const App = () => {
     const [title] = useTitle()
     const AppContainerRef = useRef(null)
+    console.log(AppContainerRef.current)
     const AppBarRef = useRef(null)
     const [isMobile] = useMobile()
     const [isNavigationDrawerOpen, setIsNavigationDrawerOpen] = useLocalStorage('IsNavigationDrawerOpen', !isMobile)

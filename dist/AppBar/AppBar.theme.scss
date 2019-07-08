@@ -11,8 +11,13 @@
     color: $color-on-primary;
     fill: $color-on-primary;
 
-    :before {
-      background: $color-on-primary !important;
+    .vui-Button.vui-Button {
+      color: $color-on-primary;
+      fill: $color-on-primary;
+
+      &:before {
+        background-color: $color-on-primary !important;
+      }
     }
   }
 }

@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 function createSharedStateHook(initialState) {
   var state = initialState;
   var listeners = [];
+  var stateRef = {};
 
   function useSharedState() {
     var _useState = useState(state),
@@ -13,6 +14,7 @@ function createSharedStateHook(initialState) {
 
     var setAllStates = function setAllStates(newState) {
       state = newState;
+      stateRef.value = state;
       listeners.forEach(function (setState) {
         return setState(state);
       });
@@ -24,7 +26,7 @@ function createSharedStateHook(initialState) {
         listeners.splice(listeners.indexOf(setSharedState), 1);
       };
     }, []);
-    return [sharedState, setAllStates];
+    return [sharedState, setAllStates, stateRef];
   }
 
   return useSharedState;

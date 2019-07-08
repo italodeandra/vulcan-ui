@@ -17,11 +17,12 @@ var Button = function Button(_ref) {
       type = _ref.type,
       to = _ref.to,
       setRef = _ref.setRef,
-      props = _objectWithoutProperties(_ref, ["children", "className", "style", "outlined", "text", "icon", "onClick", "autoFocus", "type", "to", "setRef"]);
+      disabled = _ref.disabled,
+      props = _objectWithoutProperties(_ref, ["children", "className", "style", "outlined", "text", "icon", "onClick", "autoFocus", "type", "to", "setRef", "disabled"]);
 
   type = type || 'button';
   var ref = useRef(null);
-  className = classNames(className, 'vui-Button', !outlined && !text && !icon && 'contained', outlined && 'outlined', text && 'text', icon && 'icon');
+  className = classNames(className, 'vui-Button', !outlined && !text && !icon && 'contained', outlined && 'outlined', text && 'text', icon && 'icon', disabled && 'disabled');
   useEffect(function () {
     if (autoFocus) {
       ref.current.focus();
@@ -38,7 +39,8 @@ var Button = function Button(_ref) {
     style: style,
     onClick: onClick,
     'auto-focus': autoFocus ? 'true' : undefined,
-    type: type
+    type: type,
+    disabled: disabled
   });
 
   if (to) {

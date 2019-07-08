@@ -1,6 +1,6 @@
 import _slicedToArray from "@babel/runtime/helpers/esm/slicedToArray";
 //TODO: Remove the manual animation from the scrim and use the *future* Animation component
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useLayoutEffect, useRef, useState } from 'react';
 import { classNames, useMobile } from '../index';
 import disableBodyScroll from '../Utils/disableBodyScroll';
 import Divider from './Divider/Divider';
@@ -66,21 +66,18 @@ var NavigationDrawer = function NavigationDrawer(_ref) {
     }
   }, [containerRef, isMobile]);
   useEffect(function () {
-    if (!isMobile) {
-      var containerRefEl = containerRef && containerRef.current;
+    var containerRefEl = containerRef && containerRef.current;
 
-      if (containerRefEl) {
+    if (containerRefEl) {
+      containerRefEl.classList.add('animation-ready');
+
+      if (!isMobile) {
         if (collapsable) {
           containerRefEl.classList.add('vui-NavigationDrawer-collapsable');
         }
 
         containerRefEl.classList[innerOpen ? 'add' : 'remove']('vui-NavigationDrawer-open');
       }
-
-      return function () {
-        containerRefEl.classList.remove('vui-NavigationDrawer-open');
-        containerRefEl.classList.remove('vui-NavigationDrawer-collapsable');
-      };
     }
 
     if (innerOpen) {
@@ -91,6 +88,11 @@ var NavigationDrawer = function NavigationDrawer(_ref) {
 
       _autofocusEl && _autofocusEl.focus();
     }
+
+    return function () {
+      containerRefEl.classList.remove('vui-NavigationDrawer-open');
+      containerRefEl.classList.remove('vui-NavigationDrawer-collapsable');
+    };
   }, [containerRef, innerOpen, collapsable, isMobile, appBarRef]);
   useEffect(function () {
     setTop(appBarRef.current.getBoundingClientRect().height);

@@ -7,19 +7,18 @@ var snackbarIndex = 0;
 
 var useSnackbar = function useSnackbar() {
   var _useSnackbarsSharedSt = useSnackbarsSharedState(),
-      _useSnackbarsSharedSt2 = _slicedToArray(_useSnackbarsSharedSt, 2),
+      _useSnackbarsSharedSt2 = _slicedToArray(_useSnackbarsSharedSt, 3),
       snackbars = _useSnackbarsSharedSt2[0],
-      setSnackbars = _useSnackbarsSharedSt2[1];
+      setSnackbars = _useSnackbarsSharedSt2[1],
+      snackbarRef = _useSnackbarsSharedSt2[2];
 
   var closeSnackbar = function closeSnackbar(snackbar) {
-    setSnackbars(function (ss) {
-      var newSs = _toConsumableArray(ss);
+    var newSs = _toConsumableArray(snackbarRef.value);
 
-      newSs.splice(newSs.findIndex(function (s) {
-        return s.id === snackbar.id;
-      }), 1);
-      return newSs;
-    });
+    newSs.splice(newSs.findIndex(function (s) {
+      return s.id === snackbar.id;
+    }), 1);
+    setSnackbars(newSs);
   };
 
   var showSnackbar = function showSnackbar(message, delay, action) {

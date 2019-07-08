@@ -7,14 +7,12 @@ const useSnackbarsSharedState = createSharedStateHook(initialState)
 let snackbarIndex = 0
 
 const useSnackbar = () => {
-    const [snackbars, setSnackbars] = useSnackbarsSharedState()
+    const [snackbars, setSnackbars, snackbarRef] = useSnackbarsSharedState()
 
     const closeSnackbar = (snackbar) => {
-        setSnackbars(ss => {
-            const newSs = [...ss]
-            newSs.splice(newSs.findIndex(s => s.id === snackbar.id), 1)
-            return newSs
-        })
+        const newSs = [...snackbarRef.value]
+        newSs.splice(newSs.findIndex(s => s.id === snackbar.id), 1)
+        setSnackbars(newSs)
     }
 
     const showSnackbar = (message, delay, action) => {

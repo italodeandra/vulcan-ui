@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import { classNames } from '../index'
 import './Button.scss'
 
-const Button = ({ children, className, style, outlined, text, icon, onClick, autoFocus, type, to, setRef, ...props }) => {
+const Button = ({ children, className, style, outlined, text, icon, onClick, autoFocus, type, to, setRef, disabled, ...props }) => {
     type = type || 'button'
     const ref = useRef(null)
 
@@ -13,7 +13,8 @@ const Button = ({ children, className, style, outlined, text, icon, onClick, aut
         (!outlined && !text && !icon) && 'contained',
         (outlined) && 'outlined',
         (text) && 'text',
-        (icon) && 'icon'
+        (icon) && 'icon',
+        (disabled) && 'disabled'
     )
 
     useEffect(() => {
@@ -30,12 +31,13 @@ const Button = ({ children, className, style, outlined, text, icon, onClick, aut
 
     props = {
         ...props,
-        ref: ref,
-        className: className,
-        style: style,
-        onClick: onClick,
+        ref,
+        className,
+        style,
+        onClick,
         'auto-focus': autoFocus ? 'true' : undefined,
-        type: type
+        type,
+        disabled
     }
 
     if (to) {

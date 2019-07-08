@@ -52,34 +52,50 @@
 
   &.contained {
     //box-shadow: $vui-Elevation-z2;
-    background-color: #6200eeff;
+    background: #6200eeff;
     color: #ffffff;
 
     &:before {
-      background-color: #ffffff;
+      background: #ffffff;
     }
 
     &:active {
       box-shadow: $vui-Elevation-z8;
     }
+
+    &.disabled.disabled {
+      background: rgba(#000000, 0.15);
+      color: rgba(#000000, 0.4);
+      pointer-events: none;
+    }
   }
 
   &.outlined {
-    background-color: transparent;
+    background: transparent;
     border: 1px solid rgba(#000000de, 0.3);
     color: #6200eeff;
 
     &:before {
-      background-color: #6200eeff;
+      background: #6200eeff;
+    }
+
+    &.disabled.disabled {
+      color: rgba(#000000, 0.5);
+      pointer-events: none;
     }
   }
 
   &.text {
-    background-color: transparent;
+    background: transparent;
     color: #6200eeff;
 
     &:before {
-      background-color: #6200eeff;
+      background: #6200eeff;
+    }
+
+    &.disabled.disabled {
+      color: rgba(#000000, 0.5);
+      pointer-events: none;
     }
   }
 
@@ -89,11 +105,18 @@
     border-radius: 18px;
     box-shadow: none;
     padding: 0;
-    background-color: transparent;
+    background: transparent;
     color: #000000de;
+    fill: #000000de;
 
     &:before {
-      background-color: #000000de;
+      background: #000000de;
+    }
+
+    &.disabled.disabled {
+      color: rgba(#000000, 0.5);
+      fill: rgba(#000000, 0.5);
+      pointer-events: none;
     }
   }
 }

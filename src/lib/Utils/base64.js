@@ -43,7 +43,7 @@ var Base64 = {
         var enc1, enc2, enc3, enc4
         var i = 0
 
-        input = input.replace(/[^A-Za-z0-9\+\/\=]/g, '')
+        input = input.replace(/[^A-Za-z0-9+/=]/g, '')
 
         while (i < input.length) {
 
@@ -58,10 +58,10 @@ var Base64 = {
 
             output = output + String.fromCharCode(chr1)
 
-            if (enc3 != 64) {
+            if (enc3 !== 64) {
                 output = output + String.fromCharCode(chr2)
             }
-            if (enc4 != 64) {
+            if (enc4 !== 64) {
                 output = output + String.fromCharCode(chr3)
             }
 

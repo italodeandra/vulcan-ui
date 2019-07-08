@@ -1,6 +1,6 @@
 //TODO: Remove the manual animation from the scrim and use the *future* Animation component
 
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useEffect, useLayoutEffect, useRef, useState } from 'react'
 import { classNames, useMobile } from '../index'
 import disableBodyScroll from '../Utils/disableBodyScroll'
 import Divider from './Divider/Divider'
@@ -54,20 +54,17 @@ const NavigationDrawer = ({ className, children, open, containerRef, collapsable
     }, [containerRef, isMobile])
 
     useEffect(() => {
-        if (!isMobile) {
-            const containerRefEl = containerRef && containerRef.current
+        const containerRefEl = containerRef && containerRef.current
 
-            if (containerRefEl) {
+        if (containerRefEl) {
+            containerRefEl.classList.add('animation-ready')
+
+            if (!isMobile) {
                 if (collapsable) {
                     containerRefEl.classList.add('vui-NavigationDrawer-collapsable')
                 }
 
                 containerRefEl.classList[innerOpen ? 'add' : 'remove']('vui-NavigationDrawer-open')
-            }
-
-            return () => {
-                containerRefEl.classList.remove('vui-NavigationDrawer-open')
-                containerRefEl.classList.remove('vui-NavigationDrawer-collapsable')
             }
         }
 
@@ -77,6 +74,11 @@ const NavigationDrawer = ({ className, children, open, containerRef, collapsable
         } else if (appBarRef) {
             const autofocusEl = appBarRef.current.querySelector('[auto-focus]')
             autofocusEl && autofocusEl.focus()
+        }
+
+        return () => {
+            containerRefEl.classList.remove('vui-NavigationDrawer-open')
+            containerRefEl.classList.remove('vui-NavigationDrawer-collapsable')
         }
     }, [containerRef, innerOpen, collapsable, isMobile, appBarRef])
 
