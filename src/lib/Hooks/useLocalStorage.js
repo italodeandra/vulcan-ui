@@ -1,16 +1,19 @@
-import { useEffect, useMemo } from 'react'
+import { useEffect } from 'react'
 import { useDeepCompareEffect } from '../index'
 import createSharedStateHook from '../Utils/createSharedStateHook'
+
+const localStorageSharedState = {}
 
 const useLocalStorage = (name, initialValue) => {
     if (!localStorage.getItem(name) && initialValue) {
         localStorage.setItem(name, JSON.stringify(initialValue))
     }
 
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    const useSharedState = useMemo(() => createSharedStateHook(JSON.parse(localStorage.getItem(name))), [])
+    if (!localStorageSharedState[name]) {
+        localStorageSharedState[name] = createSharedStateHook(JSON.parse(localStorage.getItem(name)))
+    }
 
-    const [state, setState] = useSharedState()
+    const [state, setState] = localStorageSharedState[name]()
 
     useEffect(() => {
         setState(JSON.parse(localStorage.getItem(name)))
