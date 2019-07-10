@@ -51,6 +51,15 @@
     right: 56px;
     overflow-y: auto;
 
+    .vui-AppBar .vui-Button.vui-Button {
+      color: rgba(#000000de, 0.6);
+      fill: rgba(#000000de, 0.6);
+
+      &:before {
+        background-color: rgba(#000000de, 0.6);
+      }
+    }
+
     &.open {
       box-shadow: $vui-Elevation-z16;
     }
