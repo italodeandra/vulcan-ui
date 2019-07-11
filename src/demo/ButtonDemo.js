@@ -53,6 +53,18 @@ const ButtonDemo = () => {
     <Icon name='menu' />
 </Button>`}</pre>
             </>
+            <>
+                <h2>With Icon</h2>
+                <div>
+                    <Button onClick={() => alert('Button with icon clicked')}>
+                        <Icon name='printer' />
+                        With Icon
+                    </Button>
+                </div>
+                <pre>{`<Button icon onClick={() => alert('Icon button clicked')}>
+    <Icon name='menu' />
+</Button>`}</pre>
+            </>
         </>
     )
 }

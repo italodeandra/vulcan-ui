@@ -17,9 +17,11 @@ const DataTable = ({ children, onSortChange, columns: defaultColumns }) => {
 
     return (
         <Context.Provider value={[columns, setColumns, onSortChange]}>
-            <table className='vui-DataTable'>
-                {children}
-            </table>
+            <div className='vui-DataTable-overflow'>
+                <table className='vui-DataTable'>
+                    {children}
+                </table>
+            </div>
         </Context.Provider>
     )
 }

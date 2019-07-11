@@ -54,6 +54,7 @@
     //box-shadow: $vui-Elevation-z2;
     background: #6200eeff;
     color: #ffffff;
+    fill: #ffffff;
 
     &:before {
       background: #ffffff;
@@ -74,6 +75,7 @@
     background: transparent;
     border: 1px solid rgba(#000000de, 0.3);
     color: #6200eeff;
+    fill: #6200eeff;
 
     &:before {
       background: #6200eeff;
@@ -88,6 +90,7 @@
   &.text {
     background: transparent;
     color: #6200eeff;
+    fill: #6200eeff;
 
     &:before {
       background: #6200eeff;
@@ -117,6 +120,13 @@
       color: rgba(#000000, 0.5);
       fill: rgba(#000000, 0.5);
       pointer-events: none;
+    }
+  }
+
+  &:not(.icon) {
+    :first-child {
+      margin-left: -4px;
+      margin-right: 8px;
     }
   }
 }

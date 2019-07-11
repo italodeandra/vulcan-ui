@@ -10,10 +10,15 @@
   font-weight: 500;
 }
 
+.vui-DataTable-overflow {
+  overflow-x: auto;
+}
+
 .vui-DataTable {
   width: 100%;
   border-spacing: 0;
   background-color: white;
+  white-space: nowrap;
 
   .vui-DataTable-Column {
     border-bottom: 2px solid rgba(#0000001e, 0.12);
