@@ -1,5 +1,5 @@
-import React, { useEffect } from 'react'
-import { Button, Icon } from '../lib'
+import React, {useEffect} from 'react'
+import {Button, Icon} from '../lib'
 import useTitle from './useTitle'
 
 const ButtonDemo = () => {
@@ -61,8 +61,33 @@ const ButtonDemo = () => {
                         With Icon
                     </Button>
                 </div>
-                <pre>{`<Button icon onClick={() => alert('Icon button clicked')}>
-    <Icon name='menu' />
+                <pre>{`<Button onClick={() => alert('Button with icon clicked')}>
+    <Icon name='printer' />
+    With Icon
+</Button>`}</pre>
+            </>
+            <>
+                <h2>Floating Action Button</h2>
+                <div>
+                    <Button fab onClick={() => alert('Floating action button clicked')}>
+                        <Icon name='printer'/>
+                    </Button>
+                </div>
+                <pre>{`<Button fab onClick={() => alert('Floating action button clicked')}>
+    <Icon name='printer' />
+</Button>`}</pre>
+            </>
+            <>
+                <h2>Extended Floating Action Button</h2>
+                <div>
+                    <Button fab onClick={() => alert('Extended floating action button clicked')}>
+                        <span className='text'>Print</span>
+                        <Icon className='icon' name='printer'/>
+                    </Button>
+                </div>
+                <pre>{`<Button fab onClick={() => alert('Extended floating action button clicked')}>
+    <span className='text'>Print</span>
+    <Icon className='icon' name='printer' />
 </Button>`}</pre>
             </>
         </>

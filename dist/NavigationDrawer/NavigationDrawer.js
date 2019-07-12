@@ -1,7 +1,7 @@
 import _slicedToArray from "@babel/runtime/helpers/esm/slicedToArray";
 //TODO: Remove the manual animation from the scrim and use the *future* Animation component
-import React, { useEffect, useLayoutEffect, useRef, useState } from 'react';
-import { classNames, useMobile } from '../index';
+import React, {useEffect, useRef, useState} from 'react';
+import {classNames, useMobile} from '../index';
 import disableBodyScroll from '../Utils/disableBodyScroll';
 import Divider from './Divider/Divider';
 import Header from './Header/Header';

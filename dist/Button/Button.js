@@ -1,8 +1,8 @@
 import _objectSpread from "@babel/runtime/helpers/esm/objectSpread";
 import _objectWithoutProperties from "@babel/runtime/helpers/esm/objectWithoutProperties";
-import React, { useEffect, useRef } from 'react';
-import { Link } from 'react-router-dom';
-import { classNames } from '../index';
+import React, {useEffect, useRef} from 'react';
+import {Link} from 'react-router-dom';
+import {classNames} from '../index';
 import './Button.scss';
 
 var Button = function Button(_ref) {
@@ -18,11 +18,12 @@ var Button = function Button(_ref) {
       to = _ref.to,
       setRef = _ref.setRef,
       disabled = _ref.disabled,
-      props = _objectWithoutProperties(_ref, ["children", "className", "style", "outlined", "text", "icon", "onClick", "autoFocus", "type", "to", "setRef", "disabled"]);
+      fab = _ref.fab,
+      props = _objectWithoutProperties(_ref, ["children", "className", "style", "outlined", "text", "icon", "onClick", "autoFocus", "type", "to", "setRef", "disabled", "fab"]);
 
   type = type || 'button';
   var ref = useRef(null);
-  className = classNames(className, 'vui-Button', !outlined && !text && !icon && 'contained', outlined && 'outlined', text && 'text', icon && 'icon', disabled && 'disabled');
+    className = classNames(className, 'vui-Button', !outlined && !text && !icon && !fab && 'contained', outlined && 'outlined', text && 'text', icon && 'icon', disabled && 'disabled', fab && 'fab');
   useEffect(function () {
     if (autoFocus) {
       ref.current.focus();

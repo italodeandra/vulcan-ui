@@ -1,20 +1,36 @@
-import React, { useEffect, useRef } from 'react'
-import { Link } from 'react-router-dom'
-import { classNames } from '../index'
+import React, {useEffect, useRef} from 'react'
+import {Link} from 'react-router-dom'
+import {classNames} from '../index'
 import './Button.scss'
 
-const Button = ({ children, className, style, outlined, text, icon, onClick, autoFocus, type, to, setRef, disabled, ...props }) => {
+const Button = ({
+                    children,
+                    className,
+                    style,
+                    outlined,
+                    text,
+                    icon,
+                    onClick,
+                    autoFocus,
+                    type,
+                    to,
+                    setRef,
+                    disabled,
+                    fab,
+                    ...props
+                }) => {
     type = type || 'button'
     const ref = useRef(null)
 
     className = classNames(
         className,
         'vui-Button',
-        (!outlined && !text && !icon) && 'contained',
+        (!outlined && !text && !icon && !fab) && 'contained',
         (outlined) && 'outlined',
         (text) && 'text',
         (icon) && 'icon',
-        (disabled) && 'disabled'
+        (disabled) && 'disabled',
+        (fab) && 'fab',
     )
 
     useEffect(() => {

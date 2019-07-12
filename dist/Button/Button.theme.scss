@@ -4,12 +4,14 @@
   }
 
   #{$class} .vui-Button {
-    &.contained {
+    &.contained,
+    &.fab {
       background: $primary;
       @if $gradient {
         background: if($gradient, $gradient, $primary);
       }
       color: $color-on-primary;
+      fill: $color-on-primary;
 
       &:before {
         background: $color-on-primary;
@@ -18,6 +20,7 @@
 
     &.outlined {
       color: $primary;
+      fill: $primary;
 
       &:before {
         background: $primary;
@@ -29,6 +32,7 @@
 
     &.text {
       color: $primary;
+      fill: $primary;
 
       &:before {
         background: $primary;

@@ -1,6 +1,7 @@
-import React, { useContext, useEffect } from 'react'
-import { classNames, Icon } from '../../index'
-import { Context } from '../DataTable'
+import React, {useContext, useEffect} from 'react'
+import {classNames, Icon} from '../../index'
+import {Context} from '../DataTable'
+import './Column.scss'
 
 const directions = ['asc', 'desc', null]
 

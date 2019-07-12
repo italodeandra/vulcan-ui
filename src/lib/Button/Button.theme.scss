@@ -4,7 +4,8 @@
   }
 
   #{$class} .vui-Button {
-    &.contained {
+    &.contained,
+    &.fab {
       background: $primary;
       @if $gradient {
         background: if($gradient, $gradient, $primary);

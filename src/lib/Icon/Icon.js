@@ -1,5 +1,5 @@
 import React from 'react'
-import { classNames } from '../index'
+import {classNames} from '../index'
 import './Icon.scss'
 import account from './icons/account'
 import accountGroup from './icons/accountGroup'
@@ -34,11 +34,13 @@ import speedometer from './icons/speedometer'
 import store from './icons/store'
 import truckCheck from './icons/truckCheck'
 import upload from './icons/upload'
+import arrowRight from "./icons/arrowRight";
 
 const icons = {
     account,
     accountGroup,
     arrowDown,
+    arrowRight,
     autoFix,
     calendar,
     calendarCheck,
@@ -71,10 +73,14 @@ const icons = {
     upload
 }
 
-const Icon = ({ className, name, onClick }) => (
-    <div className={classNames(className, 'vui-Icon')} onClick={onClick}>
-        {icons[name]()}
-    </div>
-)
+const Icon = ({className, name, onClick}) => {
+    if (!icons[name] || typeof icons[name] !== 'function') throw new Error(`Icon ${name} not installed`)
+
+    return (
+        <div className={classNames(className, 'vui-Icon')} onClick={onClick}>
+            {icons[name]()}
+        </div>
+    )
+}
 
 export default Icon

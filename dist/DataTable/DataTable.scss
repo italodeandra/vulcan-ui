@@ -10,62 +10,15 @@
   font-weight: 500;
 }
 
+.vui-DataTable-overflow {
+  overflow-x: auto;
+}
+
 .vui-DataTable {
   width: 100%;
   border-spacing: 0;
   background-color: white;
-
-  .vui-DataTable-Column {
-    border-bottom: 2px solid rgba(#0000001e, 0.12);
-    height: 48px;
-    text-align: left;
-    color: #00000099;
-    fill: #00000099;
-    font-size: 12px;
-    font-weight: 700;
-    padding: 0 16px;
-    box-sizing: border-box;
-
-    &.sortable {
-      cursor: pointer;
-    }
-
-    .order-icon {
-      opacity: 0;
-      display: inline-flex;
-      vertical-align: middle;
-      margin: -2px 4px 0 4px;
-      transition-timing-function: $vui-Motion-Speed-Standard-Easing;
-      transition-property: opacity, transform;
-      transition-duration: 210ms;
-
-      &.desc {
-        opacity: 1;
-        transform: rotate(180deg);
-      }
-
-      &.asc {
-        opacity: 1;
-      }
-
-      svg {
-        width: 20px;
-        height: 20px;
-      }
-    }
-  }
-
-  .vui-DataTable-Cell {
-    height: 48px;
-    font-size: 14px;
-    color: #000000de;
-    padding: 0 16px;
-    box-sizing: border-box;
-  }
-
-  .right-aligned {
-    text-align: right;
-  }
+  white-space: nowrap;
 
   .vui-DataTable-Row:not(:last-child) .vui-DataTable-Cell {
     border-bottom: 1px solid rgba(#0000001e, 0.08);

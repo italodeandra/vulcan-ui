@@ -50,7 +50,8 @@
     opacity: 0.20;
   }
 
-  &.contained {
+  &.contained,
+  &.fab {
     //box-shadow: $vui-Elevation-z2;
     background: #6200eeff;
     color: #ffffff;
@@ -120,6 +121,43 @@
       color: rgba(#000000, 0.5);
       fill: rgba(#000000, 0.5);
       pointer-events: none;
+    }
+  }
+
+  &.fab {
+    min-width: 40px;
+    border-radius: 28px;
+    height: 56px;
+    box-shadow: $vui-Elevation-z6;
+    padding: 0;
+
+    &:before {
+      margin-left: 8px;
+    }
+
+    :first-child:first-child {
+      margin-left: 8px;
+      margin-right: 8px;
+    }
+
+    :last-child {
+      margin-left: 0;
+      margin-right: 20px;
+    }
+
+    .text:first-child {
+      margin-left: 8px;
+      margin-right: 8px;
+    }
+
+    :first-child.text {
+      margin-left: 20px;
+      margin-right: 0;
+    }
+
+    :last-child.icon {
+      margin-left: 8px;
+      margin-right: 8px;
     }
   }
 
