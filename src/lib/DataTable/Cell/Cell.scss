@@ -1,0 +1,33 @@
+.vui-DataTable-Cell {
+  height: 48px;
+  font-size: 14px;
+  color: #000000de;
+  padding: 0 16px;
+  box-sizing: border-box;
+
+  input {
+    height: 100%;
+    width: 100%;
+    padding: 8px;
+    border-left: 0;
+    border-right: 0;
+    border-top: 0;
+    outline: none;
+
+    &:focus {
+      border-bottom-color: #6200ee;
+    }
+  }
+
+  &.right-aligned {
+    input {
+      text-align: right;
+    }
+  }
+
+  &.center-aligned {
+    input {
+      text-align: center;
+    }
+  }
+}
