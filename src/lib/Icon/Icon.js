@@ -3,15 +3,20 @@ import {classNames} from '../index'
 import './Icon.scss'
 import account from './icons/account'
 import accountGroup from './icons/accountGroup'
+import alarm from './icons/alarm'
 import arrowDown from './icons/arrowDown'
+import arrowRight from './icons/arrowRight'
 import autoFix from './icons/autoFix'
 import calendar from './icons/calendar'
 import calendarCheck from './icons/calendarCheck'
+import check from './icons/check'
 import checkCircleOutline from './icons/checkCircleOutline'
 import chevronUp from './icons/chevronUp'
 import clipboardCheckOutline from './icons/clipboardCheckOutline'
 import close from './icons/close'
 import compass from './icons/compass'
+import contentSave from './icons/contentSave'
+import deletee from './icons/deletee'
 import eye from './icons/eye'
 import eyeOff from './icons/eyeOff'
 import fileChart from './icons/fileChart'
@@ -28,27 +33,31 @@ import openInNew from './icons/openInNew'
 import plus from './icons/plus'
 import printer from './icons/printer'
 import progressCheck from './icons/progressCheck'
+import refresh from './icons/refresh'
 import rss from './icons/rss'
 import sitemap from './icons/sitemap'
 import speedometer from './icons/speedometer'
 import store from './icons/store'
 import truckCheck from './icons/truckCheck'
 import upload from './icons/upload'
-import arrowRight from "./icons/arrowRight";
 
 const icons = {
     account,
     accountGroup,
+    alarm,
     arrowDown,
     arrowRight,
     autoFix,
     calendar,
     calendarCheck,
+    check,
     checkCircleOutline,
     chevronUp,
     clipboardCheckOutline,
     close,
     compass,
+    contentSave,
+    'delete': deletee,
     eye,
     eyeOff,
     fileChart,
@@ -65,12 +74,13 @@ const icons = {
     plus,
     printer,
     progressCheck,
+    refresh,
     rss,
     sitemap,
     speedometer,
     store,
     truckCheck,
-    upload
+    upload,
 }
 
 const Icon = ({className, name, onClick}) => {

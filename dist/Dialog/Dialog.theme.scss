@@ -1,0 +1,45 @@
+@mixin VuiButtonTheme($class, $primary, $color-on-primary, $gradient) {
+  @if $gradient {
+    $gradient: linear-gradient(45deg, $primary, lighten($primary, 20));
+  }
+
+  #{$class} .vui-Button {
+    &.contained,
+    &.fab {
+      background: $primary;
+      @if $gradient {
+        background: if($gradient, $gradient, $primary);
+      }
+      color: $color-on-primary;
+      fill: $color-on-primary;
+
+      &:before {
+        background: $color-on-primary;
+      }
+    }
+
+    &.outlined {
+      color: $primary;
+      fill: $primary;
+
+      &:before {
+        background: $primary;
+        @if $gradient {
+          background: if($gradient, $gradient, $primary);
+        }
+      }
+    }
+
+    &.text {
+      color: $primary;
+      fill: $primary;
+
+      &:before {
+        background: $primary;
+        @if $gradient {
+          background: if($gradient, $gradient, $primary);
+        }
+      }
+    }
+  }
+}

@@ -15,7 +15,6 @@ function PrettyJson(_ref) {
       }
     });
   } else {
-    console.error('[PrettyJson]: Property "json" not set');
     return React.createElement(React.Fragment, null);
   }
 }

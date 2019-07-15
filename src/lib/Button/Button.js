@@ -35,7 +35,9 @@ const Button = ({
 
     useEffect(() => {
         if (autoFocus) {
-            ref.current.focus()
+            setTimeout(() => {
+                ref.current.focus()
+            })
         }
     }, [autoFocus])
 
@@ -53,7 +55,7 @@ const Button = ({
         onClick,
         'auto-focus': autoFocus ? 'true' : undefined,
         type,
-        disabled
+        disabled,
     }
 
     if (to) {

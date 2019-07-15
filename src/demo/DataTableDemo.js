@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react'
-import { Button, Card, DataTable, Icon, PrettyJson } from '../lib'
+import React, {useEffect, useState} from 'react'
+import {Button, Card, DataTable, Icon, PrettyJson} from '../lib'
 import useTitle from './useTitle'
 
 const DataTableDemo = () => {
@@ -49,7 +49,7 @@ const DataTableDemo = () => {
                                     <DataTable.Row key={item.id}>
                                         <DataTable.Cell>{item.id}</DataTable.Cell>
                                         <DataTable.Cell
-                                            editable
+                                            editable='always'
                                             onChange={(newValue) => handleChangeCell(list, item, 'hero', newValue)}
                                         >{item.hero}</DataTable.Cell>
                                         <DataTable.Cell>{item.power}</DataTable.Cell>

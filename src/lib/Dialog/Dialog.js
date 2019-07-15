@@ -1,11 +1,21 @@
-import React, { useLayoutEffect, useState } from 'react'
-import { createPortal } from 'react-dom'
-import { Card, classNames, usePortal } from '../index'
+import React, {useEffect, useLayoutEffect, useState} from 'react'
+import {createPortal} from 'react-dom'
+import {Card, classNames, usePortal} from '../index'
 import './Dialog.scss'
 
-function Dialog({ onClickOutside, children }) {
+function Dialog({target, onClickOutside, children}) {
     const portalContainer = usePortal('vui-Dialog-container')
     const [open, setOpen] = useState(false)
+
+    useEffect(() => {
+        const targetRef = target && target.current
+        return () => {
+            if (targetRef && targetRef.focus && !open) {
+                targetRef.focus()
+            }
+        }
+        // eslint-disable-next-line
+    }, [target])
 
     function handleClickOutside() {
         onClickOutside && onClickOutside()
@@ -13,7 +23,7 @@ function Dialog({ onClickOutside, children }) {
 
     const className = classNames(
         'vui-Dialog',
-        open && 'open'
+        open && 'open',
     )
 
     useLayoutEffect(() => {
@@ -35,7 +45,7 @@ function Dialog({ onClickOutside, children }) {
                 {children}
             </Card>
         </div>,
-        portalContainer
+        portalContainer,
     )
 }
 

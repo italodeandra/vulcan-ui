@@ -27,6 +27,7 @@ import base64 from './Utils/base64'
 import caretPosition from './Utils/caretPosition'
 import classNames from './Utils/classNames'
 import createSharedStateHook from './Utils/createSharedStateHook'
+import dateFormat from './Utils/dateFormat'
 import disableBodyScroll from './Utils/disableBodyScroll'
 import jsonToParams from './Utils/jsonToParams'
 import jsonToQueryString from './Utils/jsonToQueryString'
@@ -62,6 +63,7 @@ export {
     caretPosition,
     classNames,
     createSharedStateHook,
+    dateFormat,
     disableBodyScroll,
     jsonToParams,
     jsonToQueryString,

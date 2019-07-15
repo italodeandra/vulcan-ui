@@ -1,5 +1,5 @@
-import React, { useEffect } from 'react'
-import { Button, Dialog, useDialog } from '../lib'
+import React, {useEffect} from 'react'
+import {Button, Dialog, useDialog} from '../lib'
 import useTitle from './useTitle'
 
 const DialogDemo = () => {
@@ -17,14 +17,14 @@ const DialogDemo = () => {
                     onClick={() => dialog1SetShow(s => !s)}
                 >Show dialog</Button>
                 {dialog1Show &&
-                <Dialog onClickOutside={() => dialog1SetShow(false)}>
+                <Dialog target={dialog1Ref} onClickOutside={() => dialog1SetShow(false)}>
                     <Dialog.Title>Test title</Dialog.Title>
                     <Dialog.Content>
                         Dialog item
                     </Dialog.Content>
                     <Dialog.Actions alignRight>
+                        <Button autoFocus text onClick={() => dialog1SetShow(false)}>Close</Button>
                         <Button>Action</Button>
-                        <Button text onClick={() => dialog1SetShow(false)}>Close</Button>
                     </Dialog.Actions>
                 </Dialog>
                 }

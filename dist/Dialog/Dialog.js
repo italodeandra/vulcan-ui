@@ -1,11 +1,12 @@
 import _slicedToArray from "@babel/runtime/helpers/esm/slicedToArray";
-import React, { useLayoutEffect, useState } from 'react';
+import React, { useEffect, useLayoutEffect, useState } from 'react';
 import { createPortal } from 'react-dom';
 import { Card, classNames, usePortal } from '../index';
 import './Dialog.scss';
 
 function Dialog(_ref) {
-  var onClickOutside = _ref.onClickOutside,
+  var target = _ref.target,
+      onClickOutside = _ref.onClickOutside,
       children = _ref.children;
   var portalContainer = usePortal('vui-Dialog-container');
 
@@ -13,6 +14,15 @@ function Dialog(_ref) {
       _useState2 = _slicedToArray(_useState, 2),
       open = _useState2[0],
       setOpen = _useState2[1];
+
+  useEffect(function () {
+    var targetRef = target && target.current;
+    return function () {
+      if (targetRef && targetRef.focus && !open) {
+        targetRef.focus();
+      }
+    }; // eslint-disable-next-line
+  }, [target]);
 
   function handleClickOutside() {
     onClickOutside && onClickOutside();

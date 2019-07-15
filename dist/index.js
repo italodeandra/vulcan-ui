@@ -31,4 +31,5 @@ import disableBodyScroll from './Utils/disableBodyScroll';
 import jsonToParams from './Utils/jsonToParams';
 import jsonToQueryString from './Utils/jsonToQueryString';
 import polyfill from './Utils/polyfill';
-export { AppBar, Button, Card, DataTable, Dialog, useDialog, Form, Icon, Menu, useMenu, NavigationDrawer, PrettyJson, ProgressBar, Snackbars, useSnackbar, Spinner, Tabs, TextField, useDeepCompareEffect, useLocalStorage, useMobile, usePortal, useScroll, base64, caretPosition, classNames, createSharedStateHook, disableBodyScroll, jsonToParams, jsonToQueryString, polyfill, queryString, axios };
+import dateFormat from "./Utils/dateFormat";
+export { AppBar, Button, Card, DataTable, Dialog, useDialog, Form, Icon, Menu, useMenu, NavigationDrawer, PrettyJson, ProgressBar, Snackbars, useSnackbar, Spinner, Tabs, TextField, useDeepCompareEffect, useLocalStorage, useMobile, usePortal, useScroll, base64, caretPosition, classNames, createSharedStateHook, dateFormat, disableBodyScroll, jsonToParams, jsonToQueryString, polyfill, queryString, axios };

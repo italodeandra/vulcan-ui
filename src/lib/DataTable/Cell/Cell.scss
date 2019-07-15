@@ -4,6 +4,11 @@
   color: #000000de;
   padding: 0 16px;
   box-sizing: border-box;
+  cursor: default;
+
+  &.editable {
+    cursor: text;
+  }
 
   input {
     height: 100%;
@@ -13,6 +18,7 @@
     border-right: 0;
     border-top: 0;
     outline: none;
+    border-bottom-color: rgba(0, 0, 0, 0.13);
 
     &:focus {
       border-bottom-color: #6200ee;

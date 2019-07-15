@@ -9,7 +9,6 @@ function PrettyJson({ json, label, style }) {
         </pre>
         )
     } else {
-        console.error('[PrettyJson]: Property "json" not set')
         return (<></>)
     }
 }

@@ -1,8 +1,10 @@
 import _slicedToArray from "@babel/runtime/helpers/esm/slicedToArray";
 import { useEffect, useState } from 'react';
-var mobileWidthViewport = 758;
+var defaultMobileWidthViewport = 758;
 
-var useMobile = function useMobile() {
+var useMobile = function useMobile(mobileWidthViewport) {
+  mobileWidthViewport = mobileWidthViewport || defaultMobileWidthViewport;
+
   var _useState = useState(window.innerWidth <= mobileWidthViewport),
       _useState2 = _slicedToArray(_useState, 2),
       isMobile = _useState2[0],

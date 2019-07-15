@@ -1,7 +1,7 @@
 //TODO: Remove the manual animation from the scrim and use the *future* Animation component
 
-import React, { useEffect, useRef, useState } from 'react'
-import { classNames, useMobile } from '../index'
+import React, {useEffect, useRef, useState} from 'react'
+import {classNames, useMobile} from '../index'
 import disableBodyScroll from '../Utils/disableBodyScroll'
 import Divider from './Divider/Divider'
 import Header from './Header/Header'
@@ -11,10 +11,10 @@ import './NavigationDrawer.scss'
 import Subtitle from './Subtitle/Subtitle'
 import useTouchMove from './useTouchMove'
 
-const NavigationDrawer = ({ className, children, open, containerRef, collapsable, appBarRef, onOpenChange }) => {
+const NavigationDrawer = ({className, children, open, containerRef, collapsable, appBarRef, onOpenChange, customMobileWidthViewport}) => {
     const scrimRef = useRef(null)
     const navigationDrawerRef = useRef(null)
-    const [isMobile] = useMobile()
+    const [isMobile] = useMobile(customMobileWidthViewport)
     const [isAnimationReady] = useState(false)
     const [top, setTop] = useState(undefined)
     const [innerOpen, setInnerOpen] = useState(open)

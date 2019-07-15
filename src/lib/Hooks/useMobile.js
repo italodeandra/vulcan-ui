@@ -1,8 +1,9 @@
-import { useEffect, useState } from 'react'
+import {useEffect, useState} from 'react'
 
-const mobileWidthViewport = 758
+const defaultMobileWidthViewport = 758
 
-const useMobile = () => {
+const useMobile = (mobileWidthViewport) => {
+    mobileWidthViewport = mobileWidthViewport || defaultMobileWidthViewport
     const [isMobile, setIsMobile] = useState(window.innerWidth <= mobileWidthViewport)
 
     useEffect(() => {
@@ -19,7 +20,7 @@ const useMobile = () => {
     }, [])
 
     return [
-        isMobile
+        isMobile,
     ]
 }
 

@@ -4,10 +4,11 @@ import { useMobile } from '../../index';
 import './Header.scss';
 
 var Header = function Header(_ref) {
-  var children = _ref.children;
+  var children = _ref.children,
+      customMobileWidthViewport = _ref.customMobileWidthViewport;
 
   // eslint-disable-next-line react-hooks/rules-of-hooks
-  var _useMobile = useMobile(),
+  var _useMobile = useMobile(customMobileWidthViewport),
       _useMobile2 = _slicedToArray(_useMobile, 1),
       isMobile = _useMobile2[0];
 

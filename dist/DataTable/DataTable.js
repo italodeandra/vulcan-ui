@@ -1,6 +1,6 @@
 import _slicedToArray from "@babel/runtime/helpers/esm/slicedToArray";
-import React, {createContext, useState} from 'react';
-import {useDeepCompareEffect} from '../index';
+import React, { createContext, useState } from 'react';
+import { useDeepCompareEffect } from '../index';
 import Cell from './Cell/Cell';
 import Column from './Column/Column';
 import Columns from './Columns/Columns';
@@ -8,10 +8,7 @@ import './DataTable.scss';
 import Header from './Header/Header';
 import Row from './Row/Row';
 import Rows from './Rows/Rows';
-
-export var Context = createContext([{}, function () {
-}, function () {
-}]);
+export var Context = createContext([{}, function () {}, function () {}]);
 
 var DataTable = function DataTable(_ref) {
   var children = _ref.children,
@@ -31,9 +28,9 @@ var DataTable = function DataTable(_ref) {
   return React.createElement(Context.Provider, {
     value: [columns, setColumns, onSortChange]
   }, React.createElement("div", {
-      className: "vui-DataTable-overflow"
+    className: "vui-DataTable-overflow"
   }, React.createElement("table", {
-      className: "vui-DataTable"
+    className: "vui-DataTable"
   }, children)));
 };
 

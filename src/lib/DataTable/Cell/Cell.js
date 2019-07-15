@@ -2,7 +2,7 @@ import React, {useLayoutEffect, useRef, useState} from 'react'
 import {classNames} from '../../index'
 import './Cell.scss'
 
-const Cell = ({ children, editable, onChange, style }) => {
+const Cell = ({children, editable, onChange, style, customInput}) => {
     const ref = useRef(null)
     const [rightAligned, setRightAligned] = useState(false)
     const [centerAligned, setCenterAligned] = useState(false)
@@ -26,11 +26,12 @@ const Cell = ({ children, editable, onChange, style }) => {
 
     const className = classNames(
         'vui-DataTable-Cell',
+        editable && 'editable',
         rightAligned && 'right-aligned',
-        centerAligned && 'center-aligned'
+        centerAligned && 'center-aligned',
     )
 
-    const handleChange = ({ target }) => {
+    const handleChange = ({target}) => {
         onChange && onChange(target.value)
     }
 
@@ -44,14 +45,23 @@ const Cell = ({ children, editable, onChange, style }) => {
         }
     }
 
+    const inputProps = {
+        value: children || '',
+        onBlur: () => setIsEditing(false),
+        autoFocus: editable !== 'always',
+        onChange: handleChange,
+        onKeyDown: handleEnter,
+    }
+
+    const input = customInput ? customInput(inputProps) : <input {...inputProps} />
+
     return (
         <td className={className} ref={ref} onClick={editable ? handleDoubleClick : undefined} style={style}>
             {!isEditing && editable !== 'always'
                 ?
                 children
                 :
-                <input defaultValue={children} onBlur={() => setIsEditing(false)} autoFocus={editable !== 'always'}
-                       onChange={handleChange} onKeyDown={handleEnter}/>
+                input
             }
         </td>
     )

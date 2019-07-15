@@ -1,7 +1,7 @@
 import _slicedToArray from "@babel/runtime/helpers/esm/slicedToArray";
 //TODO: Remove the manual animation from the scrim and use the *future* Animation component
-import React, {useEffect, useRef, useState} from 'react';
-import {classNames, useMobile} from '../index';
+import React, { useEffect, useRef, useState } from 'react';
+import { classNames, useMobile } from '../index';
 import disableBodyScroll from '../Utils/disableBodyScroll';
 import Divider from './Divider/Divider';
 import Header from './Header/Header';
@@ -18,11 +18,12 @@ var NavigationDrawer = function NavigationDrawer(_ref) {
       containerRef = _ref.containerRef,
       collapsable = _ref.collapsable,
       appBarRef = _ref.appBarRef,
-      onOpenChange = _ref.onOpenChange;
+      onOpenChange = _ref.onOpenChange,
+      customMobileWidthViewport = _ref.customMobileWidthViewport;
   var scrimRef = useRef(null);
   var navigationDrawerRef = useRef(null);
 
-  var _useMobile = useMobile(),
+  var _useMobile = useMobile(customMobileWidthViewport),
       _useMobile2 = _slicedToArray(_useMobile, 1),
       isMobile = _useMobile2[0];
 
