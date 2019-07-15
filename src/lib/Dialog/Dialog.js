@@ -3,7 +3,7 @@ import {createPortal} from 'react-dom'
 import {Card, classNames, usePortal} from '../index'
 import './Dialog.scss'
 
-function Dialog({target, onClickOutside, children}) {
+function Dialog({target, onClickOutside, children, className}) {
     const portalContainer = usePortal('vui-Dialog-container')
     const [open, setOpen] = useState(false)
 
@@ -21,8 +21,9 @@ function Dialog({target, onClickOutside, children}) {
         onClickOutside && onClickOutside()
     }
 
-    const className = classNames(
+    className = classNames(
         'vui-Dialog',
+        className,
         open && 'open',
     )
 

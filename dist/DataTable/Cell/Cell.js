@@ -8,7 +8,9 @@ var Cell = function Cell(_ref) {
       editable = _ref.editable,
       onChange = _ref.onChange,
       style = _ref.style,
-      customInput = _ref.customInput;
+      customInput = _ref.customInput,
+      colSpan = _ref.colSpan,
+      className = _ref.className;
   var ref = useRef(null);
 
   var _useState = useState(false),
@@ -43,7 +45,7 @@ var Cell = function Cell(_ref) {
 
     setCenterAligned(isColumnCenterAligned); // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-  var className = classNames('vui-DataTable-Cell', editable && 'editable', rightAligned && 'right-aligned', centerAligned && 'center-aligned');
+  className = classNames('vui-DataTable-Cell', className, editable && 'editable', rightAligned && 'right-aligned', centerAligned && 'center-aligned');
 
   var handleChange = function handleChange(_ref2) {
     var target = _ref2.target;
@@ -76,7 +78,8 @@ var Cell = function Cell(_ref) {
     className: className,
     ref: ref,
     onClick: editable ? handleDoubleClick : undefined,
-    style: style
+    style: style,
+    colSpan: colSpan
   }, !isEditing && editable !== 'always' ? children : input);
 };
 

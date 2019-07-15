@@ -1,9 +1,11 @@
 import React from 'react';
+import classNames from '../Utils/classNames';
 import './Spinner.scss';
 
-var Spinner = function Spinner() {
+var Spinner = function Spinner(_ref) {
+  var className = _ref.className;
   return React.createElement("div", {
-    className: "vui-Spinner"
+    className: classNames('vui-Spinner', className)
   }, React.createElement("svg", {
     viewBox: "0 0 44 44"
   }, React.createElement("circle", {
