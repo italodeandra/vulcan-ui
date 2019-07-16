@@ -17,7 +17,8 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "rimraf dist && cross-env NODE_ENV=production babel src/lib --out-dir dist --copy-files",
-    "build-project": "cross-env NODE_ENV=production babel src/lib --out-dir ~/Application/Web/reed-web/node_modules/vulcan-ui/dist --copy-files",
+    "build-kaio": "cross-env NODE_ENV=production babel src/lib --out-dir ~/Application/Web/reed-web/node_modules/vulcan-ui/dist --copy-files",
+    "build-italo": "cross-env NODE_ENV=production babel src/lib --out-dir C:/Users/italo/Documents/reed-web/node_modules/vulcan-ui/dist --copy-files",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },

@@ -7,7 +7,8 @@ import './Dialog.scss';
 function Dialog(_ref) {
   var target = _ref.target,
       onClickOutside = _ref.onClickOutside,
-      children = _ref.children;
+      children = _ref.children,
+      className = _ref.className;
   var portalContainer = usePortal('vui-Dialog-container');
 
   var _useState = useState(false),
@@ -28,7 +29,7 @@ function Dialog(_ref) {
     onClickOutside && onClickOutside();
   }
 
-  var className = classNames('vui-Dialog', open && 'open');
+  className = classNames('vui-Dialog', className, open && 'open');
   useLayoutEffect(function () {
     setTimeout(function () {
       setOpen(true);

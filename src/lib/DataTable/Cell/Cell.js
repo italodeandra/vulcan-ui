@@ -2,7 +2,7 @@ import React, {useLayoutEffect, useRef, useState} from 'react'
 import {classNames} from '../../index'
 import './Cell.scss'
 
-const Cell = ({bold, children, customInput, editable, onChange, style}) => {
+const Cell = ({bold, children, editable, onChange, style, customInput, colSpan, className}) => {
     const ref = useRef(null)
     const [rightAligned, setRightAligned] = useState(false)
     const [centerAligned, setCenterAligned] = useState(false)
@@ -24,8 +24,9 @@ const Cell = ({bold, children, customInput, editable, onChange, style}) => {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
-    const className = classNames(
+    className = classNames(
         'vui-DataTable-Cell',
+        className,
         editable && 'editable',
         rightAligned && 'right-aligned',
         centerAligned && 'center-aligned',
@@ -57,7 +58,8 @@ const Cell = ({bold, children, customInput, editable, onChange, style}) => {
     const input = customInput ? customInput(inputProps) : <input {...inputProps} />
 
     return (
-        <td className={className} ref={ref} onClick={editable ? handleDoubleClick : undefined} style={style}>
+        <td className={className} ref={ref} onClick={editable ? handleDoubleClick : undefined} style={style}
+            colSpan={colSpan}>
             {!isEditing && editable !== 'always'
                 ?
                 children
