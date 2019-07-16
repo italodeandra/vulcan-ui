@@ -1,5 +1,5 @@
-import React, {useEffect, useState} from 'react'
-import {Button, Card, DataTable, Icon, PrettyJson} from '../lib'
+import React, { useEffect, useState } from 'react'
+import { Button, Card, DataTable, Icon, PrettyJson } from '../lib'
 import useTitle from './useTitle'
 
 const DataTableDemo = () => {
@@ -57,6 +57,14 @@ const DataTableDemo = () => {
                                     </DataTable.Row>
                                 ))}
                             </DataTable.Rows>
+                            <DataTable.Footer>
+                                <DataTable.Row>
+                                    <DataTable.Cell bold>Total</DataTable.Cell>
+                                    <DataTable.Cell>10</DataTable.Cell>
+                                    <DataTable.Cell>10</DataTable.Cell>
+                                    <DataTable.Cell>10</DataTable.Cell>
+                                </DataTable.Row>
+                            </DataTable.Footer>
                         </DataTable>
                     </Card>
                 </div>

@@ -23,4 +23,9 @@
   .vui-DataTable-Row:not(:last-child) .vui-DataTable-Cell {
     border-bottom: 1px solid rgba(#0000001e, 0.08);
   }
+
+  .vui-DataTable-FixedRow {
+    position: absolute;
+    bottom: 0;
+  }
 }

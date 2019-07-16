@@ -19,8 +19,22 @@
   border-spacing: 0;
   background-color: white;
   white-space: nowrap;
+  position: relative;
 
   .vui-DataTable-Row:not(:last-child) .vui-DataTable-Cell {
     border-bottom: 1px solid rgba(#0000001e, 0.08);
+  }
+
+  .vui-DataTable-Footer,
+  .vui-DataTable-Footer th,
+  .vui-DataTable-Footer td {
+    position: -webkit-sticky;
+    position: sticky;
+    bottom: 0;
+    z-index: 1;
+  }
+
+  .vui-DataTable-Footer .vui-DataTable-Row:first-child .vui-DataTable-Cell {
+    border-top: 1px solid rgba(#000000, 0.08);
   }
 }

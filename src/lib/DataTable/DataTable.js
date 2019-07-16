@@ -7,6 +7,7 @@ import './DataTable.scss'
 import Header from './Header/Header'
 import Row from './Row/Row'
 import Rows from './Rows/Rows'
+import Footer from './Footer/Footer'
 
 export const Context = createContext([{}, () => {
 }, () => {
@@ -43,5 +44,7 @@ DataTable.Rows = Rows
 DataTable.Row = Row
 
 DataTable.Cell = Cell
+
+DataTable.Footer = Footer
 
 export default DataTable

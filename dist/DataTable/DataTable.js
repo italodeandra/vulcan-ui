@@ -39,5 +39,6 @@ DataTable.Columns = Columns;
 DataTable.Column = Column;
 DataTable.Rows = Rows;
 DataTable.Row = Row;
+DataTable.FixedRow = FixedRow;
 DataTable.Cell = Cell;
 export default DataTable;

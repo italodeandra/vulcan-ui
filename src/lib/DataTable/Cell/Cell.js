@@ -2,7 +2,7 @@ import React, {useLayoutEffect, useRef, useState} from 'react'
 import {classNames} from '../../index'
 import './Cell.scss'
 
-const Cell = ({children, editable, onChange, style, customInput}) => {
+const Cell = ({bold, children, customInput, editable, onChange, style}) => {
     const ref = useRef(null)
     const [rightAligned, setRightAligned] = useState(false)
     const [centerAligned, setCenterAligned] = useState(false)
@@ -29,6 +29,7 @@ const Cell = ({children, editable, onChange, style, customInput}) => {
         editable && 'editable',
         rightAligned && 'right-aligned',
         centerAligned && 'center-aligned',
+        bold && 'bold'
     )
 
     const handleChange = ({target}) => {
