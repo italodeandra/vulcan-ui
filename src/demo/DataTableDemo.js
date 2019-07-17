@@ -11,7 +11,26 @@ const DataTableDemo = () => {
         { id: 2, hero: 'Captain America', actor: 'Chris Evans', power: 10 },
         { id: 3, hero: 'Carol Danvers', actor: 'Brie Larson', power: 10 },
         { id: 4, hero: 'Black Widow', actor: 'Scarlett Johansson', power: 10 },
-        { id: 5, hero: 'Thor', actor: 'Chris Hemsworth', power: 10 }
+        { id: 5, hero: 'Black Widow', actor: 'Scarlett Johansson', power: 10 },
+        { id: 6, hero: 'Black Widow', actor: 'Scarlett Johansson', power: 10 },
+        { id: 7, hero: 'Black Widow', actor: 'Scarlett Johansson', power: 10 },
+        { id: 8, hero: 'Black Widow', actor: 'Scarlett Johansson', power: 10 },
+        { id: 9, hero: 'Black Widow', actor: 'Scarlett Johansson', power: 10 },
+        { id: 10, hero: 'Black Widow', actor: 'Scarlett Johansson', power: 10 },
+        { id: 11, hero: 'Black Widow', actor: 'Scarlett Johansson', power: 10 },
+        { id: 12, hero: 'Black Widow', actor: 'Scarlett Johansson', power: 10 },
+        { id: 13, hero: 'Black Widow', actor: 'Scarlett Johansson', power: 10 },
+        { id: 14, hero: 'Black Widow', actor: 'Scarlett Johansson', power: 10 },
+        { id: 15, hero: 'Black Widow', actor: 'Scarlett Johansson', power: 10 },
+        { id: 16, hero: 'Black Widow', actor: 'Scarlett Johansson', power: 10 },
+        { id: 17, hero: 'Black Widow', actor: 'Scarlett Johansson', power: 10 },
+        { id: 18, hero: 'Black Widow', actor: 'Scarlett Johansson', power: 10 },
+        { id: 19, hero: 'Black Widow', actor: 'Scarlett Johansson', power: 10 },
+        { id: 20, hero: 'Black Widow', actor: 'Scarlett Johansson', power: 10 },
+        { id: 21, hero: 'Black Widow', actor: 'Scarlett Johansson', power: 10 },
+        { id: 22, hero: 'Black Widow', actor: 'Scarlett Johansson', power: 10 },
+        { id: 23, hero: 'Black Widow', actor: 'Scarlett Johansson', power: 10 },
+        { id: 24, hero: 'Thor', actor: 'Chris Hemsworth', power: 10 }
     ])
 
     const handleSortChange = (columns) => {
@@ -37,8 +56,8 @@ const DataTableDemo = () => {
                                 <Icon name='filterVariant' />
                             </Button>
                         </DataTable.Header>
-                        <DataTable onSortChange={handleSortChange}>
-                            <DataTable.Columns>
+                        <DataTable onSortChange={handleSortChange} style={{ height: 400 }}>
+                            <DataTable.Columns sticky>
                                 <DataTable.Column>#</DataTable.Column>
                                 <DataTable.Column>Hero</DataTable.Column>
                                 <DataTable.Column name='power' rightAligned sortable>Power</DataTable.Column>
@@ -57,7 +76,7 @@ const DataTableDemo = () => {
                                     </DataTable.Row>
                                 ))}
                             </DataTable.Rows>
-                            <DataTable.Footer>
+                            <DataTable.Footer sticky>
                                 <DataTable.Row>
                                     <DataTable.Cell bold>Total</DataTable.Cell>
                                     <DataTable.Cell>10</DataTable.Cell>

@@ -1,4 +1,4 @@
-import React, { createContext, useState } from 'react'
+import React, { createContext, useEffect, useRef, useState } from 'react'
 import { useDeepCompareEffect } from '../index'
 import Cell from './Cell/Cell'
 import Column from './Column/Column'
@@ -13,8 +13,9 @@ export const Context = createContext([{}, () => {
 }, () => {
 }])
 
-const DataTable = ({ children, onSortChange, columns: defaultColumns }) => {
+const DataTable = ({ children, onSortChange, columns: defaultColumns, sticky, style }) => {
     const [columns, setColumns] = useState(defaultColumns || {})
+    const ref = useRef(null);
 
     useDeepCompareEffect(() => {
         if (defaultColumns) {
@@ -22,9 +23,29 @@ const DataTable = ({ children, onSortChange, columns: defaultColumns }) => {
         }
     }, [defaultColumns])
 
+
+    useEffect(() => {
+        if (sticky) {
+            function handleResize() {
+                let offsetTop = ref.current.offsetTop;
+                let pageSize = window.innerHeight;
+        
+                if (offsetTop + ref.current.scrollHeight >= pageSize) {
+                    ref.current.style.height = `${pageSize - offsetTop}px`;
+                }
+            }
+
+            handleResize();
+            window.addEventListener("resize", handleResize);    
+            
+            return () =>  window.removeEventListener("resize", handleResize); 
+        }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [])
+
     return (
         <Context.Provider value={[columns, setColumns, onSortChange]}>
-            <div className='vui-DataTable-overflow'>
+            <div className='vui-DataTable-overflow' ref={ref} style={style}>
                 <table className='vui-DataTable'>
                     {children}
                 </table>
