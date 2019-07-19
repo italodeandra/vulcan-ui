@@ -1,8 +1,12 @@
-import React, { useLayoutEffect, useRef } from 'react'
+import React, { useContext, useLayoutEffect, useRef } from 'react'
 import { classNames } from '../..';
+
+import SearchRow from '../SearchRow/SearchRow'
+import { Context } from '../DataTable';
 
 const Columns = ({ children, sticky }) => {
 
+    const {isSearchActive} = useContext(Context);
     const ref = useRef(null);
     const className = classNames(
         'vui-DataTable-Columns',
@@ -18,12 +22,12 @@ const Columns = ({ children, sticky }) => {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
-
     return (
         <thead ref={ref} className={className}>
             <tr>
                 {children}
             </tr>
+            {isSearchActive && <SearchRow />}
         </thead>
     )
 }

@@ -35,6 +35,7 @@ import printer from './icons/printer'
 import progressCheck from './icons/progressCheck'
 import refresh from './icons/refresh'
 import rss from './icons/rss'
+import search from './icons/search'
 import sitemap from './icons/sitemap'
 import speedometer from './icons/speedometer'
 import store from './icons/store'
@@ -76,6 +77,7 @@ const icons = {
     progressCheck,
     refresh,
     rss,
+    search,
     sitemap,
     speedometer,
     store,

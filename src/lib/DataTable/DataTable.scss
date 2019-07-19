@@ -1,7 +1,7 @@
 @import "../styles";
 
 .vui-DataTable-Header {
-  height: 64px;
+  min-height: 64px;
   font-size: 20px;
   color: #000000de;
   display: flex;
@@ -26,7 +26,7 @@
   }
 
   .vui-DataTable-Footer .vui-DataTable-Row:first-child .vui-DataTable-Cell {
-    border-top: 1px solid rgba(#000000, 0.08);
+    border-top: 1px solid rgba(0, 0, 0, 0.08);
   }
 }
 
@@ -48,4 +48,29 @@
   bottom: 0;
   z-index: 1;
   background: white;
+}
+
+.vui-DataTable-SearchRow {
+  .vui-DataTable-SearchRow-Cell {
+    background: #fafafa;
+    border-bottom: 1px solid rgba(#0000001e, 0.08);
+    position: -webkit-sticky;
+    position: sticky;
+    top: 48px;
+    z-index: 1;
+
+    .vui-DataTable-SearchRow-Input {
+      background: #fafafa;
+    }
+  }
+
+  .vui-DataTable-SearchRow-Button {
+    position: absolute;
+    background: #fafafa;
+    color: rgba(0, 0, 0, 0.13);
+    fill: rgba(0, 0, 0, 0.40);
+    padding: 0 8px;
+    right: 0;
+    top: 5px;
+  }
 }

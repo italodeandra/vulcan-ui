@@ -24,6 +24,21 @@
     cursor: pointer;
   }
 
+  .search-icon {
+    display: inline-flex;
+    vertical-align: middle;
+    margin: -2px 4px 0 4px;
+
+    svg {
+      width: 20px;
+      height: 20px;
+    }
+
+    &:hover {
+      cursor: pointer;
+    }
+  }
+
   .order-icon {
     opacity: 0;
     display: inline-flex;

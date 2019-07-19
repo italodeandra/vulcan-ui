@@ -13,8 +13,10 @@ export const Context = createContext([{}, () => {
 }, () => {
 }])
 
-const DataTable = ({ children, onSortChange, columns: defaultColumns, sticky, style }) => {
+const DataTable = ({ children, onSortChange, onSearchChange, columns: defaultColumns, sticky, style }) => {
+
     const [columns, setColumns] = useState(defaultColumns || {})
+    const [isSearchActive, setIsSearchActive] = useState(false)
     const ref = useRef(null);
 
     useDeepCompareEffect(() => {
@@ -22,7 +24,6 @@ const DataTable = ({ children, onSortChange, columns: defaultColumns, sticky, st
             setColumns(defaultColumns)
         }
     }, [defaultColumns])
-
 
     useEffect(() => {
         if (sticky) {
@@ -44,7 +45,7 @@ const DataTable = ({ children, onSortChange, columns: defaultColumns, sticky, st
     }, [])
 
     return (
-        <Context.Provider value={[columns, setColumns, onSortChange]}>
+        <Context.Provider value={{columns, setColumns, isSearchActive, setIsSearchActive, onSearchChange, onSortChange}}>
             <div className='vui-DataTable-overflow' ref={ref} style={style}>
                 <table className='vui-DataTable'>
                     {children}
