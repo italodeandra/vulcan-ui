@@ -1,0 +1,47 @@
+.vui-DataTablePagination {
+
+  td {
+    .vui-DataTablePagination-Items {
+      display: flex;
+      justify-content: flex-end;
+      padding: 0;
+      margin: 0;
+
+      .vui-DataTablePagination-Item {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 48px;
+        text-align: left;
+        color: #00000099;
+        fill: #00000099;
+        font-size: 12px;
+        font-weight: 500;
+        padding: 0 16px;
+        box-sizing: border-box;
+        cursor: default;
+
+        .vui-Icon {
+            fill: #00000099;
+        }
+
+        .vui-Button.disabled .vui-Icon {
+            fill: rgba(0, 0, 0, 0.15);
+        }
+
+        .vui-DataTablePagination-ItemsByPage{
+            margin-left: 16px;
+            background: none;
+            color: #00000099;
+            font-size: 12px;
+            font-weight: 500;
+            border: none;
+
+            &:focus {
+                outline: none;
+            }
+        }
+      }
+    }
+  }
+}

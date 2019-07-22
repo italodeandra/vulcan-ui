@@ -6,28 +6,19 @@ const SearchRow = () => {
 
     const ref = useRef(null);
     const [elements, setElements] = useState([])
-
-    const { columns, setColumns, onSearchChange } = useContext(Context);
+    const { columns, setColumns, onSearchChange } = useContext(Context)
 
     useLayoutEffect(() => {
-        let columns = ref.current.previousSibling.querySelectorAll(".vui-DataTable-Column")
+        let searchColumns = ref.current.previousSibling.querySelectorAll(".vui-DataTable-Column")
 
-        columns.forEach(column => {
-            let columnName = column.getAttribute("name");
+        searchColumns.forEach(column => {
+            let columnName = column.getAttribute("name")
 
             if (column.classList.contains("search")) {
-                setColumns(c => ({ ...c, [columnName]: { ...c[columnName], query: null } }))
-                setElements(elements => {
-                    return [
-                        ...elements,
-                        {
-                            name: columnName,
-                            input: input(columnName, columns[columnName])
-                        }
-                    ]
-                });
+                setColumns(c => ({ ...c, [columnName]: {...c[columnName]} }))
+                setElements(elements => [ ...elements, {name: columnName, input: true} ])
             } else {
-                setElements(elements => [...elements, {}]);
+                setElements(elements => [...elements, {}])
             }
         });
 
@@ -38,10 +29,7 @@ const SearchRow = () => {
         setColumns(c => {
             let column = {
                 ...c,
-                [target.name]: {
-                    ...c[target.name],
-                    query: target.value
-                }
+                [target.name]: {...c[target.name], query: target.value}
             };
 
             onSearchChange && onSearchChange(column)
@@ -54,15 +42,18 @@ const SearchRow = () => {
         className: "vui-DataTable-SearchRow-Input input"
     }
 
-    const input = (key, value) => {
-
+    const input = (key) => {
         if (columns[key] && columns[key].searchCustomInput) {
-            return columns[key].searchCustomInput({ ...inputProps, name: key, value: value })
+            return columns[key].searchCustomInput({ 
+                ...inputProps, 
+                name: key,
+                value: columns[key].query || ""
+            })
         }
 
         return (
             <>
-                <input {...inputProps} name={key} value={value} />
+                <input {...inputProps} name={key} value={columns[key] && columns[key].query} />
                 <Button className="vui-DataTable-SearchRow-Button" icon onClick={() => onSearchChange(columns)}>
                     <Icon name='search' />
                 </Button>
@@ -75,7 +66,7 @@ const SearchRow = () => {
             {elements.map((element, index) => {
                 return (
                     <td className="vui-DataTable-SearchRow-Cell vui-DataTable-Cell" key={index}>
-                        {element.input}
+                        {element.input && input(element.name)}
                     </td>
                 )
             })}

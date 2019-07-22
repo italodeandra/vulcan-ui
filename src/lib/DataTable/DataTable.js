@@ -8,12 +8,13 @@ import Header from './Header/Header'
 import Row from './Row/Row'
 import Rows from './Rows/Rows'
 import Footer from './Footer/Footer'
+import Pagination from './Pagination/Pagination'
 
 export const Context = createContext([{}, () => {
 }, () => {
 }])
 
-const DataTable = ({ children, onSortChange, onSearchChange, columns: defaultColumns, sticky, style }) => {
+const DataTable = ({ children, onPaginationChange, onSortChange, onSearchChange, columns: defaultColumns, sticky, style }) => {
 
     const [columns, setColumns] = useState(defaultColumns || {})
     const [isSearchActive, setIsSearchActive] = useState(false)
@@ -45,7 +46,7 @@ const DataTable = ({ children, onSortChange, onSearchChange, columns: defaultCol
     }, [])
 
     return (
-        <Context.Provider value={{columns, setColumns, isSearchActive, setIsSearchActive, onSearchChange, onSortChange}}>
+        <Context.Provider value={{columns, setColumns, isSearchActive, setIsSearchActive, onPaginationChange, onSearchChange, onSortChange}}>
             <div className='vui-DataTable-overflow' ref={ref} style={style}>
                 <table className='vui-DataTable'>
                     {children}
@@ -68,5 +69,7 @@ DataTable.Row = Row
 DataTable.Cell = Cell
 
 DataTable.Footer = Footer
+
+DataTable.Pagination = Pagination
 
 export default DataTable

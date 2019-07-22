@@ -64,7 +64,14 @@ const Column = ({ children, name, rightAligned, centerAligned, search, searchCus
         sorting = <Icon className={classNames('order-icon', columns[name].direction)} name='arrowDown' />
     }
 
-    const searchButton = <Icon className={classNames("search-icon search")} name="search" onClick={handleClickSearch} />
+    const searchButton = <Icon 
+                            className={classNames(
+                                "search-icon search",
+                                columns[name] && columns[name].query ? "active" : "" 
+                            )} 
+                            name="search" 
+                            onClick={handleClickSearch} 
+                        />
 
     return (
         <th className={className} onClick={handleClick} name={name}>

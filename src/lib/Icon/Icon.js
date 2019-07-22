@@ -11,6 +11,8 @@ import calendar from './icons/calendar'
 import calendarCheck from './icons/calendarCheck'
 import check from './icons/check'
 import checkCircleOutline from './icons/checkCircleOutline'
+import chevronLeft from './icons/chevronLeft'
+import chevronRight from './icons/chevronRight'
 import chevronUp from './icons/chevronUp'
 import clipboardCheckOutline from './icons/clipboardCheckOutline'
 import close from './icons/close'
@@ -53,6 +55,8 @@ const icons = {
     calendarCheck,
     check,
     checkCircleOutline,
+    chevronLeft,
+    chevronRight,
     chevronUp,
     clipboardCheckOutline,
     close,

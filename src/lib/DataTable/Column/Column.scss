@@ -29,6 +29,10 @@
     vertical-align: middle;
     margin: -2px 4px 0 4px;
 
+    &.active {
+      fill: #6200eeff;
+    }
+
     svg {
       width: 20px;
       height: 20px;

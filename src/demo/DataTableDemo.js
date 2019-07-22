@@ -15,7 +15,7 @@ const DataTableDemo = () => {
     ])
 
     const handleSortChange = (columns) => {
-        console.log(columns)
+        // console.log(columns)
     }
 
     const handleChangeCell = (list, item, property, newValue) => {
@@ -26,7 +26,11 @@ const DataTableDemo = () => {
     }
 
     const handleSearchChange = (columns) => {
-        console.log(columns)
+        // console.log(columns)
+    }
+
+    const handlePaginationChange = (data) => {
+        console.log(data)
     }
 
     return (
@@ -41,7 +45,12 @@ const DataTableDemo = () => {
                                 <Icon name='filterVariant' />
                             </Button>
                         </DataTable.Header>
-                        <DataTable onSortChange={handleSortChange} onSearchChange={handleSearchChange} sticky>
+                        <DataTable 
+                            onSortChange={handleSortChange} 
+                            onSearchChange={handleSearchChange}
+                            onPaginationChange={handlePaginationChange}
+                            sticky
+                        >
                             <DataTable.Columns sticky>
                                 <DataTable.Column>#</DataTable.Column>
                                 <DataTable.Column name="hero" search sortable
@@ -67,11 +76,17 @@ const DataTableDemo = () => {
                             </DataTable.Rows>
                             <DataTable.Footer sticky>
                                 <DataTable.Row>
-                                    <DataTable.Cell bold>Total</DataTable.Cell>
-                                    <DataTable.Cell></DataTable.Cell>
-                                    <DataTable.Cell>50</DataTable.Cell>
-                                    <DataTable.Cell></DataTable.Cell>
+                                    <DataTable.Cell style={{bottom: 48}} bold>Total</DataTable.Cell>
+                                    <DataTable.Cell style={{bottom: 48}}></DataTable.Cell>
+                                    <DataTable.Cell style={{bottom: 48}}>50</DataTable.Cell>
+                                    <DataTable.Cell style={{bottom: 48}}></DataTable.Cell>
                                 </DataTable.Row>
+                                <DataTable.Pagination
+                                    rowsPerPageOptions={[10, 25, 50, 100]}
+                                    rowsPerPage={25}
+                                    page={1}
+                                    count={80}
+                                />
                             </DataTable.Footer>
                         </DataTable>
                     </Card>
