@@ -17,6 +17,12 @@
   outline: none;
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 
+  &.disabled {
+    opacity: 0.5;
+    cursor: default;
+    pointer-events: none;
+  }
+
   .label {
     white-space: nowrap;
     width: 100%;

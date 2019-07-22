@@ -13,6 +13,7 @@ import check from './icons/check'
 import checkCircleOutline from './icons/checkCircleOutline'
 import chevronUp from './icons/chevronUp'
 import clipboardCheckOutline from './icons/clipboardCheckOutline'
+import clipboardOutline from './icons/clipboardOutline'
 import close from './icons/close'
 import compass from './icons/compass'
 import contentSave from './icons/contentSave'
@@ -30,6 +31,7 @@ import libraryShelves from './icons/libraryShelves'
 import link from './icons/link'
 import menu from './icons/menu'
 import openInNew from './icons/openInNew'
+import pencil from './icons/pencil'
 import plus from './icons/plus'
 import printer from './icons/printer'
 import progressCheck from './icons/progressCheck'
@@ -55,6 +57,7 @@ const icons = {
     checkCircleOutline,
     chevronUp,
     clipboardCheckOutline,
+    clipboardOutline,
     close,
     compass,
     contentSave,
@@ -72,6 +75,7 @@ const icons = {
     link,
     menu,
     openInNew,
+    pencil,
     plus,
     printer,
     progressCheck,
