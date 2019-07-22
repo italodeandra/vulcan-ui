@@ -1,6 +1,8 @@
 // Cheatsheet https://devhints.io/wip/intl-datetime
 
 function dateFormat(date, options) {
+    if (!date) return ''
+
     return new Intl.DateTimeFormat('pt-BR', options || {
         year: 'numeric',
         month: 'long',
