@@ -14,10 +14,6 @@ const DataTableDemo = () => {
         { id: 5, hero: 'Thor', actor: 'Chris Hemsworth', power: 10 }
     ])
 
-    const handleSortChange = (columns) => {
-        // console.log(columns)
-    }
-
     const handleChangeCell = (list, item, property, newValue) => {
         const newList = [...list]
         const newItem = newList.find(i => i === item)
@@ -25,12 +21,8 @@ const DataTableDemo = () => {
         setList(newList)
     }
 
-    const handleSearchChange = (columns) => {
-        // console.log(columns)
-    }
-
-    const handlePaginationChange = (data) => {
-        console.log(data)
+    const handleFilterChange = (filter) => {
+        console.log(JSON.stringify(filter))
     }
 
     return (
@@ -39,55 +31,54 @@ const DataTableDemo = () => {
             <>
                 <div>
                     <Card>
-                        <DataTable.Header>
-                            Data table header
-                            <Button icon onClick={() => alert('Filter button clicked')} style={{ marginLeft: 'auto' }}>
-                                <Icon name='filterVariant' />
-                            </Button>
-                        </DataTable.Header>
-                        <DataTable 
-                            onSortChange={handleSortChange} 
-                            onSearchChange={handleSearchChange}
-                            onPaginationChange={handlePaginationChange}
-                            sticky
+                        <DataTable
+                            onFilterChange={handleFilterChange}
                         >
-                            <DataTable.Columns sticky>
-                                <DataTable.Column>#</DataTable.Column>
-                                <DataTable.Column name="hero" search sortable
-                                    // searchCustomInput={(props) => <input {...props} type="text"/>}
-                                >
-                                    Hero
-                                </DataTable.Column>
-                                <DataTable.Column name='power' search rightAligned sortable>Power</DataTable.Column>
-                                <DataTable.Column >Actor</DataTable.Column>
-                            </DataTable.Columns>
-                            <DataTable.Rows>
-                                {list.map(item => (
-                                    <DataTable.Row key={item.id}>
-                                        <DataTable.Cell>{item.id}</DataTable.Cell>
-                                        <DataTable.Cell
-                                            editable='always'
-                                            onChange={(newValue) => handleChangeCell(list, item, 'hero', newValue)}
-                                        >{item.hero}</DataTable.Cell>
-                                        <DataTable.Cell>{item.power}</DataTable.Cell>
-                                        <DataTable.Cell>{item.actor}</DataTable.Cell>
+                            <DataTable.Header>
+                                Data table header
+                                <Button icon onClick={() => alert('Filter button clicked')} style={{ marginLeft: 'auto' }}>
+                                    <Icon name='filterVariant' />
+                                </Button>
+                            </DataTable.Header>
+                            <DataTable.Table sticky>
+                                <DataTable.Columns sticky>
+                                    <DataTable.Column>#</DataTable.Column>
+                                    <DataTable.Column name="hero" search sortable
+                                        // searchCustomInput={(props) => <input {...props} type="text"/>}
+                                    >
+                                        Hero
+                                    </DataTable.Column>
+                                    <DataTable.Column name='power' search rightAligned sortable>Power</DataTable.Column>
+                                    <DataTable.Column search name='actor'>Actor</DataTable.Column>
+                                </DataTable.Columns>
+                                <DataTable.Rows>
+                                    {list.map(item => (
+                                        <DataTable.Row key={item.id}>
+                                            <DataTable.Cell>{item.id}</DataTable.Cell>
+                                            <DataTable.Cell
+                                                editable='always'
+                                                onChange={(newValue) => handleChangeCell(list, item, 'hero', newValue)}
+                                            >{item.hero}</DataTable.Cell>
+                                            <DataTable.Cell>{item.power}</DataTable.Cell>
+                                            <DataTable.Cell>{item.actor}</DataTable.Cell>
+                                        </DataTable.Row>
+                                    ))}
+                                </DataTable.Rows>
+                                <DataTable.Footer sticky>
+                                    <DataTable.Row>
+                                        <DataTable.Cell bold>Total</DataTable.Cell>
+                                        <DataTable.Cell></DataTable.Cell>
+                                        <DataTable.Cell>50</DataTable.Cell>
+                                        <DataTable.Cell></DataTable.Cell>
                                     </DataTable.Row>
-                                ))}
-                            </DataTable.Rows>
-                            <DataTable.Footer sticky>
-                                <DataTable.Row>
-                                    <DataTable.Cell style={{bottom: 48}} bold>Total</DataTable.Cell>
-                                    <DataTable.Cell style={{bottom: 48}}></DataTable.Cell>
-                                    <DataTable.Cell style={{bottom: 48}}>50</DataTable.Cell>
-                                    <DataTable.Cell style={{bottom: 48}}></DataTable.Cell>
-                                </DataTable.Row>
-                                <DataTable.Pagination
-                                    rowsPerPageOptions={[10, 25, 50, 100]}
-                                    rowsPerPage={25}
-                                    page={1}
-                                    count={80}
-                                />
-                            </DataTable.Footer>
+                                </DataTable.Footer>
+                            </DataTable.Table>
+                            <DataTable.Pagination
+                                rowsPerPageOptions={[10, 25, 50, 100]}
+                                rowsPerPage={25}
+                                page={1}
+                                count={80}
+                            />
                         </DataTable>
                     </Card>
                 </div>

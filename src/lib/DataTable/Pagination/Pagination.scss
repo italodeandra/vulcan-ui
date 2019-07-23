@@ -1,6 +1,7 @@
 .vui-DataTablePagination {
+  border-top: 1px solid rgba(#000000, 0.12);
 
-  td {
+  .vui-DataTable-Cell {
     .vui-DataTablePagination-Items {
       display: flex;
       justify-content: flex-end;
@@ -17,7 +18,7 @@
         fill: #00000099;
         font-size: 12px;
         font-weight: 500;
-        padding: 0 16px;
+        padding: 0 0 0 16px;
         box-sizing: border-box;
         cursor: default;
 

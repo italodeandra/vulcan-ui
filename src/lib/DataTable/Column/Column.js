@@ -6,7 +6,7 @@ import './Column.scss'
 const directions = ['asc', 'desc', null]
 
 const Column = ({ children, name, rightAligned, centerAligned, search, searchCustomInput, sortable }) => {
-    const {columns, setColumns, isSearchActive, setIsSearchActive, onSortChange} = useContext(Context)
+    const {columns, setColumns, isSearchActive, setIsSearchActive} = useContext(Context)
     const className = classNames(
         'vui-DataTable-Column',
         rightAligned && 'right-aligned',
@@ -55,7 +55,6 @@ const Column = ({ children, name, rightAligned, centerAligned, search, searchCus
             const currentDirection = newColumns[name].direction
             newColumns[name].direction = directions[(directions.indexOf(currentDirection) + 1) % 3]
             setColumns(newColumns)
-            onSortChange && onSortChange(newColumns)
         }
     }
 

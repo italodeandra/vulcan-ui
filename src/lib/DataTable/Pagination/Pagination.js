@@ -1,4 +1,4 @@
-import React, { useContext, useLayoutEffect, useState, useRef } from "react"
+import React, { useContext, useEffect, useLayoutEffect, useState, useRef } from "react"
 import { Button, Icon } from "../.."
 
 import "./Pagination.scss"
@@ -18,17 +18,32 @@ const Pagination = ({ rowsPerPage, rowsPerPageOptions, page, count }) => {
     if (!count)
         console.error('The property "count" is required for Pagination')
 
-    const { onPaginationChange } = useContext(Context)
+    const { setFilter, onFilterChange } = useContext(Context)
     const ref = useRef(null)
     const [totalColumns, setTotalColumns] = useState(0)
     const [pagination, setPagination] = useState({ rowsPerPage, page })
+
+    useEffect(() => {
+        setFilter(f => {
+            let filter = {
+                ...f,
+                pagination
+            };
+
+            onFilterChange && onFilterChange(filter)
+
+           return filter
+        });
+
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [JSON.stringify(pagination)])
 
     useLayoutEffect(() => {
         let length = ref.current.parentNode.parentNode.querySelectorAll(".vui-DataTable-Columns tr .vui-DataTable-Column").length
         setTotalColumns(length)
 
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, []);
+    }, [])
 
     function handleClick(type) {
         setPagination(pagination => {
@@ -37,7 +52,6 @@ const Pagination = ({ rowsPerPage, rowsPerPageOptions, page, count }) => {
                 rowsPerPage: pagination.rowsPerPage
             }
 
-            onPaginationChange && onPaginationChange(data)
             return data
         })
     }
@@ -49,7 +63,16 @@ const Pagination = ({ rowsPerPage, rowsPerPageOptions, page, count }) => {
                 rowsPerPage: +target.value
             }
 
-            onPaginationChange && onPaginationChange(data)
+            setFilter(filter => {
+                let newFilter = {
+                    ...filter,
+                    pagination: data
+                };
+
+                onFilterChange && onFilterChange(newFilter)
+
+               return newFilter
+            }) 
             return data
         })
     }
@@ -66,8 +89,8 @@ const Pagination = ({ rowsPerPage, rowsPerPageOptions, page, count }) => {
     }
 
     return (
-        <tr className="vui-DataTable-Row vui-DataTablePagination" ref={ref}>
-            <td className="vui-DataTable-Cell" colSpan={totalColumns}>
+        <div className="vui-DataTable-Row vui-DataTablePagination" ref={ref}>
+            <div className="vui-DataTable-Cell" colSpan={totalColumns}>
                 <div className="vui-DataTablePagination-Items">
                     <div className="vui-DataTablePagination-Item">
                         <p>Itens por página:</p>
@@ -107,8 +130,8 @@ const Pagination = ({ rowsPerPage, rowsPerPageOptions, page, count }) => {
                         </Button>
                     </div>
                 </div>
-            </td>
-        </tr>
+            </div>
+        </div>
     );
 }
 
