@@ -25,13 +25,21 @@
     }
   }
 
+  &.bold {
+    font-weight: bold;
+  }
+
   &.right-aligned {
+    text-align: right;
+
     input {
       text-align: right;
     }
   }
 
   &.center-aligned {
+    text-align: center;
+
     input {
       text-align: center;
     }

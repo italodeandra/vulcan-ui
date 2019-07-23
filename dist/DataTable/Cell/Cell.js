@@ -4,7 +4,8 @@ import { classNames } from '../../index';
 import './Cell.scss';
 
 var Cell = function Cell(_ref) {
-  var children = _ref.children,
+  var bold = _ref.bold,
+      children = _ref.children,
       editable = _ref.editable,
       onChange = _ref.onChange,
       style = _ref.style,
@@ -45,7 +46,7 @@ var Cell = function Cell(_ref) {
 
     setCenterAligned(isColumnCenterAligned); // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-  className = classNames('vui-DataTable-Cell', className, editable && 'editable', rightAligned && 'right-aligned', centerAligned && 'center-aligned');
+  className = classNames('vui-DataTable-Cell', className, editable && 'editable', rightAligned && 'right-aligned', centerAligned && 'center-aligned', bold && 'bold');
 
   var handleChange = function handleChange(_ref2) {
     var target = _ref2.target;

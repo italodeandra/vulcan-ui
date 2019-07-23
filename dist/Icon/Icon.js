@@ -11,8 +11,11 @@ import calendar from './icons/calendar';
 import calendarCheck from './icons/calendarCheck';
 import check from './icons/check';
 import checkCircleOutline from './icons/checkCircleOutline';
+import chevronLeft from './icons/chevronLeft';
+import chevronRight from './icons/chevronRight';
 import chevronUp from './icons/chevronUp';
 import clipboardCheckOutline from './icons/clipboardCheckOutline';
+import clipboardOutline from './icons/clipboardOutline';
 import close from './icons/close';
 import compass from './icons/compass';
 import contentSave from './icons/contentSave';
@@ -30,11 +33,13 @@ import libraryShelves from './icons/libraryShelves';
 import link from './icons/link';
 import menu from './icons/menu';
 import openInNew from './icons/openInNew';
+import pencil from './icons/pencil';
 import plus from './icons/plus';
 import printer from './icons/printer';
 import progressCheck from './icons/progressCheck';
 import refresh from './icons/refresh';
 import rss from './icons/rss';
+import search from './icons/search';
 import sitemap from './icons/sitemap';
 import speedometer from './icons/speedometer';
 import store from './icons/store';
@@ -51,8 +56,11 @@ var icons = {
   calendarCheck: calendarCheck,
   check: check,
   checkCircleOutline: checkCircleOutline,
+  chevronLeft: chevronLeft,
+  chevronRight: chevronRight,
   chevronUp: chevronUp,
   clipboardCheckOutline: clipboardCheckOutline,
+  clipboardOutline: clipboardOutline,
   close: close,
   compass: compass,
   contentSave: contentSave,
@@ -70,11 +78,13 @@ var icons = {
   link: link,
   menu: menu,
   openInNew: openInNew,
+  pencil: pencil,
   plus: plus,
   printer: printer,
   progressCheck: progressCheck,
   refresh: refresh,
   rss: rss,
+  search: search,
   sitemap: sitemap,
   speedometer: speedometer,
   store: store,

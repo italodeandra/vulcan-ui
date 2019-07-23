@@ -19,7 +19,7 @@ var useMobile = function useMobile(mobileWidthViewport) {
     window.addEventListener('resize', handleResize);
     return function () {
       window.removeEventListener('resize', handleResize);
-    };
+    }; // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   return [isMobile];
 };
