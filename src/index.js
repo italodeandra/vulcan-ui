@@ -19,6 +19,7 @@ import TextFieldChipsDemo from './demo/TextFieldChipsDemo'
 import TextFielDemo from './demo/TextFieldDemo'
 import useTitle from './demo/useTitle'
 import { AppBar, Button, Icon, NavigationDrawer, polyfill, Snackbars, useLocalStorage, useMobile } from './lib'
+import TextFieldDateDemo from "./demo/TextFieldDateDemo";
 
 polyfill()
 
@@ -167,6 +168,11 @@ const App = () => {
                                                onClick={() => isMobile && setIsNavigationDrawerOpen(false)}>
                             Text field Chips
                         </NavigationDrawer.Item>
+                        <NavigationDrawer.Item to='/text-field-date'
+                                               title={!isNavigationDrawerOpen && 'Text field Date'}
+                                               onClick={() => isMobile && setIsNavigationDrawerOpen(false)}>
+                            Text field Date
+                        </NavigationDrawer.Item>
                     </NavigationDrawer.ItemGroup>
                 </NavigationDrawer>
                 <div className='app-container' ref={AppContainerRef}>
@@ -185,6 +191,7 @@ const App = () => {
                     <Route path='/text-field' component={TextFielDemo} />
                     <Route path='/text-field-autocomplete' component={TextFieldAutocompleteDemo} />
                     <Route path='/text-field-chips' component={TextFieldChipsDemo} />
+                    <Route path='/text-field-date' component={TextFieldDateDemo} />
                 </div>
                 <Snackbars />
             </Router>

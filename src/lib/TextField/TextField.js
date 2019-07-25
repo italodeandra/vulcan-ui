@@ -6,6 +6,7 @@ import { classNames, useDeepCompareEffect } from '../index'
 import Autocomplete from './Autocomplete/Autocomplete'
 import Autosize from './Autosize/Autosize'
 import Chips from './Chips/Chips'
+import Date from './Date/Date'
 import Number from './Number/Number'
 import Select from './Select/Select'
 import './TextField.scss'
@@ -199,5 +200,7 @@ TextField.Autosize = Autosize
 TextField.Select = Select
 
 TextField.Chips = Chips
+
+TextField.Date = Date
 
 export default TextField
