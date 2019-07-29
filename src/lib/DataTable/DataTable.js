@@ -1,21 +1,26 @@
-import React, { createContext, useEffect, useState } from 'react'
-import { useDeepCompareEffect } from '../index'
+import React, {createContext, useEffect, useState} from 'react'
+import {classNames, useDeepCompareEffect} from '../index'
 import Cell from './Cell/Cell'
 import Column from './Column/Column'
 import Columns from './Columns/Columns'
-import './DataTable.scss'
+import './DataTable.sass'
+import Footer from './Footer/Footer'
 import Header from './Header/Header'
+import Pagination from './Pagination/Pagination'
 import Row from './Row/Row'
 import Rows from './Rows/Rows'
-import Footer from './Footer/Footer'
-import Pagination from './Pagination/Pagination'
 import Table from './Table/Table'
 
 export const Context = createContext([{}, () => {
 }, () => {
 }])
 
-const DataTable = ({ children, onFilterChange, columns: defaultColumns }) => {
+const DataTable = ({
+                       children,
+                       onFilterChange,
+                       className,
+                       columns: defaultColumns
+                   }) => {
 
     const [filter, setFilter] = useState({})
     const [columns, setColumns] = useState(defaultColumns || {})
@@ -26,12 +31,12 @@ const DataTable = ({ children, onFilterChange, columns: defaultColumns }) => {
             let newFilter = {
                 ...filter,
                 columns
-            };
+            }
 
             onFilterChange && onFilterChange(newFilter)
 
-           return newFilter
-        })   
+            return newFilter
+        })
 
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [JSON.stringify(columns)])
@@ -43,8 +48,9 @@ const DataTable = ({ children, onFilterChange, columns: defaultColumns }) => {
     }, [defaultColumns])
 
     return (
-        <Context.Provider value={{columns, setColumns,filter, setFilter, isSearchActive, setIsSearchActive, onFilterChange}}>
-            <div className='vui-DataTable'>
+        <Context.Provider
+            value={{columns, setColumns, filter, setFilter, isSearchActive, setIsSearchActive, onFilterChange}}>
+            <div className={classNames('vui-DataTable', className)}>
                 {children}
             </div>
         </Context.Provider>
