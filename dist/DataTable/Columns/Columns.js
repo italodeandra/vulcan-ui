@@ -2,6 +2,7 @@ import React, { useContext, useLayoutEffect, useRef } from 'react';
 import { classNames } from '../..';
 import SearchRow from '../SearchRow/SearchRow';
 import { Context } from '../DataTable';
+import "./Columns.sass";
 
 var Columns = function Columns(_ref) {
   var children = _ref.children,

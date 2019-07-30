@@ -1,22 +1,23 @@
 import _objectSpread from "@babel/runtime/helpers/esm/objectSpread";
 import _slicedToArray from "@babel/runtime/helpers/esm/slicedToArray";
 import React, { createContext, useEffect, useState } from 'react';
-import { useDeepCompareEffect } from '../index';
+import { classNames, useDeepCompareEffect } from '../index';
 import Cell from './Cell/Cell';
 import Column from './Column/Column';
 import Columns from './Columns/Columns';
-import './DataTable.scss';
+import './DataTable.sass';
+import Footer from './Footer/Footer';
 import Header from './Header/Header';
+import Pagination from './Pagination/Pagination';
 import Row from './Row/Row';
 import Rows from './Rows/Rows';
-import Footer from './Footer/Footer';
-import Pagination from './Pagination/Pagination';
 import Table from './Table/Table';
 export var Context = createContext([{}, function () {}, function () {}]);
 
 var DataTable = function DataTable(_ref) {
   var children = _ref.children,
       onFilterChange = _ref.onFilterChange,
+      className = _ref.className,
       defaultColumns = _ref.columns;
 
   var _useState = useState({}),
@@ -60,7 +61,7 @@ var DataTable = function DataTable(_ref) {
       onFilterChange: onFilterChange
     }
   }, React.createElement("div", {
-    className: "vui-DataTable"
+    className: classNames('vui-DataTable', className)
   }, children));
 };
 
