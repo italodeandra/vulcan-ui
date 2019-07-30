@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react'
-import { Button, Card, DataTable, Icon, PrettyJson } from '../lib'
+import React, {useEffect, useState} from 'react'
+import {Button, Card, DataTable, Icon, PrettyJson} from '../lib'
 import useTitle from './useTitle'
 
 const DataTableDemo = () => {
@@ -44,7 +44,9 @@ const DataTableDemo = () => {
                                 <DataTable.Columns sticky>
                                     <DataTable.Column>#</DataTable.Column>
                                     <DataTable.Column name="hero" search sortable
-                                        // searchCustomInput={(props) => <input {...props} type="text"/>}
+                                                      searchCustomInput={(props) => <select {...props}>
+                                                          <option value='Iron Man'>Iron Man</option>
+                                                      </select>}
                                     >
                                         Hero
                                     </DataTable.Column>
@@ -53,7 +55,7 @@ const DataTableDemo = () => {
                                 </DataTable.Columns>
                                 <DataTable.Rows>
                                     {list.map(item => (
-                                        <DataTable.Row key={item.id}>
+                                        <DataTable.Row key={item.id} clickable>
                                             <DataTable.Cell>{item.id}</DataTable.Cell>
                                             <DataTable.Cell
                                                 editable='always'
