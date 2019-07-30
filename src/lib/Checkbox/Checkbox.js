@@ -1,5 +1,5 @@
 import React from "react"
-import "./Checkbox.scss"
+import "./Checkbox.sass"
 
 const Checkbox = ({ id, label, onChange }) => {
     return (

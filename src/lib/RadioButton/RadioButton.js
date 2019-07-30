@@ -1,5 +1,5 @@
 import React from "react"
-import "./RadioButton.scss"
+import "./RadioButton.sass"
 
 const RadioButton = ({ id, name, label, onChange }) => {
 
