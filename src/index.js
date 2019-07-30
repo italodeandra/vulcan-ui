@@ -11,6 +11,7 @@ import HomeDemo from './demo/HomeDemo'
 import MenuDemo from './demo/MenuDemo'
 import NavigationDrawerDemo from './demo/NavigationDrawerDemo'
 import ProgressBarDemo from './demo/ProgressBarDemo'
+import SelectionControlsDemo from './demo/SelectionControlsDemo'
 import SnackbarDemo from './demo/SnackbarDemo'
 import SpinnerDemo from './demo/SpinnerDemo'
 import TabsDemo from './demo/TabsDemo'
@@ -20,6 +21,7 @@ import TextFielDemo from './demo/TextFieldDemo'
 import useTitle from './demo/useTitle'
 import { AppBar, Button, Icon, NavigationDrawer, polyfill, Snackbars, useLocalStorage, useMobile } from './lib'
 import TextFieldDateDemo from "./demo/TextFieldDateDemo";
+import ListDemo from "./demo/ListDemo";
 
 polyfill()
 
@@ -123,6 +125,11 @@ const App = () => {
                                                onClick={() => isMobile && setIsNavigationDrawerOpen(false)}>
                             Dialog
                         </NavigationDrawer.Item>
+                        <NavigationDrawer.Item to='/list'
+                                               title={!isNavigationDrawerOpen && 'List'}
+                                               onClick={() => isMobile && setIsNavigationDrawerOpen(false)}>
+                            List
+                        </NavigationDrawer.Item>
                         <NavigationDrawer.Item to='/menu'
                                                title={!isNavigationDrawerOpen && 'Menu'}
                                                onClick={() => isMobile && setIsNavigationDrawerOpen(false)}>
@@ -137,6 +144,11 @@ const App = () => {
                                                title={!isNavigationDrawerOpen && 'Progress bar'}
                                                onClick={() => isMobile && setIsNavigationDrawerOpen(false)}>
                             Progress bar
+                        </NavigationDrawer.Item>
+                        <NavigationDrawer.Item to='/selection-controls'
+                                               title={!isNavigationDrawerOpen && 'Selection Controls'}
+                                               onClick={() => isMobile && setIsNavigationDrawerOpen(false)}>
+                            Selection Controls
                         </NavigationDrawer.Item>
                         <NavigationDrawer.Item to='/snackbar'
                                                title={!isNavigationDrawerOpen && 'Snackbar'}
@@ -182,9 +194,11 @@ const App = () => {
                     <Route path='/card' component={CardDemo} />
                     <Route path='/data-table' component={DataTableDemo} />
                     <Route path='/dialog' component={DialogDemo} />
+                    <Route path='/list' component={ListDemo} />
                     <Route path='/menu' component={MenuDemo} />
                     <Route path='/navigation-drawer' component={NavigationDrawerDemo} />
                     <Route path='/progress-bar' component={ProgressBarDemo} />
+                    <Route path='/selection-controls' component={SelectionControlsDemo} />
                     <Route path='/snackbar' component={SnackbarDemo} />
                     <Route path='/spinner' component={SpinnerDemo} />
                     <Route path='/tabs' component={TabsDemo} />

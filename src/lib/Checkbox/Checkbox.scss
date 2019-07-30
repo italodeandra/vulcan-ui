@@ -1,0 +1,51 @@
+.vui-Checkbox {
+    position: relative;
+    display: flex;
+    justify-content: flex-start;
+    min-height: 20px;
+    cursor: pointer;
+
+    label {
+        display: inline;
+        clear: both;
+
+        &:before, &:after {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            box-sizing: border-box;
+        }
+
+        &:before {
+            width: 20px;
+            height: 20px;
+            border: 2px solid #0000008a;
+            border-radius: 2px;
+            cursor: pointer;
+            transition: background .3s;
+        }
+    }
+
+    input[type="checkbox"] {
+        outline: none;
+        width: 24px;
+        margin: 0;
+        display: block;
+        visibility: hidden;
+
+        &:checked + label:before {
+            background-color: #6200ee;
+            border: none;
+        }
+
+        &:checked + label:after {
+            transform: translate(4px, 5px) rotate(-45deg);
+            width: 12px;
+            height: 6px;
+            border: 2px solid #fff;
+            border-top-style: none;
+            border-right-style: none;
+        }
+    }
+}
