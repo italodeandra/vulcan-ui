@@ -1,6 +1,8 @@
 import React from 'react'
 import classNames from '../../Utils/classNames';
 
+import "./Footer.sass"
+
 const Footer = ({ children, sticky, ...props }) => {
 
     const className = classNames(

@@ -42,7 +42,7 @@ const DataTableDemo = () => {
                             </DataTable.Header>
                             <DataTable.Table sticky>
                                 <DataTable.Columns sticky>
-                                    <DataTable.Column>#</DataTable.Column>
+                                    <DataTable.Column name="id" search>#</DataTable.Column>
                                     <DataTable.Column name="hero" search sortable
                                         // searchCustomInput={(props) => <input {...props} type="text"/>}
                                     >

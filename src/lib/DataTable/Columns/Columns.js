@@ -4,6 +4,8 @@ import { classNames } from '../..';
 import SearchRow from '../SearchRow/SearchRow'
 import { Context } from '../DataTable';
 
+import "./Columns.sass"
+
 const Columns = ({ children, sticky }) => {
 
     const {isSearchActive} = useContext(Context);

@@ -2,6 +2,8 @@ import React, { useContext, useLayoutEffect, useRef, useState } from "react";
 import { Context } from "../DataTable";
 import { Button, Icon } from "../..";
 
+import "./SearchRow.sass"
+
 const SearchRow = () => {
 
     const ref = useRef(null);
