@@ -1,6 +1,6 @@
 import React, {useLayoutEffect, useRef, useState} from 'react'
 import {classNames} from '../../index'
-import './Cell.scss'
+import './Cell.sass'
 
 const Cell = ({bold, children, editable, onChange, style, customInput, colSpan, className}) => {
     const ref = useRef(null)
