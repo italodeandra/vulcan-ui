@@ -1,0 +1,24 @@
+@import "../../styles"
+
+.vui-ListItem
+    min-height: 56px
+    display: flex
+    justify-content: flex-start
+    align-items: center
+    box-sizing: border-box
+    padding: 16px
+
+    &.link
+        transition-property: background-color
+        transition-duration: 210ms
+        transition-timing-function: $vui-Motion-Speed-Accelerate-Easing
+
+        -webkit-tap-highlight-color: rgba(0, 0, 0, 0)
+
+        &:hover
+            background: rgba(0, 0, 0, 0.08)
+            cursor: pointer
+
+        &:focus
+            background: rgba(0, 0, 0, 0.25)
+            outline: none

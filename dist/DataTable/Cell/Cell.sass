@@ -1,0 +1,40 @@
+.vui-DataTable-Cell
+    height: 48px
+    font-size: 14px
+    color: rgba(0, 0, 0, 0.87)
+    padding: 0 16px
+    box-sizing: border-box
+    cursor: default
+
+    &.editable
+        cursor: text
+
+    .input, input
+        height: 100%
+        width: 100%
+        padding: 8px
+        border-left: 0
+        border-right: 0
+        border-top: 0
+        outline: none
+        border-bottom-color: rgba(0, 0, 0, 0.13)
+        background-color: transparent
+        border-bottom-width: 2px
+
+        &:focus
+            border-bottom-color: #6200ee
+
+    &.bold
+        font-weight: bold
+
+    &.right-aligned
+        text-align: right
+
+        input
+            text-align: right
+
+    &.center-aligned
+        text-align: center
+
+        input
+            text-align: center

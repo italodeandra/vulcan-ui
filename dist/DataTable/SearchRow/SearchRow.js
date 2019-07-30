@@ -5,6 +5,7 @@ import _slicedToArray from "@babel/runtime/helpers/esm/slicedToArray";
 import React, { useContext, useLayoutEffect, useRef, useState } from "react";
 import { Context } from "../DataTable";
 import { Button, Icon } from "../..";
+import "./SearchRow.sass";
 
 var SearchRow = function SearchRow() {
   var ref = useRef(null);

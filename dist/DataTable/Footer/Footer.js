@@ -1,6 +1,7 @@
 import _objectWithoutProperties from "@babel/runtime/helpers/esm/objectWithoutProperties";
 import React from 'react';
 import classNames from '../../Utils/classNames';
+import "./Footer.sass";
 
 var Footer = function Footer(_ref) {
   var children = _ref.children,
