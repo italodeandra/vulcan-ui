@@ -15,7 +15,7 @@ const Pagination = ({rowsPerPage, rowsPerPageOptions, page, count}) => {
     if (!page)
         console.error('The property "page" is required for Pagination')
 
-    if (!count)
+    if (typeof count === 'undefined')
         console.error('The property "count" is required for Pagination')
 
     const {setFilter, onFilterChange} = useContext(Context)
@@ -94,14 +94,14 @@ const Pagination = ({rowsPerPage, rowsPerPageOptions, page, count}) => {
     }
 
     return (
-        <div className="vui-DataTable-Row vui-DataTablePagination" ref={ref}>
-            <div className="vui-DataTable-Cell" colSpan={totalColumns}>
-                <div className="vui-DataTablePagination-Items">
-                    <div className="vui-DataTablePagination-Item">
+        <div className='vui-DataTable-Row vui-DataTablePagination' ref={ref}>
+            <div className='vui-DataTable-Cell' colSpan={totalColumns}>
+                <div className='vui-DataTablePagination-Items'>
+                    <div className='vui-DataTablePagination-Item'>
                         <p>Itens por página:</p>
                         <select
-                            className="vui-DataTablePagination-ItemsByPage"
-                            name="rowsPerPage"
+                            className='vui-DataTablePagination-ItemsByPage'
+                            name='rowsPerPage'
                             onChange={handleChange}
                             value={pagination.rowsPerPage}
                         >
@@ -115,10 +115,10 @@ const Pagination = ({rowsPerPage, rowsPerPageOptions, page, count}) => {
                             ))}
                         </select>
                     </div>
-                    <div className="vui-DataTablePagination-Item">
+                    <div className='vui-DataTablePagination-Item'>
                         {currentItems()}
                     </div>
-                    <div className="vui-DataTablePagination-Item">
+                    <div className='vui-DataTablePagination-Item'>
                         <Button
                             icon
                             disabled={pagination.page === 1}
