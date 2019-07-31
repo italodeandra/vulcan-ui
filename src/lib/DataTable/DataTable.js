@@ -1,4 +1,4 @@
-import React, {createContext, useEffect, useState} from 'react'
+import React, {createContext, useState} from 'react'
 import {classNames, useDeepCompareEffect} from '../index'
 import Cell from './Cell/Cell'
 import Column from './Column/Column'
@@ -22,24 +22,18 @@ const DataTable = ({
                        columns: defaultColumns
                    }) => {
 
-    const [filter, setFilter] = useState({})
+    const [filter, setFilter] = useState()
     const [columns, setColumns] = useState(defaultColumns || {})
     const [isSearchActive, setIsSearchActive] = useState(false)
 
-    useEffect(() => {
-        setFilter(filter => {
-            let newFilter = {
-                ...filter,
-                columns
-            }
+    useDeepCompareEffect(() => {
+        if (filter)
+            onFilterChange && onFilterChange(filter)
 
-            onFilterChange && onFilterChange(newFilter)
-
-            return newFilter
-        })
+        console.log(filter)
 
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [JSON.stringify(columns)])
+    }, [filter])
 
     useDeepCompareEffect(() => {
         if (defaultColumns) {

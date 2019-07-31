@@ -1,23 +1,32 @@
-import React, { useEffect, useRef } from 'react'
+import React, { useLayoutEffect, useRef } from 'react'
 
 const Table = ({children, sticky, style}) => {
     const ref = useRef(null);
 
-    useEffect(() => {
+    useLayoutEffect(() => {
         if (sticky) {
             function handleResize() {
                 let offsetTop = ref.current.offsetTop;
                 let pageSize = window.innerHeight;
-        
+
                 if (offsetTop + ref.current.scrollHeight >= pageSize) {
-                    ref.current.style.height = `${pageSize - offsetTop}px`;
+                    let height = pageSize - offsetTop;
+
+                    let pagination = ref.current.parentNode.querySelector(".vui-DataTablePagination");
+                    if(pagination) {
+                        height -= pagination.scrollHeight + 8
+                    }
+
+                    ref.current.style.height = `${height}px`;
                 }
             }
 
             handleResize();
-            window.addEventListener("resize", handleResize);    
+            window.addEventListener("resize", handleResize);
             
-            return () =>  window.removeEventListener("resize", handleResize); 
+            return () =>  {
+                window.removeEventListener("resize", handleResize)
+            };
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])

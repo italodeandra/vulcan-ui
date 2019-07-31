@@ -1,10 +1,10 @@
-import React, { useContext, useEffect, useLayoutEffect, useState, useRef } from "react"
-import { Button, Icon } from "../.."
+import React, {useContext, useEffect, useLayoutEffect, useState, useRef} from 'react'
+import {Button, Icon, useDeepCompareEffect} from '../..'
 
-import "./Pagination.scss"
-import { Context } from "../DataTable";
+import './Pagination.scss'
+import {Context} from '../DataTable'
 
-const Pagination = ({ rowsPerPage, rowsPerPageOptions, page, count }) => {
+const Pagination = ({rowsPerPage, rowsPerPageOptions, page, count}) => {
 
     if (!rowsPerPage)
         console.error('The property "rowsPerPage" is required for Pagination')
@@ -18,28 +18,30 @@ const Pagination = ({ rowsPerPage, rowsPerPageOptions, page, count }) => {
     if (!count)
         console.error('The property "count" is required for Pagination')
 
-    const { setFilter, onFilterChange } = useContext(Context)
+    const {setFilter, onFilterChange} = useContext(Context)
     const ref = useRef(null)
+    const [enable, setEnable] = useState()
     const [totalColumns, setTotalColumns] = useState(0)
-    const [pagination, setPagination] = useState({ rowsPerPage, page })
+    const [pagination, setPagination] = useState({rowsPerPage, page})
 
-    useEffect(() => {
-        setFilter(f => {
-            let filter = {
-                ...f,
-                pagination
-            };
+    useDeepCompareEffect(() => {
+        if(enable) {
+            setFilter(f => {
+                let filter = {
+                    ...f,
+                    pagination,
+                }
 
-            onFilterChange && onFilterChange(filter)
-
-           return filter
-        });
+                onFilterChange && onFilterChange(filter)
+                return filter
+            })
+        }
 
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [JSON.stringify(pagination)])
+    }, [pagination])
 
     useLayoutEffect(() => {
-        let length = ref.current.parentNode.parentNode.querySelectorAll(".vui-DataTable-Columns tr .vui-DataTable-Column").length
+        let length = ref.current.parentNode.parentNode.querySelectorAll('.vui-DataTable-Columns tr .vui-DataTable-Column').length
         setTotalColumns(length)
 
         // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -48,31 +50,34 @@ const Pagination = ({ rowsPerPage, rowsPerPageOptions, page, count }) => {
     function handleClick(type) {
         setPagination(pagination => {
             let data = {
-                page: type === "prevPage" ? pagination.page - 1 : pagination.page + 1,
-                rowsPerPage: pagination.rowsPerPage
+                page: type === 'prevPage' ? pagination.page - 1 : pagination.page + 1,
+                rowsPerPage: pagination.rowsPerPage,
             }
+
+            setEnable(true)
 
             return data
         })
     }
 
-    function handleChange({ target }) {
+    function handleChange({target}) {
         setPagination(pagination => {
             let data = {
                 page: pagination.page,
-                rowsPerPage: +target.value
+                rowsPerPage: +target.value,
             }
 
             setFilter(filter => {
                 let newFilter = {
                     ...filter,
-                    pagination: data
-                };
+                    pagination: data,
+                }
 
-                onFilterChange && onFilterChange(newFilter)
+                return newFilter
+            })
 
-               return newFilter
-            }) 
+            setEnable(true)
+
             return data
         })
     }
@@ -117,22 +122,22 @@ const Pagination = ({ rowsPerPage, rowsPerPageOptions, page, count }) => {
                         <Button
                             icon
                             disabled={pagination.page === 1}
-                            onClick={() => handleClick("prevPage")}
+                            onClick={() => handleClick('prevPage')}
                         >
-                            <Icon name='chevronLeft' />
+                            <Icon name='chevronLeft'/>
                         </Button>
                         <Button
                             icon
                             disabled={pagination.page * pagination.rowsPerPage >= count}
-                            onClick={() => handleClick("nextPage")}
+                            onClick={() => handleClick('nextPage')}
                         >
-                            <Icon name='chevronRight' />
+                            <Icon name='chevronRight'/>
                         </Button>
                     </div>
                 </div>
             </div>
         </div>
-    );
+    )
 }
 
-export default Pagination;
+export default Pagination

@@ -10,10 +10,11 @@ import Icon from "./Icon/Icon"
 import Subtitle from "./Subtitle/Subtitle";
 
 import "./List.scss"
+import {classNames} from '../index'
 
-const List = ({ children }) => {
+const List = ({ children, ...props }) => {
     return (
-        <div className="vui-List">
+        <div className={classNames("vui-List", props.className)} {...props}>
             {children}
         </div>
     );

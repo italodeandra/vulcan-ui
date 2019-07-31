@@ -6,7 +6,7 @@ import './Column.scss'
 const directions = ['asc', 'desc', null]
 
 const Column = ({ children, name, rightAligned, centerAligned, search, searchCustomInput, sortable }) => {
-    const {columns, setColumns, isSearchActive, setIsSearchActive} = useContext(Context)
+    const {columns, setColumns, isSearchActive, setIsSearchActive, setFilter} = useContext(Context)
     const className = classNames(
         'vui-DataTable-Column',
         rightAligned && 'right-aligned',
@@ -32,9 +32,9 @@ const Column = ({ children, name, rightAligned, centerAligned, search, searchCus
 
     useEffect(() => {
         if (searchCustomInput && name) {
-            setColumns(c => ({ ...c, [name]: { 
-                ...c[name], 
-                searchCustomInput 
+            setColumns(c => ({ ...c, [name]: {
+                ...c[name],
+                searchCustomInput
             } }))
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -55,6 +55,10 @@ const Column = ({ children, name, rightAligned, centerAligned, search, searchCus
             const currentDirection = newColumns[name].direction
             newColumns[name].direction = directions[(directions.indexOf(currentDirection) + 1) % 3]
             setColumns(newColumns)
+            setFilter(f => ({
+                ...f,
+                columns: newColumns
+            }))
         }
     }
 
