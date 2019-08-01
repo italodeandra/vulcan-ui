@@ -1,3 +1,4 @@
+import _objectWithoutProperties from "@babel/runtime/helpers/esm/objectWithoutProperties";
 import React from "react";
 import ListItem from "./ListItem/ListItem";
 import Avatar from "./Avatar/Avatar";
@@ -9,12 +10,15 @@ import Action from "./Action/Action";
 import Icon from "./Icon/Icon";
 import Subtitle from "./Subtitle/Subtitle";
 import "./List.scss";
+import { classNames } from '../index';
 
 var List = function List(_ref) {
-  var children = _ref.children;
-  return React.createElement("div", {
-    className: "vui-List"
-  }, children);
+  var children = _ref.children,
+      props = _objectWithoutProperties(_ref, ["children"]);
+
+  return React.createElement("div", Object.assign({
+    className: classNames("vui-List", props.className)
+  }, props), children);
 };
 
 List.Avatar = Avatar;

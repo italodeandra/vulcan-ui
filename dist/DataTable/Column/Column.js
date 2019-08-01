@@ -19,7 +19,8 @@ var Column = function Column(_ref) {
       columns = _useContext.columns,
       setColumns = _useContext.setColumns,
       isSearchActive = _useContext.isSearchActive,
-      setIsSearchActive = _useContext.setIsSearchActive;
+      setIsSearchActive = _useContext.setIsSearchActive,
+      onTrigger = _useContext.onTrigger;
 
   var className = classNames('vui-DataTable-Column', rightAligned && 'right-aligned', centerAligned && 'center-aligned', sortable && 'sortable', search && 'search');
 
@@ -68,6 +69,7 @@ var Column = function Column(_ref) {
       var currentDirection = newColumns[name].direction;
       newColumns[name].direction = directions[(directions.indexOf(currentDirection) + 1) % 3];
       setColumns(newColumns);
+      onTrigger("columns", newColumns);
     }
   };
 

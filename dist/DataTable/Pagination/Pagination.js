@@ -1,9 +1,9 @@
 import _objectSpread from "@babel/runtime/helpers/esm/objectSpread";
 import _slicedToArray from "@babel/runtime/helpers/esm/slicedToArray";
-import React, { useContext, useEffect, useLayoutEffect, useState, useRef } from "react";
-import { Button, Icon } from "../..";
-import "./Pagination.scss";
-import { Context } from "../DataTable";
+import React, { useContext, useEffect, useLayoutEffect, useState, useRef } from 'react';
+import { Button, Icon } from '../..';
+import './Pagination.scss';
+import { Context } from '../DataTable';
 
 var Pagination = function Pagination(_ref) {
   var rowsPerPage = _ref.rowsPerPage,
@@ -13,11 +13,11 @@ var Pagination = function Pagination(_ref) {
   if (!rowsPerPage) console.error('The property "rowsPerPage" is required for Pagination');
   if (!rowsPerPageOptions) console.error('The property "rowsPerPageOptions" is required for Pagination');
   if (!page) console.error('The property "page" is required for Pagination');
-  if (!count) console.error('The property "count" is required for Pagination');
+  if (typeof count === 'undefined') console.error('The property "count" is required for Pagination');
 
   var _useContext = useContext(Context),
-      setFilter = _useContext.setFilter,
-      onFilterChange = _useContext.onFilterChange;
+      onTrigger = _useContext.onTrigger,
+      setFilter = _useContext.setFilter;
 
   var ref = useRef(null);
 
@@ -35,26 +35,24 @@ var Pagination = function Pagination(_ref) {
       setPagination = _useState4[1];
 
   useEffect(function () {
-    setFilter(function (f) {
-      var filter = _objectSpread({}, f, {
+    setFilter(function (filter) {
+      return _objectSpread({}, filter, {
         pagination: pagination
       });
-
-      onFilterChange && onFilterChange(filter);
-      return filter;
     }); // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [JSON.stringify(pagination)]);
+  }, []);
   useLayoutEffect(function () {
-    var length = ref.current.parentNode.parentNode.querySelectorAll(".vui-DataTable-Columns tr .vui-DataTable-Column").length;
+    var length = ref.current.parentNode.parentNode.querySelectorAll('.vui-DataTable-Columns tr .vui-DataTable-Column').length;
     setTotalColumns(length); // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   function handleClick(type) {
     setPagination(function (pagination) {
       var data = {
-        page: type === "prevPage" ? pagination.page - 1 : pagination.page + 1,
+        page: type === 'prevPage' ? pagination.page - 1 : pagination.page + 1,
         rowsPerPage: pagination.rowsPerPage
       };
+      onTrigger("pagination", data);
       return data;
     });
   }
@@ -66,14 +64,7 @@ var Pagination = function Pagination(_ref) {
         page: pagination.page,
         rowsPerPage: +target.value
       };
-      setFilter(function (filter) {
-        var newFilter = _objectSpread({}, filter, {
-          pagination: data
-        });
-
-        onFilterChange && onFilterChange(newFilter);
-        return newFilter;
-      });
+      onTrigger("pagination", data);
       return data;
     });
   }
@@ -113,7 +104,7 @@ var Pagination = function Pagination(_ref) {
     icon: true,
     disabled: pagination.page === 1,
     onClick: function onClick() {
-      return handleClick("prevPage");
+      return handleClick('prevPage');
     }
   }, React.createElement(Icon, {
     name: "chevronLeft"
@@ -121,7 +112,7 @@ var Pagination = function Pagination(_ref) {
     icon: true,
     disabled: pagination.page * pagination.rowsPerPage >= count,
     onClick: function onClick() {
-      return handleClick("nextPage");
+      return handleClick('nextPage');
     }
   }, React.createElement(Icon, {
     name: "chevronRight"
