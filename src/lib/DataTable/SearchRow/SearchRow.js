@@ -59,7 +59,7 @@ const SearchRow = () => {
                     {...inputProps}
                     className={classNames(inputProps.className, 'default')}
                     name={key}
-                    value={columns[key] && columns[key].query}
+                    value={(columns[key] && columns[key].query) || ''}
                 />
                 <Button className='vui-DataTable-SearchRow-Button' icon onClick={() => onTrigger("columns", columns)}>
                     <Icon name='search'/>
