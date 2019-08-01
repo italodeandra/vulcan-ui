@@ -1,4 +1,4 @@
-import React, {useContext, useLayoutEffect, useState, useRef} from 'react'
+import React, {useContext, useEffect, useLayoutEffect, useState, useRef} from 'react'
 import {Button, Icon} from '../..'
 
 import './Pagination.scss'
@@ -18,10 +18,19 @@ const Pagination = ({rowsPerPage, rowsPerPageOptions, page, count}) => {
     if (typeof count === 'undefined')
         console.error('The property "count" is required for Pagination')
 
-    const {onTrigger} = useContext(Context)
+    const {onTrigger, setFilter} = useContext(Context)
     const ref = useRef(null)
     const [totalColumns, setTotalColumns] = useState(0)
     const [pagination, setPagination] = useState({rowsPerPage, page})
+
+    useEffect(() => {
+        setFilter(filter => ({
+            ...filter,
+            pagination
+        }))
+
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [])
 
     useLayoutEffect(() => {
         let length = ref.current.parentNode.parentNode.querySelectorAll('.vui-DataTable-Columns tr .vui-DataTable-Column').length

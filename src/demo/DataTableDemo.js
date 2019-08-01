@@ -75,7 +75,7 @@ const DataTableDemo = () => {
                                 </DataTable.Columns>
                                 <DataTable.Rows>
                                     {list.map(item => (
-                                        <DataTable.Row key={item.id} clickable>
+                                        <DataTable.Row key={item.id}>
                                             <DataTable.Cell>{item.id}</DataTable.Cell>
                                             <DataTable.Cell
                                                 editable='always'
