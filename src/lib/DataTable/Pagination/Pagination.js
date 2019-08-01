@@ -1,5 +1,5 @@
-import React, {useContext, useEffect, useLayoutEffect, useState, useRef} from 'react'
-import {Button, Icon, useDeepCompareEffect} from '../..'
+import React, {useContext, useLayoutEffect, useState, useRef} from 'react'
+import {Button, Icon} from '../..'
 
 import './Pagination.scss'
 import {Context} from '../DataTable'
@@ -18,27 +18,10 @@ const Pagination = ({rowsPerPage, rowsPerPageOptions, page, count}) => {
     if (typeof count === 'undefined')
         console.error('The property "count" is required for Pagination')
 
-    const {setFilter, onFilterChange} = useContext(Context)
+    const {onTrigger} = useContext(Context)
     const ref = useRef(null)
-    const [enable, setEnable] = useState()
     const [totalColumns, setTotalColumns] = useState(0)
     const [pagination, setPagination] = useState({rowsPerPage, page})
-
-    useDeepCompareEffect(() => {
-        if(enable) {
-            setFilter(f => {
-                let filter = {
-                    ...f,
-                    pagination,
-                }
-
-                onFilterChange && onFilterChange(filter)
-                return filter
-            })
-        }
-
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [pagination])
 
     useLayoutEffect(() => {
         let length = ref.current.parentNode.parentNode.querySelectorAll('.vui-DataTable-Columns tr .vui-DataTable-Column').length
@@ -54,8 +37,7 @@ const Pagination = ({rowsPerPage, rowsPerPageOptions, page, count}) => {
                 rowsPerPage: pagination.rowsPerPage,
             }
 
-            setEnable(true)
-
+            onTrigger("pagination", data)
             return data
         })
     }
@@ -67,17 +49,7 @@ const Pagination = ({rowsPerPage, rowsPerPageOptions, page, count}) => {
                 rowsPerPage: +target.value,
             }
 
-            setFilter(filter => {
-                let newFilter = {
-                    ...filter,
-                    pagination: data,
-                }
-
-                return newFilter
-            })
-
-            setEnable(true)
-
+            onTrigger("pagination", data)
             return data
         })
     }

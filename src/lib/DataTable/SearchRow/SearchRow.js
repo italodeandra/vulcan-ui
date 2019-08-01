@@ -8,7 +8,7 @@ const SearchRow = () => {
 
     const ref = useRef(null)
     const [elements, setElements] = useState([])
-    const {columns, setColumns, filter, onFilterChange} = useContext(Context)
+    const {columns, setColumns, onTrigger} = useContext(Context)
 
     useLayoutEffect(() => {
         let searchColumns = ref.current.previousSibling.querySelectorAll('.vui-DataTable-Column')
@@ -28,15 +28,20 @@ const SearchRow = () => {
     }, [])
 
     function handleChange({target}) {
-        setColumns(c => ({
-            ...c,
-            [target.name]: {...c[target.name], query: target.value}
-        }))
+        setColumns(c => {
+            let columns = {
+                ...c,
+                [target.name]: {...c[target.name], query: target.value},
+            }
+
+            onTrigger("columns", columns)
+            return columns
+        })
     }
 
     const inputProps = {
         onChange: handleChange,
-        className: 'vui-DataTable-SearchRow-Input input'
+        className: 'vui-DataTable-SearchRow-Input input',
     }
 
     const input = (key) => {
@@ -44,7 +49,7 @@ const SearchRow = () => {
             return columns[key].searchCustomInput({
                 ...inputProps,
                 name: key,
-                value: columns[key].query || ''
+                value: columns[key].query || '',
             })
         }
 
@@ -56,7 +61,7 @@ const SearchRow = () => {
                     name={key}
                     value={columns[key] && columns[key].query}
                 />
-                <Button className='vui-DataTable-SearchRow-Button' icon onClick={() => onFilterChange(filter)}>
+                <Button className='vui-DataTable-SearchRow-Button' icon onClick={() => onTrigger("columns", columns)}>
                     <Icon name='search'/>
                 </Button>
             </>
