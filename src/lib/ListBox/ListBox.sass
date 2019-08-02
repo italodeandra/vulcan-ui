@@ -1,0 +1,30 @@
+.vui-ListBox
+    display: flex
+    align-items: center
+    justify-content: center
+
+    .vui-ListBox-items
+        display: flex
+        flex-direction: column
+        max-width: 400px
+        width: 100%
+
+        .vui-ListBox-List
+            overflow-y: scroll
+            height: 400px
+            border: 1px solid rgba(0, 0, 0, 0.24)
+            border-radius: 4px
+
+    .vui-ListBox-controls
+        display: flex
+        flex-direction: column
+        justify-content: center
+        align-items: center
+
+        width: 54px
+
+        .vui-ListBox-controls-button
+            margin: 0 0 16px 0
+
+            &:last-child
+                margin-bottom: 0

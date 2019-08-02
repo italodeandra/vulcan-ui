@@ -1,23 +1,37 @@
-import React, {useRef} from "react";
+import React, {useRef, useState} from "react";
 import classNames from "../../Utils/classNames";
 
 import "./ListItem.sass"
 
-const ListItem = ({ children, onClick }) => {
+const ListItem = ({ children, onClick, selectable, ...props }) => {
 
     const ref = useRef(null)
+    const [active, setActive] = useState("")
     const className = classNames(
         "vui-ListItem",
-        onClick && "link"
+        onClick && "link",
+        active && "active",
+        props.active && "active"
     )
 
-    function handleClick() {
+    function handleClick(e) {
         ref.current.blur()
-        onClick && onClick()
+
+        if(selectable) {
+            setActive(!active)
+        }
+
+        onClick && onClick(e)
     }
 
     return (
-        <div ref={ref} className={className} onClick={handleClick} tabIndex={onClick ? "0" : undefined}>
+        <div
+            ref={ref}
+            className={className}
+            onClick={handleClick}
+            tabIndex={onClick ? "0" : undefined} {...props}
+
+        >
             {children}
         </div>
     );

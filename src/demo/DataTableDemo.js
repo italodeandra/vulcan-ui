@@ -11,7 +11,27 @@ const DataTableDemo = () => {
         { id: 2, hero: 'Captain America', actor: 'Chris Evans', power: 10 },
         { id: 3, hero: 'Carol Danvers', actor: 'Brie Larson', power: 10 },
         { id: 4, hero: 'Black Widow', actor: 'Scarlett Johansson', power: 10 },
-        { id: 5, hero: 'Thor', actor: 'Chris Hemsworth', power: 10 }
+        { id: 5, hero: 'Thor', actor: 'Chris Hemsworth', power: 10 },
+        { id: 6, hero: 'Iron Man', actor: 'Robert Downey Jr.', power: 10 },
+        { id: 7, hero: 'Captain America', actor: 'Chris Evans', power: 10 },
+        { id: 8, hero: 'Carol Danvers', actor: 'Brie Larson', power: 10 },
+        { id: 9, hero: 'Black Widow', actor: 'Scarlett Johansson', power: 10 },
+        { id: 10, hero: 'Thor', actor: 'Chris Hemsworth', power: 10 },
+        { id: 11, hero: 'Iron Man', actor: 'Robert Downey Jr.', power: 10 },
+        { id: 12, hero: 'Captain America', actor: 'Chris Evans', power: 10 },
+        { id: 13, hero: 'Carol Danvers', actor: 'Brie Larson', power: 10 },
+        { id: 14, hero: 'Black Widow', actor: 'Scarlett Johansson', power: 10 },
+        { id: 15, hero: 'Thor', actor: 'Chris Hemsworth', power: 10 },
+        { id: 16, hero: 'Iron Man', actor: 'Robert Downey Jr.', power: 10 },
+        { id: 17, hero: 'Captain America', actor: 'Chris Evans', power: 10 },
+        { id: 18, hero: 'Carol Danvers', actor: 'Brie Larson', power: 10 },
+        { id: 19, hero: 'Black Widow', actor: 'Scarlett Johansson', power: 10 },
+        { id: 20, hero: 'Thor', actor: 'Chris Hemsworth', power: 10 },
+        { id: 21, hero: 'Iron Man', actor: 'Robert Downey Jr.', power: 10 },
+        { id: 22, hero: 'Captain America', actor: 'Chris Evans', power: 10 },
+        { id: 23, hero: 'Carol Danvers', actor: 'Brie Larson', power: 10 },
+        { id: 24, hero: 'Black Widow', actor: 'Scarlett Johansson', power: 10 },
+        { id: 25, hero: 'Thor', actor: 'Chris Hemsworth', power: 10 }
     ])
 
     const handleChangeCell = (list, item, property, newValue) => {
@@ -55,7 +75,7 @@ const DataTableDemo = () => {
                                 </DataTable.Columns>
                                 <DataTable.Rows>
                                     {list.map(item => (
-                                        <DataTable.Row key={item.id} clickable>
+                                        <DataTable.Row key={item.id}>
                                             <DataTable.Cell>{item.id}</DataTable.Cell>
                                             <DataTable.Cell
                                                 editable='always'

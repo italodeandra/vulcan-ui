@@ -1,6 +1,7 @@
+import _defineProperty from "@babel/runtime/helpers/esm/defineProperty";
 import _objectSpread from "@babel/runtime/helpers/esm/objectSpread";
 import _slicedToArray from "@babel/runtime/helpers/esm/slicedToArray";
-import React, { createContext, useEffect, useState } from 'react';
+import React, { createContext, useState } from 'react';
 import { classNames, useDeepCompareEffect } from '../index';
 import Cell from './Cell/Cell';
 import Column from './Column/Column';
@@ -20,7 +21,7 @@ var DataTable = function DataTable(_ref) {
       className = _ref.className,
       defaultColumns = _ref.columns;
 
-  var _useState = useState({}),
+  var _useState = useState(),
       _useState2 = _slicedToArray(_useState, 2),
       filter = _useState2[0],
       setFilter = _useState2[1];
@@ -35,21 +36,28 @@ var DataTable = function DataTable(_ref) {
       isSearchActive = _useState6[0],
       setIsSearchActive = _useState6[1];
 
-  useEffect(function () {
+  useDeepCompareEffect(function () {
     setFilter(function (filter) {
-      var newFilter = _objectSpread({}, filter, {
+      return _objectSpread({}, filter, {
         columns: columns
       });
-
-      onFilterChange && onFilterChange(newFilter);
-      return newFilter;
     }); // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [JSON.stringify(columns)]);
+  }, [columns]);
   useDeepCompareEffect(function () {
     if (defaultColumns) {
       setColumns(defaultColumns);
     }
   }, [defaultColumns]);
+
+  var onTrigger = function onTrigger(type, data) {
+    setFilter(function (filter) {
+      var nextFilter = _objectSpread({}, filter, _defineProperty({}, type, data));
+
+      onFilterChange && onFilterChange(nextFilter);
+      return nextFilter;
+    });
+  };
+
   return React.createElement(Context.Provider, {
     value: {
       columns: columns,
@@ -58,7 +66,7 @@ var DataTable = function DataTable(_ref) {
       setFilter: setFilter,
       isSearchActive: isSearchActive,
       setIsSearchActive: setIsSearchActive,
-      onFilterChange: onFilterChange
+      onTrigger: onTrigger
     }
   }, React.createElement("div", {
     className: classNames('vui-DataTable', className)

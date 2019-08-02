@@ -5,6 +5,7 @@ import account from './icons/account'
 import accountGroup from './icons/accountGroup'
 import alarm from './icons/alarm'
 import arrowDown from './icons/arrowDown'
+import arrowLeft from './icons/arrowLeft'
 import arrowRight from './icons/arrowRight'
 import autoFix from './icons/autoFix'
 import calendar from './icons/calendar'
@@ -43,6 +44,8 @@ import search from './icons/search'
 import sitemap from './icons/sitemap'
 import speedometer from './icons/speedometer'
 import store from './icons/store'
+import transferLeft from './icons/transferLeft'
+import transferRight from './icons/transferRight'
 import truckCheck from './icons/truckCheck'
 import upload from './icons/upload'
 
@@ -51,6 +54,7 @@ const icons = {
     accountGroup,
     alarm,
     arrowDown,
+    arrowLeft,
     arrowRight,
     autoFix,
     calendar,
@@ -89,6 +93,8 @@ const icons = {
     sitemap,
     speedometer,
     store,
+    transferLeft,
+    transferRight,
     truckCheck,
     upload,
 }

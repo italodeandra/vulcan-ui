@@ -1,8 +1,8 @@
-import React, {useContext, useLayoutEffect, useRef, useState} from 'react'
-import {Button, Icon, useDeepCompareEffect} from '../..'
-import {Context} from '../DataTable'
+import React, {useContext, useEffect, useLayoutEffect, useState, useRef} from 'react'
+import {Button, Icon} from '../..'
 
 import './Pagination.scss'
+import {Context} from '../DataTable'
 
 const Pagination = ({rowsPerPage, rowsPerPageOptions, page, count}) => {
 
@@ -18,25 +18,19 @@ const Pagination = ({rowsPerPage, rowsPerPageOptions, page, count}) => {
     if (typeof count === 'undefined')
         console.error('The property "count" is required for Pagination')
 
-    const {setFilter, onFilterChange} = useContext(Context)
+    const {onTrigger, setFilter} = useContext(Context)
     const ref = useRef(null)
     const [totalColumns, setTotalColumns] = useState(0)
     const [pagination, setPagination] = useState({rowsPerPage, page})
 
-    useDeepCompareEffect(() => {
-        setFilter(f => {
-            let filter = {
-                ...f,
-                pagination
-            }
-
-            onFilterChange && onFilterChange(filter)
-
-            return filter
-        })
+    useEffect(() => {
+        setFilter(filter => ({
+            ...filter,
+            pagination
+        }))
 
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [pagination])
+    }, [])
 
     useLayoutEffect(() => {
         let length = ref.current.parentNode.parentNode.querySelectorAll('.vui-DataTable-Columns tr .vui-DataTable-Column').length
@@ -49,9 +43,10 @@ const Pagination = ({rowsPerPage, rowsPerPageOptions, page, count}) => {
         setPagination(pagination => {
             let data = {
                 page: type === 'prevPage' ? pagination.page - 1 : pagination.page + 1,
-                rowsPerPage: pagination.rowsPerPage
+                rowsPerPage: pagination.rowsPerPage,
             }
 
+            onTrigger("pagination", data)
             return data
         })
     }
@@ -60,19 +55,10 @@ const Pagination = ({rowsPerPage, rowsPerPageOptions, page, count}) => {
         setPagination(pagination => {
             let data = {
                 page: pagination.page,
-                rowsPerPage: +target.value
+                rowsPerPage: +target.value,
             }
 
-            setFilter(filter => {
-                let newFilter = {
-                    ...filter,
-                    pagination: data
-                }
-
-                onFilterChange && onFilterChange(newFilter)
-
-                return newFilter
-            })
+            onTrigger("pagination", data)
             return data
         })
     }
