@@ -1,7 +1,8 @@
-import _slicedToArray from "@babel/runtime/helpers/esm/slicedToArray";
-import React, { useLayoutEffect, useRef, useState } from 'react';
-import { classNames } from '../../index';
-import './Cell.sass';
+import _slicedToArray from '@babel/runtime/helpers/esm/slicedToArray'
+//TODO: Receber valores das colunas e do filtro ao invés de reseta-los quando o componente é re-renderizado
+import React, {useLayoutEffect, useRef, useState} from 'react'
+import {classNames} from '../../index'
+import './Cell.sass'
 
 var Cell = function Cell(_ref) {
   var bold = _ref.bold,

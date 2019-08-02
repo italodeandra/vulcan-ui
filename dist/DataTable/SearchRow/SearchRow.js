@@ -1,11 +1,11 @@
-import _toConsumableArray from "@babel/runtime/helpers/esm/toConsumableArray";
-import _defineProperty from "@babel/runtime/helpers/esm/defineProperty";
-import _objectSpread from "@babel/runtime/helpers/esm/objectSpread";
-import _slicedToArray from "@babel/runtime/helpers/esm/slicedToArray";
-import React, { useContext, useLayoutEffect, useRef, useState } from 'react';
-import { Button, classNames, Icon } from '../..';
-import { Context } from '../DataTable';
-import './SearchRow.sass';
+import _defineProperty from '@babel/runtime/helpers/esm/defineProperty'
+import _objectSpread from '@babel/runtime/helpers/esm/objectSpread'
+import _slicedToArray from '@babel/runtime/helpers/esm/slicedToArray'
+import _toConsumableArray from '@babel/runtime/helpers/esm/toConsumableArray'
+import React, {useContext, useLayoutEffect, useRef, useState} from 'react'
+import {Button, classNames, Icon} from '../..'
+import {Context} from '../DataTable'
+import './SearchRow.sass'
 
 var SearchRow = function SearchRow() {
   var ref = useRef(null);
@@ -71,7 +71,7 @@ var SearchRow = function SearchRow() {
     return React.createElement(React.Fragment, null, React.createElement("input", Object.assign({}, inputProps, {
       className: classNames(inputProps.className, 'default'),
       name: key,
-      value: columns[key] && columns[key].query
+      value: columns[key] && columns[key].query || ''
     })), React.createElement(Button, {
       className: "vui-DataTable-SearchRow-Button",
       icon: true,
