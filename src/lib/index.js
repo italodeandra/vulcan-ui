@@ -3,12 +3,13 @@ import * as queryString from 'query-string'
 import AppBar from './AppBar/AppBar'
 import Button from './Button/Button'
 import Card from './Card/Card'
+import Checkbox from './Checkbox/Checkbox'
 import DataTable from './DataTable/DataTable'
-import Checkbox from "./Checkbox/Checkbox"
 import Dialog from './Dialog/Dialog'
 import useDialog from './Dialog/useDialog'
 import Form from './Form/Form'
 import useDeepCompareEffect from './Hooks/useDeepCompareEffect'
+import useDeepCompareLayoutEffect from './Hooks/useDeepCompareLayoutEffect'
 import useLocalStorage from './Hooks/useLocalStorage'
 import useMobile from './Hooks/useMobile'
 import usePortal from './Hooks/usePortal'
@@ -22,9 +23,9 @@ import PrettyJson from './PrettyJson/PrettyJson'
 import ProgressBar from './ProgressBar/ProgressBar'
 import RadioButton from './RadioButton/RadioButton'
 import Snackbars from './Snackbar/Snackbars'
-import Switch from './Switch/Switch'
 import useSnackbar from './Snackbar/useSnackbar'
 import Spinner from './Spinner/Spinner'
+import Switch from './Switch/Switch'
 import Tabs from './Tabs/Tabs'
 import TextField from './TextField/TextField'
 import base64 from './Utils/base64'
@@ -62,6 +63,7 @@ export {
     TextField,
 
     useDeepCompareEffect,
+    useDeepCompareLayoutEffect,
     useLocalStorage,
     useMobile,
     usePortal,

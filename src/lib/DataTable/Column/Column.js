@@ -1,6 +1,6 @@
-import React, { useContext, useEffect } from 'react'
-import { classNames, Icon } from '../../index'
-import { Context } from '../DataTable'
+import React, {useContext, useEffect} from 'react'
+import {classNames, Icon} from '../../index'
+import {Context} from '../DataTable'
 import './Column.scss'
 
 const directions = ['asc', 'desc', null]
@@ -31,7 +31,7 @@ const Column = ({ children, name, rightAligned, centerAligned, search, searchCus
     }, [name, sortable])
 
     useEffect(() => {
-        if (searchCustomInput && name) {
+        if (name) {
             setColumns(c => ({ ...c, [name]: {
                 ...c[name],
                 searchCustomInput

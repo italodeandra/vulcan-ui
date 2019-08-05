@@ -19,8 +19,8 @@ const DataTable = ({
                        children,
                        onFilterChange,
                        className,
-                       filter: defaultFilters,
-                       columns: defaultColumns
+                       columns: defaultColumns,
+                       filter: defaultFilter
                    }) => {
 
     const [filter, setFilter] = useState()
@@ -39,10 +39,17 @@ const DataTable = ({
     }, [defaultColumns])
 
     useDeepCompareEffect(() => {
-        if (defaultFilters)
-            setColumns({...defaultFilters.columns})
-
-    }, [defaultFilters])
+        if (defaultFilter) {
+            setFilter(defaultFilter)
+            let newIsSearchActive = isSearchActive
+            Object.keys(defaultFilter.columns).forEach(k => {
+                if (defaultFilter.columns[k].query) {
+                    newIsSearchActive = true
+                }
+            })
+            setIsSearchActive(newIsSearchActive)
+        }
+    }, [defaultFilter])
 
     const onTrigger = (type, data) => {
         setFilter(filter => {

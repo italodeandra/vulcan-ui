@@ -1,5 +1,5 @@
-import React, {useContext, useLayoutEffect, useRef, useState} from 'react'
-import {Button, classNames, Icon} from '../..'
+import React, {useContext, useRef, useState} from 'react'
+import {Button, classNames, Icon, useDeepCompareLayoutEffect} from '../..'
 import {Context} from '../DataTable'
 
 import './SearchRow.sass'
@@ -10,8 +10,10 @@ const SearchRow = () => {
     const [elements, setElements] = useState([])
     const {columns, setColumns, onTrigger} = useContext(Context)
 
-    useLayoutEffect(() => {
+    useDeepCompareLayoutEffect(() => {
         let searchColumns = ref.current.previousSibling.querySelectorAll('.vui-DataTable-Column')
+
+        setElements([])
 
         searchColumns.forEach(column => {
             let columnName = column.getAttribute('name')
@@ -25,23 +27,23 @@ const SearchRow = () => {
         })
 
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [])
+    }, [columns])
 
     function handleChange(key, value) {
         setColumns(c => {
             let columns = {
                 ...c,
-                [key]: {...c[key], query: value},
+                [key]: {...c[key], query: value}
             }
 
-            onTrigger("columns", columns)
+            onTrigger('columns', columns)
             return columns
         })
     }
 
     const inputProps = {
         onChange: handleChange,
-        className: 'vui-DataTable-SearchRow-Input input',
+        className: 'vui-DataTable-SearchRow-Input input'
     }
 
     const input = (key) => {
@@ -50,7 +52,7 @@ const SearchRow = () => {
                 ...inputProps,
                 name: key,
                 onChange: (value) => handleChange(key, value),
-                value: columns[key].query || '',
+                value: columns[key].query || ''
             })
         }
 
@@ -63,7 +65,7 @@ const SearchRow = () => {
                     onChange={(e) => handleChange(key, e.target.value)}
                     value={(columns[key] && columns[key].query) || ''}
                 />
-                <Button className='vui-DataTable-SearchRow-Button' icon onClick={() => onTrigger("columns", columns)}>
+                <Button className='vui-DataTable-SearchRow-Button' icon onClick={() => onTrigger('columns', columns)}>
                     <Icon name='search'/>
                 </Button>
             </>
