@@ -1,11 +1,11 @@
-import _defineProperty from '@babel/runtime/helpers/esm/defineProperty'
-import _objectSpread from '@babel/runtime/helpers/esm/objectSpread'
-import _slicedToArray from '@babel/runtime/helpers/esm/slicedToArray'
-import _toConsumableArray from '@babel/runtime/helpers/esm/toConsumableArray'
-import React, {useContext, useLayoutEffect, useRef, useState} from 'react'
-import {Button, classNames, Icon} from '../..'
-import {Context} from '../DataTable'
-import './SearchRow.sass'
+import _toConsumableArray from "@babel/runtime/helpers/esm/toConsumableArray";
+import _defineProperty from "@babel/runtime/helpers/esm/defineProperty";
+import _objectSpread from "@babel/runtime/helpers/esm/objectSpread";
+import _slicedToArray from "@babel/runtime/helpers/esm/slicedToArray";
+import React, { useContext, useRef, useState } from 'react';
+import { Button, classNames, Icon, useDeepCompareLayoutEffect } from '../..';
+import { Context } from '../DataTable';
+import './SearchRow.sass';
 
 var SearchRow = function SearchRow() {
   var ref = useRef(null);
@@ -17,11 +17,13 @@ var SearchRow = function SearchRow() {
 
   var _useContext = useContext(Context),
       columns = _useContext.columns,
+      filter = _useContext.filter,
       setColumns = _useContext.setColumns,
       onTrigger = _useContext.onTrigger;
 
-  useLayoutEffect(function () {
+  useDeepCompareLayoutEffect(function () {
     var searchColumns = ref.current.previousSibling.querySelectorAll('.vui-DataTable-Column');
+    setElements([]);
     searchColumns.forEach(function (column) {
       var columnName = column.getAttribute('name');
 
@@ -41,16 +43,15 @@ var SearchRow = function SearchRow() {
         });
       }
     }); // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [filter]);
 
-  function handleChange(_ref) {
-    var target = _ref.target;
+  function handleChange(key, value) {
     setColumns(function (c) {
-      var columns = _objectSpread({}, c, _defineProperty({}, target.name, _objectSpread({}, c[target.name], {
-        query: target.value
+      var columns = _objectSpread({}, c, _defineProperty({}, key, _objectSpread({}, c[key], {
+        query: value
       })));
 
-      onTrigger("columns", columns);
+      onTrigger('columns', columns);
       return columns;
     });
   }
@@ -64,6 +65,9 @@ var SearchRow = function SearchRow() {
     if (columns[key] && columns[key].searchCustomInput) {
       return columns[key].searchCustomInput(_objectSpread({}, inputProps, {
         name: key,
+        onChange: function onChange(value) {
+          return handleChange(key, value);
+        },
         value: columns[key].query || ''
       }));
     }
@@ -71,12 +75,15 @@ var SearchRow = function SearchRow() {
     return React.createElement(React.Fragment, null, React.createElement("input", Object.assign({}, inputProps, {
       className: classNames(inputProps.className, 'default'),
       name: key,
+      onChange: function onChange(e) {
+        return handleChange(key, e.target.value);
+      },
       value: columns[key] && columns[key].query || ''
     })), React.createElement(Button, {
       className: "vui-DataTable-SearchRow-Button",
       icon: true,
       onClick: function onClick() {
-        return onTrigger("columns", columns);
+        return onTrigger('columns', columns);
       }
     }, React.createElement(Icon, {
       name: "search"

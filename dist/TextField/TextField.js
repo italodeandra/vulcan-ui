@@ -1,18 +1,18 @@
-import _objectSpread from '@babel/runtime/helpers/esm/objectSpread'
-import _objectWithoutProperties from '@babel/runtime/helpers/esm/objectWithoutProperties'
-import _slicedToArray from '@babel/runtime/helpers/esm/slicedToArray'
+import _objectSpread from "@babel/runtime/helpers/esm/objectSpread";
+import _slicedToArray from "@babel/runtime/helpers/esm/slicedToArray";
+import _objectWithoutProperties from "@babel/runtime/helpers/esm/objectWithoutProperties";
 //TODO: Fix the assistive text changing fast between error and helper when it has an required error
-import _isEqual from 'lodash.isequal'
-import React, {useEffect, useRef, useState} from 'react'
-import {classNames, useDeepCompareEffect} from '../index'
-import Autocomplete from './Autocomplete/Autocomplete'
-import Autosize from './Autosize/Autosize'
-import Chips from './Chips/Chips'
-import Date from './Date/Date'
-import Number from './Number/Number'
-import Select from './Select/Select'
-import './TextField.scss'
-import useValidation from './useValidation'
+import _isEqual from 'lodash.isequal';
+import React, { useEffect, useRef, useState } from 'react';
+import { classNames, useDeepCompareEffect } from '../index';
+import Autocomplete from './Autocomplete/Autocomplete';
+import Autosize from './Autosize/Autosize';
+import Chips from './Chips/Chips';
+import Date from './Date/Date';
+import Number from './Number/Number';
+import Select from './Select/Select';
+import './TextField.scss';
+import useValidation from './useValidation';
 
 function checkIfIsCounter(value) {
   return new RegExp('^[0-9]+\\/[0-9]+$').test(value);
@@ -185,12 +185,12 @@ var TextField = function TextField(_ref) {
     isFocused: isFocused,
     isFilled: isFilled,
     isPristine: isPristine
-  }
+  };
   return React.createElement("div", {
     className: className
   }, React.createElement("div", {
     className: "input-container"
-  }, inputElement ? inputElement(inputElementProps, states) : React.createElement('input', inputElementProps), suffix && React.createElement('div', {
+  }, inputElement ? inputElement(inputElementProps, states) : React.createElement("input", inputElementProps), suffix && React.createElement("div", {
     className: "suffix"
   }, suffix), !!label && React.createElement("label", {
     htmlFor: id

@@ -43,7 +43,7 @@ var Column = function Column(_ref) {
 
   }, [name, sortable]);
   useEffect(function () {
-    if (searchCustomInput && name) {
+    if (name) {
       setColumns(function (c) {
         return _objectSpread({}, c, _defineProperty({}, name, _objectSpread({}, c[name], {
           searchCustomInput: searchCustomInput

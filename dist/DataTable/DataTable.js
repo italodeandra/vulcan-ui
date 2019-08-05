@@ -19,8 +19,8 @@ var DataTable = function DataTable(_ref) {
   var children = _ref.children,
       onFilterChange = _ref.onFilterChange,
       className = _ref.className,
-      defaultFilters = _ref.filter,
-      defaultColumns = _ref.columns;
+      defaultColumns = _ref.columns,
+      defaultFilter = _ref.filter;
 
   var _useState = useState(),
       _useState2 = _slicedToArray(_useState, 2),
@@ -50,8 +50,17 @@ var DataTable = function DataTable(_ref) {
     }
   }, [defaultColumns]);
   useDeepCompareEffect(function () {
-    if (defaultFilters) setColumns(_objectSpread({}, defaultFilters.columns));
-  }, [defaultFilters]);
+    if (defaultFilter) {
+      setFilter(defaultFilter);
+      var newIsSearchActive = isSearchActive;
+      Object.keys(defaultFilter.columns).forEach(function (k) {
+        if (defaultFilter.columns[k].query) {
+          newIsSearchActive = true;
+        }
+      });
+      setIsSearchActive(newIsSearchActive);
+    }
+  }, [defaultFilter]);
 
   var onTrigger = function onTrigger(type, data) {
     setFilter(function (filter) {
