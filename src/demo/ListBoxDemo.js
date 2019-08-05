@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react'
-import useTitle from './useTitle'
 import ListBox from '../lib/ListBox/ListBox'
+import useTitle from './useTitle'
 
 const ListBoxDemo = () => {
     const [, setTitle] = useTitle()
@@ -52,7 +52,7 @@ const ListBoxDemo = () => {
     useEffect(() => setTitle('ListBox'))
 
     const onChange = (data) => {
-        console.log(data)
+        console.info(data)
     }
 
     return (

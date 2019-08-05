@@ -1,9 +1,9 @@
 import React, {useEffect, useState} from 'react'
-import {Button, Card, DataTable, Icon, PrettyJson} from '../lib'
-import useTitle from './useTitle'
 
 import DatePicker from 'react-datepicker'
 import 'react-datepicker/dist/react-datepicker.css'
+import {Button, Card, DataTable, Icon, PrettyJson} from '../lib'
+import useTitle from './useTitle'
 
 const DataTableDemo = () => {
 
@@ -64,7 +64,7 @@ const DataTableDemo = () => {
     }
 
     const handleFilterChange = (filter) => {
-        console.log(JSON.stringify(filter))
+        console.info(JSON.stringify(filter))
     }
 
     return (

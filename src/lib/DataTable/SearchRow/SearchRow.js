@@ -8,7 +8,7 @@ const SearchRow = () => {
 
     const ref = useRef(null)
     const [elements, setElements] = useState([])
-    const {columns, setColumns, onTrigger} = useContext(Context)
+    const {columns, filter, setColumns, onTrigger} = useContext(Context)
 
     useDeepCompareLayoutEffect(() => {
         let searchColumns = ref.current.previousSibling.querySelectorAll('.vui-DataTable-Column')
@@ -27,7 +27,7 @@ const SearchRow = () => {
         })
 
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [columns])
+    }, [filter])
 
     function handleChange(key, value) {
         setColumns(c => {
