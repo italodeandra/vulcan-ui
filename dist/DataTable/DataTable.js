@@ -19,6 +19,7 @@ var DataTable = function DataTable(_ref) {
   var children = _ref.children,
       onFilterChange = _ref.onFilterChange,
       className = _ref.className,
+      defaultFilters = _ref.filter,
       defaultColumns = _ref.columns;
 
   var _useState = useState(),
@@ -48,6 +49,9 @@ var DataTable = function DataTable(_ref) {
       setColumns(defaultColumns);
     }
   }, [defaultColumns]);
+  useDeepCompareEffect(function () {
+    if (defaultFilters) setColumns(_objectSpread({}, defaultFilters.columns));
+  }, [defaultFilters]);
 
   var onTrigger = function onTrigger(type, data) {
     setFilter(function (filter) {

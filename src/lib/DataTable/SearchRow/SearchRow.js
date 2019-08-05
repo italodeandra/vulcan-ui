@@ -27,11 +27,11 @@ const SearchRow = () => {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
-    function handleChange({target}) {
+    function handleChange(key, value) {
         setColumns(c => {
             let columns = {
                 ...c,
-                [target.name]: {...c[target.name], query: target.value},
+                [key]: {...c[key], query: value},
             }
 
             onTrigger("columns", columns)
@@ -49,6 +49,7 @@ const SearchRow = () => {
             return columns[key].searchCustomInput({
                 ...inputProps,
                 name: key,
+                onChange: (value) => handleChange(key, value),
                 value: columns[key].query || '',
             })
         }
@@ -59,6 +60,7 @@ const SearchRow = () => {
                     {...inputProps}
                     className={classNames(inputProps.className, 'default')}
                     name={key}
+                    onChange={(e) => handleChange(key, e.target.value)}
                     value={(columns[key] && columns[key].query) || ''}
                 />
                 <Button className='vui-DataTable-SearchRow-Button' icon onClick={() => onTrigger("columns", columns)}>

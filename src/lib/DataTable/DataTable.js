@@ -19,6 +19,7 @@ const DataTable = ({
                        children,
                        onFilterChange,
                        className,
+                       filter: defaultFilters,
                        columns: defaultColumns
                    }) => {
 
@@ -36,6 +37,12 @@ const DataTable = ({
             setColumns(defaultColumns)
         }
     }, [defaultColumns])
+
+    useDeepCompareEffect(() => {
+        if (defaultFilters)
+            setColumns({...defaultFilters.columns})
+
+    }, [defaultFilters])
 
     const onTrigger = (type, data) => {
         setFilter(filter => {
