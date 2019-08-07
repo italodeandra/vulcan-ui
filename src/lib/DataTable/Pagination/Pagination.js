@@ -1,8 +1,8 @@
-import React, {useContext, useEffect, useLayoutEffect, useState, useRef} from 'react'
-import {Button, Icon} from '../..'
+import React, {useContext, useEffect, useLayoutEffect, useRef, useState} from 'react'
+import {Button, Icon} from '../../index'
+import {Context} from '../DataTable'
 
 import './Pagination.scss'
-import {Context} from '../DataTable'
 
 const Pagination = ({rowsPerPage, rowsPerPageOptions, page, count}) => {
 

@@ -1,10 +1,10 @@
-import React, { useContext, useLayoutEffect, useRef } from 'react'
-import { classNames } from '../..';
+import React, {useContext, useLayoutEffect, useRef} from 'react'
+import {classNames} from '../../index'
+import {Context} from '../DataTable'
 
 import SearchRow from '../SearchRow/SearchRow'
-import { Context } from '../DataTable';
 
-import "./Columns.sass"
+import './Columns.sass'
 
 const Columns = ({ children, sticky }) => {
 

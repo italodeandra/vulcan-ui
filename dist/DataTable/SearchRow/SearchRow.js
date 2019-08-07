@@ -1,9 +1,9 @@
-import _toConsumableArray from "@babel/runtime/helpers/esm/toConsumableArray";
 import _defineProperty from "@babel/runtime/helpers/esm/defineProperty";
 import _objectSpread from "@babel/runtime/helpers/esm/objectSpread";
+import _toConsumableArray from "@babel/runtime/helpers/esm/toConsumableArray";
 import _slicedToArray from "@babel/runtime/helpers/esm/slicedToArray";
 import React, { useContext, useRef, useState } from 'react';
-import { Button, classNames, Icon, useDeepCompareLayoutEffect } from '../..';
+import { Button, classNames, Icon, useDeepCompareLayoutEffect } from '../../index';
 import { Context } from '../DataTable';
 import './SearchRow.sass';
 
@@ -16,11 +16,11 @@ var SearchRow = function SearchRow() {
       setElements = _useState2[1];
 
   var _useContext = useContext(Context),
-      columns = _useContext.columns,
       filter = _useContext.filter,
-      setColumns = _useContext.setColumns,
+      setFilter = _useContext.setFilter,
       onTrigger = _useContext.onTrigger;
 
+  var columns = filter && filter.columns;
   useDeepCompareLayoutEffect(function () {
     var searchColumns = ref.current.previousSibling.querySelectorAll('.vui-DataTable-Column');
     setElements([]);
@@ -28,9 +28,7 @@ var SearchRow = function SearchRow() {
       var columnName = column.getAttribute('name');
 
       if (column.classList.contains('search')) {
-        setColumns(function (c) {
-          return _objectSpread({}, c, _defineProperty({}, columnName, _objectSpread({}, c[columnName])));
-        });
+        // setColumns(c => ({...c, [columnName]: {...c[columnName]}}))
         setElements(function (elements) {
           return [].concat(_toConsumableArray(elements), [{
             name: columnName,
@@ -43,16 +41,20 @@ var SearchRow = function SearchRow() {
         });
       }
     }); // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [filter]);
+  }, [filter, columns]);
 
   function handleChange(key, value) {
-    setColumns(function (c) {
-      var columns = _objectSpread({}, c, _defineProperty({}, key, _objectSpread({}, c[key], {
+    setFilter(function (f) {
+      var columns = _objectSpread({}, f.columns, _defineProperty({}, key, _objectSpread({}, f.columns[key], {
         query: value
       })));
 
+      var filter = _objectSpread({}, f, {
+        columns: columns
+      });
+
       onTrigger('columns', columns);
-      return columns;
+      return filter;
     });
   }
 

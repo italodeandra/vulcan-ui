@@ -1,7 +1,7 @@
 import _objectSpread from "@babel/runtime/helpers/esm/objectSpread";
 import _slicedToArray from "@babel/runtime/helpers/esm/slicedToArray";
 import React, { useContext, useEffect, useLayoutEffect, useState, useRef } from 'react';
-import { Button, Icon } from '../..';
+import { Button, Icon } from '../../index';
 import './Pagination.scss';
 import { Context } from '../DataTable';
 

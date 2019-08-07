@@ -19,36 +19,20 @@ var DataTable = function DataTable(_ref) {
   var children = _ref.children,
       onFilterChange = _ref.onFilterChange,
       className = _ref.className,
-      defaultColumns = _ref.columns,
       defaultFilter = _ref.filter;
 
-  var _useState = useState(),
+  var _useState = useState({
+    columns: {}
+  }),
       _useState2 = _slicedToArray(_useState, 2),
       filter = _useState2[0],
       setFilter = _useState2[1];
 
-  var _useState3 = useState(defaultColumns || {}),
+  var _useState3 = useState(false),
       _useState4 = _slicedToArray(_useState3, 2),
-      columns = _useState4[0],
-      setColumns = _useState4[1];
+      isSearchActive = _useState4[0],
+      setIsSearchActive = _useState4[1];
 
-  var _useState5 = useState(false),
-      _useState6 = _slicedToArray(_useState5, 2),
-      isSearchActive = _useState6[0],
-      setIsSearchActive = _useState6[1];
-
-  useDeepCompareEffect(function () {
-    setFilter(function (filter) {
-      return _objectSpread({}, filter, {
-        columns: columns
-      });
-    }); // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [columns]);
-  useDeepCompareEffect(function () {
-    if (defaultColumns) {
-      setColumns(defaultColumns);
-    }
-  }, [defaultColumns]);
   useDeepCompareEffect(function () {
     if (defaultFilter) {
       setFilter(defaultFilter);
@@ -73,8 +57,6 @@ var DataTable = function DataTable(_ref) {
 
   return React.createElement(Context.Provider, {
     value: {
-      columns: columns,
-      setColumns: setColumns,
       filter: filter,
       setFilter: setFilter,
       isSearchActive: isSearchActive,

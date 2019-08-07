@@ -1,12 +1,14 @@
 import React, {useContext, useEffect} from 'react'
-import {classNames, Icon} from '../../index'
+import {classNames, Icon} from 'vulcan-ui'
 import {Context} from '../DataTable'
 import './Column.scss'
 
 const directions = ['asc', 'desc', null]
 
-const Column = ({ children, name, rightAligned, centerAligned, search, searchCustomInput, sortable }) => {
-    const {columns, setColumns, isSearchActive, setIsSearchActive, onTrigger} = useContext(Context)
+const Column = ({children, name, rightAligned, centerAligned, search, searchCustomInput, sortable}) => {
+    const {isSearchActive, setIsSearchActive, onTrigger, filter, setFilter} = useContext(Context)
+    const columns = filter && filter.columns
+
     const className = classNames(
         'vui-DataTable-Column',
         rightAligned && 'right-aligned',
@@ -25,68 +27,74 @@ const Column = ({ children, name, rightAligned, centerAligned, search, searchCus
 
     useEffect(() => {
         if (sortable && name) {
-            setColumns(c => ({ ...c, [name]: { ...c[name], direction: null } }))
+            setFilter(f => ({
+                ...f,
+                columns: {...f.columns, [name]: {...f.columns[name], direction: null}}
+            }))
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [name, sortable])
 
     useEffect(() => {
         if (name) {
-            setColumns(c => ({ ...c, [name]: {
-                ...c[name],
-                searchCustomInput
-            } }))
+            setFilter(f => ({
+                ...f,
+                columns: {...f.columns, [name]: {...f.columns[name], direction: null, searchCustomInput}}
+            }))
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [name, searchCustomInput]);
+    }, [name, searchCustomInput])
 
     const handleClickSearch = (e) => {
-        e.preventDefault();
-        e.stopPropagation();
+        e.preventDefault()
+        e.stopPropagation()
 
         if (search) {
-            setIsSearchActive(!isSearchActive);
+            setIsSearchActive(!isSearchActive)
         }
     }
 
     const handleClick = () => {
         if (sortable) {
-            const newColumns = { ...columns }
+            const newColumns = {...columns}
             const currentDirection = newColumns[name].direction
             newColumns[name].direction = directions[(directions.indexOf(currentDirection) + 1) % 3]
-            setColumns(newColumns)
-            onTrigger("columns", newColumns)
+            setFilter(f => ({
+                ...f,
+                columns: newColumns
+            }))
+            onTrigger('columns', newColumns)
         }
     }
 
     let sorting
     if (sortable && columns[name]) {
-        sorting = <Icon className={classNames('order-icon', columns[name].direction)} name='arrowDown' />
+        sorting = <Icon className={classNames('order-icon', columns[name].direction)} name='arrowDown'/>
     }
 
-    const searchButton = <Icon 
-                            className={classNames(
-                                "search-icon search",
-                                columns[name] && columns[name].query ? "active" : "" 
-                            )} 
-                            name="search" 
-                            onClick={handleClickSearch} 
-                        />
+    const searchButton = <Icon
+        className={classNames(
+            'search-icon search',
+            columns[name] && columns[name].query ? 'active' : ''
+        )}
+        name='search'
+        onClick={handleClickSearch}
+    />
 
     return (
         <th className={className} onClick={handleClick} name={name}>
             {rightAligned &&
-                <>
-                    {sortable && sorting}
-                    {search && searchButton} 
-                </>
+            <>
+                {sortable && sorting}
+                {search && searchButton}
+            </>
             }
             {children}
             {!rightAligned &&
-                <>      
-                    {search && searchButton}               
-                    {sortable && sorting}
-                </>
+            <>
+                {search && searchButton}
+                {sortable && sorting}
+            </>
             }
         </th>
     )

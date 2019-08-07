@@ -1,7 +1,7 @@
 import _defineProperty from "@babel/runtime/helpers/esm/defineProperty";
 import _objectSpread from "@babel/runtime/helpers/esm/objectSpread";
 import React, { useContext, useEffect } from 'react';
-import { classNames, Icon } from '../../index';
+import { classNames, Icon } from 'vulcan-ui';
 import { Context } from '../DataTable';
 import './Column.scss';
 var directions = ['asc', 'desc', null];
@@ -16,12 +16,13 @@ var Column = function Column(_ref) {
       sortable = _ref.sortable;
 
   var _useContext = useContext(Context),
-      columns = _useContext.columns,
-      setColumns = _useContext.setColumns,
       isSearchActive = _useContext.isSearchActive,
       setIsSearchActive = _useContext.setIsSearchActive,
-      onTrigger = _useContext.onTrigger;
+      onTrigger = _useContext.onTrigger,
+      filter = _useContext.filter,
+      setFilter = _useContext.setFilter;
 
+  var columns = filter && filter.columns;
   var className = classNames('vui-DataTable-Column', rightAligned && 'right-aligned', centerAligned && 'center-aligned', sortable && 'sortable', search && 'search');
 
   if (sortable && !name) {
@@ -34,20 +35,25 @@ var Column = function Column(_ref) {
 
   useEffect(function () {
     if (sortable && name) {
-      setColumns(function (c) {
-        return _objectSpread({}, c, _defineProperty({}, name, _objectSpread({}, c[name], {
-          direction: null
-        })));
+      setFilter(function (f) {
+        return _objectSpread({}, f, {
+          columns: _objectSpread({}, f.columns, _defineProperty({}, name, _objectSpread({}, f.columns[name], {
+            direction: null
+          })))
+        });
       });
     } // eslint-disable-next-line react-hooks/exhaustive-deps
 
   }, [name, sortable]);
   useEffect(function () {
     if (name) {
-      setColumns(function (c) {
-        return _objectSpread({}, c, _defineProperty({}, name, _objectSpread({}, c[name], {
-          searchCustomInput: searchCustomInput
-        })));
+      setFilter(function (f) {
+        return _objectSpread({}, f, {
+          columns: _objectSpread({}, f.columns, _defineProperty({}, name, _objectSpread({}, f.columns[name], {
+            direction: null,
+            searchCustomInput: searchCustomInput
+          })))
+        });
       });
     } // eslint-disable-next-line react-hooks/exhaustive-deps
 
@@ -68,8 +74,12 @@ var Column = function Column(_ref) {
 
       var currentDirection = newColumns[name].direction;
       newColumns[name].direction = directions[(directions.indexOf(currentDirection) + 1) % 3];
-      setColumns(newColumns);
-      onTrigger("columns", newColumns);
+      setFilter(function (f) {
+        return _objectSpread({}, f, {
+          columns: newColumns
+        });
+      });
+      onTrigger('columns', newColumns);
     }
   };
 
@@ -83,7 +93,7 @@ var Column = function Column(_ref) {
   }
 
   var searchButton = React.createElement(Icon, {
-    className: classNames("search-icon search", columns[name] && columns[name].query ? "active" : ""),
+    className: classNames('search-icon search', columns[name] && columns[name].query ? 'active' : ''),
     name: "search",
     onClick: handleClickSearch
   });

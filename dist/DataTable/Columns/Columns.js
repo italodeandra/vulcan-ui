@@ -1,5 +1,5 @@
 import React, { useContext, useLayoutEffect, useRef } from 'react';
-import { classNames } from '../..';
+import { classNames } from '../../index';
 import SearchRow from '../SearchRow/SearchRow';
 import { Context } from '../DataTable';
 import "./Columns.sass";

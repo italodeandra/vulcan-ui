@@ -19,24 +19,11 @@ const DataTable = ({
                        children,
                        onFilterChange,
                        className,
-                       columns: defaultColumns,
                        filter: defaultFilter
                    }) => {
 
-    const [filter, setFilter] = useState()
-    const [columns, setColumns] = useState(defaultColumns || {})
+    const [filter, setFilter] = useState({columns: {}})
     const [isSearchActive, setIsSearchActive] = useState(false)
-
-    useDeepCompareEffect(() => {
-        setFilter(filter => ({...filter, columns}))
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [columns])
-
-    useDeepCompareEffect(() => {
-        if (defaultColumns) {
-            setColumns(defaultColumns)
-        }
-    }, [defaultColumns])
 
     useDeepCompareEffect(() => {
         if (defaultFilter) {
@@ -65,7 +52,7 @@ const DataTable = ({
 
     return (
         <Context.Provider
-            value={{columns, setColumns, filter, setFilter, isSearchActive, setIsSearchActive, onTrigger}}>
+            value={{filter, setFilter, isSearchActive, setIsSearchActive, onTrigger}}>
             <div className={classNames('vui-DataTable', className)}>
                 {children}
             </div>

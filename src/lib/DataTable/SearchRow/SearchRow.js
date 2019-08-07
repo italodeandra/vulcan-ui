@@ -1,5 +1,5 @@
 import React, {useContext, useRef, useState} from 'react'
-import {Button, classNames, Icon, useDeepCompareLayoutEffect} from '../..'
+import {Button, classNames, Icon, useDeepCompareLayoutEffect} from '../../index'
 import {Context} from '../DataTable'
 
 import './SearchRow.sass'
@@ -8,7 +8,8 @@ const SearchRow = () => {
 
     const ref = useRef(null)
     const [elements, setElements] = useState([])
-    const {columns, filter, setColumns, onTrigger} = useContext(Context)
+    const {filter, setFilter, onTrigger} = useContext(Context)
+    const columns = filter && filter.columns
 
     useDeepCompareLayoutEffect(() => {
         let searchColumns = ref.current.previousSibling.querySelectorAll('.vui-DataTable-Column')
@@ -19,7 +20,7 @@ const SearchRow = () => {
             let columnName = column.getAttribute('name')
 
             if (column.classList.contains('search')) {
-                setColumns(c => ({...c, [columnName]: {...c[columnName]}}))
+                // setColumns(c => ({...c, [columnName]: {...c[columnName]}}))
                 setElements(elements => [...elements, {name: columnName, input: true}])
             } else {
                 setElements(elements => [...elements, {}])
@@ -27,17 +28,22 @@ const SearchRow = () => {
         })
 
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [filter])
+    }, [filter, columns])
 
     function handleChange(key, value) {
-        setColumns(c => {
+        setFilter(f => {
             let columns = {
-                ...c,
-                [key]: {...c[key], query: value}
+                ...f.columns,
+                [key]: {...f.columns[key], query: value}
+            }
+
+            let filter = {
+                ...f,
+                columns
             }
 
             onTrigger('columns', columns)
-            return columns
+            return filter
         })
     }
 
