@@ -6,7 +6,8 @@ import {Button, Card, DataTable, Icon, PrettyJson} from '../lib'
 import useTitle from './useTitle'
 
 const DataTableDemo = () => {
-    const [filter, ] = useState({
+
+    const [filter,] = useState({
         "pagination": {
             "rowsPerPage": 10,
             "page": 2
@@ -93,11 +94,11 @@ const DataTableDemo = () => {
                                         //   searchCustomInput={(props) => <select {...props}>
                                         //       <option value='Iron Man'>Iron Man</option>
                                         //   </select>}
-                                        searchCustomInput={isTrue ? (props) => <DatePicker
+                                        searchCustomInput={(props) => <DatePicker
                                             {...props}
                                             name="openedAt"
                                             selected={props.value}
-                                        /> : false}
+                                        />}
                                     >
                                         Hero
                                     </DataTable.Column>
