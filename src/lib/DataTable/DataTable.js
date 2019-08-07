@@ -21,7 +21,6 @@ const DataTable = ({
                        className,
                        filter: defaultFilter
                    }) => {
-
     const [filter, setFilter] = useState({columns: {}})
     const [isSearchActive, setIsSearchActive] = useState(false)
 
@@ -35,6 +34,8 @@ const DataTable = ({
                 }
             })
             setIsSearchActive(newIsSearchActive)
+        } else {
+            setFilter({columns: {}})
         }
     }, [defaultFilter])
 

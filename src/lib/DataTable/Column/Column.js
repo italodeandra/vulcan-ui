@@ -1,5 +1,5 @@
-import React, {useContext, useEffect} from 'react'
-import {classNames, Icon} from 'vulcan-ui'
+import React, {useContext} from 'react'
+import {classNames, Icon, useDeepCompareEffect} from '../../index'
 import {Context} from '../DataTable'
 import './Column.scss'
 
@@ -25,25 +25,22 @@ const Column = ({children, name, rightAligned, centerAligned, search, searchCust
         console.error('[DataTable.Column] The property "name" is required for search columns')
     }
 
-    useEffect(() => {
-        if (sortable && name) {
-            setFilter(f => ({
-                ...f,
-                columns: {...f.columns, [name]: {...f.columns[name], direction: null}}
-            }))
-        }
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [name, sortable])
-
-    useEffect(() => {
+    useDeepCompareEffect(() => {
         if (name) {
             setFilter(f => ({
                 ...f,
-                columns: {...f.columns, [name]: {...f.columns[name], direction: null, searchCustomInput}}
+                columns: {
+                    ...f.columns,
+                    [name]: {
+                        ...f.columns[name],
+                        direction: !sortable ? null : f.columns[name] && f.columns[name].direction,
+                        searchCustomInput
+                    }
+                }
             }))
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [name, searchCustomInput])
+    }, [name, filter, sortable, searchCustomInput])
 
     const handleClickSearch = (e) => {
         e.preventDefault()

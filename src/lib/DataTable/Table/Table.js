@@ -1,7 +1,9 @@
-import React, { useLayoutEffect, useRef } from 'react'
+import React, {useContext, useLayoutEffect, useRef} from 'react'
+import {Context} from '../DataTable'
 
 const Table = ({children, sticky, style}) => {
     const ref = useRef(null);
+    const {filter} = useContext(Context)
 
     useLayoutEffect(() => {
         if (sticky) {
@@ -9,7 +11,6 @@ const Table = ({children, sticky, style}) => {
                 let offsetTop = ref.current.offsetTop;
                 let pageSize = window.innerHeight;
 
-                if (offsetTop + ref.current.scrollHeight >= pageSize) {
                     let height = pageSize - offsetTop;
 
                     let pagination = ref.current.parentNode.querySelector(".vui-DataTablePagination");
@@ -18,18 +19,17 @@ const Table = ({children, sticky, style}) => {
                     }
 
                     ref.current.style.height = `${height}px`;
-                }
             }
 
             handleResize();
             window.addEventListener("resize", handleResize);
-            
+
             return () =>  {
                 window.removeEventListener("resize", handleResize)
             };
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [])
+    }, [filter])
 
     return (
         <div className='vui-DataTable-overflow' ref={ref} style={style}>
