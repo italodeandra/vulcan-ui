@@ -1,9 +1,9 @@
 import _objectSpread from "@babel/runtime/helpers/esm/objectSpread";
 import _slicedToArray from "@babel/runtime/helpers/esm/slicedToArray";
-import React, { useContext, useEffect, useLayoutEffect, useState, useRef } from 'react';
+import React, { useContext, useEffect, useLayoutEffect, useRef, useState } from 'react';
 import { Button, Icon } from '../../index';
-import './Pagination.scss';
 import { Context } from '../DataTable';
+import './Pagination.scss';
 
 var Pagination = function Pagination(_ref) {
   var rowsPerPage = _ref.rowsPerPage,
@@ -35,6 +35,16 @@ var Pagination = function Pagination(_ref) {
       setPagination = _useState4[1];
 
   useEffect(function () {
+    setPagination(function (pagination) {
+      var data = _objectSpread({}, pagination, {
+        page: 1
+      });
+
+      onTrigger("pagination", data);
+      return data;
+    });
+  }, [count]);
+  useEffect(function () {
     setFilter(function (filter) {
       return _objectSpread({}, filter, {
         pagination: pagination
@@ -61,7 +71,7 @@ var Pagination = function Pagination(_ref) {
     var target = _ref2.target;
     setPagination(function (pagination) {
       var data = {
-        page: pagination.page,
+        page: 1,
         rowsPerPage: +target.value
       };
       onTrigger("pagination", data);
@@ -73,6 +83,7 @@ var Pagination = function Pagination(_ref) {
     var pageItems = pagination.page * pagination.rowsPerPage;
     var initValue = pageItems - (pagination.rowsPerPage - 1);
     var lastValue = pageItems >= count ? count : pageItems;
+    if (count === 0) initValue = 0;
     return React.createElement(React.Fragment, null, initValue, "-", lastValue, " de ", count);
   }
 

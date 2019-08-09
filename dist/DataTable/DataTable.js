@@ -43,6 +43,10 @@ var DataTable = function DataTable(_ref) {
         }
       });
       setIsSearchActive(newIsSearchActive);
+    } else {
+      setFilter({
+        columns: {}
+      });
     }
   }, [defaultFilter]);
 
