@@ -35,16 +35,6 @@ var Pagination = function Pagination(_ref) {
       setPagination = _useState4[1];
 
   useEffect(function () {
-    setPagination(function (pagination) {
-      var data = _objectSpread({}, pagination, {
-        page: 1
-      });
-
-      onTrigger("pagination", data);
-      return data;
-    });
-  }, [count]);
-  useEffect(function () {
     setFilter(function (filter) {
       return _objectSpread({}, filter, {
         pagination: pagination

@@ -24,18 +24,6 @@ const Pagination = ({rowsPerPage, rowsPerPageOptions, page, count}) => {
     const [pagination, setPagination] = useState({rowsPerPage, page})
 
     useEffect(() => {
-        setPagination(pagination => {
-            let data = {
-                ...pagination,
-                page: 1
-            }
-
-            onTrigger("pagination", data)
-            return data
-        })
-    }, [count])
-
-    useEffect(() => {
         setFilter(filter => ({
             ...filter,
             pagination
