@@ -1,7 +1,7 @@
-import React, { useEffect, useRef } from 'react'
+import React, {useEffect, useRef} from 'react'
 import TextField from '../TextField'
 
-const Autosize = ({ setRef, ...props }) => {
+const Autosize = ({setRef, ...props}) => {
     const innerSetRef = useRef(null)
 
     const resize = (target) => {
@@ -9,7 +9,7 @@ const Autosize = ({ setRef, ...props }) => {
         target.style.height = target.scrollHeight + 1 + 'px'
     }
 
-    const handleKeyUp = ({ target }) => {
+    const handleKeyUp = ({target}) => {
         resize(target)
     }
 
@@ -20,6 +20,22 @@ const Autosize = ({ setRef, ...props }) => {
         const target = innerSetRef.current.element
         resize(target)
     }, [setRef])
+
+    useEffect(() => {
+        const handleResize = () => {
+            const target = innerSetRef.current.element
+            resize(target)
+        }
+
+        handleResize()
+        window.addEventListener('scroll', handleResize)
+        window.addEventListener('resize', handleResize)
+
+        return () => {
+            window.removeEventListener('scroll', handleResize)
+            window.removeEventListener('resize', handleResize)
+        }
+    }, [])
 
     return (
         <TextField

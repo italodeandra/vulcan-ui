@@ -26,6 +26,20 @@ var Autosize = function Autosize(_ref) {
     var target = innerSetRef.current.element;
     resize(target);
   }, [setRef]);
+  useEffect(function () {
+    var handleResize = function handleResize() {
+      var target = innerSetRef.current.element;
+      resize(target);
+    };
+
+    handleResize();
+    window.addEventListener('scroll', handleResize);
+    window.addEventListener('resize', handleResize);
+    return function () {
+      window.removeEventListener('scroll', handleResize);
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
   return React.createElement(TextField, Object.assign({}, props, {
     setRef: innerSetRef,
     onInput: handleKeyUp,

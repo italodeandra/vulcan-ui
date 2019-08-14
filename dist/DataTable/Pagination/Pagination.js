@@ -32,7 +32,17 @@ var Pagination = function Pagination(_ref) {
   }),
       _useState4 = _slicedToArray(_useState3, 2),
       pagination = _useState4[0],
-      setPagination = _useState4[1];
+      setPagination = _useState4[1]; // useEffect(() => {
+  //     setPagination(pagination => {
+  //         let data = {
+  //             ...pagination,
+  //             page: 1
+  //         }
+  //
+  //         return data
+  //     })
+  // }, [count])
+
 
   useEffect(function () {
     setFilter(function (filter) {

@@ -48,6 +48,7 @@ import transferLeft from './icons/transferLeft';
 import transferRight from './icons/transferRight';
 import truckCheck from './icons/truckCheck';
 import upload from './icons/upload';
+import viewDashboard from './icons/viewDashboard';
 var icons = {
   account: account,
   accountGroup: accountGroup,
@@ -95,7 +96,8 @@ var icons = {
   transferLeft: transferLeft,
   transferRight: transferRight,
   truckCheck: truckCheck,
-  upload: upload
+  upload: upload,
+  viewDashboard: viewDashboard
 };
 
 var Icon = function Icon(_ref) {

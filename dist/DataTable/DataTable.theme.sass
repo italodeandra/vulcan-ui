@@ -1,0 +1,13 @@
+@mixin VuiDataTableTheme($class, $primary)
+    #{$class} .vui-DataTable
+
+        .vui-DataTable-Column
+            &.active
+                fill: $primary
+
+        .vui-DataTable-Cell
+
+            .input,
+            input
+                &:focus
+                    border-bottom-color: $primary
