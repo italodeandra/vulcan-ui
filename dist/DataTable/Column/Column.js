@@ -1,7 +1,7 @@
 import _defineProperty from "@babel/runtime/helpers/esm/defineProperty";
 import _objectSpread from "@babel/runtime/helpers/esm/objectSpread";
-import React, { useContext, useEffect } from 'react';
-import { classNames, Icon } from 'vulcan-ui';
+import React, { useContext } from 'react';
+import { classNames, Icon, useDeepCompareEffect } from '../../index';
 import { Context } from '../DataTable';
 import './Column.scss';
 var directions = ['asc', 'desc', null];
@@ -33,31 +33,19 @@ var Column = function Column(_ref) {
     console.error('[DataTable.Column] The property "name" is required for search columns');
   }
 
-  useEffect(function () {
-    if (sortable && name) {
-      setFilter(function (f) {
-        return _objectSpread({}, f, {
-          columns: _objectSpread({}, f.columns, _defineProperty({}, name, _objectSpread({}, f.columns[name], {
-            direction: null
-          })))
-        });
-      });
-    } // eslint-disable-next-line react-hooks/exhaustive-deps
-
-  }, [name, sortable]);
-  useEffect(function () {
+  useDeepCompareEffect(function () {
     if (name) {
       setFilter(function (f) {
         return _objectSpread({}, f, {
           columns: _objectSpread({}, f.columns, _defineProperty({}, name, _objectSpread({}, f.columns[name], {
-            direction: null,
+            direction: !sortable ? null : f.columns[name] && f.columns[name].direction,
             searchCustomInput: searchCustomInput
           })))
         });
       });
     } // eslint-disable-next-line react-hooks/exhaustive-deps
 
-  }, [name, searchCustomInput]);
+  }, [name, filter, sortable, searchCustomInput]);
 
   var handleClickSearch = function handleClickSearch(e) {
     e.preventDefault();

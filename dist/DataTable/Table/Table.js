@@ -1,26 +1,28 @@
-import React, { useLayoutEffect, useRef } from 'react';
+import React, { useContext, useLayoutEffect, useRef } from 'react';
+import { Context } from '../DataTable';
 
 var Table = function Table(_ref) {
   var children = _ref.children,
       sticky = _ref.sticky,
       style = _ref.style;
   var ref = useRef(null);
+
+  var _useContext = useContext(Context),
+      filter = _useContext.filter;
+
   useLayoutEffect(function () {
     if (sticky) {
       var handleResize = function handleResize() {
         var offsetTop = ref.current.offsetTop;
         var pageSize = window.innerHeight;
+        var height = pageSize - offsetTop;
+        var pagination = ref.current.parentNode.querySelector(".vui-DataTablePagination");
 
-        if (offsetTop + ref.current.scrollHeight >= pageSize) {
-          var height = pageSize - offsetTop;
-          var pagination = ref.current.parentNode.querySelector(".vui-DataTablePagination");
-
-          if (pagination) {
-            height -= pagination.scrollHeight + 8;
-          }
-
-          ref.current.style.height = "".concat(height, "px");
+        if (pagination) {
+          height -= pagination.scrollHeight + 8;
         }
+
+        ref.current.style.height = "".concat(height, "px");
       };
 
       handleResize();
@@ -30,7 +32,7 @@ var Table = function Table(_ref) {
       };
     } // eslint-disable-next-line react-hooks/exhaustive-deps
 
-  }, []);
+  }, [filter]);
   return React.createElement("div", {
     className: "vui-DataTable-overflow",
     ref: ref,
