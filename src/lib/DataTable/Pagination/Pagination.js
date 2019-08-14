@@ -23,6 +23,17 @@ const Pagination = ({rowsPerPage, rowsPerPageOptions, page, count}) => {
     const [totalColumns, setTotalColumns] = useState(0)
     const [pagination, setPagination] = useState({rowsPerPage, page})
 
+    // useEffect(() => {
+    //     setPagination(pagination => {
+    //         let data = {
+    //             ...pagination,
+    //             page: 1
+    //         }
+    //
+    //         return data
+    //     })
+    // }, [count])
+
     useEffect(() => {
         setFilter(filter => ({
             ...filter,
