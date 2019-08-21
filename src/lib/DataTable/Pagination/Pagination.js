@@ -35,6 +35,13 @@ const Pagination = ({rowsPerPage, rowsPerPageOptions, page, count}) => {
     // }, [count])
 
     useEffect(() => {
+        setPagination((pagination) => ({
+            ...pagination,
+            page
+        }))
+    }, [page])
+
+    useEffect(() => {
         setFilter(filter => ({
             ...filter,
             pagination
