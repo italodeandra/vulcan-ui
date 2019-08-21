@@ -45,6 +45,13 @@ var Pagination = function Pagination(_ref) {
 
 
   useEffect(function () {
+    setPagination(function (pagination) {
+      return _objectSpread({}, pagination, {
+        page: page
+      });
+    });
+  }, [page]);
+  useEffect(function () {
     setFilter(function (filter) {
       return _objectSpread({}, filter, {
         pagination: pagination
