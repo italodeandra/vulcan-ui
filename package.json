@@ -19,7 +19,7 @@
     "start": "react-scripts start",
     "build": "rimraf dist && cross-env NODE_ENV=production babel src/lib --out-dir dist --copy-files",
     "build-kaio": "cross-env NODE_ENV=production babel src/lib --out-dir ~/Application/Web/kirk-web/node_modules/vulcan-ui/dist --copy-files",
-    "build-italo": "cross-env NODE_ENV=production babel src/lib --out-dir C:/Users/italo/Documents/kirk-web/node_modules/vulcan-ui/dist --copy-files",
+    "build-italo": "cross-env NODE_ENV=production babel src/lib --out-dir C:/Users/italo/Documents/trackfy-web/node_modules/vulcan-ui/dist --copy-files",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
@@ -45,7 +45,8 @@
     "react-router-dom": "^5.0.0",
     "react-scripts": "3.0.1",
     "lodash.isequal": "^4.5.0",
-    "query-string": "^6.8.1"
+    "query-string": "^6.8.1",
+    "react-datepicker": "^2.7.0"
   },
   "main": "dist/index.js",
   "module": "dist/index.js",
