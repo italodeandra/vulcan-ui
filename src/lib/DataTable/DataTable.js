@@ -11,9 +11,7 @@ import Row from './Row/Row'
 import Rows from './Rows/Rows'
 import Table from './Table/Table'
 
-export const Context = createContext([{}, () => {
-}, () => {
-}])
+export const Context = createContext({})
 
 const DataTable = ({
                        children,
