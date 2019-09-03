@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react'
-import ListBox from '../lib/ListBox/ListBox'
 import useTitle from './useTitle'
+import {ListBox} from '../lib'
 
 const ListBoxDemo = () => {
     const [, setTitle] = useTitle()
