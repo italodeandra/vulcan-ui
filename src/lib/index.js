@@ -16,6 +16,7 @@ import usePortal from './Hooks/usePortal'
 import useScroll from './Hooks/useScroll'
 import Icon from './Icon/Icon'
 import List from './List/List'
+import ListBox from './ListBox/ListBox'
 import Menu from './Menu/Menu'
 import useMenu from './Menu/useMenu'
 import NavigationDrawer from './NavigationDrawer/NavigationDrawer'
@@ -49,6 +50,7 @@ export {
     Form,
     Icon,
     List,
+    ListBox,
     Menu,
     useMenu,
     NavigationDrawer,
