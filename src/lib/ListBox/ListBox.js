@@ -16,11 +16,12 @@ const ListBox = ({className, onChange, selected, unselected}) => {
     const [virtualItems, setVirtualItems] = useState()
 
     useEffect(() => {
-        setListItems({unselected, selected})
-        setVirtualItems({unselected, selected})
+        let data = {unselected, selected}
+        setListItems(data)
+        setVirtualItems(data)
 
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [])
+    }, [selected, unselected])
 
     const handleClick = (e, type, item, index) => {
         setLastSelected({item, index})
@@ -28,92 +29,59 @@ const ListBox = ({className, onChange, selected, unselected}) => {
         if (e.ctrlKey) {
             virtualItems[type].forEach((item, listIndex) => {
                 if (lastSelected.index <= index) {
-                    if (listIndex >= lastSelected.index && listIndex <= index) {
+                    if (listIndex >= lastSelected.index && listIndex <= index)
                         item.checked = true
-                        return item
-                    }
                 } else {
-                    if (listIndex <= lastSelected.index && listIndex >= index) {
+                    if (listIndex <= lastSelected.index && listIndex >= index)
                         item.checked = true
-                        return item
-                    }
                 }
             })
-        } else {
-            setVirtualItems(virtualItems => {
-                let data = virtualItems[type].map(virtualItem => {
-                    if (virtualItem.id === item.id)
-                        virtualItem.checked = !virtualItem.checked
-                    return virtualItem
-                })
-
-                return {
-                    ...virtualItems,
-                    [type]: data,
-                }
-            })
-        }
+        } else
+            virtualItems[type][index].checked = !virtualItems[type][index].checked
     }
 
-    const handleDoubleClick = async (item, before, prev) => {
+    const handleDoubleClick = (item, before, prev) => {
         item['type'] = prev
         item['checked'] = false
-        onChange(await reflectList([item], before, prev))
+        reflectList([item], before, prev)
     }
 
-    const reflectList = async (items, before, prev) => {
-        let data = {}
 
-        for (let item of items) {
-            setVirtualItems(virtualItems => {
-                let prevData = [...virtualItems[prev]]
+    const reflectList = (items, before, prev) => {
+        setListItems(listItems => {
+            let prevData = [...listItems[prev]]
+            let beforeData = [...listItems[before]]
+
+            for (let item of items) {
                 prevData.push(item)
-
-                let beforeData = [...virtualItems[before]]
                 let index = beforeData.findIndex(i => i.id === item.id)
-                virtualItems[before].splice(index, 1)
+                beforeData.splice(index, 1)
+            }
 
-                return {
-                    ...virtualItems,
-                    [item.type]: prevData,
-                    [before]: virtualItems[before],
-                }
-            })
+            let data = {
+                ...listItems,
+                [prev]: prevData,
+                [before]: beforeData,
+            }
 
-            // eslint-disable-next-line no-loop-func
-            await setListItems(listItems => {
-                let prevData = [...listItems[prev]]
-                prevData.push(item)
+            setVirtualItems(data)
+            onChange(data)
 
-                let beforeData = [...listItems[before]]
-                let index = beforeData.findIndex(i => i.id === item.id)
-                listItems[before].splice(index, 1)
-
-                data = {
-                    ...listItems,
-                    [item.type]: prevData,
-                    [before]: listItems[before],
-                }
-
-                return data
-            })
-        }
-
-        return data
+            return data
+        })
     }
 
     const handleChange = async (before, prev) => {
-        let items = []
-
-        virtualItems[before].forEach(item => {
+        // eslint-disable-next-line array-callback-return
+        let items = virtualItems[before].filter(item => {
             if (item.checked) {
                 item['type'] = prev
                 item.checked = false
-                items.push(item)
+                return item
             }
         })
 
-        onChange(await reflectList(items, before, prev))
+        reflectList(items, before, prev)
     }
 
     const handleSearch = async (type, value) => {
@@ -134,19 +102,17 @@ const ListBox = ({className, onChange, selected, unselected}) => {
             })
         }
 
-        return ""
+        return ''
     }
 
     const handleTransferAll = async (before, prev) => {
-        let items = []
-
-        virtualItems[before].forEach(item => {
+        let items = virtualItems[before].map(item => {
             item['type'] = prev
             item.checked = false
-            items.push(item)
+            return item
         })
 
-        onChange(await reflectList(items, before, prev))
+        reflectList(items, before, prev)
     }
 
     return (
