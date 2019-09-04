@@ -44,6 +44,7 @@ import search from './icons/search'
 import sitemap from './icons/sitemap'
 import speedometer from './icons/speedometer'
 import store from './icons/store'
+import timer from './icons/timer'
 import transferLeft from './icons/transferLeft'
 import transferRight from './icons/transferRight'
 import truckCheck from './icons/truckCheck'
@@ -94,6 +95,7 @@ const icons = {
     sitemap,
     speedometer,
     store,
+    timer,
     transferLeft,
     transferRight,
     truckCheck,
