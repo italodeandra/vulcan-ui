@@ -1,9 +1,13 @@
-import _toConsumableArray from "@babel/runtime/helpers/esm/toConsumableArray";
 import _regeneratorRuntime from "@babel/runtime/regenerator";
 import _asyncToGenerator from "@babel/runtime/helpers/esm/asyncToGenerator";
 import _defineProperty from "@babel/runtime/helpers/esm/defineProperty";
-import _objectSpread from "@babel/runtime/helpers/esm/objectSpread";
+import _toConsumableArray from "@babel/runtime/helpers/esm/toConsumableArray";
 import _slicedToArray from "@babel/runtime/helpers/esm/slicedToArray";
+
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(source, true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(source).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
 import React, { useEffect, useState } from 'react';
 import './ListBox.sass';
 import Item from './Item/Item';
@@ -34,15 +38,13 @@ var ListBox = function ListBox(_ref) {
       setVirtualItems = _useState6[1];
 
   useEffect(function () {
-    setListItems({
+    var data = {
       unselected: unselected,
       selected: selected
-    });
-    setVirtualItems({
-      unselected: unselected,
-      selected: selected
-    }); // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+    };
+    setListItems(data);
+    setVirtualItems(data); // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [selected, unselected]);
 
   var handleClick = function handleClick(e, type, item, index) {
     setLastSelected({
@@ -53,49 +55,90 @@ var ListBox = function ListBox(_ref) {
     if (e.ctrlKey) {
       virtualItems[type].forEach(function (item, listIndex) {
         if (lastSelected.index <= index) {
-          if (listIndex >= lastSelected.index && listIndex <= index) {
-            item.checked = true;
-            return item;
-          }
+          if (listIndex >= lastSelected.index && listIndex <= index) item.checked = true;
         } else {
-          if (listIndex <= lastSelected.index && listIndex >= index) {
-            item.checked = true;
-            return item;
-          }
+          if (listIndex <= lastSelected.index && listIndex >= index) item.checked = true;
         }
       });
-    } else {
-      setVirtualItems(function (virtualItems) {
-        var data = virtualItems[type].map(function (virtualItem) {
-          if (virtualItem.id === item.id) virtualItem.checked = !virtualItem.checked;
-          return virtualItem;
-        });
-        return _objectSpread({}, virtualItems, _defineProperty({}, type, data));
-      });
-    }
+    } else virtualItems[type][index].checked = !virtualItems[type][index].checked;
   };
 
-  var handleDoubleClick =
+  var handleDoubleClick = function handleDoubleClick(item, before, prev) {
+    item['type'] = prev;
+    item['checked'] = false;
+    reflectList([item], before, prev);
+  };
+
+  var reflectList = function reflectList(items, before, prev) {
+    setListItems(function (listItems) {
+      var _objectSpread2;
+
+      var prevData = _toConsumableArray(listItems[prev]);
+
+      var beforeData = _toConsumableArray(listItems[before]);
+
+      var _iteratorNormalCompletion = true;
+      var _didIteratorError = false;
+      var _iteratorError = undefined;
+
+      try {
+        var _loop = function _loop() {
+          var item = _step.value;
+          prevData.push(item);
+          var index = beforeData.findIndex(function (i) {
+            return i.id === item.id;
+          });
+          beforeData.splice(index, 1);
+        };
+
+        for (var _iterator = items[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+          _loop();
+        }
+      } catch (err) {
+        _didIteratorError = true;
+        _iteratorError = err;
+      } finally {
+        try {
+          if (!_iteratorNormalCompletion && _iterator.return != null) {
+            _iterator.return();
+          }
+        } finally {
+          if (_didIteratorError) {
+            throw _iteratorError;
+          }
+        }
+      }
+
+      var data = _objectSpread({}, listItems, (_objectSpread2 = {}, _defineProperty(_objectSpread2, prev, prevData), _defineProperty(_objectSpread2, before, beforeData), _objectSpread2));
+
+      setVirtualItems(data);
+      onChange(data);
+      return data;
+    });
+  };
+
+  var handleChange =
   /*#__PURE__*/
   function () {
     var _ref2 = _asyncToGenerator(
     /*#__PURE__*/
-    _regeneratorRuntime.mark(function _callee(item, before, prev) {
+    _regeneratorRuntime.mark(function _callee(before, prev) {
+      var items;
       return _regeneratorRuntime.wrap(function _callee$(_context) {
         while (1) {
           switch (_context.prev = _context.next) {
             case 0:
-              item['type'] = prev;
-              item['checked'] = false;
-              _context.t0 = onChange;
-              _context.next = 5;
-              return reflectList([item], before, prev);
+              // eslint-disable-next-line array-callback-return
+              items = virtualItems[before].filter(function (item) {
+                if (item.checked) {
+                  item['type'] = prev;
+                  item.checked = false;
+                  return item;
+                }
+              });
+              reflectList(items, before, prev);
 
-            case 5:
-              _context.t1 = _context.sent;
-              (0, _context.t0)(_context.t1);
-
-            case 7:
+            case 2:
             case "end":
               return _context.stop();
           }
@@ -103,192 +146,20 @@ var ListBox = function ListBox(_ref) {
       }, _callee);
     }));
 
-    return function handleDoubleClick(_x, _x2, _x3) {
+    return function handleChange(_x, _x2) {
       return _ref2.apply(this, arguments);
-    };
-  }();
-
-  var reflectList =
-  /*#__PURE__*/
-  function () {
-    var _ref3 = _asyncToGenerator(
-    /*#__PURE__*/
-    _regeneratorRuntime.mark(function _callee2(items, before, prev) {
-      var data, _iteratorNormalCompletion, _didIteratorError, _iteratorError, _loop, _iterator, _step;
-
-      return _regeneratorRuntime.wrap(function _callee2$(_context3) {
-        while (1) {
-          switch (_context3.prev = _context3.next) {
-            case 0:
-              data = {};
-              _iteratorNormalCompletion = true;
-              _didIteratorError = false;
-              _iteratorError = undefined;
-              _context3.prev = 4;
-              _loop =
-              /*#__PURE__*/
-              _regeneratorRuntime.mark(function _loop() {
-                var item;
-                return _regeneratorRuntime.wrap(function _loop$(_context2) {
-                  while (1) {
-                    switch (_context2.prev = _context2.next) {
-                      case 0:
-                        item = _step.value;
-                        setVirtualItems(function (virtualItems) {
-                          var _objectSpread3;
-
-                          var prevData = _toConsumableArray(virtualItems[prev]);
-
-                          prevData.push(item);
-
-                          var beforeData = _toConsumableArray(virtualItems[before]);
-
-                          var index = beforeData.findIndex(function (i) {
-                            return i.id === item.id;
-                          });
-                          virtualItems[before].splice(index, 1);
-                          return _objectSpread({}, virtualItems, (_objectSpread3 = {}, _defineProperty(_objectSpread3, item.type, prevData), _defineProperty(_objectSpread3, before, virtualItems[before]), _objectSpread3));
-                        }); // eslint-disable-next-line no-loop-func
-
-                        _context2.next = 4;
-                        return setListItems(function (listItems) {
-                          var _objectSpread4;
-
-                          var prevData = _toConsumableArray(listItems[prev]);
-
-                          prevData.push(item);
-
-                          var beforeData = _toConsumableArray(listItems[before]);
-
-                          var index = beforeData.findIndex(function (i) {
-                            return i.id === item.id;
-                          });
-                          listItems[before].splice(index, 1);
-                          data = _objectSpread({}, listItems, (_objectSpread4 = {}, _defineProperty(_objectSpread4, item.type, prevData), _defineProperty(_objectSpread4, before, listItems[before]), _objectSpread4));
-                          return data;
-                        });
-
-                      case 4:
-                      case "end":
-                        return _context2.stop();
-                    }
-                  }
-                }, _loop);
-              });
-              _iterator = items[Symbol.iterator]();
-
-            case 7:
-              if (_iteratorNormalCompletion = (_step = _iterator.next()).done) {
-                _context3.next = 12;
-                break;
-              }
-
-              return _context3.delegateYield(_loop(), "t0", 9);
-
-            case 9:
-              _iteratorNormalCompletion = true;
-              _context3.next = 7;
-              break;
-
-            case 12:
-              _context3.next = 18;
-              break;
-
-            case 14:
-              _context3.prev = 14;
-              _context3.t1 = _context3["catch"](4);
-              _didIteratorError = true;
-              _iteratorError = _context3.t1;
-
-            case 18:
-              _context3.prev = 18;
-              _context3.prev = 19;
-
-              if (!_iteratorNormalCompletion && _iterator.return != null) {
-                _iterator.return();
-              }
-
-            case 21:
-              _context3.prev = 21;
-
-              if (!_didIteratorError) {
-                _context3.next = 24;
-                break;
-              }
-
-              throw _iteratorError;
-
-            case 24:
-              return _context3.finish(21);
-
-            case 25:
-              return _context3.finish(18);
-
-            case 26:
-              return _context3.abrupt("return", data);
-
-            case 27:
-            case "end":
-              return _context3.stop();
-          }
-        }
-      }, _callee2, null, [[4, 14, 18, 26], [19,, 21, 25]]);
-    }));
-
-    return function reflectList(_x4, _x5, _x6) {
-      return _ref3.apply(this, arguments);
-    };
-  }();
-
-  var handleChange =
-  /*#__PURE__*/
-  function () {
-    var _ref4 = _asyncToGenerator(
-    /*#__PURE__*/
-    _regeneratorRuntime.mark(function _callee3(before, prev) {
-      var items;
-      return _regeneratorRuntime.wrap(function _callee3$(_context4) {
-        while (1) {
-          switch (_context4.prev = _context4.next) {
-            case 0:
-              items = [];
-              virtualItems[before].forEach(function (item) {
-                if (item.checked) {
-                  item['type'] = prev;
-                  item.checked = false;
-                  items.push(item);
-                }
-              });
-              _context4.t0 = onChange;
-              _context4.next = 5;
-              return reflectList(items, before, prev);
-
-            case 5:
-              _context4.t1 = _context4.sent;
-              (0, _context4.t0)(_context4.t1);
-
-            case 7:
-            case "end":
-              return _context4.stop();
-          }
-        }
-      }, _callee3);
-    }));
-
-    return function handleChange(_x7, _x8) {
-      return _ref4.apply(this, arguments);
     };
   }();
 
   var handleSearch =
   /*#__PURE__*/
   function () {
-    var _ref5 = _asyncToGenerator(
+    var _ref3 = _asyncToGenerator(
     /*#__PURE__*/
-    _regeneratorRuntime.mark(function _callee4(type, value) {
-      return _regeneratorRuntime.wrap(function _callee4$(_context5) {
+    _regeneratorRuntime.mark(function _callee2(type, value) {
+      return _regeneratorRuntime.wrap(function _callee2$(_context2) {
         while (1) {
-          switch (_context5.prev = _context5.next) {
+          switch (_context2.prev = _context2.next) {
             case 0:
               if (value.length) {
                 setVirtualItems(function (virtualItems) {
@@ -305,56 +176,49 @@ var ListBox = function ListBox(_ref) {
                 });
               }
 
-              return _context5.abrupt("return", "");
+              return _context2.abrupt("return", '');
 
             case 2:
             case "end":
-              return _context5.stop();
+              return _context2.stop();
           }
         }
-      }, _callee4);
+      }, _callee2);
     }));
 
-    return function handleSearch(_x9, _x10) {
-      return _ref5.apply(this, arguments);
+    return function handleSearch(_x3, _x4) {
+      return _ref3.apply(this, arguments);
     };
   }();
 
   var handleTransferAll =
   /*#__PURE__*/
   function () {
-    var _ref6 = _asyncToGenerator(
+    var _ref4 = _asyncToGenerator(
     /*#__PURE__*/
-    _regeneratorRuntime.mark(function _callee5(before, prev) {
+    _regeneratorRuntime.mark(function _callee3(before, prev) {
       var items;
-      return _regeneratorRuntime.wrap(function _callee5$(_context6) {
+      return _regeneratorRuntime.wrap(function _callee3$(_context3) {
         while (1) {
-          switch (_context6.prev = _context6.next) {
+          switch (_context3.prev = _context3.next) {
             case 0:
-              items = [];
-              virtualItems[before].forEach(function (item) {
+              items = virtualItems[before].map(function (item) {
                 item['type'] = prev;
                 item.checked = false;
-                items.push(item);
+                return item;
               });
-              _context6.t0 = onChange;
-              _context6.next = 5;
-              return reflectList(items, before, prev);
+              reflectList(items, before, prev);
 
-            case 5:
-              _context6.t1 = _context6.sent;
-              (0, _context6.t0)(_context6.t1);
-
-            case 7:
+            case 2:
             case "end":
-              return _context6.stop();
+              return _context3.stop();
           }
         }
-      }, _callee5);
+      }, _callee3);
     }));
 
-    return function handleTransferAll(_x11, _x12) {
-      return _ref6.apply(this, arguments);
+    return function handleTransferAll(_x5, _x6) {
+      return _ref4.apply(this, arguments);
     };
   }();
 
