@@ -49,6 +49,7 @@ import transferRight from './icons/transferRight'
 import truckCheck from './icons/truckCheck'
 import upload from './icons/upload'
 import viewDashboard from './icons/viewDashboard'
+import viewList from './icons/viewList'
 
 const icons = {
     account,
@@ -98,7 +99,8 @@ const icons = {
     transferRight,
     truckCheck,
     upload,
-    viewDashboard
+    viewDashboard,
+    viewList
 }
 
 const Icon = ({className, name, onClick}) => {

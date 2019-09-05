@@ -49,6 +49,7 @@ import transferRight from './icons/transferRight';
 import truckCheck from './icons/truckCheck';
 import upload from './icons/upload';
 import viewDashboard from './icons/viewDashboard';
+import viewList from './icons/viewList';
 var icons = {
   account: account,
   accountGroup: accountGroup,
@@ -97,7 +98,8 @@ var icons = {
   transferRight: transferRight,
   truckCheck: truckCheck,
   upload: upload,
-  viewDashboard: viewDashboard
+  viewDashboard: viewDashboard,
+  viewList: viewList
 };
 
 var Icon = function Icon(_ref) {
