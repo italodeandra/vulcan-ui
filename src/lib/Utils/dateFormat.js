@@ -1,9 +1,9 @@
 // Cheatsheet https://devhints.io/wip/intl-datetime
 
-function dateFormat(date, options) {
+function dateFormat(date, options, language) {
     if (!date) return ''
 
-    return new Intl.DateTimeFormat('pt-BR', options || {
+    return new Intl.DateTimeFormat(language || 'pt-BR', options || {
         year: 'numeric',
         month: 'long',
         day: '2-digit',

@@ -44,11 +44,13 @@ import search from './icons/search';
 import sitemap from './icons/sitemap';
 import speedometer from './icons/speedometer';
 import store from './icons/store';
+import timer from './icons/timer';
 import transferLeft from './icons/transferLeft';
 import transferRight from './icons/transferRight';
 import truckCheck from './icons/truckCheck';
 import upload from './icons/upload';
 import viewDashboard from './icons/viewDashboard';
+import viewList from './icons/viewList';
 var icons = {
   account: account,
   accountGroup: accountGroup,
@@ -93,11 +95,13 @@ var icons = {
   sitemap: sitemap,
   speedometer: speedometer,
   store: store,
+  timer: timer,
   transferLeft: transferLeft,
   transferRight: transferRight,
   truckCheck: truckCheck,
   upload: upload,
-  viewDashboard: viewDashboard
+  viewDashboard: viewDashboard,
+  viewList: viewList
 };
 
 var Icon = function Icon(_ref) {
