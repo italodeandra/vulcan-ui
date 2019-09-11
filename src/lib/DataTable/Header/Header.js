@@ -1,7 +1,8 @@
 import React from 'react'
+import { classNames } from '../../index'
 
-const Header = ({ children }) => (
-    <div className='vui-DataTable-Header'>
+const Header = ({ className, children }) => (
+    <div className={classNames('vui-DataTable-Header', className)}>
         {children}
     </div>
 )
