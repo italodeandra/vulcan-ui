@@ -1,7 +1,7 @@
-import React, {useRef, useState} from "react";
-import classNames from "../../Utils/classNames";
+import React, { useRef, useState } from 'react'
+import classNames from '../../Utils/classNames'
 
-import "./ListItem.sass"
+import './ListItem.sass'
 
 const ListItem = ({ children, onClick, selectable, ...props }) => {
 
@@ -24,13 +24,15 @@ const ListItem = ({ children, onClick, selectable, ...props }) => {
         onClick && onClick(e)
     }
 
+    delete props.active
+
     return (
         <div
             ref={ref}
             className={className}
             onClick={handleClick}
-            tabIndex={onClick ? "0" : undefined} {...props}
-
+            tabIndex={onClick ? '0' : undefined}
+            {...props}
         >
             {children}
         </div>

@@ -1,6 +1,6 @@
-import React from "react"
+import React from 'react'
+import { Checkbox, List } from '../../index'
 import Search from '../Search/Search'
-import {Checkbox, List} from '../../index'
 
 const Item = ({ before, prev, items, onDoubleClick, onClick, onSearch }) => {
     return (
@@ -18,14 +18,14 @@ const Item = ({ before, prev, items, onDoubleClick, onClick, onSearch }) => {
                         onDoubleClick={() => onDoubleClick(item, before, prev)}
                         onClick={(e) => onClick(e, before, item, index)}
                         selectable
-                        active={item.checked ? true : false}
+                        active={!!item.checked}
                     >
                         <List.Content>
                             <List.Title>{item.label}</List.Title>
                         </List.Content>
                         <List.Action right>
                             <Checkbox
-                                checked={item.checked ? true : false}
+                                checked={!!item.checked}
                                 id={item.id}
                                 name={item.id}
                             />
