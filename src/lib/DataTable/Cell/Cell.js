@@ -1,7 +1,7 @@
-//TODO: Receber valores das colunas e do filtro ao invés de reseta-los quando o componente é re-renderizado
+//TODO: Receber valores das colunas e do filtro ao invés de resetar-los quando o componente é re-renderizado
 
-import React, {useLayoutEffect, useRef, useState} from 'react'
-import {classNames} from '../../index'
+import React, { useLayoutEffect, useRef, useState } from 'react'
+import { classNames } from '../../index'
 import './Cell.sass'
 
 const Cell = ({bold, children, editable, onChange, style, customInput, colSpan, className}) => {
@@ -11,15 +11,20 @@ const Cell = ({bold, children, editable, onChange, style, customInput, colSpan, 
     const [isEditing, setIsEditing] = useState(false)
 
     useLayoutEffect(() => {
+        // noinspection JSUnresolvedVariable
         const thisIndex = ref.current.parentNode.children.indexOf(ref.current)
+        // noinspection JSUnresolvedFunction
         const isColumnRightAligned = ref.current.closest('.vui-DataTable').querySelectorAll('.vui-DataTable-Column')[thisIndex].classList.contains('right-aligned')
         if (isColumnRightAligned) {
+            // noinspection JSUnresolvedVariable
             ref.current.classList.add('right-aligned')
         }
         setRightAligned(isColumnRightAligned)
 
+        // noinspection JSUnresolvedFunction
         const isColumnCenterAligned = ref.current.closest('.vui-DataTable').querySelectorAll('.vui-DataTable-Column')[thisIndex].classList.contains('center-aligned')
         if (isColumnCenterAligned) {
+            // noinspection JSUnresolvedVariable
             ref.current.classList.add('center-aligned')
         }
         setCenterAligned(isColumnCenterAligned)

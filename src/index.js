@@ -8,8 +8,8 @@ import CardDemo from './demo/CardDemo'
 import DataTableDemo from './demo/DataTableDemo'
 import DialogDemo from './demo/DialogDemo'
 import HomeDemo from './demo/HomeDemo'
-import ListDemo from "./demo/ListDemo";
 import ListBoxDemo from './demo/ListBoxDemo'
+import ListDemo from './demo/ListDemo'
 import MenuDemo from './demo/MenuDemo'
 import NavigationDrawerDemo from './demo/NavigationDrawerDemo'
 import ProgressBarDemo from './demo/ProgressBarDemo'
@@ -19,10 +19,10 @@ import SpinnerDemo from './demo/SpinnerDemo'
 import TabsDemo from './demo/TabsDemo'
 import TextFieldAutocompleteDemo from './demo/TextFieldAutocompleteDemo'
 import TextFieldChipsDemo from './demo/TextFieldChipsDemo'
-import TextFielDemo from './demo/TextFieldDemo'
+import TextFieldDateDemo from './demo/TextFieldDateDemo'
+import TextFieldDemo from './demo/TextFieldDemo'
 import useTitle from './demo/useTitle'
 import { AppBar, Button, Icon, NavigationDrawer, polyfill, Snackbars, useLocalStorage, useMobile } from './lib'
-import TextFieldDateDemo from "./demo/TextFieldDateDemo";
 
 polyfill()
 
@@ -209,7 +209,7 @@ const App = () => {
                     <Route path='/snackbar' component={SnackbarDemo} />
                     <Route path='/spinner' component={SpinnerDemo} />
                     <Route path='/tabs' component={TabsDemo} />
-                    <Route path='/text-field' component={TextFielDemo} />
+                    <Route path='/text-field' component={TextFieldDemo}/>
                     <Route path='/text-field-autocomplete' component={TextFieldAutocompleteDemo} />
                     <Route path='/text-field-chips' component={TextFieldChipsDemo} />
                     <Route path='/text-field-date' component={TextFieldDateDemo} />

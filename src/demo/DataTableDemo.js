@@ -1,8 +1,8 @@
-import React, {useEffect, useState} from 'react'
+import React, { useEffect, useState } from 'react'
 
 import DatePicker from 'react-datepicker'
 import 'react-datepicker/dist/react-datepicker.css'
-import {Button, Card, DataTable, Icon, PrettyJson} from '../lib'
+import { Button, Card, DataTable, Icon, PrettyJson } from '../lib'
 import useTitle from './useTitle'
 
 const DataTableDemo = () => {
@@ -121,9 +121,9 @@ const DataTableDemo = () => {
                                 <DataTable.Footer sticky>
                                     <DataTable.Row>
                                         <DataTable.Cell bold>Total</DataTable.Cell>
-                                        <DataTable.Cell></DataTable.Cell>
+                                        <DataTable.Cell/>
                                         <DataTable.Cell>50</DataTable.Cell>
-                                        <DataTable.Cell></DataTable.Cell>
+                                        <DataTable.Cell/>
                                     </DataTable.Row>
                                 </DataTable.Footer>
                             </DataTable.Table>
