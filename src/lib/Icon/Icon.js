@@ -1,5 +1,5 @@
 import React from 'react'
-import {classNames} from '../index'
+import { classNames } from '../index'
 import './Icon.scss'
 import account from './icons/account'
 import accountGroup from './icons/accountGroup'
@@ -15,6 +15,7 @@ import checkCircleOutline from './icons/checkCircleOutline'
 import chevronLeft from './icons/chevronLeft'
 import chevronRight from './icons/chevronRight'
 import chevronUp from './icons/chevronUp'
+import clipboardAlertOutline from './icons/clipboardAlertOutline'
 import clipboardCheckOutline from './icons/clipboardCheckOutline'
 import clipboardOutline from './icons/clipboardOutline'
 import close from './icons/close'
@@ -67,6 +68,7 @@ const icons = {
     chevronLeft,
     chevronRight,
     chevronUp,
+    clipboardAlertOutline,
     clipboardCheckOutline,
     clipboardOutline,
     close,
