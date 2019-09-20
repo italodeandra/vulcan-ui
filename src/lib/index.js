@@ -28,6 +28,7 @@ import useSnackbar from './Snackbar/useSnackbar'
 import Spinner from './Spinner/Spinner'
 import Switch from './Switch/Switch'
 import Tabs from './Tabs/Tabs'
+import NumberFormatter from './TextField/Number/NumberFormatter'
 import TextField from './TextField/TextField'
 import base64 from './Utils/base64'
 import caretPosition from './Utils/caretPosition'
@@ -63,6 +64,7 @@ export {
     Spinner,
     Tabs,
     TextField,
+    NumberFormatter,
 
     useDeepCompareEffect,
     useDeepCompareLayoutEffect,

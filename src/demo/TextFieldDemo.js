@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from 'react'
 import { Button, Form, TextField } from '../lib/index'
 import useTitle from './useTitle'
 
-const TextFielDemo = () => {
+const TextFieldDemo = () => {
     const [, setTitle] = useTitle()
     useEffect(() => setTitle('Text field'))
 
@@ -18,6 +18,7 @@ const TextFielDemo = () => {
     const customErrorFieldRef = useRef(null)
 
     const handleCustomErrorClick = () => {
+        // noinspection JSUnresolvedFunction
         customErrorFieldRef.current.setCustomErrorMessage('Test custom error message')
     }
 
@@ -95,9 +96,10 @@ const TextFielDemo = () => {
                             required: 'Please fill this field',
                             minAmount: {
                                 amount: 50000,
-                                message: 'Fill with more than or equal 50.000,00'
+                                message: 'Fill with more than or equal 50000'
                             }
                         }}
+                        maskConfig={{ allowNegative: true }}
                     />
                     <pre>
                         state: {test2}
@@ -163,7 +165,7 @@ const TextFielDemo = () => {
                             required: 'Please fill this field',
                             maxAmount: 9859962.50
                         }}
-                        maskConfig={{ money: true, prefix: 'R$' }}
+                        maskConfig={{ money: true, prefix: 'R$', decimal: 5 }}
                     />
                     <pre>
                         state: {test4}
@@ -283,7 +285,7 @@ const handleCustomErrorClick = () => {
                     <TextField.Select
                         label='Test 8'
                         name='test8'
-                        value={JSON.parse(test8 || 'null')}
+                        value={JSON.parse(test8.toString() || 'null')}
                         onChange={setTest8}
                         options={[
                             { label: 'Test A', value: true },
@@ -311,4 +313,4 @@ const handleCustomErrorClick = () => {
     )
 }
 
-export default TextFielDemo
+export default TextFieldDemo

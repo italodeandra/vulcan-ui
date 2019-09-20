@@ -3,23 +3,43 @@ import { caretPosition } from '../../index'
 const NumberFormatter = (config) => {
     config = config || {}
     config.prefix = config.prefix || ''
+    config.allowNegative = config.allowNegative || false
+    if ((config.decimal && typeof config.decimal !== 'number') || (!config.decimal && config.money)) {
+        config.decimal = 2
+    }
 
     function maskValue(rawValue) {
+        let addedDecimal = false
+
         if (!rawValue) {
             return rawValue
         }
 
+        if (config.decimal && rawValue.length < 3) {
+            rawValue = `${rawValue}.${'0'.repeat(config.decimal)}`
+            addedDecimal = true
+        }
+
         let maskedValue = rawValue.toString()
+        const isNegative = config.allowNegative && maskedValue.indexOf('-') > -1
+        maskedValue = maskedValue.replace(/[^\d.]/g, '')
+        if (isNegative) {
+            maskedValue = `-${maskedValue}`
+        }
 
         const activeElement = document.activeElement
 
         if (activeElement && activeElement.value) {
             const characters = activeElement.value.length
             const caretPos = caretPosition.get(activeElement)
-            if (caretPos) {
+            if (caretPos || addedDecimal) {
                 setTimeout(() => {
                     if (document.activeElement === activeElement) {
-                        caretPosition.set(activeElement, caretPos + (activeElement.value.length - characters))
+                        if (caretPos && !addedDecimal) {
+                            caretPosition.set(activeElement, caretPos + (activeElement.value.length - characters))
+                        } else {
+                            caretPosition.set(activeElement, activeElement.value.length - config.decimal - 1)
+                        }
                     }
                 })
             }
@@ -39,7 +59,11 @@ const NumberFormatter = (config) => {
     function parseValue(maskedValue) {
         let parsedValue = maskedValue.toString()
 
+        const isNegative = config.allowNegative && parsedValue.indexOf('-') > -1
         parsedValue = parsedValue.replace(/[^\d]/g, '')
+        if (isNegative) {
+            parsedValue = `-${parsedValue}`
+        }
 
         if (parsedValue.length < 3) {
             if (parsedValue) {
@@ -53,13 +77,13 @@ const NumberFormatter = (config) => {
         if (!config.decimal && !config.money) {
             parsedValue = parseFloat(parsedValue).toString()
         } else {
-            parsedValue = parsedValue.substring(0, parsedValue.length - 2) + '.' + parsedValue.substring(parsedValue.length - 2).padEnd(2, '0')
+            parsedValue = parsedValue.substring(0, parsedValue.length - config.decimal) + '.' + parsedValue.substring(parsedValue.length - config.decimal).padEnd(config.decimal, '0')
             parsedValue = parseFloat(parsedValue).toString()
             parsedValue = parsedValue.split('.')
             if (parsedValue[1]) {
-                parsedValue[1] = parsedValue[1].padEnd(2, '0')
+                parsedValue[1] = parsedValue[1].padEnd(config.decimal, '0')
             } else {
-                parsedValue.push('00')
+                parsedValue.push('0'.repeat(config.decimal))
             }
             parsedValue = parsedValue.join('.')
         }
@@ -75,9 +99,8 @@ const NumberFormatter = (config) => {
 
 function addThousandDots(value) {
     if (value.includes('.')) {
-        const splitted = value.split('.')
-
-        return `${addThousandDots(splitted[0])},${splitted[1]}`
+        const split = value.split('.')
+        return `${addThousandDots(split[0])},${split[1]}`
     } else {
         return parseInt(value).toLocaleString('pt-BR')
     }
