@@ -132,6 +132,9 @@ const DataTableDemo = () => {
                                 rowsPerPage={25}
                                 page={1}
                                 count={80}
+                                actions={
+                                    <Button>Test</Button>
+                                }
                             />
                         </DataTable>
                     </Card>

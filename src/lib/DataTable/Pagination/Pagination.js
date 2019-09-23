@@ -1,10 +1,10 @@
-import React, {useContext, useEffect, useLayoutEffect, useRef, useState} from 'react'
-import {Button, Icon} from '../../index'
-import {Context} from '../DataTable'
+import React, { useContext, useEffect, useRef, useState } from 'react'
+import { Button, Icon } from '../../index'
+import { Context } from '../DataTable'
 
 import './Pagination.scss'
 
-const Pagination = ({rowsPerPage, rowsPerPageOptions, page, count}) => {
+const Pagination = ({ rowsPerPage, rowsPerPageOptions, page, count, actions }) => {
 
     if (!rowsPerPage)
         console.error('The property "rowsPerPage" is required for Pagination')
@@ -18,28 +18,16 @@ const Pagination = ({rowsPerPage, rowsPerPageOptions, page, count}) => {
     if (typeof count === 'undefined')
         console.error('The property "count" is required for Pagination')
 
-    const {onTrigger, setFilter} = useContext(Context)
+    const { onTrigger, setFilter } = useContext(Context)
     const ref = useRef(null)
-    const [totalColumns, setTotalColumns] = useState(0)
-    const [pagination, setPagination] = useState({rowsPerPage, page})
-
-    // useEffect(() => {
-    //     setPagination(pagination => {
-    //         let data = {
-    //             ...pagination,
-    //             page: 1
-    //         }
-    //
-    //         return data
-    //     })
-    // }, [count])
+    const [ pagination, setPagination ] = useState({ rowsPerPage, page })
 
     useEffect(() => {
         setPagination((pagination) => ({
             ...pagination,
             page
         }))
-    }, [page])
+    }, [ page ])
 
     useEffect(() => {
         setFilter(filter => ({
@@ -50,33 +38,26 @@ const Pagination = ({rowsPerPage, rowsPerPageOptions, page, count}) => {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
-    useLayoutEffect(() => {
-        let length = ref.current.parentNode.parentNode.querySelectorAll('.vui-DataTable-Columns tr .vui-DataTable-Column').length
-        setTotalColumns(length)
-
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [])
-
     function handleClick(type) {
         setPagination(pagination => {
             let data = {
                 page: type === 'prevPage' ? pagination.page - 1 : pagination.page + 1,
-                rowsPerPage: pagination.rowsPerPage,
+                rowsPerPage: pagination.rowsPerPage
             }
 
-            onTrigger("pagination", data)
+            onTrigger('pagination', data)
             return data
         })
     }
 
-    function handleChange({target}) {
-        setPagination(pagination => {
+    function handleChange({ target }) {
+        setPagination(() => {
             let data = {
                 page: 1,
-                rowsPerPage: +target.value,
+                rowsPerPage: +target.value
             }
 
-            onTrigger("pagination", data)
+            onTrigger('pagination', data)
             return data
         })
     }
@@ -87,7 +68,7 @@ const Pagination = ({rowsPerPage, rowsPerPageOptions, page, count}) => {
         let initValue = pageItems - (pagination.rowsPerPage - 1)
         let lastValue = pageItems >= count ? count : pageItems
 
-        if(count === 0)
+        if (count === 0)
             initValue = 0
 
         return (
@@ -97,7 +78,7 @@ const Pagination = ({rowsPerPage, rowsPerPageOptions, page, count}) => {
 
     return (
         <div className='vui-DataTable-Row vui-DataTablePagination' ref={ref}>
-            <div className='vui-DataTable-Cell' colSpan={totalColumns}>
+            <div className='vui-DataTable-Cell'>
                 <div className='vui-DataTablePagination-Items'>
                     <div className='vui-DataTablePagination-Item'>
                         <p>Itens por página:</p>
@@ -136,6 +117,11 @@ const Pagination = ({rowsPerPage, rowsPerPageOptions, page, count}) => {
                             <Icon name='chevronRight'/>
                         </Button>
                     </div>
+                    {actions &&
+                    <div className='actions'>
+                        {actions}
+                    </div>
+                    }
                 </div>
             </div>
         </div>
