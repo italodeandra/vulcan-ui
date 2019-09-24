@@ -1,8 +1,8 @@
 //TODO: Fix the assistive text changing fast between error and helper when it has an required error
 
 import _isEqual from 'lodash.isequal'
-import React, {useEffect, useRef, useState} from 'react'
-import {classNames, useDeepCompareEffect} from '../index'
+import React, { useEffect, useRef, useState } from 'react'
+import { classNames, useDeepCompareEffect } from '../index'
 import Autocomplete from './Autocomplete/Autocomplete'
 import Autosize from './Autosize/Autosize'
 import Chips from './Chips/Chips'
@@ -143,7 +143,7 @@ const TextField = ({
         name: name,
         type: type,
         onChange: handleChange,
-        value: format.mask(value) || '',
+        value: checkValue(format.mask(value)) ? format.mask(value) : '',
         onFocus: e => {
             setIsFocused(true)
             if (onFocus) onFocus(e)
