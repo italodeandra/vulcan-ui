@@ -1,6 +1,6 @@
 {
 	"name": "vulcan-ui",
-	"version": "0.1.2",
+  "version": "0.1.5",
 	"dependencies": {
 		"rimraf": "^2.6.3",
 		"cross-env": "^5.2.0",
