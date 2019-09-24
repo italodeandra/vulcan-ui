@@ -133,7 +133,7 @@ const TextFieldDemo = () => {
                             required: 'Please fill this field',
                             maxAmount: 9859962.50
                         }}
-                        maskConfig={{ decimal: true }}
+                        maskConfig={{ decimal: true, allowNegative: true }}
                     />
                     <pre>
                         state: {test3}

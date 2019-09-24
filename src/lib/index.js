@@ -32,6 +32,7 @@ import NumberFormatter from './TextField/Number/NumberFormatter'
 import TextField from './TextField/TextField'
 import base64 from './Utils/base64'
 import caretPosition from './Utils/caretPosition'
+import checkValue from './Utils/checkValue'
 import classNames from './Utils/classNames'
 import createSharedStateHook from './Utils/createSharedStateHook'
 import dateFormat from './Utils/dateFormat'
@@ -75,6 +76,7 @@ export {
 
     base64,
     caretPosition,
+    checkValue,
     classNames,
     createSharedStateHook,
     dateFormat,
