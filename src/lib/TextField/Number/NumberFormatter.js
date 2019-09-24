@@ -1,4 +1,5 @@
 import { caretPosition } from '../../index'
+import checkValue from '../../Utils/checkValue'
 
 const NumberFormatter = (config) => {
     config = config || {}
@@ -9,6 +10,8 @@ const NumberFormatter = (config) => {
     }
 
     function maskValue(rawValue) {
+        rawValue = checkValue(rawValue) ? rawValue.toString() : rawValue
+
         let addedDecimal = false
 
         if (!rawValue) {

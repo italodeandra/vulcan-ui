@@ -2,6 +2,7 @@
 
 import React, { useLayoutEffect, useRef, useState } from 'react'
 import { classNames } from '../../index'
+import checkValue from '../../Utils/checkValue'
 import './Cell.sass'
 
 const Cell = ({bold, children, editable, onChange, style, customInput, colSpan, className}) => {
@@ -55,7 +56,7 @@ const Cell = ({bold, children, editable, onChange, style, customInput, colSpan, 
     }
 
     const inputProps = {
-        value: children || '',
+        value: checkValue(children) ? children : '',
         onBlur: () => setIsEditing(false),
         autoFocus: editable !== 'always',
         onChange: handleChange,
