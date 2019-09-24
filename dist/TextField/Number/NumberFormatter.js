@@ -3,23 +3,46 @@ import { caretPosition } from '../../index';
 var NumberFormatter = function NumberFormatter(config) {
   config = config || {};
   config.prefix = config.prefix || '';
+  config.allowNegative = config.allowNegative || false;
+
+  if (config.decimal && typeof config.decimal !== 'number' || !config.decimal && config.money) {
+    config.decimal = 2;
+  }
 
   function maskValue(rawValue) {
+    var addedDecimal = false;
+
     if (!rawValue) {
       return rawValue;
     }
 
+    if (config.decimal && rawValue.length < 3) {
+      rawValue = "".concat(rawValue, ".").concat('0'.repeat(config.decimal));
+      addedDecimal = true;
+    }
+
     var maskedValue = rawValue.toString();
+    var isNegative = config.allowNegative && maskedValue.indexOf('-') > -1;
+    maskedValue = maskedValue.replace(/[^\d.]/g, '');
+
+    if (isNegative) {
+      maskedValue = "-".concat(maskedValue);
+    }
+
     var activeElement = document.activeElement;
 
     if (activeElement && activeElement.value) {
       var characters = activeElement.value.length;
       var caretPos = caretPosition.get(activeElement);
 
-      if (caretPos) {
+      if (caretPos || addedDecimal) {
         setTimeout(function () {
           if (document.activeElement === activeElement) {
-            caretPosition.set(activeElement, caretPos + (activeElement.value.length - characters));
+            if (caretPos && !addedDecimal) {
+              caretPosition.set(activeElement, caretPos + (activeElement.value.length - characters));
+            } else {
+              caretPosition.set(activeElement, activeElement.value.length - config.decimal - 1);
+            }
           }
         });
       }
@@ -38,7 +61,12 @@ var NumberFormatter = function NumberFormatter(config) {
 
   function parseValue(maskedValue) {
     var parsedValue = maskedValue.toString();
+    var isNegative = config.allowNegative && parsedValue.indexOf('-') > -1;
     parsedValue = parsedValue.replace(/[^\d]/g, '');
+
+    if (isNegative) {
+      parsedValue = "-".concat(parsedValue);
+    }
 
     if (parsedValue.length < 3) {
       if (parsedValue) {
@@ -53,14 +81,14 @@ var NumberFormatter = function NumberFormatter(config) {
     if (!config.decimal && !config.money) {
       parsedValue = parseFloat(parsedValue).toString();
     } else {
-      parsedValue = parsedValue.substring(0, parsedValue.length - 2) + '.' + parsedValue.substring(parsedValue.length - 2).padEnd(2, '0');
+      parsedValue = parsedValue.substring(0, parsedValue.length - config.decimal) + '.' + parsedValue.substring(parsedValue.length - config.decimal).padEnd(config.decimal, '0');
       parsedValue = parseFloat(parsedValue).toString();
       parsedValue = parsedValue.split('.');
 
       if (parsedValue[1]) {
-        parsedValue[1] = parsedValue[1].padEnd(2, '0');
+        parsedValue[1] = parsedValue[1].padEnd(config.decimal, '0');
       } else {
-        parsedValue.push('00');
+        parsedValue.push('0'.repeat(config.decimal));
       }
 
       parsedValue = parsedValue.join('.');
@@ -77,8 +105,8 @@ var NumberFormatter = function NumberFormatter(config) {
 
 function addThousandDots(value) {
   if (value.includes('.')) {
-    var splitted = value.split('.');
-    return "".concat(addThousandDots(splitted[0]), ",").concat(splitted[1]);
+    var split = value.split('.');
+    return "".concat(addThousandDots(split[0]), ",").concat(split[1]);
   } else {
     return parseInt(value).toLocaleString('pt-BR');
   }

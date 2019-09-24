@@ -1,8 +1,8 @@
 import _slicedToArray from "@babel/runtime/helpers/esm/slicedToArray";
 import _objectWithoutProperties from "@babel/runtime/helpers/esm/objectWithoutProperties";
-import React, { useRef, useState } from "react";
-import classNames from "../../Utils/classNames";
-import "./ListItem.sass";
+import React, { useRef, useState } from 'react';
+import classNames from '../../Utils/classNames';
+import './ListItem.sass';
 
 var ListItem = function ListItem(_ref) {
   var children = _ref.children,
@@ -29,11 +29,12 @@ var ListItem = function ListItem(_ref) {
     onClick && onClick(e);
   }
 
+  delete props.active;
   return React.createElement("div", Object.assign({
     ref: ref,
     className: className,
     onClick: handleClick,
-    tabIndex: onClick ? "0" : undefined
+    tabIndex: onClick ? '0' : undefined
   }, props), children);
 };
 

@@ -1,6 +1,6 @@
-import React from "react";
-import Search from '../Search/Search';
+import React from 'react';
 import { Checkbox, List } from '../../index';
+import Search from '../Search/Search';
 
 var Item = function Item(_ref) {
   var before = _ref.before,
@@ -27,11 +27,11 @@ var Item = function Item(_ref) {
         return _onClick(e, before, item, index);
       },
       selectable: true,
-      active: item.checked ? true : false
+      active: !!item.checked
     }, React.createElement(List.Content, null, React.createElement(List.Title, null, item.label)), React.createElement(List.Action, {
       right: true
     }, React.createElement(Checkbox, {
-      checked: item.checked ? true : false,
+      checked: !!item.checked,
       id: item.id,
       name: item.id
     })));

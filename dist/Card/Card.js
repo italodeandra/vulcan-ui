@@ -6,11 +6,13 @@ var Card = function Card(_ref) {
   var children = _ref.children,
       className = _ref.className,
       rounder = _ref.rounder,
-      onClick = _ref.onClick;
+      onClick = _ref.onClick,
+      setRef = _ref.setRef;
   className = classNames(className, 'vui-Card', rounder ? 'rounder' : '');
   return React.createElement("div", {
     className: className,
-    onClick: onClick
+    onClick: onClick,
+    ref: setRef
   }, children);
 };
 

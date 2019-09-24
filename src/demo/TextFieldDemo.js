@@ -285,7 +285,7 @@ const handleCustomErrorClick = () => {
                     <TextField.Select
                         label='Test 8'
                         name='test8'
-                        value={JSON.parse(test8.toString() || 'null')}
+                        value={JSON.parse(test8 ? test8.toString() : 'null')}
                         onChange={setTest8}
                         options={[
                             { label: 'Test A', value: true },

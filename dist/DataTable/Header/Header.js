@@ -1,9 +1,11 @@
 import React from 'react';
+import { classNames } from '../../index';
 
 var Header = function Header(_ref) {
-  var children = _ref.children;
+  var className = _ref.className,
+      children = _ref.children;
   return React.createElement("div", {
-    className: "vui-DataTable-Header"
+    className: classNames('vui-DataTable-Header', className)
   }, children);
 };
 

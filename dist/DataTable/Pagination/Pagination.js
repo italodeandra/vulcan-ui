@@ -1,11 +1,6 @@
-import _defineProperty from "@babel/runtime/helpers/esm/defineProperty";
+import _objectSpread from "@babel/runtime/helpers/esm/objectSpread";
 import _slicedToArray from "@babel/runtime/helpers/esm/slicedToArray";
-
-function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
-
-function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(source, true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(source).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
-
-import React, { useContext, useEffect, useLayoutEffect, useRef, useState } from 'react';
+import React, { useContext, useEffect, useRef, useState } from 'react';
 import { Button, Icon } from '../../index';
 import { Context } from '../DataTable';
 import './Pagination.scss';
@@ -14,7 +9,8 @@ var Pagination = function Pagination(_ref) {
   var rowsPerPage = _ref.rowsPerPage,
       rowsPerPageOptions = _ref.rowsPerPageOptions,
       page = _ref.page,
-      count = _ref.count;
+      count = _ref.count,
+      actions = _ref.actions;
   if (!rowsPerPage) console.error('The property "rowsPerPage" is required for Pagination');
   if (!rowsPerPageOptions) console.error('The property "rowsPerPageOptions" is required for Pagination');
   if (!page) console.error('The property "page" is required for Pagination');
@@ -26,28 +22,13 @@ var Pagination = function Pagination(_ref) {
 
   var ref = useRef(null);
 
-  var _useState = useState(0),
-      _useState2 = _slicedToArray(_useState, 2),
-      totalColumns = _useState2[0],
-      setTotalColumns = _useState2[1];
-
-  var _useState3 = useState({
+  var _useState = useState({
     rowsPerPage: rowsPerPage,
     page: page
   }),
-      _useState4 = _slicedToArray(_useState3, 2),
-      pagination = _useState4[0],
-      setPagination = _useState4[1]; // useEffect(() => {
-  //     setPagination(pagination => {
-  //         let data = {
-  //             ...pagination,
-  //             page: 1
-  //         }
-  //
-  //         return data
-  //     })
-  // }, [count])
-
+      _useState2 = _slicedToArray(_useState, 2),
+      pagination = _useState2[0],
+      setPagination = _useState2[1];
 
   useEffect(function () {
     setPagination(function (pagination) {
@@ -63,10 +44,6 @@ var Pagination = function Pagination(_ref) {
       });
     }); // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-  useLayoutEffect(function () {
-    var length = ref.current.parentNode.parentNode.querySelectorAll('.vui-DataTable-Columns tr .vui-DataTable-Column').length;
-    setTotalColumns(length); // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
 
   function handleClick(type) {
     setPagination(function (pagination) {
@@ -74,19 +51,19 @@ var Pagination = function Pagination(_ref) {
         page: type === 'prevPage' ? pagination.page - 1 : pagination.page + 1,
         rowsPerPage: pagination.rowsPerPage
       };
-      onTrigger("pagination", data);
+      onTrigger('pagination', data);
       return data;
     });
   }
 
   function handleChange(_ref2) {
     var target = _ref2.target;
-    setPagination(function (pagination) {
+    setPagination(function () {
       var data = {
         page: 1,
         rowsPerPage: +target.value
       };
-      onTrigger("pagination", data);
+      onTrigger('pagination', data);
       return data;
     });
   }
@@ -103,8 +80,7 @@ var Pagination = function Pagination(_ref) {
     className: "vui-DataTable-Row vui-DataTablePagination",
     ref: ref
   }, React.createElement("div", {
-    className: "vui-DataTable-Cell",
-    colSpan: totalColumns
+    className: "vui-DataTable-Cell"
   }, React.createElement("div", {
     className: "vui-DataTablePagination-Items"
   }, React.createElement("div", {
@@ -139,7 +115,9 @@ var Pagination = function Pagination(_ref) {
     }
   }, React.createElement(Icon, {
     name: "chevronRight"
-  }))))));
+  }))), actions && React.createElement("div", {
+    className: "actions"
+  }, actions))));
 };
 
 export default Pagination;

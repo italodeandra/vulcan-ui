@@ -15,6 +15,7 @@ import checkCircleOutline from './icons/checkCircleOutline';
 import chevronLeft from './icons/chevronLeft';
 import chevronRight from './icons/chevronRight';
 import chevronUp from './icons/chevronUp';
+import clipboardAlertOutline from './icons/clipboardAlertOutline';
 import clipboardCheckOutline from './icons/clipboardCheckOutline';
 import clipboardOutline from './icons/clipboardOutline';
 import close from './icons/close';
@@ -66,6 +67,7 @@ var icons = {
   chevronLeft: chevronLeft,
   chevronRight: chevronRight,
   chevronUp: chevronUp,
+  clipboardAlertOutline: clipboardAlertOutline,
   clipboardCheckOutline: clipboardCheckOutline,
   clipboardOutline: clipboardOutline,
   close: close,

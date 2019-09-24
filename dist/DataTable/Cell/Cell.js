@@ -1,5 +1,5 @@
 import _slicedToArray from "@babel/runtime/helpers/esm/slicedToArray";
-//TODO: Receber valores das colunas e do filtro ao invés de reseta-los quando o componente é re-renderizado
+//TODO: Receber valores das colunas e do filtro ao invés de resetar-los quando o componente é re-renderizado
 import React, { useLayoutEffect, useRef, useState } from 'react';
 import { classNames } from '../../index';
 import './Cell.sass';
@@ -31,17 +31,22 @@ var Cell = function Cell(_ref) {
       setIsEditing = _useState6[1];
 
   useLayoutEffect(function () {
-    var thisIndex = ref.current.parentNode.children.indexOf(ref.current);
+    // noinspection JSUnresolvedVariable
+    var thisIndex = ref.current.parentNode.children.indexOf(ref.current); // noinspection JSUnresolvedFunction
+
     var isColumnRightAligned = ref.current.closest('.vui-DataTable').querySelectorAll('.vui-DataTable-Column')[thisIndex].classList.contains('right-aligned');
 
     if (isColumnRightAligned) {
+      // noinspection JSUnresolvedVariable
       ref.current.classList.add('right-aligned');
     }
 
-    setRightAligned(isColumnRightAligned);
+    setRightAligned(isColumnRightAligned); // noinspection JSUnresolvedFunction
+
     var isColumnCenterAligned = ref.current.closest('.vui-DataTable').querySelectorAll('.vui-DataTable-Column')[thisIndex].classList.contains('center-aligned');
 
     if (isColumnCenterAligned) {
+      // noinspection JSUnresolvedVariable
       ref.current.classList.add('center-aligned');
     }
 

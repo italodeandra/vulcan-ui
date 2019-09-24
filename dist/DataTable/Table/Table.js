@@ -16,7 +16,7 @@ var Table = function Table(_ref) {
         var offsetTop = ref.current.offsetTop;
         var pageSize = window.innerHeight;
         var height = pageSize - offsetTop;
-        var pagination = ref.current.parentNode.querySelector(".vui-DataTablePagination");
+        var pagination = ref.current.parentNode.querySelector('.vui-DataTablePagination');
 
         if (pagination) {
           height -= pagination.scrollHeight + 8;
@@ -26,9 +26,11 @@ var Table = function Table(_ref) {
       };
 
       handleResize();
-      window.addEventListener("resize", handleResize);
+      setTimeout(handleResize, 100);
+      setTimeout(handleResize, 1000);
+      window.addEventListener('resize', handleResize);
       return function () {
-        window.removeEventListener("resize", handleResize);
+        window.removeEventListener('resize', handleResize);
       };
     } // eslint-disable-next-line react-hooks/exhaustive-deps
 
