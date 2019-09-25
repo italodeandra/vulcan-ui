@@ -2,6 +2,7 @@ import _slicedToArray from "@babel/runtime/helpers/esm/slicedToArray";
 //TODO: Receber valores das colunas e do filtro ao invés de resetar-los quando o componente é re-renderizado
 import React, { useLayoutEffect, useRef, useState } from 'react';
 import { classNames } from '../../index';
+import checkValue from '../../Utils/checkValue';
 import './Cell.sass';
 
 var Cell = function Cell(_ref) {
@@ -72,7 +73,7 @@ var Cell = function Cell(_ref) {
   };
 
   var inputProps = {
-    value: children || '',
+    value: checkValue(children) ? children : '',
     onBlur: function onBlur() {
       return setIsEditing(false);
     },

@@ -5,6 +5,7 @@ import _objectWithoutProperties from "@babel/runtime/helpers/esm/objectWithoutPr
 import _isEqual from 'lodash.isequal';
 import React, { useEffect, useRef, useState } from 'react';
 import { classNames, useDeepCompareEffect } from '../index';
+import checkValue from '../Utils/checkValue';
 import Autocomplete from './Autocomplete/Autocomplete';
 import Autosize from './Autosize/Autosize';
 import Chips from './Chips/Chips';
@@ -16,10 +17,6 @@ import useValidation from './useValidation';
 
 function checkIfIsCounter(value) {
   return new RegExp('^[0-9]+\\/[0-9]+$').test(value);
-}
-
-function checkValue(value) {
-  return typeof value !== 'undefined' && value !== null && value !== '';
 }
 
 var TextField = function TextField(_ref) {
@@ -165,7 +162,7 @@ var TextField = function TextField(_ref) {
     name: name,
     type: type,
     onChange: handleChange,
-    value: format.mask(value) || '',
+    value: checkValue(format.mask(value)) ? format.mask(value) : '',
     onFocus: function onFocus(e) {
       setIsFocused(true);
       if (_onFocus) _onFocus(e);

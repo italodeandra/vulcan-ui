@@ -1,4 +1,5 @@
 import { caretPosition } from '../../index';
+import checkValue from '../../Utils/checkValue';
 
 var NumberFormatter = function NumberFormatter(config) {
   config = config || {};
@@ -10,20 +11,25 @@ var NumberFormatter = function NumberFormatter(config) {
   }
 
   function maskValue(rawValue) {
+    rawValue = checkValue(rawValue) ? rawValue.toString() : rawValue;
     var addedDecimal = false;
 
     if (!rawValue) {
       return rawValue;
     }
 
-    if (config.decimal && rawValue.length < 3) {
-      rawValue = "".concat(rawValue, ".").concat('0'.repeat(config.decimal));
-      addedDecimal = true;
+    if (rawValue === '-') {
+      return rawValue;
     }
 
     var maskedValue = rawValue.toString();
     var isNegative = config.allowNegative && maskedValue.indexOf('-') > -1;
     maskedValue = maskedValue.replace(/[^\d.]/g, '');
+
+    if (config.decimal && maskedValue.length < 3) {
+      maskedValue = "".concat(maskedValue, ".").concat('0'.repeat(config.decimal));
+      addedDecimal = true;
+    }
 
     if (isNegative) {
       maskedValue = "-".concat(maskedValue);
@@ -49,7 +55,7 @@ var NumberFormatter = function NumberFormatter(config) {
     }
 
     if (config.money) {
-      maskedValue = addThousandDots(maskedValue);
+      maskedValue = addThousandDots(maskedValue, config.decimal);
     }
 
     if (!config.money && config.decimal) {
@@ -64,16 +70,27 @@ var NumberFormatter = function NumberFormatter(config) {
     var isNegative = config.allowNegative && parsedValue.indexOf('-') > -1;
     parsedValue = parsedValue.replace(/[^\d]/g, '');
 
-    if (isNegative) {
-      parsedValue = "-".concat(parsedValue);
+    if (parsedValue === '' && !isNegative) {
+      return parsedValue;
+    }
+
+    if (parsedValue === '' && isNegative) {
+      return '-';
     }
 
     if (parsedValue.length < 3) {
-      if (parsedValue) {
-        parsedValue = parseFloat(parsedValue).toString();
-      }
+      //     if (parsedValue) {
+      //         if (isNegative) {
+      //             parsedValue = `-${parsedValue}`
+      //         }
+      //         parsedValue = parseFloat(parsedValue).toString()
+      //         return parsedValue
+      //     }
+      parsedValue = parsedValue.padStart(config.decimal + 1, '0');
+    }
 
-      return parsedValue;
+    if (isNegative) {
+      parsedValue = "-".concat(parsedValue);
     }
 
     parsedValue = parsedValue.substring(0, 15);
@@ -81,6 +98,7 @@ var NumberFormatter = function NumberFormatter(config) {
     if (!config.decimal && !config.money) {
       parsedValue = parseFloat(parsedValue).toString();
     } else {
+      console.log(parsedValue);
       parsedValue = parsedValue.substring(0, parsedValue.length - config.decimal) + '.' + parsedValue.substring(parsedValue.length - config.decimal).padEnd(config.decimal, '0');
       parsedValue = parseFloat(parsedValue).toString();
       parsedValue = parsedValue.split('.');
@@ -103,10 +121,10 @@ var NumberFormatter = function NumberFormatter(config) {
   };
 };
 
-function addThousandDots(value) {
+function addThousandDots(value, decimal) {
   if (value.includes('.')) {
     var split = value.split('.');
-    return "".concat(addThousandDots(split[0]), ",").concat(split[1]);
+    return "".concat(addThousandDots(split[0], decimal), ",").concat(split[1].substring(0, decimal));
   } else {
     return parseInt(value).toLocaleString('pt-BR');
   }
