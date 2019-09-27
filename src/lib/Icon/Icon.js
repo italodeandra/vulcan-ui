@@ -34,9 +34,11 @@ import home from './icons/home'
 import libraryShelves from './icons/libraryShelves'
 import link from './icons/link'
 import menu from './icons/menu'
+import minusBoxOutline from './icons/minusBoxOutline'
 import openInNew from './icons/openInNew'
 import pencil from './icons/pencil'
 import plus from './icons/plus'
+import plusBoxOutline from './icons/plusBoxOutline'
 import printer from './icons/printer'
 import progressCheck from './icons/progressCheck'
 import refresh from './icons/refresh'
@@ -87,9 +89,11 @@ const icons = {
     libraryShelves,
     link,
     menu,
+    minusBoxOutline,
     openInNew,
     pencil,
     plus,
+    plusBoxOutline,
     printer,
     progressCheck,
     refresh,
@@ -107,7 +111,7 @@ const icons = {
     viewList
 }
 
-const Icon = ({className, name, onClick}) => {
+const Icon = ({ className, name, onClick }) => {
     if (!icons[name] || typeof icons[name] !== 'function') throw new Error(`Icon ${name} not installed`)
 
     return (

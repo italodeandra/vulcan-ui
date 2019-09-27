@@ -1,7 +1,8 @@
 import React, { useContext, useLayoutEffect, useRef } from 'react'
+import { classNames } from '../../index'
 import { Context } from '../DataTable'
 
-const Table = ({ children, sticky, style }) => {
+const Table = ({ children, sticky, style, className }) => {
     const ref = useRef(null)
     const { filter } = useContext(Context)
 
@@ -34,7 +35,7 @@ const Table = ({ children, sticky, style }) => {
     }, [ filter ])
 
     return (
-        <div className='vui-DataTable-overflow' ref={ref} style={style}>
+        <div className={classNames('vui-DataTable-overflow', className)} ref={ref} style={style}>
             <table className='vui-DataTable-Table'>
                 {children}
             </table>

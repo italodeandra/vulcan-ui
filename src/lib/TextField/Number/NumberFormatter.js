@@ -26,9 +26,14 @@ const NumberFormatter = (config) => {
         const isNegative = config.allowNegative && maskedValue.indexOf('-') > -1
         maskedValue = maskedValue.replace(/[^\d.]/g, '')
 
-        if (config.decimal && maskedValue.length < 3) {
-            maskedValue = `${maskedValue}.${'0'.repeat(config.decimal)}`
-            addedDecimal = true
+        const hasComma = maskedValue.split('.')[1]
+        if (config.decimal) {
+            if (!hasComma) {
+                maskedValue = `${maskedValue}.${'0'.repeat(config.decimal)}`
+                addedDecimal = true
+            } else {
+                maskedValue = `${maskedValue}${'0'.repeat(config.decimal - hasComma.length)}`
+            }
         }
 
         if (isNegative) {
@@ -98,7 +103,6 @@ const NumberFormatter = (config) => {
         if (!config.decimal && !config.money) {
             parsedValue = parseFloat(parsedValue).toString()
         } else {
-            console.log(parsedValue)
             parsedValue = parsedValue.substring(0, parsedValue.length - config.decimal) + '.' + parsedValue.substring(parsedValue.length - config.decimal).padEnd(config.decimal, '0')
             parsedValue = parseFloat(parsedValue).toString()
             parsedValue = parsedValue.split('.')
@@ -129,3 +133,6 @@ function addThousandDots(value, decimal) {
 }
 
 export default NumberFormatter
+
+
+console.log(NumberFormatter({ decimal: 2, allowNegative: true }).mask(-0.1))

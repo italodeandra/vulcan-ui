@@ -1,10 +1,12 @@
 import React, { useContext, useLayoutEffect, useRef } from 'react';
+import { classNames } from '../../index';
 import { Context } from '../DataTable';
 
 var Table = function Table(_ref) {
   var children = _ref.children,
       sticky = _ref.sticky,
-      style = _ref.style;
+      style = _ref.style,
+      className = _ref.className;
   var ref = useRef(null);
 
   var _useContext = useContext(Context),
@@ -36,7 +38,7 @@ var Table = function Table(_ref) {
 
   }, [filter]);
   return React.createElement("div", {
-    className: "vui-DataTable-overflow",
+    className: classNames('vui-DataTable-overflow', className),
     ref: ref,
     style: style
   }, React.createElement("table", {
