@@ -32,7 +32,12 @@ const NumberFormatter = (config) => {
                 maskedValue = `${maskedValue}.${'0'.repeat(config.decimal)}`
                 addedDecimal = true
             } else {
-                maskedValue = `${maskedValue}${'0'.repeat(config.decimal - hasComma.length)}`
+                const repeatCount = config.decimal - hasComma.length
+                if (repeatCount > 0) {
+                    maskedValue = `${maskedValue}${'0'.repeat(repeatCount > 0 ? repeatCount : 0)}`
+                } else if (repeatCount < 0) {
+                    maskedValue = maskedValue.substring(0, maskedValue.length + repeatCount)
+                }
             }
         }
 

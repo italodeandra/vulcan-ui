@@ -1,11 +1,11 @@
-import React, {useContext} from 'react'
-import {classNames, Icon, useDeepCompareEffect} from '../../index'
-import {Context} from '../DataTable'
+import React, { useContext } from 'react'
+import { classNames, Icon, useDeepCompareEffect } from '../../index'
+import { Context } from '../DataTable'
 import './Column.scss'
 
 const directions = ['asc', 'desc', null]
 
-const Column = ({children, name, rightAligned, centerAligned, search, searchCustomInput, sortable}) => {
+const Column = ({ children, name, rightAligned, centerAligned, search, searchCustomInput, sortable, colSpan }) => {
     const {isSearchActive, setIsSearchActive, onTrigger, filter, setFilter} = useContext(Context)
     const columns = filter && filter.columns
 
@@ -79,7 +79,7 @@ const Column = ({children, name, rightAligned, centerAligned, search, searchCust
     />
 
     return (
-        <th className={className} onClick={handleClick} name={name}>
+        <th className={className} onClick={handleClick} name={name} colSpan={colSpan}>
             {rightAligned &&
             <>
                 {sortable && sorting}
