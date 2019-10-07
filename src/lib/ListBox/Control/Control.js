@@ -1,5 +1,5 @@
-import React from "react"
-import {Button, Icon} from '../../index'
+import React from 'react'
+import { Button, Icon } from '../../index'
 
 const Control = ({ nonSelected, selected, onChange, onTransferAll }) => {
 
@@ -20,30 +20,30 @@ const Control = ({ nonSelected, selected, onChange, onTransferAll }) => {
     }
 
     return (
-        <div className="vui-ListBox-controls">
+        <div className='vui-ListBox-controls'>
             <Button
-                className="vui-ListBox-controls-button"
+                className='vui-ListBox-controls-button'
                 icon
                 onClick={handleTransferAllRight}
             >
                 <Icon name='transferRight'/>
             </Button>
             <Button
-                className="vui-ListBox-controls-button"
+                className='vui-ListBox-controls-button'
                 icon
                 onClick={handleChangeRight}
             >
                 <Icon name='arrowRight'/>
             </Button>
             <Button
-                className="vui-ListBox-controls-button"
+                className='vui-ListBox-controls-button'
                 icon
                 onClick={handleChangeLeft}
             >
                 <Icon name='arrowLeft'/>
             </Button>
             <Button
-                className="vui-ListBox-controls-button"
+                className='vui-ListBox-controls-button'
                 icon
                 onClick={handleTransferAllLeft}
             >

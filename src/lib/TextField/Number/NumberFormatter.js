@@ -138,6 +138,3 @@ function addThousandDots(value, decimal) {
 }
 
 export default NumberFormatter
-
-
-console.log(NumberFormatter({ decimal: 2, allowNegative: true }).mask(-0.1))

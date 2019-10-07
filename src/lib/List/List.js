@@ -1,20 +1,20 @@
-import React from "react"
-import ListItem from "./ListItem/ListItem"
-import Avatar from "./Avatar/Avatar"
-import Content from "./Content/Content"
-import Divider from "../NavigationDrawer/Divider/Divider"
-import Overline from "./Overline/Overline"
-import Title from "./Title/Title"
-import Action from "./Action/Action"
-import Icon from "./Icon/Icon"
-import Subtitle from "./Subtitle/Subtitle";
+import React from 'react'
+import { classNames } from '../index'
+import Divider from '../NavigationDrawer/Divider/Divider'
+import Action from './Action/Action'
+import Avatar from './Avatar/Avatar'
+import Content from './Content/Content'
+import Icon from './Icon/Icon'
 
-import "./List.scss"
-import {classNames} from '../index'
+import './List.scss'
+import ListItem from './ListItem/ListItem'
+import Overline from './Overline/Overline'
+import Subtitle from './Subtitle/Subtitle'
+import Title from './Title/Title'
 
-const List = ({ children, ...props }) => {
+const List = ({ children, setRef, ...props }) => {
     return (
-        <div className={classNames("vui-List", props.className)} {...props}>
+        <div className={classNames('vui-List', props.className)} {...props} ref={setRef}>
             {children}
         </div>
     );
