@@ -164,4 +164,24 @@
       margin-right: 8px;
     }
   }
+
+  .vui-Spinner.vui-Spinner.vui-Spinner {
+    right: 0;
+    top: 0;
+    position: absolute;
+    height: 100%;
+    margin: 0;
+    width: inherit;
+    display: flex;
+    justify-content: flex-end;
+
+    svg {
+      margin: 0;
+      height: 100%;
+
+      circle {
+        stroke: white;
+      }
+    }
+  }
 }
