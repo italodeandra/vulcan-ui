@@ -23,6 +23,7 @@
   transition-duration: 280ms;
   transition-timing-function: $vui-Elevation-transition;
   white-space: nowrap;
+  text-decoration: none;
 
   & + .vui-Button {
     margin-left: 8px;

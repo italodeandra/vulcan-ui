@@ -75,6 +75,10 @@ const NumberFormatter = (config) => {
     }
 
     function parseValue(maskedValue) {
+        if (!checkValue(maskedValue)) {
+            return maskedValue
+        }
+
         let parsedValue = maskedValue.toString()
 
         const isNegative = config.allowNegative && parsedValue.indexOf('-') > -1
