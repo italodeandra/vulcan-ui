@@ -13,7 +13,8 @@ var Column = function Column(_ref) {
       centerAligned = _ref.centerAligned,
       search = _ref.search,
       searchCustomInput = _ref.searchCustomInput,
-      sortable = _ref.sortable;
+      sortable = _ref.sortable,
+      colSpan = _ref.colSpan;
 
   var _useContext = useContext(Context),
       isSearchActive = _useContext.isSearchActive,
@@ -88,7 +89,8 @@ var Column = function Column(_ref) {
   return React.createElement("th", {
     className: className,
     onClick: handleClick,
-    name: name
+    name: name,
+    colSpan: colSpan
   }, rightAligned && React.createElement(React.Fragment, null, sortable && sorting, search && searchButton), children, !rightAligned && React.createElement(React.Fragment, null, search && searchButton, sortable && sorting));
 };
 

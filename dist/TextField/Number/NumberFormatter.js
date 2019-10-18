@@ -32,7 +32,13 @@ var NumberFormatter = function NumberFormatter(config) {
         maskedValue = "".concat(maskedValue, ".").concat('0'.repeat(config.decimal));
         addedDecimal = true;
       } else {
-        maskedValue = "".concat(maskedValue).concat('0'.repeat(config.decimal - hasComma.length));
+        var repeatCount = config.decimal - hasComma.length;
+
+        if (repeatCount > 0) {
+          maskedValue = "".concat(maskedValue).concat('0'.repeat(repeatCount > 0 ? repeatCount : 0));
+        } else if (repeatCount < 0) {
+          maskedValue = maskedValue.substring(0, maskedValue.length + repeatCount);
+        }
       }
     }
 
@@ -71,6 +77,10 @@ var NumberFormatter = function NumberFormatter(config) {
   }
 
   function parseValue(maskedValue) {
+    if (!checkValue(maskedValue)) {
+      return maskedValue;
+    }
+
     var parsedValue = maskedValue.toString();
     var isNegative = config.allowNegative && parsedValue.indexOf('-') > -1;
     parsedValue = parsedValue.replace(/[^\d]/g, '');
@@ -135,7 +145,3 @@ function addThousandDots(value, decimal) {
 }
 
 export default NumberFormatter;
-console.log(NumberFormatter({
-  decimal: 2,
-  allowNegative: true
-}).mask(-0.1));

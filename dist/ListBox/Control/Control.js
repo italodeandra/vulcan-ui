@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 import { Button, Icon } from '../../index';
 
 var Control = function Control(_ref) {

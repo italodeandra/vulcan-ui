@@ -5,17 +5,29 @@ import _objectSpread from "@babel/runtime/helpers/esm/objectSpread";
 import _toConsumableArray from "@babel/runtime/helpers/esm/toConsumableArray";
 import _slicedToArray from "@babel/runtime/helpers/esm/slicedToArray";
 import React, { useEffect, useState } from 'react';
-import './ListBox.sass';
-import Item from './Item/Item';
 import Control from './Control/Control';
+import Item from './Item/Item';
+import './ListBox.sass';
 var UNSELECTED = 'unselected';
 var SELECTED = 'selected';
+/**
+ * @param {className}
+ * @param onChange
+ * @param selected
+ * @param unselected
+ * @param filter */
 
 var ListBox = function ListBox(_ref) {
   var className = _ref.className,
       onChange = _ref.onChange,
       selected = _ref.selected,
-      unselected = _ref.unselected;
+      unselected = _ref.unselected,
+      filter = _ref.filter;
+
+  filter = filter || function (item) {
+    return item;
+  };
+
   if (!unselected) console.error('The property "unselected" is required for ListBox');
 
   var _useState = useState(),
@@ -124,13 +136,14 @@ var ListBox = function ListBox(_ref) {
         while (1) {
           switch (_context.prev = _context.next) {
             case 0:
-              // eslint-disable-next-line array-callback-return
-              items = virtualItems[before].filter(function (item) {
+              items = listItems[before].filter(function (item) {
                 if (item.checked) {
                   item['type'] = prev;
                   item.checked = false;
                   return item;
                 }
+
+                return false;
               });
               reflectList(items, before, prev);
 
@@ -223,7 +236,7 @@ var ListBox = function ListBox(_ref) {
   }, React.createElement(Item, {
     before: UNSELECTED,
     prev: SELECTED,
-    items: virtualItems && virtualItems.unselected,
+    items: virtualItems && virtualItems.unselected.filter(filter),
     onClick: handleClick,
     onDoubleClick: handleDoubleClick,
     onSearch: handleSearch

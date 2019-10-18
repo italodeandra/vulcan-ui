@@ -26,7 +26,7 @@ var Search = function Search(_ref) {
     name: name,
     value: value,
     onChange: handleChange,
-    placeholder: placeholder ? placeholder : "Pesquisar..."
+    placeholder: placeholder ? placeholder : 'Pesquisar...'
   }), React.createElement(Button, {
     disabled: true,
     className: "vui-ListBox-Search-Button",
