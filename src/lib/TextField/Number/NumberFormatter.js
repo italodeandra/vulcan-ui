@@ -93,13 +93,6 @@ const NumberFormatter = (config) => {
         }
 
         if (parsedValue.length < 3) {
-            //     if (parsedValue) {
-            //         if (isNegative) {
-            //             parsedValue = `-${parsedValue}`
-            //         }
-            //         parsedValue = parseFloat(parsedValue).toString()
-            //         return parsedValue
-            //     }
             parsedValue = parsedValue.padStart(config.decimal + 1, '0')
         }
 

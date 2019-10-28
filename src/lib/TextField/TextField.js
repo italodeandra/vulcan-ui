@@ -1,7 +1,7 @@
 //TODO: Fix the assistive text changing fast between error and helper when it has an required error
 
 import _isEqual from 'lodash.isequal'
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useEffect, useRef, useState, useMemo } from 'react'
 import { classNames, useDeepCompareEffect } from '../index'
 import checkValue from '../Utils/checkValue'
 import Autocomplete from './Autocomplete/Autocomplete'
@@ -133,6 +133,9 @@ const TextField = ({
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
+    // eslint-disable-next-line
+    let formattedValue = useMemo(() => format.mask(value), [value])
+
     const inputElementProps = {
         ref: ref,
         className: classNames('input', inputClassName),
@@ -140,7 +143,7 @@ const TextField = ({
         name: name,
         type: type,
         onChange: handleChange,
-        value: checkValue(format.mask(value)) ? format.mask(value) : '',
+        value: checkValue(formattedValue) ? formattedValue : '',
         onFocus: e => {
             setIsFocused(true)
             if (onFocus) onFocus(e)
