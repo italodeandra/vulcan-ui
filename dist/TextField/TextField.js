@@ -1,9 +1,14 @@
-import _objectSpread from "@babel/runtime/helpers/esm/objectSpread";
+import _defineProperty from "@babel/runtime/helpers/esm/defineProperty";
 import _slicedToArray from "@babel/runtime/helpers/esm/slicedToArray";
 import _objectWithoutProperties from "@babel/runtime/helpers/esm/objectWithoutProperties";
+
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
 //TODO: Fix the assistive text changing fast between error and helper when it has an required error
 import _isEqual from 'lodash.isequal';
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState, useMemo } from 'react';
 import { classNames, useDeepCompareEffect } from '../index';
 import checkValue from '../Utils/checkValue';
 import Autocomplete from './Autocomplete/Autocomplete';
@@ -153,7 +158,11 @@ var TextField = function TextField(_ref) {
       }
     } // eslint-disable-next-line react-hooks/exhaustive-deps
 
-  }, []);
+  }, []); // eslint-disable-next-line
+
+  var formattedValue = useMemo(function () {
+    return format.mask(value);
+  }, [value]);
 
   var inputElementProps = _objectSpread({
     ref: ref,
@@ -162,7 +171,7 @@ var TextField = function TextField(_ref) {
     name: name,
     type: type,
     onChange: handleChange,
-    value: checkValue(format.mask(value)) ? format.mask(value) : '',
+    value: checkValue(formattedValue) ? formattedValue : '',
     onFocus: function onFocus(e) {
       setIsFocused(true);
       if (_onFocus) _onFocus(e);

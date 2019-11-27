@@ -70,6 +70,20 @@ function useValidation(value, validation) {
                     return
                 }
             }
+
+            if (validation.regexExpression) {
+                var regexExpression = {};
+                regexExpression.value = validation.regexExpression.value || validation.regexExpression;
+                regexExpression.message = validation.regexExpression.message;
+
+                var condition = new RegExp(regexExpression.value, 'g');
+
+                if (!checkValue(value) || !condition.test(value)) {
+                    setHasError(true);
+                    setErrorMessage(regexExpression.message);
+                    return;
+                }
+            }
         }
     }
 
