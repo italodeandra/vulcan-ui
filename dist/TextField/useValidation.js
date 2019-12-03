@@ -89,7 +89,7 @@ function useValidation(value, validation) {
         regexExpression.message = validation.regexExpression.message;
         var condition = new RegExp(regexExpression.value, 'g');
 
-        if (!checkValue(value) || !condition.test(value)) {
+        if (!condition.test(value)) {
           setHasError(true);
           setErrorMessage(regexExpression.message);
           return;
