@@ -2,23 +2,19 @@
 	"name": "vulcan-ui",
 	"version": "0.1.15",
 	"dependencies": {
-		"rimraf": "^2.6.3",
-		"cross-env": "^5.2.0",
-		"@babel/cli": "^7.4.4",
-		"node-sass": "^4.12.0",
+		"axios": "^0.18.0",
+		"lodash.isequal": "^4.5.0",
+		"query-string": "^6.8.1",
 		"react": "^16.8.6",
 		"react-datepicker": "^2.7.0",
 		"react-dom": "^16.8.6",
 		"react-router-dom": "^5.0.0",
-		"react-scripts": "3.0.1",
-		"axios": "^0.18.0",
-		"lodash.isequal": "^4.5.0",
-		"query-string": "^6.8.1"
+		"react-scripts": "3.0.1"
 	},
 	"scripts": {
 		"start": "react-scripts start",
 		"build": "rimraf dist && cross-env NODE_ENV=production babel src/lib --out-dir dist --copy-files",
-		"build-kaio": "cross-env NODE_ENV=production babel src/lib --out-dir C:/Users/kaioh/Applications/web/reed-web/node_modules/vulcan-ui/dist --copy-files",
+		"build-kaio": "cross-env NODE_ENV=production babel src/lib --out-dir C:/Users/kaioh/Applications/web/kirk-web/node_modules/vulcan-ui/dist --copy-files",
 		"build-italo": "cross-env NODE_ENV=production babel src/lib --out-dir C:/Users/italo/Documents/reed-web/node_modules/vulcan-ui/dist --copy-files",
 		"test": "react-scripts test",
 		"eject": "react-scripts eject"
@@ -39,14 +35,14 @@
 		]
 	},
 	"peerDependencies": {
+		"lodash.isequal": "^4.5.0",
 		"node-sass": "^4.12.0",
+		"query-string": "^6.8.1",
 		"react": "^16.8.6",
+		"react-datepicker": "^2.7.0",
 		"react-dom": "^16.8.6",
 		"react-router-dom": "^5.0.0",
-		"react-scripts": "3.0.1",
-		"lodash.isequal": "^4.5.0",
-		"query-string": "^6.8.1",
-		"react-datepicker": "^2.7.0"
+		"react-scripts": "3.0.1"
 	},
 	"main": "dist/index.js",
 	"module": "dist/index.js",
@@ -57,5 +53,13 @@
 	"repository": {
 		"type": "git",
 		"url": "https://github.com/italoandrade/vulcan-ui.git"
+	},
+	"devDependencies": {
+		"@babel/runtime": "^7.7.7",
+		"@babel/cli": "^7.4.4",
+		"@babel/preset-env": "^7.7.7",
+		"@babel/preset-react": "^7.7.4",
+		"cross-env": "^5.2.0",
+		"rimraf": "^2.6.3"
 	}
 }

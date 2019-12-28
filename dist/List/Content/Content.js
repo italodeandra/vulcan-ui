@@ -1,10 +1,20 @@
-import React from "react";
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _react = _interopRequireDefault(require("react"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var Content = function Content(_ref) {
   var children = _ref.children;
-  return React.createElement("div", {
+  return _react.default.createElement("div", {
     className: "vui-ListItem-Content"
   }, children);
 };
 
-export default Content;
+var _default = Content;
+exports.default = _default;

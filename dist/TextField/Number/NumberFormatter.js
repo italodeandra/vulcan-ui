@@ -1,5 +1,15 @@
-import { caretPosition } from '../../index';
-import checkValue from '../../Utils/checkValue';
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _index = require("../../index");
+
+var _checkValue = _interopRequireDefault(require("../../Utils/checkValue"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var NumberFormatter = function NumberFormatter(config) {
   config = config || {};
@@ -11,7 +21,7 @@ var NumberFormatter = function NumberFormatter(config) {
   }
 
   function maskValue(rawValue) {
-    rawValue = checkValue(rawValue) ? rawValue.toString() : rawValue;
+    rawValue = (0, _checkValue.default)(rawValue) ? rawValue.toString() : rawValue;
     var addedDecimal = false;
 
     if (!rawValue) {
@@ -50,15 +60,16 @@ var NumberFormatter = function NumberFormatter(config) {
 
     if (activeElement && activeElement.value) {
       var characters = activeElement.value.length;
-      var caretPos = caretPosition.get(activeElement);
+
+      var caretPos = _index.caretPosition.get(activeElement);
 
       if (caretPos || addedDecimal) {
         setTimeout(function () {
           if (document.activeElement === activeElement) {
             if (caretPos && !addedDecimal) {
-              caretPosition.set(activeElement, caretPos + (activeElement.value.length - characters));
+              _index.caretPosition.set(activeElement, caretPos + (activeElement.value.length - characters));
             } else {
-              caretPosition.set(activeElement, activeElement.value.length - config.decimal - 1);
+              _index.caretPosition.set(activeElement, activeElement.value.length - config.decimal - 1);
             }
           }
         });
@@ -77,7 +88,7 @@ var NumberFormatter = function NumberFormatter(config) {
   }
 
   function parseValue(maskedValue) {
-    if (!checkValue(maskedValue)) {
+    if (!(0, _checkValue.default)(maskedValue)) {
       return maskedValue;
     }
 
@@ -137,4 +148,5 @@ function addThousandDots(value, decimal) {
   }
 }
 
-export default NumberFormatter;
+var _default = NumberFormatter;
+exports.default = _default;

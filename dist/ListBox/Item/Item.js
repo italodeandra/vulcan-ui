@@ -1,7 +1,31 @@
-import _slicedToArray from "@babel/runtime/helpers/esm/slicedToArray";
-import React, { useEffect, useRef, useState } from 'react';
-import { Checkbox, List } from '../../index';
-import Search from '../Search/Search';
+"use strict";
+
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _react = _interopRequireWildcard(require("react"));
+
+var _index = require("../../index");
+
+var _Search = _interopRequireDefault(require("../Search/Search"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function _getRequireWildcardCache() { return cache; }; return cache; }
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
+
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance"); }
+
+function _iterableToArrayLimit(arr, i) { if (!(Symbol.iterator in Object(arr) || Object.prototype.toString.call(arr) === "[object Arguments]")) { return; } var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var Item = function Item(_ref) {
   var before = _ref.before,
@@ -11,7 +35,7 @@ var Item = function Item(_ref) {
       _onClick = _ref.onClick,
       onSearch = _ref.onSearch;
 
-  var _useState = useState({
+  var _useState = (0, _react.useState)({
     from: 0,
     to: 0
   }),
@@ -19,8 +43,8 @@ var Item = function Item(_ref) {
       render = _useState2[0],
       setRender = _useState2[1];
 
-  var scrollableRef = useRef();
-  useEffect(function () {
+  var scrollableRef = (0, _react.useRef)();
+  (0, _react.useEffect)(function () {
     var target = scrollableRef.current;
     var from = Math.floor(target.scrollTop / 56) - 1;
     var to = Math.ceil(target.getBoundingClientRect().height / 56 + target.scrollTop / 56 + 2);
@@ -50,24 +74,24 @@ var Item = function Item(_ref) {
     });
   }
 
-  return React.createElement("div", {
+  return _react.default.createElement("div", {
     className: "vui-ListBox-items"
-  }, React.createElement(Search, {
+  }, _react.default.createElement(_Search.default, {
     onChange: onSearch,
     name: before,
     placeholder: "Pesquisar..."
-  }), React.createElement(List, {
+  }), _react.default.createElement(_index.List, {
     className: "vui-ListBox-List",
     onScroll: handleScroll,
     setRef: scrollableRef
-  }, items && React.createElement(React.Fragment, null, React.createElement("div", {
+  }, items && _react.default.createElement(_react.default.Fragment, null, _react.default.createElement("div", {
     style: {
       height: 56 * render.from
     }
   }), items.sort(function (a, b) {
     return a.id > b.id ? 1 : -1;
   }).map(function (item, index) {
-    return React.createElement(List.ListItem, {
+    return _react.default.createElement(_index.List.ListItem, {
       key: item.id,
       onDoubleClick: function onDoubleClick() {
         return _onDoubleClick(item, before, prev);
@@ -77,9 +101,9 @@ var Item = function Item(_ref) {
       },
       selectable: true,
       active: !!item.checked
-    }, React.createElement(List.Content, null, React.createElement(List.Title, null, item.label)), React.createElement(List.Action, {
+    }, _react.default.createElement(_index.List.Content, null, _react.default.createElement(_index.List.Title, null, item.label)), _react.default.createElement(_index.List.Action, {
       right: true
-    }, React.createElement(Checkbox, {
+    }, _react.default.createElement(_index.Checkbox, {
       onClick: function onClick(e) {
         return e.stopPropagation();
       },
@@ -89,11 +113,12 @@ var Item = function Item(_ref) {
     })));
   }).filter(function (_, i) {
     return i >= render.from && i <= render.to;
-  }), React.createElement("div", {
+  }), _react.default.createElement("div", {
     style: {
       height: 56 * (items.length - render.to)
     }
   }))));
 };
 
-export default Item;
+var _default = Item;
+exports.default = _default;

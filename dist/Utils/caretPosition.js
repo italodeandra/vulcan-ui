@@ -1,3 +1,10 @@
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
 function doGetCaretPosition(ctrl) {
   var CaretPos = 0;
 
@@ -28,7 +35,8 @@ function setCaretPosition(ctrl, pos) {
   }
 }
 
-export default {
+var _default = {
   get: doGetCaretPosition,
   set: setCaretPosition
 };
+exports.default = _default;

@@ -1,12 +1,22 @@
-import _isEqual from 'lodash.isequal';
-import { useLayoutEffect, useRef } from 'react';
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _lodash = _interopRequireDefault(require("lodash.isequal"));
+
+var _react = require("react");
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function deepCompareEquals(a, b) {
-  return _isEqual(a, b);
+  return (0, _lodash.default)(a, b);
 }
 
 function useDeepCompareMemoize(value) {
-  var ref = useRef(null);
+  var ref = (0, _react.useRef)(null);
 
   if (!deepCompareEquals(value, ref.current)) {
     ref.current = value;
@@ -16,7 +26,8 @@ function useDeepCompareMemoize(value) {
 }
 
 function useDeepCompareEffect(callback, dependencies) {
-  useLayoutEffect(callback, useDeepCompareMemoize(dependencies));
+  (0, _react.useLayoutEffect)(callback, useDeepCompareMemoize(dependencies));
 }
 
-export default useDeepCompareEffect;
+var _default = useDeepCompareEffect;
+exports.default = _default;

@@ -1,3 +1,10 @@
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
 function jsonToQueryString(json) {
   var params = Object.keys(json).map(function (key) {
     var value = json[key];
@@ -13,4 +20,5 @@ function jsonToQueryString(json) {
   return (params.length ? '?' : '') + params.join('&');
 }
 
-export default jsonToQueryString;
+var _default = jsonToQueryString;
+exports.default = _default;

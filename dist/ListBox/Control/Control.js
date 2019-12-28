@@ -1,5 +1,15 @@
-import React from 'react';
-import { Button, Icon } from '../../index';
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _react = _interopRequireDefault(require("react"));
+
+var _index = require("../../index");
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var Control = function Control(_ref) {
   var nonSelected = _ref.nonSelected,
@@ -23,33 +33,34 @@ var Control = function Control(_ref) {
     onChange && onChange(selected, nonSelected);
   };
 
-  return React.createElement("div", {
+  return _react.default.createElement("div", {
     className: "vui-ListBox-controls"
-  }, React.createElement(Button, {
+  }, _react.default.createElement(_index.Button, {
     className: "vui-ListBox-controls-button",
     icon: true,
     onClick: handleTransferAllRight
-  }, React.createElement(Icon, {
+  }, _react.default.createElement(_index.Icon, {
     name: "transferRight"
-  })), React.createElement(Button, {
+  })), _react.default.createElement(_index.Button, {
     className: "vui-ListBox-controls-button",
     icon: true,
     onClick: handleChangeRight
-  }, React.createElement(Icon, {
+  }, _react.default.createElement(_index.Icon, {
     name: "arrowRight"
-  })), React.createElement(Button, {
+  })), _react.default.createElement(_index.Button, {
     className: "vui-ListBox-controls-button",
     icon: true,
     onClick: handleChangeLeft
-  }, React.createElement(Icon, {
+  }, _react.default.createElement(_index.Icon, {
     name: "arrowLeft"
-  })), React.createElement(Button, {
+  })), _react.default.createElement(_index.Button, {
     className: "vui-ListBox-controls-button",
     icon: true,
     onClick: handleTransferAllLeft
-  }, React.createElement(Icon, {
+  }, _react.default.createElement(_index.Icon, {
     name: "transferLeft"
   })));
 };
 
-export default Control;
+var _default = Control;
+exports.default = _default;

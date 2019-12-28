@@ -1,18 +1,29 @@
-import React from 'react';
-import { classNames } from '../index';
-import './ProgressBar.scss';
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _react = _interopRequireDefault(require("react"));
+
+var _index = require("../index");
+
+require("./ProgressBar.scss");
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var ProgressBar = function ProgressBar(_ref) {
   var className = _ref.className,
       indeterminate = _ref.indeterminate,
       height = _ref.height,
       progression = _ref.progression;
-  return React.createElement("div", {
-    className: classNames(className, 'vui-ProgressBar'),
+  return _react.default.createElement("div", {
+    className: (0, _index.classNames)(className, 'vui-ProgressBar'),
     style: {
       height: height
     }
-  }, React.createElement("div", {
+  }, _react.default.createElement("div", {
     className: indeterminate ? 'indeterminate' : 'determinate',
     style: {
       width: progression ? progression + '%' : undefined
@@ -20,4 +31,5 @@ var ProgressBar = function ProgressBar(_ref) {
   }));
 };
 
-export default ProgressBar;
+var _default = ProgressBar;
+exports.default = _default;

@@ -1,12 +1,52 @@
-import _toConsumableArray from "@babel/runtime/helpers/esm/toConsumableArray";
-import _slicedToArray from "@babel/runtime/helpers/esm/slicedToArray";
-import _objectWithoutProperties from "@babel/runtime/helpers/esm/objectWithoutProperties";
-import _isEqual from 'lodash.isequal';
-import React, { useEffect, useRef, useState } from 'react';
-import { Button, Icon, ProgressBar, Spinner, TextField, useDeepCompareEffect, usePortal, useSnackbar } from '../../index';
-import './Autocomplete.scss';
-import AutocompleteDataSource from './AutocompleteDataSource';
-import AutocompleteResult from './AutocompleteResult';
+"use strict";
+
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _lodash = _interopRequireDefault(require("lodash.isequal"));
+
+var _react = _interopRequireWildcard(require("react"));
+
+var _index = require("../../index");
+
+require("./Autocomplete.scss");
+
+var _AutocompleteDataSource = _interopRequireDefault(require("./AutocompleteDataSource"));
+
+var _AutocompleteResult = _interopRequireDefault(require("./AutocompleteResult"));
+
+function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function _getRequireWildcardCache() { return cache; }; return cache; }
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
+
+function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _nonIterableSpread(); }
+
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance"); }
+
+function _iterableToArray(iter) { if (Symbol.iterator in Object(iter) || Object.prototype.toString.call(iter) === "[object Arguments]") return Array.from(iter); }
+
+function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = new Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } }
+
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance"); }
+
+function _iterableToArrayLimit(arr, i) { if (!(Symbol.iterator in Object(arr) || Object.prototype.toString.call(arr) === "[object Arguments]")) { return; } var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
+function _objectWithoutProperties(source, excluded) { if (source == null) return {}; var target = _objectWithoutPropertiesLoose(source, excluded); var key, i; if (Object.getOwnPropertySymbols) { var sourceSymbolKeys = Object.getOwnPropertySymbols(source); for (i = 0; i < sourceSymbolKeys.length; i++) { key = sourceSymbolKeys[i]; if (excluded.indexOf(key) >= 0) continue; if (!Object.prototype.propertyIsEnumerable.call(source, key)) continue; target[key] = source[key]; } } return target; }
+
+function _objectWithoutPropertiesLoose(source, excluded) { if (source == null) return {}; var target = {}; var sourceKeys = Object.keys(source); var key, i; for (i = 0; i < sourceKeys.length; i++) { key = sourceKeys[i]; if (excluded.indexOf(key) >= 0) continue; target[key] = source[key]; } return target; }
+
 var autocompleteIndex = 0;
 
 var Autocomplete = function Autocomplete(_ref) {
@@ -30,61 +70,61 @@ var Autocomplete = function Autocomplete(_ref) {
     return r;
   };
 
-  var resultRef = useRef(null);
+  var resultRef = (0, _react.useRef)(null);
 
-  var _usePortal$hook = usePortal.hook(),
+  var _usePortal$hook = _index.usePortal.hook(),
       _usePortal$hook2 = _slicedToArray(_usePortal$hook, 3),
       resultTargetRef = _usePortal$hook2[0],
       showResult = _usePortal$hook2[1],
       setShowResult = _usePortal$hook2[2];
 
-  var _useState = useState(false),
+  var _useState = (0, _react.useState)(false),
       _useState2 = _slicedToArray(_useState, 2),
       isLoading = _useState2[0],
       setIsLoading = _useState2[1];
 
-  var _useState3 = useState(defaultValue),
+  var _useState3 = (0, _react.useState)(defaultValue),
       _useState4 = _slicedToArray(_useState3, 2),
       value = _useState4[0],
       setValue = _useState4[1];
 
-  var _useState5 = useState(defaultValue),
+  var _useState5 = (0, _react.useState)(defaultValue),
       _useState6 = _slicedToArray(_useState5, 2),
       selected = _useState6[0],
       setSelected = _useState6[1];
 
-  var _useState7 = useState(null),
+  var _useState7 = (0, _react.useState)(null),
       _useState8 = _slicedToArray(_useState7, 2),
       result = _useState8[0],
       setResult = _useState8[1];
 
-  var getResultIndex = useRef(0);
-  var getResultTimeout = useRef(null);
+  var getResultIndex = (0, _react.useRef)(0);
+  var getResultTimeout = (0, _react.useRef)(null);
 
-  var _useState9 = useState(0),
+  var _useState9 = (0, _react.useState)(0),
       _useState10 = _slicedToArray(_useState9, 2),
       page = _useState10[0],
       setPage = _useState10[1];
 
-  var _useState11 = useState(false),
+  var _useState11 = (0, _react.useState)(false),
       _useState12 = _slicedToArray(_useState11, 2),
       isScrollEnd = _useState12[0],
       setIsScrollEnd = _useState12[1];
 
-  var index = useRef(++autocompleteIndex);
+  var index = (0, _react.useRef)(++autocompleteIndex);
 
-  var _useSnackbar = useSnackbar(),
+  var _useSnackbar = (0, _index.useSnackbar)(),
       _useSnackbar2 = _slicedToArray(_useSnackbar, 1),
       showSnackbar = _useSnackbar2[0];
 
-  useEffect(function () {
+  (0, _react.useEffect)(function () {
     if (setRef) {
       setRef.current = resultTargetRef.current;
     } // eslint-disable-next-line react-hooks/exhaustive-deps
 
   }, [setRef]);
-  useDeepCompareEffect(function () {
-    if (!_isEqual(value, defaultValue)) {
+  (0, _index.useDeepCompareEffect)(function () {
+    if (!(0, _lodash.default)(value, defaultValue)) {
       if (autocompleteConfig.keepValue) {
         setValue(defaultValue);
         setSelected(defaultValue);
@@ -105,7 +145,7 @@ var Autocomplete = function Autocomplete(_ref) {
     setIsLoading(true);
     setIsScrollEnd(false);
     var getResultIndexCurrent = ++getResultIndex.current;
-    AutocompleteDataSource(autocompleteConfig.request, value, page).get().then(function (res) {
+    (0, _AutocompleteDataSource.default)(autocompleteConfig.request, value, page).get().then(function (res) {
       if (getResultIndex.current === getResultIndexCurrent) {
         var responseTranspiled = autocompleteConfig.responseTranspile(res.data);
 
@@ -128,10 +168,10 @@ var Autocomplete = function Autocomplete(_ref) {
     }).catch(function (err) {
       console.error(err);
       showSnackbar(autocompleteConfig.errorMessage, Infinity, function (snackbar) {
-        return React.createElement(Button, {
+        return _react.default.createElement(_index.Button, {
           icon: true,
           onClick: snackbar.close
-        }, React.createElement(Icon, {
+        }, _react.default.createElement(_index.Icon, {
           name: "close"
         }));
       });
@@ -162,7 +202,7 @@ var Autocomplete = function Autocomplete(_ref) {
         setPage(0);
         setResult(null);
 
-        if (!autocompleteConfig.keepValue && !_isEqual(value, selected)) {
+        if (!autocompleteConfig.keepValue && !(0, _lodash.default)(value, selected)) {
           setValue(null);
           onChange && onChange(null);
         }
@@ -245,7 +285,7 @@ var Autocomplete = function Autocomplete(_ref) {
     setIsScrollEnd(newIsScrollEnd);
   };
 
-  useEffect(function () {
+  (0, _react.useEffect)(function () {
     if (!isLoading && isScrollEnd) {
       setIsLoading(true);
       var newPage = page + 1;
@@ -254,7 +294,7 @@ var Autocomplete = function Autocomplete(_ref) {
     } // eslint-disable-next-line react-hooks/exhaustive-deps
 
   }, [isScrollEnd]);
-  return React.createElement(TextField, Object.assign({}, props, {
+  return _react.default.createElement(_index.TextField, _extends({}, props, {
     value: value,
     setRef: resultTargetRef,
     autoComplete: false,
@@ -262,19 +302,19 @@ var Autocomplete = function Autocomplete(_ref) {
     onBlur: handleBlur,
     inputClassName: "vui-TextField-Autocomplete-Target".concat(index.current),
     onKeyDown: handleKeyDown,
-    suffix: isLoading && React.createElement(Button, {
+    suffix: isLoading && _react.default.createElement(_index.Button, {
       icon: true
-    }, React.createElement(Spinner, null)),
+    }, _react.default.createElement(_index.Spinner, null)),
     onChange: handleChange,
     readOnly: readOnly
-  }), React.createElement("div", {
+  }), _react.default.createElement("div", {
     className: "auto-complete"
-  }, showResult && React.createElement(AutocompleteResult, {
+  }, showResult && _react.default.createElement(_AutocompleteResult.default, {
     target: resultTargetRef,
     setRef: resultRef,
     onScroll: autocompleteConfig.pagination ? handleScroll : undefined
-  }, result && React.createElement(React.Fragment, null, result.map(function (item, i) {
-    return React.createElement(AutocompleteResult.Item, {
+  }, result && _react.default.createElement(_react.default.Fragment, null, result.map(function (item, i) {
+    return _react.default.createElement(_AutocompleteResult.default.Item, {
       key: autocompleteConfig.valueTranspile(item).toString() + i,
       onBlur: handleBlur,
       onKeyDown: handleKeyDown,
@@ -283,16 +323,17 @@ var Autocomplete = function Autocomplete(_ref) {
       },
       targetClassName: "vui-TextField-Autocomplete-Target".concat(index.current)
     }, autocompleteConfig.itemTranspile(item));
-  }), !result.length && React.createElement("div", {
+  }), !result.length && _react.default.createElement("div", {
     className: "empty"
-  }, autocompleteConfig.emptyLabel)), isLoading ? React.createElement(ProgressBar, {
+  }, autocompleteConfig.emptyLabel)), isLoading ? _react.default.createElement(_index.ProgressBar, {
     indeterminate: true,
     height: result && result.length ? 4 : 2
-  }) : React.createElement("div", {
+  }) : _react.default.createElement("div", {
     style: {
       height: result && result.length ? 4 : 2
     }
   }))));
 };
 
-export default Autocomplete;
+var _default = Autocomplete;
+exports.default = _default;
