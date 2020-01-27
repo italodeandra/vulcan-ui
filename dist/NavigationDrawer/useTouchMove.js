@@ -1,11 +1,19 @@
-import { useEffect, useRef } from 'react';
-import { disableBodyScroll } from '../index';
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _react = require("react");
+
+var _index = require("../index");
 
 var useTouchMove = function useTouchMove(elementRef, open, setOpen) {
-  var touchStartX = useRef(null);
-  var currentElementX = useRef(0);
-  var openRef = useRef(open);
-  var nextOpen = useRef(open);
+  var touchStartX = (0, _react.useRef)(null);
+  var currentElementX = (0, _react.useRef)(0);
+  var openRef = (0, _react.useRef)(open);
+  var nextOpen = (0, _react.useRef)(open);
 
   var handleTouchStart = function handleTouchStart(e) {
     if (elementRef.current) {
@@ -39,10 +47,10 @@ var useTouchMove = function useTouchMove(elementRef, open, setOpen) {
       if (nextOpen.current) {
         elementRef.current.classList.add('open');
         document.body.style.overflow = 'hidden';
-        disableBodyScroll(true, '.can-scroll');
+        (0, _index.disableBodyScroll)(true, '.can-scroll');
       } else {
         document.body.style.overflow = '';
-        disableBodyScroll(false, '.can-scroll');
+        (0, _index.disableBodyScroll)(false, '.can-scroll');
         elementRef.current.classList.remove('open');
       }
 
@@ -50,11 +58,11 @@ var useTouchMove = function useTouchMove(elementRef, open, setOpen) {
     }
   };
 
-  useEffect(function () {
+  (0, _react.useEffect)(function () {
     openRef.current = open;
     nextOpen.current = open;
   }, [open]);
-  useEffect(function () {
+  (0, _react.useEffect)(function () {
     document.addEventListener('touchstart', handleTouchStart);
     document.addEventListener('touchmove', handleTouchMove);
     document.addEventListener('touchend', handleTouchEnd);
@@ -71,4 +79,5 @@ function getTranslateX(element) {
   return parseInt(style.split(',')[4]);
 }
 
-export default useTouchMove;
+var _default = useTouchMove;
+exports.default = _default;

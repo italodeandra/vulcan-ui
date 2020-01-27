@@ -1,3 +1,9 @@
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
 var Base64 = {
   // private property
   _keyStr: 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=',
@@ -109,4 +115,5 @@ var Base64 = {
     return string;
   }
 };
-export default Base64;
+var _default = Base64;
+exports.default = _default;

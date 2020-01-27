@@ -1,3 +1,10 @@
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
 var disableBodyScroll = function () {
   var _selector = false,
       _element = false,
@@ -112,4 +119,5 @@ var disableBodyScroll = function () {
   };
 }();
 
-export default disableBodyScroll;
+var _default = disableBodyScroll;
+exports.default = _default;

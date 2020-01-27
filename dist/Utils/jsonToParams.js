@@ -1,3 +1,10 @@
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
 function jsonToParams(url, data) {
   var dataClone = Object.assign({}, data);
   Object.keys(dataClone).forEach(function (key) {
@@ -12,4 +19,5 @@ function jsonToParams(url, data) {
   };
 }
 
-export default jsonToParams;
+var _default = jsonToParams;
+exports.default = _default;

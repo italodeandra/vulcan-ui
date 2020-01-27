@@ -1,3 +1,10 @@
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
 // Cheatsheet https://devhints.io/wip/intl-datetime
 function dateFormat(date, options, language) {
   if (!date) return '';
@@ -10,4 +17,5 @@ function dateFormat(date, options, language) {
   }).format(new Date(date));
 }
 
-export default dateFormat;
+var _default = dateFormat;
+exports.default = _default;

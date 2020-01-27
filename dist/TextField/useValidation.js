@@ -1,18 +1,33 @@
-import _slicedToArray from "@babel/runtime/helpers/esm/slicedToArray";
-import { useState } from 'react';
-import { useDeepCompareEffect } from '../index';
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _react = require("react");
+
+var _index = require("../index");
+
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance"); }
+
+function _iterableToArrayLimit(arr, i) { if (!(Symbol.iterator in Object(arr) || Object.prototype.toString.call(arr) === "[object Arguments]")) { return; } var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 function checkValue(value) {
   return typeof value !== 'undefined' && value !== null && value !== '';
 }
 
 function useValidation(value, validation) {
-  var _useState = useState(false),
+  var _useState = (0, _react.useState)(false),
       _useState2 = _slicedToArray(_useState, 2),
       hasError = _useState2[0],
       setHasError = _useState2[1];
 
-  var _useState3 = useState(null),
+  var _useState3 = (0, _react.useState)(null),
       _useState4 = _slicedToArray(_useState3, 2),
       errorText = _useState4[0],
       setErrorMessage = _useState4[1];
@@ -98,10 +113,11 @@ function useValidation(value, validation) {
     }
   };
 
-  useDeepCompareEffect(function () {
+  (0, _index.useDeepCompareEffect)(function () {
     validate(); // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [validation, value]);
   return [hasError, errorText, setCustomErrorMessage, validate];
 }
 
-export default useValidation;
+var _default = useValidation;
+exports.default = _default;

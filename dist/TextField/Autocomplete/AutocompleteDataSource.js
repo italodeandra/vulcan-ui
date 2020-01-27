@@ -1,4 +1,13 @@
-import { axios, jsonToParams, jsonToQueryString } from '../../index';
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _index = require("../../index");
+
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 var AutocompleteDataSource = function AutocompleteDataSource(request, query) {
   var page = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 0;
@@ -19,7 +28,7 @@ var AutocompleteDataSource = function AutocompleteDataSource(request, query) {
     });
   }
 
-  if (typeof request === 'object') {
+  if (_typeof(request) === 'object') {
     url = request.url;
     method = request.method || method;
     data = typeof request.data !== 'function' ? request.data : request.data({
@@ -29,14 +38,14 @@ var AutocompleteDataSource = function AutocompleteDataSource(request, query) {
     headers = request.headers;
 
     if (method === 'get') {
-      url = url + jsonToQueryString(data);
+      url = url + (0, _index.jsonToQueryString)(data);
       data = null;
     }
   }
 
   return {
     get: function get() {
-      var _jsonToParams = jsonToParams(url, data),
+      var _jsonToParams = (0, _index.jsonToParams)(url, data),
           newUrl = _jsonToParams.url,
           newData = _jsonToParams.data;
 
@@ -46,9 +55,10 @@ var AutocompleteDataSource = function AutocompleteDataSource(request, query) {
         headers: headers,
         data: newData
       };
-      return axios(config);
+      return (0, _index.axios)(config);
     }
   };
 };
 
-export default AutocompleteDataSource;
+var _default = AutocompleteDataSource;
+exports.default = _default;

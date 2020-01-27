@@ -1,5 +1,15 @@
-import React from 'react';
-import './PrettyJson.scss';
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _react = _interopRequireDefault(require("react"));
+
+require("./PrettyJson.scss");
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function PrettyJson(_ref) {
   var json = _ref.json,
@@ -7,7 +17,7 @@ function PrettyJson(_ref) {
       style = _ref.style;
 
   if (typeof json !== 'undefined') {
-    return React.createElement("pre", {
+    return _react.default.createElement("pre", {
       className: "vui-PrettyJson",
       style: style,
       dangerouslySetInnerHTML: {
@@ -15,11 +25,12 @@ function PrettyJson(_ref) {
       }
     });
   } else {
-    return React.createElement(React.Fragment, null);
+    return _react.default.createElement(_react.default.Fragment, null);
   }
 }
 
-export default PrettyJson;
+var _default = PrettyJson;
+exports.default = _default;
 
 function syntaxHighlight(json, label) {
   if (typeof json != 'string') {

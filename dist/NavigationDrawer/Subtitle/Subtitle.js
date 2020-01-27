@@ -1,6 +1,17 @@
-import React from 'react';
-import { classNames, Icon } from '../../index';
-import './Subtitle.scss';
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _react = _interopRequireDefault(require("react"));
+
+var _index = require("../../index");
+
+require("./Subtitle.scss");
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var Subtitle = function Subtitle(_ref) {
   var children = _ref.children,
@@ -11,13 +22,14 @@ var Subtitle = function Subtitle(_ref) {
     onCollapseChange && onCollapseChange(!collapse);
   };
 
-  return React.createElement("div", {
-    className: classNames('vui-NavigationDrawer-subtitle', onCollapseChange && 'pointer'),
+  return _react.default.createElement("div", {
+    className: (0, _index.classNames)('vui-NavigationDrawer-subtitle', onCollapseChange && 'pointer'),
     onClick: handleCollapseClick
-  }, children, onCollapseChange && React.createElement(Icon, {
-    className: classNames('chevron', collapse && 'collapse'),
+  }, children, onCollapseChange && _react.default.createElement(_index.Icon, {
+    className: (0, _index.classNames)('chevron', collapse && 'collapse'),
     name: "chevronUp"
   }));
 };
 
-export default Subtitle;
+var _default = Subtitle;
+exports.default = _default;

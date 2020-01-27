@@ -1,3 +1,10 @@
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
 var polyfill = function polyfill() {
   /* padEnd > */
   // https://github.com/uxitten/polyfill/blob/master/string.polyfill.js
@@ -132,4 +139,5 @@ var polyfill = function polyfill() {
   HTMLCollection.prototype.indexOf = Array.prototype.indexOf;
 };
 
-export default polyfill;
+var _default = polyfill;
+exports.default = _default;

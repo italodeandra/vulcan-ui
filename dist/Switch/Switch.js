@@ -1,19 +1,30 @@
-import React from "react";
-import "./Switch.sass";
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _react = _interopRequireDefault(require("react"));
+
+require("./Switch.sass");
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var Switch = function Switch(_ref) {
   var id = _ref.id,
       label = _ref.label,
       onChange = _ref.onChange;
-  return React.createElement("div", {
+  return _react.default.createElement("div", {
     className: "vui-Switch"
-  }, React.createElement("input", {
+  }, _react.default.createElement("input", {
     id: id,
     type: "checkbox",
     onClick: onChange
-  }), React.createElement("label", {
+  }), _react.default.createElement("label", {
     htmlFor: id
   }, label));
 };
 
-export default Switch;
+var _default = Switch;
+exports.default = _default;

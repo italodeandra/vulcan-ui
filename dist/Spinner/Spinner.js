@@ -1,14 +1,25 @@
-import React from 'react';
-import classNames from '../Utils/classNames';
-import './Spinner.scss';
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _react = _interopRequireDefault(require("react"));
+
+var _classNames = _interopRequireDefault(require("../Utils/classNames"));
+
+require("./Spinner.scss");
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var Spinner = function Spinner(_ref) {
   var className = _ref.className;
-  return React.createElement("div", {
-    className: classNames('vui-Spinner', className)
-  }, React.createElement("svg", {
+  return _react.default.createElement("div", {
+    className: (0, _classNames.default)('vui-Spinner', className)
+  }, _react.default.createElement("svg", {
     viewBox: "0 0 44 44"
-  }, React.createElement("circle", {
+  }, _react.default.createElement("circle", {
     cx: "22",
     cy: "22",
     r: "20",
@@ -17,4 +28,5 @@ var Spinner = function Spinner(_ref) {
   })));
 };
 
-export default Spinner;
+var _default = Spinner;
+exports.default = _default;
