@@ -149,17 +149,19 @@ var Autocomplete = function Autocomplete(_ref) {
       if (getResultIndex.current === getResultIndexCurrent) {
         var responseTranspiled = autocompleteConfig.responseTranspile(res.data);
 
-        if (Array.isArray(responseTranspiled)) {
-          setResult(page === 0 ? responseTranspiled : function (r) {
-            return [].concat(_toConsumableArray(r), _toConsumableArray(responseTranspiled));
-          });
-        } else {
-          if (responseTranspiled) {
-            setSelected(value);
-            onChange && onChange(value);
-            setShowResult(false);
-            setResult(null);
-            onItemSelect && onItemSelect(responseTranspiled);
+        if (res && res.data && res.data.statusCode && res.data.statusCode === 200) {
+          if (Array.isArray(responseTranspiled)) {
+            setResult(page === 0 ? responseTranspiled : function (r) {
+              return [].concat(_toConsumableArray(r), _toConsumableArray(responseTranspiled));
+            });
+          } else {
+            if (responseTranspiled) {
+              setSelected(value);
+              onChange && onChange(value);
+              setShowResult(false);
+              setResult(null);
+              onItemSelect && onItemSelect(responseTranspiled);
+            }
           }
         }
 
