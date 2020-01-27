@@ -68,15 +68,18 @@ const Autocomplete = ({ autocompleteConfig, onChange, value: defaultValue, onIte
             .then(res => {
                 if (getResultIndex.current === getResultIndexCurrent) {
                     const responseTranspiled = autocompleteConfig.responseTranspile(res.data)
-                    if (Array.isArray(responseTranspiled)) {
-                        setResult(page === 0 ? responseTranspiled : (r) => [...r, ...responseTranspiled])
-                    } else {
-                        if (responseTranspiled) {
-                            setSelected(value)
-                            onChange && onChange(value)
-                            setShowResult(false)
-                            setResult(null)
-                            onItemSelect && onItemSelect(responseTranspiled)
+
+                    if(res && res.data && res.data.statusCode && res.data.statusCode === 200) {
+                        if (Array.isArray(responseTranspiled)) {
+                            setResult(page === 0 ? responseTranspiled : (r) => [...r, ...responseTranspiled])
+                        } else {
+                            if (responseTranspiled) {
+                                setSelected(value)
+                                onChange && onChange(value)
+                                setShowResult(false)
+                                setResult(null)
+                                onItemSelect && onItemSelect(responseTranspiled)
+                            }
                         }
                     }
                     setIsLoading(false)
