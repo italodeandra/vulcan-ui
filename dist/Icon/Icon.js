@@ -117,6 +117,10 @@ var _viewDashboard = _interopRequireDefault(require("./icons/viewDashboard"));
 
 var _viewList = _interopRequireDefault(require("./icons/viewList"));
 
+var _layers = _interopRequireDefault(require("./icons/layers"));
+
+var _layersOff = _interopRequireDefault(require("./icons/layersOff"));
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var icons = {
@@ -172,7 +176,9 @@ var icons = {
   truckCheck: _truckCheck.default,
   upload: _upload.default,
   viewDashboard: _viewDashboard.default,
-  viewList: _viewList.default
+  viewList: _viewList.default,
+  layers: _layers.default,
+  layersOff: _layersOff.default
 };
 
 var Icon = function Icon(_ref) {

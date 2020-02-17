@@ -54,6 +54,8 @@ import truckCheck from './icons/truckCheck'
 import upload from './icons/upload'
 import viewDashboard from './icons/viewDashboard'
 import viewList from './icons/viewList'
+import layers from './icons/layers'
+import layersOff from './icons/layersOff'
 
 const icons = {
     account,
@@ -108,7 +110,9 @@ const icons = {
     truckCheck,
     upload,
     viewDashboard,
-    viewList
+    viewList,
+    layers,
+    layersOff
 }
 
 const Icon = ({ className, name, onClick }) => {
